@@ -1,0 +1,135 @@
+---
+title: "Course Overview"
+author: "Charlotte Chang"
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: bio104.bib
+link-citations: true
+---
+
+# BIOL 104 PO
+
+## Conservation Science: Theories and Solutions
+
+This is the [course website](https://charlottehchang.github.io/BIOL104PO/) for "Conservation Science: Theories and Solutions" at [Pomona College](https://www.pomona.edu/) in the departments of [Biology](https://www.pomona.edu/academics/departments/biology) and [Environmental Analysis](https://www.pomona.edu/academics/departments/environmental-analysis). Dr. [Charlotte Chang](http://charlottehchang.github.io) is the instructor.
+
+**Spring 2019**
+
+**Location**: Seaver South Laboratory 227 (Lecture and Labs)
+
+**Schedule**: *Lecture*-MWF 10-10:50AM (1/23/19-5/8/19) | *Lab*-W 1:15-5PM
+
+**Office Hours**: *Office*-T 1-3PM | *Walking*-R 1-3PM
+
+**Prerequisites**: Bio 41E (Intro Ecol & Evolutionry Bio w/Lab) or instructor permission
+    *Suggested Courses*: Math 58/B (Intro. to Statistics/Biostatistics)
+
+**Readings**: This course will use a combination of the primary literature, popular science books, and the free, online textbook [*Conservation Biology for All*](https://conbio.org/publications/free-textbook).
+
+**Student Well-Being**: In addition to the course policies below, I emphasize that I prioritize your health and well-being. Physical or mental illness, personal crises, family care, and other responsibilities can strongly impact your ability to participate in this course. Please let me and/or staff in the Student Affairs or related offices know if any of these issues pose severe obstacles to you and we will work together to come up with solutions. I am also more than happy to work with you and a representative from Student Affairs in situations where sensitive information is involved.
+
+## Course description
+
+Recent studies estimate that as many as 10-50% of all species on Earth are at risk of extinction. Different anthropogenic activities such as land conversion for agriculture or the exploitation of natural resources such as fisheries and bushmeat pose major threats to biodiversity; other activities such as the excessive use of fertilizer exceed safe planetary boundaries.
+
+Ultimately, the threats facing species and ecosystems are driven by human behaviors and societal decisions. Finding solutions therefore requires the combination of the social sciences alongside ecology. This course will introduce you to a broad range of theories and techniques from the social sciences that are relevant to conservation science. This course does not have social science prerequesites. I do not assume that students in these class have received training in the social sciences. As such, most of the material that we will cover in class will take the form of conceptual models linked to "lessons learned" from conservation successes or failures. The course will be centered on discussions and collaborative group work. In this course, you will also be introduced to key computational tools used by conservation scientists and you will apply these skills in your own projects.
+
+* *Reading*: You will interpret, synthesize, extend, and question 63 primary research articles.
+* *Presentation*: Describing complex issues with clarity and persuasion is a highly translatable skill. This course will offer many opportunities to further develop your presentation skills, including speed presentations on readings and group presentations.
+* *Synthesis*: Creating socio-ecological conceptual models is a critical skill for conservation science. This course will allow you to build your skills in concept-mapping and interpreting claims in the literature.
+* *Data management, analysis, and visualization*: This course has a computational lab where you will be able to develop skills in statistical programming using the `R` programming language. I do not assume any prior experience with programming. Moreover, you will learn how to use version control tools (Git and GitHub) by submitting your assignments using GitHub Classroom. Assignments are graded on a 3 point scale.
+* *Geographic Information Systems (GIS)*: This course will offer an introduction to spatial mapping (GIS) in R. You will learn about geospatial data and how to perform exploratory analyses. 
+* *Social and ecological databases*: You will learn how to access databases using efficient, programmatic interfaces and how to interact with data of small, medium, and large sizes.
+* *Lived experience*: As conservation scientists, our views are inherently shaped by our past experiences. In the course, you will read papers on environmental engagement and you will apply and interrogate these theories in your own, immersive socio-ecological research in a local field system. Examples include: water conservation challenges in a desert city, the built environment and fire regimes, threatened species conservation in the Bernard Field Station. 
+
+## Course assessment
+
+* Class and lab participation (15%)
+* Co-generated discussion points (students submit discussion topics/questions) (10%)
+* Speed Talks: Interpreting articles (15%)
+* Project 1: Immersive socio-ecological research (30%)
+* Project 2: Investigating a contemporary conservation challenge (30%)
+
+## Course policies
+
+*General*: In this course, we will respectfully consider differing opinions and engage in constructive discourse. Otherwise, this course is your own personal journey, and as such, I expect students to take leadership in their own learning and to keep track of assignments and examination dates.
+
+*Laptops and cell phones*: I encourage the use of paper and pen to take notes in course. We will use polls with the Socrative Teacher app; students who do not have personal electronic devices will be provided one for use during class. The laboratory will use either personal laptops or lab computers.
+
+*Absences*: I expect that students will prioritize their learning in this course and will actively participate in the discussions, activities, and lab. However, I understand that students have many demands on their time, ranging from athletic or scholastic commitments to family and personal responsibilities. Unexcused absences where I have not been informed in advance will lead to grade reductions. Please let me know when you will not be able to come to class, or will be coming late, and indicate why.
+
+*Late assignments*: When assignments are handed in late without prior notice, I will apply a grade deduction penalty (1 grade reduction for each day late).
+
+*Plagiarism*: Plagiarism is a violation of university policy. Plagarized assignments or exams will receive a score of 0 and will be subject to reporting.
+
+*Office \& walking hours, email, and more*: During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course. If you would like to discuss a particular problem or topic that would benefit from preparation on my part, please give me advance notice via email. I will hold both traditional office hours and walking office hours where we will depart from Seaver and walk and chat on a fixed course through campus. I will post my walking routes online so that you can find me at any point on the walk. I have email boundaries and I encourage you to find your own. Mine include not answering emails after 7pm, or on weekends or holidays.
+
+*Academic accommodations*: If you require accomodations, please contact the [Student Accessibility Office](https://www.pomona.edu/accessibility/student-accessibility/accommodation-services) as soon as possible so that we can set the conditions in place for you to succeed. I require a minimum of one day's notice from the Student Accessibility Office before any modifications to an exam or assignment, so again, please contact me and the Student Accessibility Office early in the semester if these services are key for your learning.
+
+## Course Schedule
+
+Note that **L** denotes lecture and **B** lab.
+<!--Week 1; n=26 students?; 8 small groups-->
+
+| Date | # | Type | Topic       | Resources |
+|------|---|------|-----------------------------------|---------------|
+| 1/23 | 1 | L    | Introduction: Personal motivations, Conservation Threats Overview | @pereira2010scenarios; @steffen2015planetary; @waters2016anthropocene |
+| 1/23 | 1 | B    | Introduction to `R`, Git, and GitHub | [swirl](https://swirlstats.com/) |
+| 1/25 | 2 | L    | Contemporary threats: Overexploitation | [Conservation Biology for All, Chapter 6](https://conbio.org/images/content_publications/Chapter6.pdf); @young2016patterns; @osuri2016contrasting | 
+| 1/28 | 3 | L    | Contemporary threats: Habitat loss     | [Conservation Biology for All, Chapter 5](https://conbio.org/images/content_publications/Chapter5.pdf); @tilman1994habitat; @mueller2012closing | <!--Week 2-->
+| 1/30 | 4 | L    | Contemporary threats: Consumer behaviors and Invasive Species | [Conservation Biology for All, Chapter 7](https://conbio.org/images/content_publications/Chapter7.pdf); @chang2016international |
+| 1/30 | 2 | B    | Interacting with the IUCN Red List [rredlist](https://cran.r-project.org/web/packages/rredlist/) | |
+| 2/1  | 5 | L    | Contemporary threats: Climate change   | [Conservation Biology for All, Chapter 8](https://conbio.org/images/content_publications/Chapter8.pdf); @pacala2004stabilization; @thomas2004extinction |
+| 2/4  | 6 | L    | Conservation in practice: Protecting endangered species | @rohlf1991six; [Wild Hope, Chapter 3](https://www.press.uchicago.edu/ucp/books/book/chicago/W/bo13823467.html); [Safe Harbors and RCWs](https://www.youtube.com/watch?v=fNWC4fTUU08) | <!--Week 3-->
+| 2/6  | 7 | L    | How do we prioritize locating nature reserves given limited resources? | @ando1998species; @margules2000systematic; @watson2011systematic |
+| 2/6  | 3 | B    | Systematic Conservation Prioritization  | [prioritizR](https://prioritizr.net/); [Marxan video](https://www.youtube.com/watch?v=1IDeKJJO7s8) |
+| 2/8  | 8 | L    | Parks and people or people vs. parks? | @balmford2003should; @adams2007people |
+| 2/11 | 9 | L    |  | | <!--Week 4-->
+| 2/13 | 10| L    | How do we track population recovery? (And conversely, detect when species are in trouble?) | [Morris, Doak, et al., Chapters 1, 2, and 4](https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf) |
+| 2/13 | 4 | B    | Simulating species trajectories | [com/padre](https://www.compadre-db.org/) and [popbio](https://cran.r-project.org/web/packages/popbio/index.html) |
+| 2/15 | 11| L    | Going from the Red List to a Green List perspective | @akccakaya2018quantifying and [related press](https://news.mongabay.com/2018/03/iucn-green-list-of-species-a-new-way-to-measure-conservation-success/); [Earth Optimism](https://www.youtube.com/watch?v=S-4872sB6jI); [Conservation Evidence](https://www.youtube.com/watch?v=164Ksg2fqCw) |
+| 2/18 | 12|  L   | Conservation as a problem of environmental public goods | [Public vs. Private Goods](https://www.youtube.com/watch?v=E1v5eRs0_fw); @ostrom1999revisiting; @levin2014public; [Conservation Biology for All, Ch. 14](https://conbio.org/images/content_publications/Chapter14.pdf) | <!--Week 5-->
+| 2/20 | 13| L    | The ecosystem services framework | [Conservation Biology for All, Chapter 3](https://conbio.org/images/content_publications/Chapter3.pdf); [Valuation of Ecosystem Services](https://www.youtube.com/watch?v=q8AZHtF2f50); @tallis2009mapping; @muradian2013payments |
+| 2/20 | 5 | B    | Public goods games and mapping community-managed lands |[geocomputation (Chs. 2, 3, 4)](https://bookdown.org/robinlovelace/geocompr/spatial-class.html)  |
+| 2/22 | 14| L    | Different models of conservation governance | @dietz2003struggle; @agrawal2008changing; @burivalova2017critical |
+| 2/25  | 15 | L   | Environmental psychology: How do human systems perceive, react, and affect environmental systems? | @stern1992psychological; @dunlap2000NEP | <!--Week 6-->
+| 2/27 | 16 | L   | Beliefs, identities, and actions affecting environmental (public) goods | @ajzen2011knowledge; @kahan2012polarizing |
+| 2/27 | 6  | B   | Simulating environmental opinion dynamics (game and code) | @sunstein2002law; @centola2015spontaneous |
+| 3/1  | 17 | L   | Using decision science to design more effective conservation outreach | | @clayton2013psychological; @masuda2017comms; @reddy2017advancing; [RARE Film](https://www.youtube.com/watch?v=X9KP8uiGZTs) |
+| 3/4 | 18 | L   | Conserving harvested marine species|  @mangel1996principles; [Fisheries Economics Video](https://www.youtube.com/watch?v=7DNhqtYf47E); [Diekert pages 1-5](https://www.uio.no/studier/emner/sv/oekonomi/ECON4925/h10/undervisningsmateriale/lecture_11-12_renew(1511).pdf) | <!--Week7-->
+| 3/6 | 19 | L   | Ecological interactions and implications for management; bioeconomic simulations in class  | @holt1977predation; @may1979management; [Eide - Wolfram Demo](http://www.demonstrations.wolfram.com/EcosystemDynamics/); [Hicks Lab](https://rlhick.people.wm.edu/posts/gordon-shaefer-model.html) | 
+| 3/6  | 7  | B   | Immersive socio-ecological research I |  |
+| 3/8  | 20 | L   | MPAs and institutions for fisheries management | @baskett2007designing; @costello2008can; [ITQs](https://www.youtube.com/watch?v=pyQk786TCoQ) |
+| 3/11 | 21 | L   | What is driving wild meat harvest on land? | @golden2011benefits; @duffy2016toward; @nielsen2018importance; [CIFOR Bushmeat Initiative](https://www.cifor.org/bushmeat/about/bushmeat/) | <!--Week 8-->
+| 3/13 | 22 | L   | Exploring poverty and livelihoods datasets in relation to environmental features | [D-PLACE](https://d-place.org/contributions/EA), [CIFOR PEN](https://data.cifor.org/dataset.xhtml?persistentId=doi:10.17528/CIFOR/DATA.00021), [NASA SEDAC](https://earthdata.nasa.gov/about/daacs/daac-sedac)  |
+| 3/13 | 8  | B   | Immersive socio-ecological research II | |
+| 3/15 | 23 | L   | Strategies to manage hunting (in tropical regions) | [Background on the North American Model: Sen. Heinrich](https://www.youtube.com/watch?v=KahYbd05UNk); [RARE: Theory of Change](https://www.rare.org/sites/default/files/ToC_Booklet_Final_Rare.pdf); @robinson2010protecting | <!--Anthropogenic Allee?-->
+| 3/18 | - | -    | Spring Recess | | <!--Week 9-->
+| 3/20 | - |  -   | Spring Recess | |
+| 3/22 | - |   - | Spring Recess | |
+| 3/25 | 24| L   | Feeding the world without destroying the planet | [Phalan and Perfecto Discussion](https://www.youtube.com/watch?v=DKQdKmP-H3A); @godfray2010food; @tilman2014global | <!--Week 10-->
+| 3/27 | 25| L   | Reducing waste along the supply chain and fixing incentives | @west2014leverage; @phalan2016can |
+| 3/27 | 9 | B   | Immersive socio-ecological research III (Project Wrap-Up) | |
+| 3/29 | - | _    | C&eacute;sar Ch&aacute;vez Day | |
+| 4/1  | 26| L   | Theory and impacts of non-native, introduced, and invasive species | @Shea2002community; @strauss2012invading; @doherty2016invasive | <!--Week 11-->
+| 4/3  | 27| L   | Contention in eradication and control | @larson2005war; @loss2013impact;  [Kauai's introduced *Psittacula* parrots](https://www.youtube.com/watch?v=GjKNWs93HpI)|
+| 4/3  | 10| B   | Immersive socio-ecological research IV (Project Wrap-Up) | |
+| 4/5  | 28 | L  | The economics of invasions and implications for control | @shogren2000risk; @perrings2002biological |
+| 4/8  | 29 | L  | International Conservation Policy: CITES | @ginsberg2002cites; @phelps2010boosting | <!--Week 12--> 
+| 4/10 | 30 | L  | The games that countries play | [Montreal Protocol](https://www.youtube.com/watch?v=OINKJNWtSiE); [Lessons from Kyoto](https://www.youtube.com/watch?v=bcxL7jN4akw); [Inequality between countries](https://www.youtube.com/watch?v=B11kASPfYxY); @hannam2017incomplete |
+| 4/10 | 11 | B  | Group research projects I | |
+| 4/12 | 31 | L  | Non-binding biodiversity agreements | @larigauderie2010intergovernmental; @cardinale2012biodiversity; @pascual2017valuing|
+| 4/15 | 32 | L  | Conservation challenges in our backyard | @schwartz2006biotic; @vandergast2008hotspots; @scanlon2012ground | <!--Week 13-->
+| 4/17 | 33 | L  | Group research projects II | |
+| 4/17 | 12 | B  | Environmental (in)justice in California | @boer1997there; @tallis2018california |
+| 4/19 | 34 | L  | Conservation solutions in California | @petersen2006community; @kroetz2014benefits; @johnston2015abundance;   |
+| 4/22 | 35 | L  | (Earth Day) Group presentations: I | | <!--Week 14-->
+| 4/24 | 36 | L  | Group presentations: II | |
+| 4/24 | 13 | B  | | |
+| 4/26 | 37 | L  | Group presentations: III | |
+| 4/29 | 38 | L  | Group presentations: IV | | <!--Week 15-->
+| 5/1  | 39 | L  | Group presentations: V | |
+| 5/1  | - | B  | No lab | |
+| 5/3  | 40 | L  | Group presentations: VI | |
+| 5/6  | 41 | L  | Group presentations: VII | | <!--Week 16-->
+| 5/8  | 42 | L  | Group presentations: VIII | |

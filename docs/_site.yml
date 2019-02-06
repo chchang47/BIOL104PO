@@ -1,0 +1,12 @@
+name: "BIOL104"
+output_dir: "."
+navbar:
+  title: "Conservation Science: Theories and Solutions"
+  left:
+    - text: "Syllabus"
+      icon: fa-home
+      href: index.html
+output:
+  html_document:
+    theme: flatly
+    css: style.css
