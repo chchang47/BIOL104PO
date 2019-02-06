@@ -21,7 +21,7 @@ This is the [course website](https://charlottehchang.github.io/BIOL104PO/) for "
 
 **Office Hours**: *Office*-T 1-3PM | *Walking*-R 1-3PM
 
-**Prerequisites**: Bio 41E (Intro Ecol & Evolutionry Bio w/Lab) or instructor permission
+**Prerequisites**: Bio 41E (Intro Ecol & Evolutionary Bio w/Lab) or instructor permission
     *Suggested Courses*: Math 58/B (Intro. to Statistics/Biostatistics)
 
 **Readings**: This course will use a combination of the primary literature, popular science books, and the free, online textbook [*Conservation Biology for All*](https://conbio.org/publications/free-textbook).
@@ -32,12 +32,12 @@ This is the [course website](https://charlottehchang.github.io/BIOL104PO/) for "
 
 Recent studies estimate that as many as 10-50% of all species on Earth are at risk of extinction. Different anthropogenic activities such as land conversion for agriculture or the exploitation of natural resources such as fisheries and bushmeat pose major threats to biodiversity; other activities such as the excessive use of fertilizer exceed safe planetary boundaries.
 
-Ultimately, the threats facing species and ecosystems are driven by human behaviors and societal decisions. Finding solutions therefore requires the combination of the social sciences alongside ecology. This course will introduce you to a broad range of theories and techniques from the social sciences that are relevant to conservation science. This course does not have social science prerequesites. I do not assume that students in these class have received training in the social sciences. As such, most of the material that we will cover in class will take the form of conceptual models linked to "lessons learned" from conservation successes or failures. The course will be centered on discussions and collaborative group work. In this course, you will also be introduced to key computational tools used by conservation scientists and you will apply these skills in your own projects.
+Ultimately, the threats facing species and ecosystems are driven by human behaviors and societal decisions. Finding solutions therefore requires the combination of the social sciences alongside ecology. This course will introduce you to a broad range of theories and techniques from the social sciences that are relevant to conservation science. This course does not have social science prerequisites. I do not assume that students in these class have received training in the social sciences. As such, most of the material that we will cover in class will take the form of conceptual models linked to "lessons learned" from conservation successes or failures. The course will be centered on discussions and collaborative group work. In this course, you will also be introduced to key computational tools used by conservation scientists and you will apply these skills in your own projects.
 
 * *Reading*: You will interpret, synthesize, extend, and question 63 primary research articles.
 * *Presentation*: Describing complex issues with clarity and persuasion is a highly translatable skill. This course will offer many opportunities to further develop your presentation skills, including speed presentations on readings and group presentations.
 * *Synthesis*: Creating socio-ecological conceptual models is a critical skill for conservation science. This course will allow you to build your skills in concept-mapping and interpreting claims in the literature.
-* *Data management, analysis, and visualization*: This course has a computational lab where you will be able to develop skills in statistical programming using the `R` programming language. I do not assume any prior experience with programming. Moreover, you will learn how to use version control tools (Git and GitHub) by submitting your assignments using GitHub Classroom. Assignments are graded on a 3 point scale.
+* *Data management, analysis, and visualization*: This course has a computational lab where you will be able to develop skills in statistical programming using the `R` programming language. I do not assume any prior experience with programming. Moreover, you will learn how to use version control tools (Git and Git Hub) by submitting your assignments using Git Hub Classroom. Assignments are graded on a 3 point scale.
 * *Geographic Information Systems (GIS)*: This course will offer an introduction to spatial mapping (GIS) in R. You will learn about geospatial data and how to perform exploratory analyses. 
 * *Social and ecological databases*: You will learn how to access databases using efficient, programmatic interfaces and how to interact with data of small, medium, and large sizes.
 * *Lived experience*: As conservation scientists, our views are inherently shaped by our past experiences. In the course, you will read papers on environmental engagement and you will apply and interrogate these theories in your own, immersive socio-ecological research in a local field system. Examples include: water conservation challenges in a desert city, the built environment and fire regimes, threatened species conservation in the Bernard Field Station. 
@@ -60,11 +60,11 @@ Ultimately, the threats facing species and ecosystems are driven by human behavi
 
 *Late assignments*: When assignments are handed in late without prior notice, I will apply a grade deduction penalty (1 grade reduction for each day late).
 
-*Plagiarism*: Plagiarism is a violation of university policy. Plagarized assignments or exams will receive a score of 0 and will be subject to reporting.
+*Plagiarism*: Plagiarism is a violation of university policy. Plagiarized assignments or exams will receive a score of 0 and will be subject to reporting.
 
 *Office \& walking hours, email, and more*: During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course. If you would like to discuss a particular problem or topic that would benefit from preparation on my part, please give me advance notice via email. I will hold both traditional office hours and walking office hours where we will depart from Seaver and walk and chat on a fixed course through campus. I will post my walking routes online so that you can find me at any point on the walk. I have email boundaries and I encourage you to find your own. Mine include not answering emails after 7pm, or on weekends or holidays.
 
-*Academic accommodations*: If you require accomodations, please contact the [Student Accessibility Office](https://www.pomona.edu/accessibility/student-accessibility/accommodation-services) as soon as possible so that we can set the conditions in place for you to succeed. I require a minimum of one day's notice from the Student Accessibility Office before any modifications to an exam or assignment, so again, please contact me and the Student Accessibility Office early in the semester if these services are key for your learning.
+*Academic accommodations*: If you require accommodations, please contact the [Student Accessibility Office](https://www.pomona.edu/accessibility/student-accessibility/accommodation-services) as soon as possible so that we can set the conditions in place for you to succeed. I require a minimum of one day's notice from the Student Accessibility Office before any modifications to an exam or assignment, so again, please contact me and the Student Accessibility Office early in the semester if these services are key for your learning.
 
 ## Course Schedule
 
@@ -74,8 +74,8 @@ Note that **L** denotes lecture and **B** lab.
 | Date | # | Type | Topic       | Resources |
 |------|---|------|-----------------------------------|---------------|
 | 1/23 | 1 | L    | Introduction: Personal motivations, Conservation Threats Overview | @pereira2010scenarios; @steffen2015planetary; @waters2016anthropocene |
-| 1/23 | 1 | B    | Introduction to `R`, Git, and GitHub | [swirl](https://swirlstats.com/) |
-| 1/25 | 2 | L    | Contemporary threats: Overexploitation | [Conservation Biology for All, Chapter 6](https://conbio.org/images/content_publications/Chapter6.pdf); @young2016patterns; @osuri2016contrasting | 
+| 1/23 | 1 | B    | Introduction to `R`, Git, and Git Hub | [swirl](https://swirlstats.com/) |
+| 1/25 | 2 | L    | Contemporary threats: Over-exploitation | [Conservation Biology for All, Chapter 6](https://conbio.org/images/content_publications/Chapter6.pdf); @young2016patterns; @osuri2016contrasting | 
 | 1/28 | 3 | L    | Contemporary threats: Habitat loss     | [Conservation Biology for All, Chapter 5](https://conbio.org/images/content_publications/Chapter5.pdf); @tilman1994habitat; @mueller2012closing | <!--Week 2-->
 | 1/30 | 4 | L    | Contemporary threats: Consumer behaviors and Invasive Species | [Conservation Biology for All, Chapter 7](https://conbio.org/images/content_publications/Chapter7.pdf); @chang2016international |
 | 1/30 | 2 | B    | Interacting with the IUCN Red List [rredlist](https://cran.r-project.org/web/packages/rredlist/) | |
