@@ -30,7 +30,7 @@ This is the [course website](https://charlottehchang.github.io/BIOL104PO/) for "
 
 ## Course description
 
-Recent studies estimate that as many as 10-50% of all species on Earth are at risk of extinction. Different anthropogenic activities such as land conversion for agriculture or the exploitation of natural resources such as fisheries and bushmeat pose major threats to biodiversity; other activities such as the excessive use of fertilizer exceed safe planetary boundaries.
+Recent studies estimate that as many as 10-50% of all species on Earth are at risk of extinction. Different anthropogenic activities such as land conversion for agriculture or the exploitation of natural resources such as fisheries and bushmeat pose major threats to biodiversity.
 
 Ultimately, the threats facing species and ecosystems are driven by human behaviors and societal decisions. Finding solutions therefore requires the combination of the social sciences alongside ecology. This course will introduce you to a broad range of theories and techniques from the social sciences that are relevant to conservation science. This course does not have social science prerequisites. I do not assume that students in these class have received training in the social sciences. As such, most of the material that we will cover in class will take the form of conceptual models linked to "lessons learned" from conservation successes or failures. The course will be centered on discussions and collaborative group work. In this course, you will also be introduced to key computational tools used by conservation scientists and you will apply these skills in your own projects.
 
@@ -95,7 +95,7 @@ Note that **L** denotes lecture and **B** lab.
 | 2/25  | 15 | L   | Environmental psychology: How do human systems perceive, react, and affect environmental systems? | @stern1992psychological; @dunlap2000NEP | <!--Week 6-->
 | 2/27 | 16 | L   | Beliefs, identities, and actions affecting environmental (public) goods | @ajzen2011knowledge; @kahan2012polarizing |
 | 2/27 | 6  | B   | Simulating environmental opinion dynamics (game and code) | @sunstein2002law; @centola2015spontaneous |
-| 3/1  | 17 | L   | Using decision science to design more effective conservation outreach | | @clayton2013psychological; @masuda2017comms; @reddy2017advancing; [RARE Film](https://www.youtube.com/watch?v=X9KP8uiGZTs) |
+| 3/1  | 17 | L   | Using decision science to design more effective conservation outreach | @clayton2013psychological; @masuda2017comms; @reddy2017advancing; [RARE Film](https://www.youtube.com/watch?v=X9KP8uiGZTs) |
 | 3/4 | 18 | L   | Conserving harvested marine species|  @mangel1996principles; [Fisheries Economics Video](https://www.youtube.com/watch?v=7DNhqtYf47E); [Diekert pages 1-5](https://www.uio.no/studier/emner/sv/oekonomi/ECON4925/h10/undervisningsmateriale/lecture_11-12_renew(1511).pdf) | <!--Week7-->
 | 3/6 | 19 | L   | Ecological interactions and implications for management; bioeconomic simulations in class  | @holt1977predation; @may1979management; [Eide - Wolfram Demo](http://www.demonstrations.wolfram.com/EcosystemDynamics/); [Hicks Lab](https://rlhick.people.wm.edu/posts/gordon-shaefer-model.html) | 
 | 3/6  | 7  | B   | Immersive socio-ecological research I |  |
