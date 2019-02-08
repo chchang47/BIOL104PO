@@ -84,8 +84,8 @@ Note that **L** denotes lecture and **B** lab.
 | 2/6  | 7 | L    | How do we prioritize locating nature reserves given limited resources? | @ando1998species; @margules2000systematic; @watson2011systematic |
 | 2/6  | 3 | B    | Systematic Conservation Prioritization  | [prioritizR](https://prioritizr.net/); [Marxan video](https://www.youtube.com/watch?v=1IDeKJJO7s8) |
 | 2/8  | 8 | L    | Parks and people or people vs. parks? | @balmford2003should; @adams2007people |
-| 2/11 | 9 | L    |  | | <!--Week 4-->
-| 2/13 | 10| L    | How do we track population recovery? (And conversely, detect when species are in trouble?) | [Morris, Doak, et al., Chapters 1, 2, and 4](https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf) |
+| 2/11 | 9 | L    | How do we track population recovery? (And conversely, detect when species are in trouble?) | [Morris, Doak, et al., Chapters 1, 2, and 4](https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf) | <!--Week 4-->
+| 2/13 | 10| L    | Population viability analysis as a conservation tool | [Morris, Doak, et al., Chapters 1, 2, and 4](https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf) |
 | 2/13 | 4 | B    | Simulating species trajectories | [com/padre](https://www.compadre-db.org/) and [popbio](https://cran.r-project.org/web/packages/popbio/index.html) |
 | 2/15 | 11| L    | Going from the Red List to a Green List perspective | @akccakaya2018quantifying and [related press](https://news.mongabay.com/2018/03/iucn-green-list-of-species-a-new-way-to-measure-conservation-success/); [Earth Optimism](https://www.youtube.com/watch?v=S-4872sB6jI); [Conservation Evidence](https://www.youtube.com/watch?v=164Ksg2fqCw) |
 | 2/18 | 12|  L   | Conservation as a problem of environmental public goods | [Public vs. Private Goods](https://www.youtube.com/watch?v=E1v5eRs0_fw); @ostrom1999revisiting; @levin2014public; [Conservation Biology for All, Ch. 14](https://conbio.org/images/content_publications/Chapter14.pdf) | <!--Week 5-->
@@ -125,7 +125,7 @@ Note that **L** denotes lecture and **B** lab.
 | 4/19 | 34 | L  | Conservation solutions in California | @petersen2006community; @kroetz2014benefits; @johnston2015abundance;   |
 | 4/22 | 35 | L  | (Earth Day) Group presentations: I | | <!--Week 14-->
 | 4/24 | 36 | L  | Group presentations: II | |
-| 4/24 | 13 | B  | | |
+| 4/24 | 13 | B  | No lab | |
 | 4/26 | 37 | L  | Group presentations: III | |
 | 4/29 | 38 | L  | Group presentations: IV | | <!--Week 15-->
 | 5/1  | 39 | L  | Group presentations: V | |
