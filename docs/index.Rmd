@@ -17,9 +17,9 @@ This is the [course website](https://charlottehchang.github.io/BIOL104PO/) for "
 
 **Location**: Seaver South Laboratory 227 (Lecture and Labs)
 
-**Schedule**: *Lecture*-MWF 10-10:50AM (1/23/19-5/8/19) | *Lab*-W 1:15-5PM
+**Schedule**: *Lecture*-MWF 10-10:50AM (1/23/19-5/8/19) | *Lab*-W 1:15-2:30PM
 
-**Office Hours**: *Office*-T 1-3PM | *Walking*-R 1-3PM
+**Office Hours**: *Office*-T 1-3PM | *Walking*-R 1-2PM
 
 **Prerequisites**: Bio 41E (Intro Ecol & Evolutionary Bio w/Lab) or instructor permission
     *Suggested Courses*: Math 58/B (Intro. to Statistics/Biostatistics)
