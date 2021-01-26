@@ -26,7 +26,7 @@ Ultimately, the threats facing species and ecosystems are driven by human behavi
 * *Reading*: You will interpret, synthesize, extend, and question core principles in conservation biology and science.
 * *Presentation*: Describing complex issues with clarity and persuasion is a highly translatable skill. This course will offer many opportunities to further develop your presentation skills, including speed presentations on readings and group presentations.
 * *Synthesis*: Creating socio-ecological conceptual models is a critical skill for conservation science. This course will allow you to build your skills in concept-mapping and interpreting claims in the literature.
-* *Data management, analysis, and visualization*: This course has a computational lab where you will be able to develop skills in statistical programming using the `R` programming language. I do not assume any prior experience with programming.
+* *Data management, analysis, and visualization*: This course has a computational component where you will be able to develop skills in statistical programming using the `R` programming language. I do not assume any prior experience with programming.
 * *Lived experience*: As conservation scientists, our views are inherently shaped by our past experiences. In the course, you will read papers on environmental engagement and you will apply and interrogate these theories in your own class project. 
 
 ## Learning outcomes
@@ -70,13 +70,13 @@ I welcome individuals of all ages, backgrounds, beliefs, ethnicities, genders, g
 
 I will strive to provide an equitable and inclusive learning environment. My overarching goal is to help you succeed in your exploration of conservation. To that end, you can expect me to be responsive to your concerns about course content, delivery style, and suggestions on how I can improve this course. 
 
-A key component of my role as an instructor is office hours. During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course.
+A key component of my role as an instructor is office hours. During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course. I am also more than happy to chat about broader questions such as career paths in conservation, next steps after Pomona College/the Claremont Colleges, or other topics of interest to you.
 
 ## General course policies
 
 *Office hours, email, and class Slack channel*: During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course. If you would like to discuss a particular problem or topic that would benefit from preparation on my part, please give me advance notice via [Calendly](https://calendly.com/chchang47/officechat). 
 
-I have email boundaries and I encourage you to find your own. Mine include not answering emails after 6pm, or on weekends or holidays. Finally, I request that emails only be used for interactions that are truly one-on-one (e.g. requesting extensions to assignments or accomodations); in general, to help create an atmosphere of transparency and group learning, I request that questions about content and assignments be directed to the [#bio104 Slack channel in the Pomona College Division-II workspace](https://join.slack.com/share/zt-l79rtnz5-T2xh0hornV6~hBKjHAiLcA).
+I have email boundaries and I encourage you to find your own. Mine include not answering emails after 6pm, or on weekends or holidays. Finally, I request that emails only be used for interactions that are truly one-on-one (e.g. requesting extensions to assignments or accomodations); in general, to help create an atmosphere of transparency and group learning, I request that questions about content and assignments be directed to the #bio104 Slack channel in the Pomona College Division-II workspace.
 
 *Learning diversity & accommodations*: Pomona College welcomes and accommodates students with disabilities. As your instructor, I care about you and your growth as an environmental scholar. If you encounter obstacles to your success, please let me know immediately so that we can work together to identify ways to overcome any limitations of current course design. If you feel you need a reasonable accommodation to participate in this class, complete course requirements, or benefit from the College’s programs or services, you are also welcome to contact the student accessibility resource office at your College to begin this conversation or to establish accommodations for this or other courses.
 
@@ -99,7 +99,7 @@ Below is a list of the relevant accessibility resource offices at each of the Co
 
 *Late assignments*:  When assignments are handed in late without prior notice, I reserve the right to apply a grade deduction penalty (1 grade reduction for each day late).
 
-*Academic integrity*: Academic honesty is a core value of the Pomona College and the Claremont Colleges. Plagiarism undermines academic integrity and is a threat to communal ethics. I will assign plagiarized assignments a failing grade and will report any instance of plagiarism to the College.
+*Academic integrity*: Academic honesty is a core value of Pomona College and the Claremont Colleges. Plagiarism undermines academic integrity and is a threat to communal ethics. I will assign plagiarized assignments a failing grade and will report any instance of plagiarism to the College.
 
 ## Course Schedule
 

@@ -1,11 +1,27 @@
 name: "BIOL104"
 output_dir: "."
 navbar:
-  title: "Conservation Science: Theories and Solutions"
+  title: "Conservation Science"
   left:
     - text: "Syllabus"
       icon: fa-home
       href: index.html
+    - text: "Introduction"
+      menu:
+        - text: "Week 1"
+        - text: "The R and RStudio environments"
+          href: Week1.html
+    - text: "Data manipulation"
+      menu:
+        - text: "Week 2"
+        - text: "Objects and data types in R"
+          href:  Week2.html
+        - text: "Week 3"
+        - text: "Manipulating data.frames"
+          href:  Week3.html
+        - text: "Week 4"
+        - text: "Grouping and summary operations"
+          href:  Week4.html
 output:
   html_document:
     theme: flatly
