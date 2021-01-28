@@ -11,6 +11,8 @@ navbar:
         - text: "Week 1"
         - text: "The R and RStudio environments"
           href: Week1.html
+        - text: "Introduction to R"
+          href: Week1b.html
     - text: "Data manipulation"
       menu:
         - text: "Week 2"

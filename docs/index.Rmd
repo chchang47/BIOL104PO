@@ -54,11 +54,11 @@ By the end of the course, a successful learner will be able to:
 
 ## Course assessment
 
-* Formative content and coding assessments (10%)
-* Facilitating discussion and providing incisive discussion points (students submit discussion topics/questions) (20%)
+* Content and coding assessments (20%)
+* Facilitating discussion and providing incisive discussion points (20%)
 * Speed Talks: Interpreting articles (20%)
-* Project 1 (20%)
-* Project 2 (20%)
+* Project 1A (20%)
+* Project 1B (20%)
 
 ## Mutual expectations
 
