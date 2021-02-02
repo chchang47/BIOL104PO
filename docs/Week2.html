@@ -9,12 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Charlotte Chang" />
+<meta name="author" content="" />
 
 
-<title>Objects and data types in R</title>
+<title>Interacting with data in R</title>
 
-<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -308,11 +307,11 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Week 2</li>
     <li>
-      <a href="Week2.html">Objects and data types in R</a>
+      <a href="Week2.html">Manipulating data.frames</a>
     </li>
     <li class="dropdown-header">Week 3</li>
     <li>
-      <a href="Week3.html">Manipulating data.frames</a>
+      <a href="Week3.html">Plotting data</a>
     </li>
     <li class="dropdown-header">Week 4</li>
     <li>
@@ -332,14 +331,190 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Objects and data types in R</h1>
-<h4 class="author">Charlotte Chang</h4>
+<h1 class="title toc-ignore">Interacting with data in <code>R</code></h1>
 
 </div>
 
 
-<div id="more-details-to-come" class="section level2">
-<h2>More details to come!</h2>
+<div id="interacting-with-datasets-using-the-dplyr-package" class="section level2">
+<h2>Interacting with datasets using the <code>dplyr</code> package</h2>
+<p>In this class, we will use the <a href="https://r4ds.had.co.nz/">Tidyverse</a> developed by RStudio statisticians and <code>R</code> aficianados. Relative to other ways of interacting with data in (“base”) <code>R</code>, the Tidyverse has the advantage of featuring syntax that more directly translates to other data science tool kits and languages, such as Python or SQL. <a href="https://github.com/tidyverse/dplyr/"><code>dplyr</code></a> is one of the Tidyverse packages that extends core <code>R</code> functions to make <code>R</code> more modern and elegant in interacting with real-world data.</p>
+<p>This <a href="https://github.com/charlottehchang/BIOL104PO/blob/master/data/StateSpeciesDatasetS21.csv">data file</a> will be used in this <code>R</code> module. This dataset consists of the following state-level observations, denoted by each of the column names below:</p>
+<ul>
+<li><code>State</code>: Name of each state (2-character abbreviation)</li>
+<li><code>TotX</code>: Total species richness (# of species) for each taxon:
+<ul>
+<li><code>TotMammals</code> - total mammalian richness in each state</li>
+<li><code>TotBirds</code> - all birds (lower than official state counts, which include vagrants and other rarities)</li>
+<li><code>TotVerts</code> - all vertebrates, excluding mammals and birds</li>
+<li><code>TotInverts</code> - all invertebrates</li>
+<li><code>TotVascPlants</code> - all vascular plants</li>
+<li><code>TotNonVascPlants</code> - all non-vascular plants (e.g. mosses, liverworts)</li>
+</ul></li>
+<li><code>EndX</code>: species richness of endemic species
+<ul>
+<li>Replace X with each of the taxonomic groups listed above (e.g. EndMammals, EndBirds, etc.)</li>
+</ul></li>
+<li><code>ThreatX</code>: number of threatened species in each state in each group
+<ul>
+<li>Replace <code>X</code> with each of the taxonomic groups listed above (e.g. <code>ThreatVascPlants</code>, <code>ThreatBirds</code>, etc.)</li>
+</ul></li>
+<li><code>StateLandAreaMi2</code>: Land area of each state in square miles</li>
+<li><code>FarmAcresYYYY</code>: Land in farms in units of 1000 acres (therefore, multiply each state value by 1000 to get units in acres)
+<ul>
+<li>Replace <code>YYYY</code> with one of the following years: <code>2018, 2002, 1997</code></li>
+<li>Variable names: <code>FarmAcres2018, FarmAcres2002, FarmAcres1997</code></li>
+</ul></li>
+<li><code>CostPerAcreYYYY</code>: USD$ per acre for farmland in each state in eaach year
+<ul>
+<li>Replace <code>YYYY</code> with one of the following years: 2019, 2003, 1997</li>
+<li>Variable names: <code>CostPerAcre2019, CostPerAcre2003, CostPerAcre1997</code></li>
+</ul></li>
+<li><code>TotalProtectedAreaAcres</code>: Total amount of area protected in each state in acres</li>
+<li><code>PopulationYYYY</code>: Census-based population size for each state in each census year
+<ul>
+<li>Replace <code>YYYY</code> with one of the following years: <code>2020, 2010, 2000</code></li>
+<li>Variable names: <code>Population2020, Population2010, Population2000</code></li>
+</ul></li>
+<li><code>GrossStateProduct</code>: gross domestic product by state in units of 1 million USD (therefore, multiply each value by <code>10^6</code> to get the state GDP in dollars)</li>
+</ul>
+</div>
+<div id="data-operations" class="section level2">
+<h2>Data operations</h2>
+<p>One of the core data types that is integral to the modern world is spreadsheet-like data organized into a matrix format. In <code>R</code> parlance, such data are typically represented by a type of object called a <code>data.frame</code>. In many contexts, these types of data are also called data tables.</p>
+<p>In this module, we will focus on the following types of queries for data tables:</p>
+<ul>
+<li><code>filter()</code>: subsetting a data table based on values in <strong>rows</strong></li>
+<li><code>select()</code>: subset a data table based on specific <strong>columns</strong> given by their names</li>
+<li><code>arrange()</code>: sort rows based on values in columns</li>
+<li><code>mutate()</code>: create new columns for a data table based on some operation applied to existing columns</li>
+<li><code>summarize()</code>: summarize data table, usually yielding a data table with fewer rows</li>
+</ul>
+</div>
+<div id="scripting" class="section level2">
+<h2>Scripting</h2>
+<p>Today, we will also embark on writing <code>R</code> scripts to store our commands. We will even be able to execute the code interactively from the script editor (much like a text editor or some other type of notepad).</p>
+</div>
+<div id="steps" class="section level2">
+<h2>Steps</h2>
+<ol style="list-style-type: decimal">
+<li>Navigate to <a href="https://rstudio.pomona.edu">https://rstudio.pomona.edu</a></li>
+<li>If you have not yet done so, I recommend naming your current session. You can do that as follows:</li>
+</ol>
+<div class="figure">
+<img src="figures/NamingRSession.png" alt="" />
+<p class="caption">2a) Clicking on the session menu in the upper right-hand corner</p>
+</div>
+<div class="figure">
+<img src="figures/WritingSessionName.png" alt="" />
+<p class="caption">2b) Providing a name for the current R session</p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>Opening up a new <code>.R</code> script
+<ul>
+<li>Note that you can navigate to the bars in between each pane until you see a <svg style="height:0.8em;top:.04em;position:relative;fill:black;" viewBox="0 0 512 512"><path d="M352.201 425.775l-79.196 79.196c-9.373 9.373-24.568 9.373-33.941 0l-79.196-79.196c-15.119-15.119-4.411-40.971 16.971-40.97h51.162L228 284H127.196v51.162c0 21.382-25.851 32.09-40.971 16.971L7.029 272.937c-9.373-9.373-9.373-24.569 0-33.941L86.225 159.8c15.119-15.119 40.971-4.411 40.971 16.971V228H228V127.196h-51.23c-21.382 0-32.09-25.851-16.971-40.971l79.196-79.196c9.373-9.373 24.568-9.373 33.941 0l79.196 79.196c15.119 15.119 4.411 40.971-16.971 40.971h-51.162V228h100.804v-51.162c0-21.382 25.851-32.09 40.97-16.971l79.196 79.196c9.373 9.373 9.373 24.569 0 33.941L425.773 352.2c-15.119 15.119-40.971 4.411-40.97-16.971V284H284v100.804h51.23c21.382 0 32.09 25.851 16.971 40.971z"/></svg> icon, which you can use to drag the panes to be larger or smaller</li>
+</ul></li>
+</ol>
+<div class="figure">
+<img src="figures/openingRscript.png" alt="" />
+<p class="caption">3a) Opening up the script pane</p>
+</div>
+<div class="figure">
+<img src="figures/Rscript.png" alt="" />
+<p class="caption">3b) R script editor pane</p>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>Creating a folder to store our work in BIOL104:
+<ul>
+<li>In the bottom right-hand corner (Viewer/Plots/Files pane), click on <code>Files</code></li>
+<li>Click on <code>New Folder</code></li>
+<li>Give your folder a name. I recommend <code>BIOL104</code></li>
+</ul></li>
+<li>Click in the text editor pane in the top left-hand side, which currently says <code>Untitled1</code> at the top.</li>
+<li>Subsequently, copy the code below into the <code>R</code> script:
+<ul>
+<li>Note that below, any line starting with the pound sign <code>#</code> is a <em>comment</em>.</li>
+<li>Comments are text that are not executed by <code>R</code>.</li>
+<li>In general, it is good practice to “comment your code” – that is, use comments to annotate your code for future reference.</li>
+</ul></li>
+</ol>
+<pre><code>### Loading packages with helpful functions
+library(dplyr) 
+  # R will let you know if loading in this package over-rides any existing function names; don&#39;t worry about this message for now.
+
+### Reading in data
+USdata &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/StateSpeciesDatasetS21.csv&quot;) # Here, we are using the function read_csv from the package readr
+    # R will print out a message saying how it has parsed the data table into different columns
+
+### Previewing the data
+USdata
+
+### Subsetting our data by rows
+filter(USdata, ThreatMammals &gt;= 50) # select all rows (each row is a state) where there are 10 or more threatened mammals
+filter(USdata, State==&quot;CA&quot; | State==&quot;AZ&quot;) # select all rows corresponding to the states of California OR Arizona. The vertical bar (|) denotes an &quot;OR&quot; operation
+filter(USdata, TotMammals &gt; 50 &amp; TotBirds &gt; 400) # select all rows with more than 50 mammals and more than 400 birds
+
+### Selecting columns from the data table
+select(USdata, EndVascPlants) # Here, we are selecting the column of endemic vascular plant richness counts
+select(USdata, FarmAcres2018) # Here, we are selecting the column storing the number of acres of land (in units of 1000 acres)
+select(USdata, TotBirds, EndBirds) # Here, we are selecting two columns from US data - total bird richness and endemic bird richness
+
+### Creating new variables and storing them in new columns
+thousand_acres_to_miles &lt;- 1.56 # multiplier to convert 1000 acres to square miles
+USdata &lt;- mutate(USdata, FarmAcres2018Mi2 = FarmAcres2018*thousand_acres_to_miles) # taking the conversion rate for 1000 acres to units of square miles and creating a new variable that stores farm area in each state in square miles
+    # Ensure that we store this output in the variable USdata, so that way the new column will show up when we call or refer to USdata
+USdata &lt;- mutate(USdata, FarmProportion = FarmAcres2018Mi2/StateLandAreaMi2)
+  ## A few additional operations
+summary( select(USdata, FarmProportion) )  # Summarize the proportion of land that is farm area across the 50 states.
+
+### Creating a summary across a subset of data
+
+summarize(USdata, min_number_threatened_birds = min(ThreatBirds), mean_number_threatened_birds = mean(ThreatBirds, max_number_threatened_birds = max(ThreatBirds)) # Creating a small table that summarizes the minimum and maximum species richness of threatened bird species across the 50 states</code></pre>
+<p>When you’ve copied in the code into the <code>R</code> script, it will look something like this:</p>
+<div class="figure">
+<img src="figures/InitialRScript.png" alt="" />
+<p class="caption">R script with initial commands</p>
+</div>
+<ol start="7" style="list-style-type: decimal">
+<li>Next, save the <code>Untitled1</code> file using the <svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"><path d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"/></svg> icon and give it an informative name.
+<ul>
+<li>I recommend selecting the <code>BIOL104</code> folder (or whatever you previously named the folder) as the location to save this file.</li>
+<li>I went ahead and gave this file the name <code>Week2.R</code></li>
+</ul></li>
+<li>Now you can run the code <strong>from the script editor directly</strong>!</li>
+<li>The easiest way to run the code is to highlight each line of code and either type <code>⌘ + Enter</code> (people who have Mac OS) or <code>CTRL + Enter</code></li>
+</ol>
+<p>You can also highlight each line of code with your mouse and use the “run code” button at the top right-hand side of the text editor pane: <img src="figures/runCode.png" alt="run code" /></p>
+<ol start="10" style="list-style-type: decimal">
+<li>Note that running each line of code from the text editor (from the <code>R</code> script in this case) is the same as typing the commands into the console. You typed commands directly into the console last week in your initial interactions with <code>R</code>.</li>
+<li>Writing scripts is advantageous because you can store your commands somewhere convenient and revisit or edit the file anytime.</li>
+</ol>
+<div id="going-further" class="section level3">
+<h3>Going further</h3>
+<p>Congratulations on several exciting achievements! You have 1) read in data from an online source into <code>R</code>, 2) learned how to perform different operations to select rows or columns from the data, and 3) started to see how to summarize your data.</p>
+<p>To help you make forward progress, here are several <strong>completely optional</strong> exercises. If you’d like to work through these examples, please feel free to reach out to me via Slack DM if you encounter any obstacles.</p>
+<p>I recommend using the <code>Week2.R</code> script as a scratch space to work through these questions if you have time and decide to take on these example questions.</p>
+<ol style="list-style-type: decimal">
+<li>How would you subset (filter) rows from <code>USdata</code> where <code>TotVerts</code> is greater than or equal to 100?
+<ul>
+<li>Note that you can use the command <code>names(USdata)</code> (you can add this to your script or run it any time in the console) to see the names of all of the columns in your data table</li>
+</ul></li>
+<li>How would you subset (select) the column <code>CostPerAcre1997</code> from <code>USdata</code>?</li>
+<li>How would you subset rows from <code>USdata</code> where <code>ThreatInverts</code> is <span class="math inline">\(\geq 250\)</span> <strong>and</strong> subset your data to the columns <code>ThreatInverts</code> and <code>EndInverts</code>?</li>
+<li>How would you create (mutate) a new column in <code>USdata</code> that stores the amount of protected areas in each state in units of square miles instead of acres?
+<ul>
+<li>Note that <code>TotalProtectedAreasAcres</code> presents the total acreage of protected lands in each state. The units are acres, not 1000 acres.</li>
+</ul></li>
+<li>Building on point D above, how would you create a column that stores the proportion of land protected in each state?</li>
+<li>How would you summarize the minimum (<code>min()</code>), mean (<code>mean()</code>), and maximum (<code>max()</code>) values for the proportion of land that is protected in each state?</li>
+</ol>
+</div>
+</div>
+<div id="combining-operations-using-pipes" class="section level2">
+<h2>Combining operations using “pipes”</h2>
+<ul>
+<li>More to come on Thursday</li>
+</ul>
 </div>
 
 

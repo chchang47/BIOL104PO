@@ -16,10 +16,10 @@ navbar:
     - text: "Data manipulation"
       menu:
         - text: "Week 2"
-        - text: "Objects and data types in R"
+        - text: "Manipulating data.frames"
           href:  Week2.html
         - text: "Week 3"
-        - text: "Manipulating data.frames"
+        - text: "Plotting data"
           href:  Week3.html
         - text: "Week 4"
         - text: "Grouping and summary operations"

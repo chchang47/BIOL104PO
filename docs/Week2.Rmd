@@ -1,0 +1,157 @@
+---
+title: "Interacting with data in `R`"
+author: ""
+date: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+USdata <- readr::read_csv("~/Documents/Teaching/BIOL104PO/data/StateSpeciesDatasetS21.csv")
+library(fontawesome)
+```
+
+## Interacting with datasets using the `dplyr` package
+
+In this class, we will use the [Tidyverse](https://r4ds.had.co.nz/) developed by RStudio statisticians and `R` aficianados. Relative to other ways of interacting with data in ("base") `R`, the Tidyverse has the advantage of featuring syntax that more directly translates to other data science tool kits and languages, such as Python or SQL. [`dplyr`](https://github.com/tidyverse/dplyr/) is one of the Tidyverse packages that extends core `R` functions to make `R` more modern and elegant in interacting with real-world data.
+
+This [data file](https://github.com/charlottehchang/BIOL104PO/blob/master/data/StateSpeciesDatasetS21.csv) will be used in this `R` module. This dataset consists of the following state-level observations, denoted by each of the column names below:
+
+* `State`: Name of each state (2-character abbreviation)
+* `TotX`: Total species richness (# of species) for each taxon:
+  + `TotMammals` - total mammalian richness in each state
+  + `TotBirds` - all birds (lower than official state counts, which include vagrants and other rarities)
+  + `TotVerts` - all vertebrates, excluding mammals and birds
+  + `TotInverts` - all invertebrates
+  + `TotVascPlants` - all vascular plants
+  + `TotNonVascPlants` - all non-vascular plants (e.g. mosses, liverworts)
+* `EndX`: species richness of endemic species
+  + Replace X with each of the taxonomic groups listed above (e.g. EndMammals, EndBirds, etc.)
+* `ThreatX`: number of threatened species in each state in each group
+  + Replace `X` with each of the taxonomic groups listed above (e.g. `ThreatVascPlants`, `ThreatBirds`, etc.)
+* `StateLandAreaMi2`: Land area of each state in square miles
+* `FarmAcresYYYY`: Land in farms in units of 1000 acres (therefore, multiply each state value by 1000 to get units in acres)
+  + Replace `YYYY` with one of the following years: `2018, 2002, 1997`
+  + Variable names: `FarmAcres2018, FarmAcres2002, FarmAcres1997`
+* `CostPerAcreYYYY`: USD$ per acre for farmland in each state in eaach year
+  + Replace `YYYY` with one of the following years: 2019, 2003, 1997
+  + Variable names: `CostPerAcre2019, CostPerAcre2003, CostPerAcre1997`
+* `TotalProtectedAreaAcres`: Total amount of area protected in each state in acres
+* `PopulationYYYY`: Census-based population size for each state in each census year
+  + Replace `YYYY` with one of the following years: `2020, 2010, 2000`
+  + Variable names: `Population2020, Population2010, Population2000`
+* `GrossStateProduct`: gross domestic product by state in units of 1 million USD (therefore, multiply each value by `10^6` to get the state GDP in dollars)
+
+## Data operations
+
+One of the core data types that is integral to the modern world is spreadsheet-like data organized into a matrix format. In `R` parlance, such data are typically represented by a type of object called a `data.frame`. In many contexts, these types of data are also called data tables.
+
+In this module, we will focus on the following types of queries for data tables:
+
+* `filter()`: subsetting a data table based on values in **rows**
+* `select()`: subset a data table based on specific **columns** given by their names
+* `arrange()`: sort rows based on values in columns
+* `mutate()`: create new columns for a data table based on some operation applied to existing columns
+* `summarize()`: summarize data table, usually yielding a data table with fewer rows
+
+## Scripting
+
+Today, we will also embark on writing `R` scripts to store our commands. We will even be able to execute the code interactively from the script editor (much like a text editor or some other type of notepad).
+
+## Steps
+
+1. Navigate to [https://rstudio.pomona.edu](https://rstudio.pomona.edu)
+2. If you have not yet done so, I recommend naming your current session. You can do that as follows:
+
+![2a) Clicking on the session menu in the upper right-hand corner](figures/NamingRSession.png)
+
+![2b) Providing a name for the current R session](figures/WritingSessionName.png)
+
+3. Opening up a new `.R` script
+    + Note that you can navigate to the bars in between each pane until you see a `r fa("arrows-alt", fill="black")` icon, which you can use to drag the panes to be larger or smaller 
+
+![3a) Opening up the script pane](figures/openingRscript.png)
+
+![3b) R script editor pane](figures/Rscript.png)
+
+4. Creating a folder to store our work in BIOL104:
+    + In the bottom right-hand corner (Viewer/Plots/Files pane), click on `Files`
+    + Click on `New Folder`
+    + Give your folder a name. I recommend `BIOL104`
+5. Click in the text editor pane in the top left-hand side, which currently says `Untitled1` at the top.
+6. Subsequently, copy the code below into the `R` script:
+    + Note that below, any line starting with the pound sign `#` is a *comment*.
+    + Comments are text that are not executed by `R`.
+    + In general, it is good practice to "comment your code" -- that is, use comments to annotate your code for future reference.
+    
+```
+### Loading packages with helpful functions
+library(dplyr) 
+  # R will let you know if loading in this package over-rides any existing function names; don't worry about this message for now.
+
+### Reading in data
+USdata <- readr::read_csv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/StateSpeciesDatasetS21.csv") # Here, we are using the function read_csv from the package readr
+    # R will print out a message saying how it has parsed the data table into different columns
+
+### Previewing the data
+USdata
+
+### Subsetting our data by rows
+filter(USdata, ThreatMammals >= 50) # select all rows (each row is a state) where there are 10 or more threatened mammals
+filter(USdata, State=="CA" | State=="AZ") # select all rows corresponding to the states of California OR Arizona. The vertical bar (|) denotes an "OR" operation
+filter(USdata, TotMammals > 50 & TotBirds > 400) # select all rows with more than 50 mammals and more than 400 birds
+
+### Selecting columns from the data table
+select(USdata, EndVascPlants) # Here, we are selecting the column of endemic vascular plant richness counts
+select(USdata, FarmAcres2018) # Here, we are selecting the column storing the number of acres of land (in units of 1000 acres)
+select(USdata, TotBirds, EndBirds) # Here, we are selecting two columns from US data - total bird richness and endemic bird richness
+
+### Creating new variables and storing them in new columns
+thousand_acres_to_miles <- 1.56 # multiplier to convert 1000 acres to square miles
+USdata <- mutate(USdata, FarmAcres2018Mi2 = FarmAcres2018*thousand_acres_to_miles) # taking the conversion rate for 1000 acres to units of square miles and creating a new variable that stores farm area in each state in square miles
+    # Ensure that we store this output in the variable USdata, so that way the new column will show up when we call or refer to USdata
+USdata <- mutate(USdata, FarmProportion = FarmAcres2018Mi2/StateLandAreaMi2)
+  ## A few additional operations
+summary( select(USdata, FarmProportion) )  # Summarize the proportion of land that is farm area across the 50 states.
+
+### Creating a summary across a subset of data
+
+summarize(USdata, min_number_threatened_birds = min(ThreatBirds), mean_number_threatened_birds = mean(ThreatBirds, max_number_threatened_birds = max(ThreatBirds)) # Creating a small table that summarizes the minimum and maximum species richness of threatened bird species across the 50 states
+```
+
+When you've copied in the code into the `R` script, it will look something like this:
+
+![R script with initial commands](figures/InitialRScript.png)
+
+7. Next, save the `Untitled1` file using the `r fa("save")` icon and give it an informative name.
+    + I recommend selecting the `BIOL104` folder (or whatever you previously named the folder) as the location to save this file.
+    + I went ahead and gave this file the name `Week2.R`
+8. Now you can run the code **from the script editor directly**! 
+9. The easiest way to run the code is to highlight each line of code and either type `⌘ + Enter` (people who have Mac OS) or `CTRL + Enter`
+
+You can also highlight each line of code with your mouse and use the "run code" button at the top right-hand side of the text editor pane:
+![run code](figures/runCode.png)
+
+10. Note that running each line of code from the text editor (from the `R` script in this case) is the same as typing the commands into the console. You typed commands directly into the console last week in your initial interactions with `R`.
+11. Writing scripts is advantageous because you can store your commands somewhere convenient and revisit or edit the file anytime.
+
+### Going further
+
+Congratulations on several exciting achievements! You have 1) read in data from an online source into `R`, 2) learned how to perform different operations to select rows or columns from the data, and 3) started to see how to summarize your data.
+
+To help you make forward progress, here are several **completely optional** exercises. If you'd like to work through these examples, please feel free to reach out to me via Slack DM if you encounter any obstacles.
+
+I recommend using the `Week2.R` script as a scratch space to work through these questions if you have time and decide to take on these example questions.
+
+1. How would you subset (filter) rows from `USdata` where `TotVerts` is greater than or equal to 100?
+    + Note that you can use the command `names(USdata)` (you can add this to your script or run it any time in the console) to see the names of all of the columns in your data table
+2. How would you subset (select) the column `CostPerAcre1997` from `USdata`?
+3. How would you subset rows from `USdata` where `ThreatInverts` is $\geq 250$ **and** subset your data to the columns `ThreatInverts` and `EndInverts`?
+4. How would you create (mutate) a new column in `USdata` that stores the amount of protected areas in each state in units of square miles instead of acres?
+    + Note that `TotalProtectedAreasAcres` presents the total acreage of protected lands in each state. The units are acres, not 1000 acres.
+5. Building on point D above, how would you create a column that stores the proportion of land protected in each state?
+6. How would you summarize the minimum (`min()`), mean (`mean()`), and maximum (`max()`) values for the proportion of land that is protected in each state?
+
+## Combining operations using "pipes"
+
+* More to come on Thursday

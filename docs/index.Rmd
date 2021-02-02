@@ -5,10 +5,6 @@ date: "`r Sys.Date()`"
 output: html_document
 bibliography: /Users/chc02006/Documents/Teaching/BIOL104PO/bio104.bib
 link-citations: true
-header-includes:
-  - \usepackage{tikz}
-  - \usepackage{color}
-  - \usepackage{hyperref}
 ---
 
 ```{r setup, include=FALSE}
@@ -27,7 +23,6 @@ Ultimately, the threats facing species and ecosystems are driven by human behavi
 * *Presentation*: Describing complex issues with clarity and persuasion is a highly translatable skill. This course will offer many opportunities to further develop your presentation skills, including speed presentations on readings and group presentations.
 * *Synthesis*: Creating socio-ecological conceptual models is a critical skill for conservation science. This course will allow you to build your skills in concept-mapping and interpreting claims in the literature.
 * *Data management, analysis, and visualization*: This course has a computational component where you will be able to develop skills in statistical programming using the `R` programming language. I do not assume any prior experience with programming.
-* *Lived experience*: As conservation scientists, our views are inherently shaped by our past experiences. In the course, you will read papers on environmental engagement and you will apply and interrogate these theories in your own class project. 
 
 ## Learning outcomes
 
@@ -113,10 +108,10 @@ Please note that this schedule is subject to change; this syllabus is very much 
 | 1/26 | Introduction: Personal motivations, Biodiversity overview, Getting set up with `RStudio Server` | @berkes2004rethinking; @mace2014whose; @sandbrook2019global; [Conservation Biology for All, Chapter 2](https://conbio.org/images/content_publications/Chapter2.pdf) | <!--Future of conservation-->
 | 2/2  | Measuring biodiversity, the global extinction crisis, introduction to objects and data types in `R` | @myers2000biodiversity; @pimmExtinctionChapter; @ceballos2015accelerated | <!--Students do talks on biodiversity?--> 
 | 2/9  | Why should society care? Ecosystem services, manipulating `data.frame`s in `R` |  [Conservation Biology for All, Chapter 3](https://conbio.org/images/content_publications/Chapter3.pdf); [Valuation of Ecosystem Services](https://www.youtube.com/watch?v=q8AZHtF2f50); @tallis2009mapping; @cardinale2012biodiversity | <!--Theme 2: Problems and some limited solutions; muradian2013payments?-->
-| 2/16 | Habitat loss, performing grouping and data merging operations in `R` | [Conservation Biology for All, Chapter 5](https://conbio.org/images/content_publications/Chapter5.pdf); @tilman1994habitat; @mueller2012closing |
+| 2/16 | Habitat loss, generating plots in `R` | [Conservation Biology for All, Chapter 5](https://conbio.org/images/content_publications/Chapter5.pdf); @tilman1994habitat; @mueller2012closing |
 | 2/23 | Conservation in practice: Protecting endangered species, generating plots in `R` | @rohlf1991six; [Wild Hope, Chapter 3](https://www.press.uchicago.edu/ucp/books/book/chicago/W/bo13823467.html); [Safe Harbors and RCWs](https://www.youtube.com/watch?v=fNWC4fTUU08) |
-| 3/2  | Over-exploitation, visualizing different types of data | [Conservation Biology for All, Chapter 6](https://conbio.org/images/content_publications/Chapter6.pdf); @dirzo2014defaunation; @osuri2016contrasting |
-| 3/6  | Project 1 due | |
+| 3/2  | Over-exploitation, Performing grouping and summary operations | [Conservation Biology for All, Chapter 6](https://conbio.org/images/content_publications/Chapter6.pdf); @dirzo2014defaunation; @osuri2016contrasting |
+| 3/6  | Project 1A due | |
 | 3/9  | Spring recess | |
 | 3/16 | Conserving harvested species, plotting multiple variables |  @mangel1996principles; [Fisheries Economics Video](https://www.youtube.com/watch?v=7DNhqtYf47E); [Diekert pages 1-5](https://www.uio.no/studier/emner/sv/oekonomi/ECON4925/h10/undervisningsmateriale/lecture_11-12_renew(1511).pdf) | 
 | 3/23 | Climate change, performing linear regressions and evaluating residuals   | [Conservation Biology for All, Chapter 8](https://conbio.org/images/content_publications/Chapter8.pdf); @pacala2004stabilization; @thomas2004extinction |
@@ -125,4 +120,4 @@ Please note that this schedule is subject to change; this syllabus is very much 
 | 4/13 | How do we prioritize locating nature reserves given limited resources? Parks and people or people vs. parks? | @ando1998species; @margules2000systematic; @balmford2003should; @adams2007people | <!-- @watson2011systematic;-->
 | 4/20 | Conservation as a problem of environmental public goods | [Public vs. Private Goods](https://www.youtube.com/watch?v=E1v5eRs0_fw); @ostrom1999revisiting; @agrawal2008changing; @burivalova2017critical; [Conservation Biology for All, Ch. 14](https://conbio.org/images/content_publications/Chapter14.pdf) | <!--@levin2014public; @dietz2003struggle;-->
 | 4/27 | Decisions at the scale of individuals and societies | @stern1992psychological; @larigauderie2010intergovernmental; @kahan2012polarizing; @pascual2017valuing; [Montreal Protocol](https://www.youtube.com/watch?v=OINKJNWtSiE); [Lessons from Kyoto](https://www.youtube.com/watch?v=bcxL7jN4akw); [Inequality between countries](https://www.youtube.com/watch?v=B11kASPfYxY) | <!--@dunlap2000NEP;-->
-| 5/4  | Course retrospective, Final project due | |
+| 5/4  | Course retrospective, Final project 1B due | |
