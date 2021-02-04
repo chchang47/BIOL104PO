@@ -46,7 +46,7 @@ This [data file](https://github.com/charlottehchang/BIOL104PO/blob/master/data/S
 * `CostPerAcreYYYY`: USD$ per acre for farmland in each state in eaach year
   + Replace `YYYY` with one of the following years: 2019, 2003, 1997
   + Variable names: `CostPerAcre2019, CostPerAcre2003, CostPerAcre1997`
-* `TotalProtectedAreaAcres`: Total amount of area protected in each state in acres
+* `TotalProtectedAreasAcres`: Total amount of area protected in each state in acres
 * `PopulationYYYY`: Census-based population size for each state in each census year
   + Replace `YYYY` with one of the following years: `2020, 2010, 2000`
   + Variable names: `Population2020, Population2010, Population2000`
