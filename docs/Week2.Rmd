@@ -11,6 +11,16 @@ USdata <- readr::read_csv("~/Documents/Teaching/BIOL104PO/data/StateSpeciesDatas
 library(fontawesome)
 ```
 
+## Having some fun with `R`
+
+Anytime `R` detects a syntax (spelling or programming language "grammar") error, it will spit out some kind of `warning` or `error` message. Usually the `warning` messages indicate that things are working, but maybe something weird could be happening (e.g. you think you have successfully fit a statistical model, but actually, the data are too few to perform a solid estimation of the model coefficients, so `R` starts squawking). 
+
+`Error` messages usually pertain to `R` 1) not being able to find some variable/object (spelling issues most often - and here is an example of a place where I already run into issues - I tend to use variable/object interchangeably when talking about items I am creating or defining in `R`) or 2) not being able to execute some function (usually because something is written incorrectly, spelled wrong, you're missing a closing parenthesis/bracket, or you have an extra parenthesis/bracket hanging out).
+
+So, while we may throw our hands up in despair when we see an inscrutable and alarming-sounding `R` warning or error, let's turn this into a friendly class competition instead! [This Google doc](https://docs.google.com/document/d/1mW6TsqO4IVRmawhp0D4UIyGkKDz3C0QLUJ0QBk_DY2Y/edit?usp=sharing) is where we can submit our own worst error and warning messages.
+
+Don't worry! You won't break `R`. Running into error messages and warnings is a sign of growth. I still get error messages and warnings pretty much every day I sit down and code. `¯\_(ツ)_/¯`
+
 ## Interacting with datasets using the `dplyr` package
 
 In this class, we will use the [Tidyverse](https://r4ds.had.co.nz/) developed by RStudio statisticians and `R` aficianados. Relative to other ways of interacting with data in ("base") `R`, the Tidyverse has the advantage of featuring syntax that more directly translates to other data science tool kits and languages, such as Python or SQL. [`dplyr`](https://github.com/tidyverse/dplyr/) is one of the Tidyverse packages that extends core `R` functions to make `R` more modern and elegant in interacting with real-world data.
@@ -106,17 +116,22 @@ select(USdata, EndVascPlants) # Here, we are selecting the column of endemic vas
 select(USdata, FarmAcres2018) # Here, we are selecting the column storing the number of acres of land (in units of 1000 acres)
 select(USdata, TotBirds, EndBirds) # Here, we are selecting two columns from US data - total bird richness and endemic bird richness
 
+### Sorting the data table based on the level of threatened bird richness
+dplyr::arrange(USdata, ThreatBirds) # the :: is R syntax to refer to a function from a package; I wanted to show this explicitly here.
+  # Sometimes it is necessary when multiple packages have functions of the same name. Then if you load a second package after dplyr that also has an "arrange" function, that package's arrange function would be the default one that you call on.
+
 ### Creating new variables and storing them in new columns
 thousand_acres_to_miles <- 1.56 # multiplier to convert 1000 acres to square miles
 USdata <- mutate(USdata, FarmAcres2018Mi2 = FarmAcres2018*thousand_acres_to_miles) # taking the conversion rate for 1000 acres to units of square miles and creating a new variable that stores farm area in each state in square miles
     # Ensure that we store this output in the variable USdata, so that way the new column will show up when we call or refer to USdata
 USdata <- mutate(USdata, FarmProportion = FarmAcres2018Mi2/StateLandAreaMi2)
-  ## A few additional operations
+  ## Getting a summary of our new FarmProportion column
 summary( select(USdata, FarmProportion) )  # Summarize the proportion of land that is farm area across the 50 states.
 
 ### Creating a summary across a subset of data
-
-summarize(USdata, min_number_threatened_birds = min(ThreatBirds), mean_number_threatened_birds = mean(ThreatBirds, max_number_threatened_birds = max(ThreatBirds)) # Creating a small table that summarizes the minimum and maximum species richness of threatened bird species across the 50 states
+summarize(USdata, min_number_threatened_birds = min(ThreatBirds), 
+mean_number_threatened_birds = mean(ThreatBirds),
+max_number_threatened_birds = max(ThreatBirds)) # Creating a small table that summarizes the minimum and maximum species richness of threatened bird species across the 50 states
 ```
 
 When you've copied in the code into the `R` script, it will look something like this:
@@ -154,4 +169,58 @@ I recommend using the `Week2.R` script as a scratch space to work through these 
 
 ## Combining operations using "pipes"
 
-* More to come on Thursday
+What if you wanted to combine functions above and store the final products? For example, let's say that we wanted to:
+
+1. Calculate the proportion of land in each state that is protected.
+2. Based on those proportional land protection levels, assign a "protection status" category for each state (e.g. low, medium, and high protection).
+3. Compare the number of endemic invertebrates and plants across these three categories of states.
+
+In `R`, you could write up those commands individually as follows (copy and paste into your scripting pane to save and run these commands line by line):
+
+```
+### 1: Calculating the proportion of land in each state that is protected
+  # Note that all of the code here assumes that you have run the first 3 R commands from the previous "code chunk"
+  # The first 3 commands loaded the dplyr package, pulled in the data for this week's R component, and displayed (printed) the data in the console by calling the dataset's name (USdata)
+acres_to_miles <- 1.56/1000 # multiplier to convert 1 acre to square miles
+USdata_with_land_protection <- mutate(USdata, proportion_land_protected = (TotalProtectedAreasAcres * acres_to_miles)/StateLandAreaMi2 ) # we have created a new column "proportion_land_protected" that stores the output of our conversion of protected areas in acres to square miles, then divides that quantity by the total land area (in miles^2) of each state.
+  # We are storing the output of this analysis in a new object, USdata_with_land_protection (not USdata). You could also store it in USdata though. But why might you sometimes want to store it in the original variable (USdata), and why might you sometimes want to create a new variable/object?
+
+### 2: Assigning a "protected status" category for each state
+USdata_with_land_protection <- mutate(USdata_with_land_protection,
+State_category=case_when(proportion_land_protected <= 0.2 ~ "Low",
+proportion_land_protected <= 0.5 ~ "Medium",
+proportion_land_protected > 0.5 ~ "High")) # Here I am using another nifty function in dplyr, "case_when" to assign some kind of a label / category based on the values in the column proportion_land_protected, and I'm storing those categories in a new column called State_category.
+
+### 3: Comparing the number of endemic invertebrates and plants across those three categories of state protection status
+comparisonDF <- summarize( group_by(USdata_with_land_protection, State_category), EndemicInverts = mean(EndInverts),
+EndemicPlants = mean(EndVascPlants + EndNonVascPlants))
+
+comparisonDF # call the object to print out its values
+```
+
+Alternatively, you could use the pipe operator `%>%` to daisy chain commands together into a sequence. It is a handy way to make a complex operation with intermediate steps more transparent. The visualization below describes what pipes do in `R` in linking up functions:
+
+![Schematic of the pipe `%>%` operator in `R` (Altaf Ali)](figures/Rpipeoperator.png)
+
+We could redo the commands above using the pipe operator as follows:
+
+```
+acres_to_miles <- 1.56/1000 # multiplier to convert 1 acre to square miles 
+  # You don't need to re-copy and re-run this line if you already defined this object before in your R session
+  
+comparisonDF <- USdata %>% # passing the object USdata to the next command
+    mutate(proportion_land_protected = (TotalProtectedAreasAcres * acres_to_miles)/StateLandAreaMi2 ) %>% # I don't need to refer to the USdata object! mutate() knows to use that object. Instead, I can directly refer to the new column I want to create from existing columns.
+    mutate(State_category=case_when(proportion_land_protected <= 0.2 ~ "Low",
+proportion_land_protected <= 0.5 ~ "Medium",
+proportion_land_protected > 0.5 ~ "High")) %>%
+  group_by(State_category) %>%
+  summarize(EndemicInverts = mean(EndInverts),
+EndemicPlants = mean(EndVascPlants + EndNonVascPlants))
+
+comparisonDF
+
+# Note that in this code chunk, we didn't define the USdata_with_land_protection object. We didn't need to have some intermediate variable to store the intermediate outputs!
+# Note also that if you call USdata again, you wouldn't see these new columns (e.g. proportion_land_protected) in that data table. That's because we never assigned the output of mutate back to the USdata object (this can be a good thing when you don't care or don't want intermediate data outputs to muck up your original data)
+```
+
+
