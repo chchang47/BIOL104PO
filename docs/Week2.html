@@ -457,7 +457,7 @@ USdata &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/charlottehc
 USdata
 
 ### Subsetting our data by rows
-filter(USdata, ThreatMammals &gt;= 50) # select all rows (each row is a state) where there are 10 or more threatened mammals
+filter(USdata, ThreatMammals &gt;= 50) # select all rows (each row is a state) where there are 50 or more threatened mammals
 filter(USdata, State==&quot;CA&quot; | State==&quot;AZ&quot;) # select all rows corresponding to the states of California OR Arizona. The vertical bar (|) denotes an &quot;OR&quot; operation
 filter(USdata, TotMammals &gt; 50 &amp; TotBirds &gt; 400) # select all rows with more than 50 mammals and more than 400 birds
 
