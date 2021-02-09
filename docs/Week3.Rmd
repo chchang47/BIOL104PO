@@ -1,0 +1,188 @@
+---
+title: "Interacting with datasets and creating plots"
+author: ""
+date: ""
+output: 
+  html_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Reading in the provided dataset for the class project
+
+[More information on the class project here.](https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit?usp=sharing) Friendly reminder about the:
+
+* [This Google doc](https://docs.google.com/document/d/1mW6TsqO4IVRmawhp0D4UIyGkKDz3C0QLUJ0QBk_DY2Y/edit?usp=sharing) is where we can submit our own worst error and warning messages.
+    + `R`--like many programming languages--unfortunately tends to issue these inscrutable warning/error messages. Instead of hitting our heads against the wall alone when we encounter these, let's collate them into our own "natural history log" of `R` warnings and errors doc!
+* Standing invitation to post any `R` or class related questions to the class Slack channel - homework questions totally welcome!
+
+For the class project, I have created a [Provided Datasheet](https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv) that compiles data for the 58 counties in California. [The Provided Datasheet section of the class project description document](https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit#bookmark=id.5xpubn6xluzn) describes the columns of the datasheet. In this week of class, we'll be revisiting the commands from last week and adding on two additional tools:
+
+* `View` - an RStudio Server helper command that displays spreadsheets in a pane, much like Excel;
+* `ggplot2` - plotting using the `ggplot2` library.
+
+The code chunk below shows:
+
+1. which packages to load into your `R` workspace with the `library()` command,
+2. how to read in the project data sheet. 
+
+Recall that when creating objects (as I show below with the `CA_county_data` line below), it is best to use `camelCase` or `strategic_underscore_separation` to create legible names for your objects. So far, we've considered two kinds of objects: 1) new items in your `R` workspace and 2) new columns in a data table.
+
+Make sure that you copy the text below in the "code chunk" into your text editor window in RStudio Server. I recommend saving the file as `Week3.R` in your `BIOL104` folder (see [last week's instructions](https://charlottehchang.github.io/BIOL104PO/Week2.html; also totally fine if you have named this folder something else) in the **Scripting** section, steps 1-6).
+
+```
+### Load dplyr package into R workspace
+library(dplyr)
+
+### Read in data
+CA_county_data <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_protectedareas_datasheet.tsv") # this is a link to the Provided Datasheet for the class project
+
+### Take a look at the first few rows of the data table
+CA_county_data
+```
+
+Awesome! You have 1) loaded the package `dplyr`, which is our toolkit for more elegant data manipulation in `R`, 2) read in the Provided Datasheet using the function `read_tsv` (read in tab-separated value files, sometimes also called `.txt` files, though `.tsv` is the format used here) from the package `readr`, 3) printed out the first 10 rows of the data table.
+
+One thing to note is that the packages we are using in `R` make "opinionated" decisions about how many columns to display. Because the provided datasheet has 26 columns, `R` only displays 6 or so of the columns and just lists the names of the remaining columns.
+
+## Using the `View` command
+
+Oftentimes, we may want a more intuitive way to see our data tables. It can be really annoying when `R` is too clever and only displays a subset of the columns of your spreadsheet. The `View()` function pulls up an Excel-style data viewer. Let's try it below:
+
+```
+View(CA_county_data)
+```
+
+What just happened? `R` pulled up a spreadsheet data viewer in a new tab next to your `R` script. You can always press the `x` button on the upper right-hand side of the tab to close the viewer. And if you ever want to view your spreadsheet again, you can just re-run the command above! Another cool thing is that the spreadsheet viewer gives you options to sort (`dplyr::arrange`).
+
+If you ever don't know what a function does, note that you can use the `?` command before a function's name to pull up a help page for that function. For example, you could run `?View` in the console (remember, where you see the `>` carat symbol awaiting your command -- or you can copy `?View` to the text editor pane then run that line). Calling `?View` will pull up the `Help` pane in the lower right-hand corner of RStudio Server, which will display a help document with the title **Invoke a Data Viewer**. You can do this `?` help command with `?mean` (pull up the help display for the arithmetic mean function), `?mutate` (pulls up a help display for `mutate`).
+
+![Sorting the `CA_county_data` spreadsheet in the Viewer pane by the number of birds (highest to lowest)](figures/Viewer.png)
+
+# Revisiting pipes (`%>%`) to link up data manipulation functions
+
+## Subsetting data tables with `filter` and `select`
+
+The provided datasheet, stored in `CA_county_data`, has 58 rows and 26 columns. You can confirm this by running the command `dim(CA_county_data)` in the console or adding this on its own line in your `Week3.R` script and running it (hint: `?dim` for more details).
+
+26 columns is kind of a pain! We can't view all of those columns nicely when we tell `R` to print out `CA_county_data`. Additionally, instead of looking at all 58 counties (rows) of `CA_county_data`, perhaps we want to focus on a subset of the data table that satisfies some condition. Fortunately, we can use `filter` to subset a data table into rows that meet our criterion and then we can `select` to only display certain columns.
+
+Let's say that we want to:
+
+* filter the provided datasheet to the counties that have $\geq$ 210 bird species
+* select the columns `County`, `Birds`, `iucn_threat_count_species`, and `Trees`.
+
+We'll do that below, using the `%>%` pipe operator to link up our commands:
+
+```
+### Using pipes to link up commands to 
+### 1) subset CA_county_data based on the values in the column Birds
+### and 2) select a subset of columns from the data table
+### We will store the output in a new object called birdsTreesIUCN
+birdsTreesIUCN <- CA_county_data %>%
+    filter(Birds >= 210) %>%
+    select(County,iucn_threat_count_species,Trees,Birds)
+
+birdsTreesIUCN # display our subset of the CA_county_data data table
+```
+
+Cool! What we have done above is:
+
+* Used the `%>%` pipe operator to pass `CA_county_data`, our data table object, into the `filter` function;
+* The `filter(...)` line selects the rows in our data table that satisfy the condition (`Birds >= 210`);
+* The output of the `filter` function goes into the `select` function which selects a subset of the columns in the data table based on their names;
+* Ultimately, the output of all of these commands is stored in `birdsTreesIUCN` and then we tell `R` to print out its contents.
+* Note: we could also run `View(birdsTreesIUCN)` in the console if we wanted to see the spreadsheet viewer display of this object.
+
+## Exercise
+
+How would you modify the code above take a subset of `CA_county_data` where the counties have more than 40 tree species and select the columns `County`, `Trees`, `Mammals`, and `PAs_gapstatus1thru4_Cts`? How would you store that in a new object called `treeSubset`?
+
+**Hint**:
+
+```
+treeSubset <- CA_county_data %>%
+    filter(Trees > ...) %>% # replace the ... with some value (maybe 40)
+    select(...) # replace ... with the comma-separated set of column names (maybe County, Trees, Mammals, PAs_gapstatus1thru4_Cts)
+
+treeSubset # print out treeSubset object
+
+# note that you could also run:
+# View(treeSubset) # uncomment by deleting the leading hashtag to run this command
+```
+
+## Generating summaries of new or existing columns in a spreadsheet using `mutate` and `group_by`
+
+Let's say that we want to do the following:
+
+* Create a new column that stores our calculation for the proportion of land in each county that is farmland;
+* Generate a summary across the 5 regions in California for the mean proportion of each county's area that is farmland.
+
+We will do that below using the `%>%` pipe operator to link up commands:
+
+```
+### Using pipes to 1) calculate proportion farmland in each county
+### and 2) summarize proportion farmland across the 5 regions in CA.
+### We will store the output in a new object called CA_farm_summary
+CA_farm_summary <- CA_county_data %>%
+      mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha) %>%
+      group_by(Region) %>%
+      summarize(mean_farmland_proportion = mean(farmland_proportion))
+      
+### Uncomment the line below (delete the leading # pound sign)
+### to print the CA_farm_summary at the console
+# CA_farm_summary
+```
+
+Nice! By running the code above (including uncommenting the `CA_farm_summary` line by deleting the leading `#` from `# CA_farm_summary`) we will generate this:
+
+![Summary of average amount of land that is farmland across all counties in each of the 5 regions in California](figures/Week3_mutate_groupby.png)
+What we have done above is:
+
+* Used the `%>%` pipe operator to pass `CA_county_data`, our data table object into the `mutate` command;
+* The `mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha)` line creates a new column called `farmland_proportion` that divides `farmland_area_HAs` over `area_of_county_ha`;
+  + Note though that we are not storing this column long-term in `CA_county_data` (We would need to modify the specification of this code chunk to store that `mutate` output into an object.)
+* We pass the output of the `mutate` command into a `group_by` function call.
+* `group_by` splits a data table into groups based on distinct values in some column. In this case, we tell `group_by` to divide up the `CA_county_data` data table into groups based on the values of `Region`;
+* Subsequently, we take the output of the `group_by` function forward into a `summarize` function, which tells `R` to calculate the `mean` value of the new `farmland_proportion` column (created by the `mutate` operation above) across the groups given by `Region`;
+* Ultimately, what we store in the new object `CA_farm_summary` (defined at the top of this code chunk) is the output of all of these commands, linked together, which is the little summary data table you see at the end.
+
+## Exercise
+
+How would you modify the code above to calculate the proportion of each county that is protected (GAP statuses 1-4 - you may want to use the column `PAs_gapstatus1thru4_HAs`) *and* summarize the mean values of that proportional protection across the 5 regions in California? How would you store that in a new object called `CA_protected_summary`?
+
+**Hint**:
+
+```
+CA_protected_summary <- CA_county_data %>%
+    mutate(proportion_protected = ...) %>% # replace the ... with the correct command
+    group_by(...) %>% replace by the correct column of data to define the groups
+    summarize(mean_proportion_protected = ...) # replace ... with the correct function applied to the correct column
+    
+CA_protected_summary # print out the object CA_protected_summary in the console
+```
+
+How would you modify the code above to calculate the mean number of IUCN threatened species across the counties in each of the 5 regions in California? How would you store the output of these commands in a new object called `regionIUCNrichnessMean`?
+
+**Hint**:
+
+```
+    <- CA_county_data %>%
+    group_by(...) %>% # which column would you use to divide the data into groups?
+    summarize(mean_IUCN_richness = ...) # what function would you use and what column would you apply it to?
+
+# regionIUCNrichnessMean # how would you print this object in the console?
+```
+
+# Thursday
+
+## ggplot2
+
+More to come!
+
+# Homework
+
+Generate a scatterplot with `farmland_proportion` on the x-axis and `Mammals` on the y-axis. Describe in 2-3 sentences what this plot displays.

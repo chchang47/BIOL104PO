@@ -50,7 +50,10 @@ By the end of the course, a successful learner will be able to:
 ## Course assessment
 
 * Content and coding assessments (20%)
+  + 2 lowest grades dropped for `R` homework assignments
+  + There will be an open-book summative homework before spring break and before the end of the semester to reflect on the concepts that we are building up in this class. These scores will not be dropped.
 * Facilitating discussion and providing incisive discussion points (20%)
+  + Lowest forum post grades will be dropped
 * Speed Talks: Interpreting articles (20%)
 * Project 1A (20%)
 * Project 1B (20%)

@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Charlotte Chang" />
+<meta name="author" content="" />
 
 
-<title>Plotting and visualizing data in R</title>
+<title>Interacting with datasets and creating plots</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -331,14 +331,160 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Plotting and visualizing data in <code>R</code></h1>
-<h4 class="author">Charlotte Chang</h4>
+<h1 class="title toc-ignore">Interacting with datasets and creating plots</h1>
 
 </div>
 
 
-<div id="more-to-come" class="section level2">
-<h2>More to come!</h2>
+<div id="reading-in-the-provided-dataset-for-the-class-project" class="section level1">
+<h1><span class="header-section-number">1</span> Reading in the provided dataset for the class project</h1>
+<p><a href="https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit?usp=sharing">More information on the class project here.</a> Friendly reminder about the:</p>
+<ul>
+<li><a href="https://docs.google.com/document/d/1mW6TsqO4IVRmawhp0D4UIyGkKDz3C0QLUJ0QBk_DY2Y/edit?usp=sharing">This Google doc</a> is where we can submit our own worst error and warning messages.
+<ul>
+<li><code>R</code>–like many programming languages–unfortunately tends to issue these inscrutable warning/error messages. Instead of hitting our heads against the wall alone when we encounter these, let’s collate them into our own “natural history log” of <code>R</code> warnings and errors doc!</li>
+</ul></li>
+<li>Standing invitation to post any <code>R</code> or class related questions to the class Slack channel - homework questions totally welcome!</li>
+</ul>
+<p>For the class project, I have created a <a href="https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv">Provided Datasheet</a> that compiles data for the 58 counties in California. <a href="https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit#bookmark=id.5xpubn6xluzn">The Provided Datasheet section of the class project description document</a> describes the columns of the datasheet. In this week of class, we’ll be revisiting the commands from last week and adding on two additional tools:</p>
+<ul>
+<li><code>View</code> - an RStudio Server helper command that displays spreadsheets in a pane, much like Excel;</li>
+<li><code>ggplot2</code> - plotting using the <code>ggplot2</code> library.</li>
+</ul>
+<p>The code chunk below shows:</p>
+<ol style="list-style-type: decimal">
+<li>which packages to load into your <code>R</code> workspace with the <code>library()</code> command,</li>
+<li>how to read in the project data sheet.</li>
+</ol>
+<p>Recall that when creating objects (as I show below with the <code>CA_county_data</code> line below), it is best to use <code>camelCase</code> or <code>strategic_underscore_separation</code> to create legible names for your objects. So far, we’ve considered two kinds of objects: 1) new items in your <code>R</code> workspace and 2) new columns in a data table.</p>
+<p>Make sure that you copy the text below in the “code chunk” into your text editor window in RStudio Server. I recommend saving the file as <code>Week3.R</code> in your <code>BIOL104</code> folder (see <a href="https://charlottehchang.github.io/BIOL104PO/Week2.html;%20also%20totally%20fine%20if%20you%20have%20named%20this%20folder%20something%20else">last week’s instructions</a> in the <strong>Scripting</strong> section, steps 1-6).</p>
+<pre><code>### Load dplyr package into R workspace
+library(dplyr)
+
+### Read in data
+CA_county_data &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_protectedareas_datasheet.tsv&quot;) # this is a link to the Provided Datasheet for the class project
+
+### Take a look at the first few rows of the data table
+CA_county_data</code></pre>
+<p>Awesome! You have 1) loaded the package <code>dplyr</code>, which is our toolkit for more elegant data manipulation in <code>R</code>, 2) read in the Provided Datasheet using the function <code>read_tsv</code> (read in tab-separated value files, sometimes also called <code>.txt</code> files, though <code>.tsv</code> is the format used here) from the package <code>readr</code>, 3) printed out the first 10 rows of the data table.</p>
+<p>One thing to note is that the packages we are using in <code>R</code> make “opinionated” decisions about how many columns to display. Because the provided datasheet has 26 columns, <code>R</code> only displays 6 or so of the columns and just lists the names of the remaining columns.</p>
+<div id="using-the-view-command" class="section level2">
+<h2><span class="header-section-number">1.1</span> Using the <code>View</code> command</h2>
+<p>Oftentimes, we may want a more intuitive way to see our data tables. It can be really annoying when <code>R</code> is too clever and only displays a subset of the columns of your spreadsheet. The <code>View()</code> function pulls up an Excel-style data viewer. Let’s try it below:</p>
+<pre><code>View(CA_county_data)</code></pre>
+<p>What just happened? <code>R</code> pulled up a spreadsheet data viewer in a new tab next to your <code>R</code> script. You can always press the <code>x</code> button on the upper right-hand side of the tab to close the viewer. And if you ever want to view your spreadsheet again, you can just re-run the command above! Another cool thing is that the spreadsheet viewer gives you options to sort (<code>dplyr::arrange</code>).</p>
+<p>If you ever don’t know what a function does, note that you can use the <code>?</code> command before a function’s name to pull up a help page for that function. For example, you could run <code>?View</code> in the console (remember, where you see the <code>&gt;</code> carat symbol awaiting your command – or you can copy <code>?View</code> to the text editor pane then run that line). Calling <code>?View</code> will pull up the <code>Help</code> pane in the lower right-hand corner of RStudio Server, which will display a help document with the title <strong>Invoke a Data Viewer</strong>. You can do this <code>?</code> help command with <code>?mean</code> (pull up the help display for the arithmetic mean function), <code>?mutate</code> (pulls up a help display for <code>mutate</code>).</p>
+<div class="figure">
+<img src="figures/Viewer.png" alt="" />
+<p class="caption">Sorting the <code>CA_county_data</code> spreadsheet in the Viewer pane by the number of birds (highest to lowest)</p>
+</div>
+</div>
+</div>
+<div id="revisiting-pipes-to-link-up-data-manipulation-functions" class="section level1">
+<h1><span class="header-section-number">2</span> Revisiting pipes (<code>%&gt;%</code>) to link up data manipulation functions</h1>
+<div id="subsetting-data-tables-with-filter-and-select" class="section level2">
+<h2><span class="header-section-number">2.1</span> Subsetting data tables with <code>filter</code> and <code>select</code></h2>
+<p>The provided datasheet, stored in <code>CA_county_data</code>, has 58 rows and 26 columns. You can confirm this by running the command <code>dim(CA_county_data)</code> in the console or adding this on its own line in your <code>Week3.R</code> script and running it (hint: <code>?dim</code> for more details).</p>
+<p>26 columns is kind of a pain! We can’t view all of those columns nicely when we tell <code>R</code> to print out <code>CA_county_data</code>. Additionally, instead of looking at all 58 counties (rows) of <code>CA_county_data</code>, perhaps we want to focus on a subset of the data table that satisfies some condition. Fortunately, we can use <code>filter</code> to subset a data table into rows that meet our criterion and then we can <code>select</code> to only display certain columns.</p>
+<p>Let’s say that we want to:</p>
+<ul>
+<li>filter the provided datasheet to the counties that have <span class="math inline">\(\geq\)</span> 210 bird species</li>
+<li>select the columns <code>County</code>, <code>Birds</code>, <code>iucn_threat_count_species</code>, and <code>Trees</code>.</li>
+</ul>
+<p>We’ll do that below, using the <code>%&gt;%</code> pipe operator to link up our commands:</p>
+<pre><code>### Using pipes to link up commands to 
+### 1) subset CA_county_data based on the values in the column Birds
+### and 2) select a subset of columns from the data table
+### We will store the output in a new object called birdsTreesIUCN
+birdsTreesIUCN &lt;- CA_county_data %&gt;%
+    filter(Birds &gt;= 210) %&gt;%
+    select(County,iucn_threat_count_species,Trees,Birds)
+
+birdsTreesIUCN # display our subset of the CA_county_data data table</code></pre>
+<p>Cool! What we have done above is:</p>
+<ul>
+<li>Used the <code>%&gt;%</code> pipe operator to pass <code>CA_county_data</code>, our data table object, into the <code>filter</code> function;</li>
+<li>The <code>filter(...)</code> line selects the rows in our data table that satisfy the condition (<code>Birds &gt;= 210</code>);</li>
+<li>The output of the <code>filter</code> function goes into the <code>select</code> function which selects a subset of the columns in the data table based on their names;</li>
+<li>Ultimately, the output of all of these commands is stored in <code>birdsTreesIUCN</code> and then we tell <code>R</code> to print out its contents.</li>
+<li>Note: we could also run <code>View(birdsTreesIUCN)</code> in the console if we wanted to see the spreadsheet viewer display of this object.</li>
+</ul>
+</div>
+<div id="exercise" class="section level2">
+<h2><span class="header-section-number">2.2</span> Exercise</h2>
+<p>How would you modify the code above take a subset of <code>CA_county_data</code> where the counties have more than 40 tree species and select the columns <code>County</code>, <code>Trees</code>, <code>Mammals</code>, and <code>PAs_gapstatus1thru4_Cts</code>? How would you store that in a new object called <code>treeSubset</code>?</p>
+<p><strong>Hint</strong>:</p>
+<pre><code>treeSubset &lt;- CA_county_data %&gt;%
+    filter(Trees &gt; ...) %&gt;% # replace the ... with some value (maybe 40)
+    select(...) # replace ... with the comma-separated set of column names (maybe County, Trees, Mammals, PAs_gapstatus1thru4_Cts)
+
+treeSubset # print out treeSubset object
+
+# note that you could also run:
+# View(treeSubset) # uncomment by deleting the leading hashtag to run this command</code></pre>
+</div>
+<div id="generating-summaries-of-new-or-existing-columns-in-a-spreadsheet-using-mutate-and-group_by" class="section level2">
+<h2><span class="header-section-number">2.3</span> Generating summaries of new or existing columns in a spreadsheet using <code>mutate</code> and <code>group_by</code></h2>
+<p>Let’s say that we want to do the following:</p>
+<ul>
+<li>Create a new column that stores our calculation for the proportion of land in each county that is farmland;</li>
+<li>Generate a summary across the 5 regions in California for the mean proportion of each county’s area that is farmland.</li>
+</ul>
+<p>We will do that below using the <code>%&gt;%</code> pipe operator to link up commands:</p>
+<pre><code>### Using pipes to 1) calculate proportion farmland in each county
+### and 2) summarize proportion farmland across the 5 regions in CA.
+### We will store the output in a new object called CA_farm_summary
+CA_farm_summary &lt;- CA_county_data %&gt;%
+      mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha) %&gt;%
+      group_by(Region) %&gt;%
+      summarize(mean_farmland_proportion = mean(farmland_proportion))
+      
+### Uncomment the line below (delete the leading # pound sign)
+### to print the CA_farm_summary at the console
+# CA_farm_summary</code></pre>
+<p>Nice! By running the code above (including uncommenting the <code>CA_farm_summary</code> line by deleting the leading <code>#</code> from <code># CA_farm_summary</code>) we will generate this:</p>
+<p><img src="figures/Week3_mutate_groupby.png" alt="Summary of average amount of land that is farmland across all counties in each of the 5 regions in California" /> What we have done above is:</p>
+<ul>
+<li>Used the <code>%&gt;%</code> pipe operator to pass <code>CA_county_data</code>, our data table object into the <code>mutate</code> command;</li>
+<li>The <code>mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha)</code> line creates a new column called <code>farmland_proportion</code> that divides <code>farmland_area_HAs</code> over <code>area_of_county_ha</code>;
+<ul>
+<li>Note though that we are not storing this column long-term in <code>CA_county_data</code> (We would need to modify the specification of this code chunk to store that <code>mutate</code> output into an object.)</li>
+</ul></li>
+<li>We pass the output of the <code>mutate</code> command into a <code>group_by</code> function call.</li>
+<li><code>group_by</code> splits a data table into groups based on distinct values in some column. In this case, we tell <code>group_by</code> to divide up the <code>CA_county_data</code> data table into groups based on the values of <code>Region</code>;</li>
+<li>Subsequently, we take the output of the <code>group_by</code> function forward into a <code>summarize</code> function, which tells <code>R</code> to calculate the <code>mean</code> value of the new <code>farmland_proportion</code> column (created by the <code>mutate</code> operation above) across the groups given by <code>Region</code>;</li>
+<li>Ultimately, what we store in the new object <code>CA_farm_summary</code> (defined at the top of this code chunk) is the output of all of these commands, linked together, which is the little summary data table you see at the end.</li>
+</ul>
+</div>
+<div id="exercise-1" class="section level2">
+<h2><span class="header-section-number">2.4</span> Exercise</h2>
+<p>How would you modify the code above to calculate the proportion of each county that is protected (GAP statuses 1-4 - you may want to use the column <code>PAs_gapstatus1thru4_HAs</code>) <em>and</em> summarize the mean values of that proportional protection across the 5 regions in California? How would you store that in a new object called <code>CA_protected_summary</code>?</p>
+<p><strong>Hint</strong>:</p>
+<pre><code>CA_protected_summary &lt;- CA_county_data %&gt;%
+    mutate(proportion_protected = ...) %&gt;% # replace the ... with the correct command
+    group_by(...) %&gt;% replace by the correct column of data to define the groups
+    summarize(mean_proportion_protected = ...) # replace ... with the correct function applied to the correct column
+    
+CA_protected_summary # print out the object CA_protected_summary in the console</code></pre>
+<p>How would you modify the code above to calculate the mean number of IUCN threatened species across the counties in each of the 5 regions in California? How would you store the output of these commands in a new object called <code>regionIUCNrichnessMean</code>?</p>
+<p><strong>Hint</strong>:</p>
+<pre><code>    &lt;- CA_county_data %&gt;%
+    group_by(...) %&gt;% # which column would you use to divide the data into groups?
+    summarize(mean_IUCN_richness = ...) # what function would you use and what column would you apply it to?
+
+# regionIUCNrichnessMean # how would you print this object in the console?</code></pre>
+</div>
+</div>
+<div id="thursday" class="section level1">
+<h1><span class="header-section-number">3</span> Thursday</h1>
+<div id="ggplot2" class="section level2">
+<h2><span class="header-section-number">3.1</span> ggplot2</h2>
+<p>More to come!</p>
+</div>
+</div>
+<div id="homework" class="section level1">
+<h1><span class="header-section-number">4</span> Homework</h1>
+<p>Generate a scatterplot with <code>farmland_proportion</code> on the x-axis and <code>Mammals</code> on the y-axis. Describe in 2-3 sentences what this plot displays.</p>
 </div>
 
 
