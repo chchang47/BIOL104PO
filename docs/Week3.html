@@ -475,16 +475,42 @@ CA_protected_summary # print out the object CA_protected_summary in the console<
 # regionIUCNrichnessMean # how would you print this object in the console?</code></pre>
 </div>
 </div>
-<div id="thursday" class="section level1">
-<h1><span class="header-section-number">3</span> Thursday</h1>
-<div id="ggplot2" class="section level2">
-<h2><span class="header-section-number">3.1</span> ggplot2</h2>
-<p>More to come!</p>
+<div id="answers-to-exercises" class="section level1">
+<h1><span class="header-section-number">3</span> Answers to exercises</h1>
+<div id="selecting-columns-and-storing-output" class="section level2">
+<h2><span class="header-section-number">3.1</span> Selecting columns and storing output</h2>
+<p>How would you modify the code above take a subset of <code>CA_county_data</code> where the counties have more than 40 tree species and select the columns <code>County</code>, <code>Trees</code>, <code>Mammals</code>, and <code>PAs_gapstatus1thru4_Cts</code>? How would you store that in a new object called <code>treeSubset</code>?</p>
+<p><strong>Answer</strong>:</p>
+<pre><code>treeSubset &lt;- CA_county_data %&gt;% # take CA_county_data and pipe it into the next function
+    filter(Trees &gt; 40) %&gt;% # subset to the counties (rows) with &gt; 40 tree species, pipe into the next function
+    select(County, Trees, Mammals, PAs_gapstatus1thru4_Cts) # selecting subset of columns
+
+treeSubset # print out treeSubset object
+
+# note that you could also run:
+# View(treeSubset) # uncomment by deleting the leading hashtag to run this command</code></pre>
 </div>
+<div id="performing-a-group_by-operation-and-generating-a-summary-across-categories-in-your-data" class="section level2">
+<h2><span class="header-section-number">3.2</span> Performing a <code>group_by</code> operation and generating a summary across categories in your data</h2>
+<p>How would you modify the code above to calculate the proportion of each county that is protected (GAP statuses 1-4 - you may want to use the column <code>PAs_gapstatus1thru4_HAs</code>) <em>and</em> summarize the mean values of that proportional protection across the 5 regions in California? How would you store that in a new object called <code>CA_protected_summary</code>? Each region spans 11-13 counties.</p>
+<p><strong>Answer</strong>:</p>
+<pre><code>CA_protected_summary &lt;- CA_county_data %&gt;%
+    mutate(proportion_protected = PAs_gapstatus1thru4_HAs / area_of_county_ha) %&gt;% # Calculating proportion of each county by area that is protected (GAP status 1-4 in units of hectares)
+    group_by(Region) %&gt;% # replace by the correct column of data to define the groups
+    summarize(mean_proportion_protected = mean(proportion_protected)) # replace ... with the correct function applied to the correct column
+    
+CA_protected_summary # print out the object CA_protected_summary in the console</code></pre>
 </div>
-<div id="homework" class="section level1">
-<h1><span class="header-section-number">4</span> Homework</h1>
-<p>Generate a scatterplot with <code>farmland_proportion</code> on the x-axis and <code>Mammals</code> on the y-axis. Describe in 2-3 sentences what this plot displays.</p>
+<div id="second-group_by-and-summarize-exercise" class="section level2">
+<h2><span class="header-section-number">3.3</span> Second <code>group_by</code> and <code>summarize</code> exercise</h2>
+<p>How would you modify the code above to calculate the mean number of IUCN threatened species across the counties in each of the 5 regions in California? How would you store the output of these commands in a new object called <code>regionIUCNrichnessMean</code>?</p>
+<p><strong>Answer</strong>:</p>
+<pre><code>regionIUCNrichnessMean &lt;- CA_county_data %&gt;%
+    group_by(Region) %&gt;% # which column would you use to divide the data into groups?
+    summarize(mean_IUCN_richness = mean(iucn_threat_count_species)) # what function would you use and what column would you apply it to?
+
+regionIUCNrichnessMean # how would you print this object in the console?</code></pre>
+</div>
 </div>
 
 

@@ -2,7 +2,9 @@
 title: "Interacting with data in `R`"
 author: ""
 date: ""
-output: html_document
+output: 
+  html_document:
+    number_sections: true
 ---
 
 ```{r setup, include=FALSE}
@@ -11,7 +13,7 @@ USdata <- readr::read_csv("~/Documents/Teaching/BIOL104PO/data/StateSpeciesDatas
 library(fontawesome)
 ```
 
-## Having some fun with `R`
+# Having some fun with `R`
 
 Anytime `R` detects a syntax (spelling or programming language "grammar") error, it will spit out some kind of `warning` or `error` message. Usually the `warning` messages indicate that things are working, but maybe something weird could be happening (e.g. you think you have successfully fit a statistical model, but actually, the data are too few to perform a solid estimation of the model coefficients, so `R` starts squawking). 
 
@@ -21,7 +23,7 @@ So, while we may throw our hands up in despair when we see an inscrutable and al
 
 Don't worry! You won't break `R`. Running into error messages and warnings is a sign of growth. I still get error messages and warnings pretty much every day I sit down and code. `¯\_(ツ)_/¯`
 
-## Interacting with datasets using the `dplyr` package
+# Interacting with datasets using the `dplyr` package
 
 In this class, we will use the [Tidyverse](https://r4ds.had.co.nz/) developed by RStudio statisticians and `R` aficianados. Relative to other ways of interacting with data in ("base") `R`, the Tidyverse has the advantage of featuring syntax that more directly translates to other data science tool kits and languages, such as Python or SQL. [`dplyr`](https://github.com/tidyverse/dplyr/) is one of the Tidyverse packages that extends core `R` functions to make `R` more modern and elegant in interacting with real-world data.
 
@@ -52,7 +54,7 @@ This [data file](https://github.com/charlottehchang/BIOL104PO/blob/master/data/S
   + Variable names: `Population2020, Population2010, Population2000`
 * `GrossStateProduct`: gross domestic product by state in units of 1 million USD (therefore, multiply each value by `10^6` to get the state GDP in dollars)
 
-## Data operations
+# Data operations
 
 One of the core data types that is integral to the modern world is spreadsheet-like data organized into a matrix format. In `R` parlance, such data are typically represented by a type of object called a `data.frame`. In many contexts, these types of data are also called data tables.
 
@@ -64,11 +66,11 @@ In this module, we will focus on the following types of queries for data tables:
 * `mutate()`: create new columns for a data table based on some operation applied to existing columns
 * `summarize()`: summarize data table, usually yielding a data table with fewer rows
 
-## Scripting
+# Scripting
 
 Today, we will also embark on writing `R` scripts to store our commands. We will even be able to execute the code interactively from the script editor (much like a text editor or some other type of notepad).
 
-## Steps
+# Steps
 
 1. Navigate to [https://rstudio.pomona.edu](https://rstudio.pomona.edu)
 2. If you have not yet done so, I recommend naming your current session. You can do that as follows:
@@ -150,7 +152,7 @@ You can also highlight each line of code with your mouse and use the "run code" 
 10. Note that running each line of code from the text editor (from the `R` script in this case) is the same as typing the commands into the console. You typed commands directly into the console last week in your initial interactions with `R`.
 11. Writing scripts is advantageous because you can store your commands somewhere convenient and revisit or edit the file anytime.
 
-### Going further
+# Going further
 
 Congratulations on several exciting achievements! You have 1) read in data from an online source into `R`, 2) learned how to perform different operations to select rows or columns from the data, and 3) started to see how to summarize your data.
 
@@ -167,7 +169,112 @@ I recommend using the `Week2.R` script as a scratch space to work through these 
 5. Building on point D above, how would you create a column that stores the proportion of land protected in each state?
 6. How would you summarize the minimum (`min()`), mean (`mean()`), and maximum (`max()`) values for the proportion of land that is protected in each state?
 
-## Combining operations using "pipes"
+## Answers to the `Going further` exercises above
+
+1. How would you subset (filter) rows from `USdata` where `TotVerts` is greater than or equal to 100?
+    + Note that you can use the command `names(USdata)` (you can add this to your script or run it any time in the console) to see the names of all of the columns in your data table
+    
+```
+### Let's run names(USdata) for fun to see what happens!
+names(USdata)
+
+### Subsetting rows (using pipes!)
+USdata %>%
+  filter(TotVerts >= 100) %>%
+    View() # not part of original question, but opens that nice spreadsheet viewer
+    
+### The code above is equivalent to:
+View( filter(USdata, TotVerts >= 100) )
+```
+
+2. How would you subset (select) the column `CostPerAcre1997` from `USdata`?
+
+```
+### Selecting one column from USdata
+USdata %>%
+  select(CostPerAcre1997)
+  
+### The above syntax is equivalent to:
+select(USdata, CostPerAcre1997)
+```
+
+3. How would you subset rows from `USdata` where `ThreatInverts` is $\geq 250$ **and** subset your data to the columns `ThreatInverts` and `EndInverts`?
+
+```
+### Performing a row and column subsetting operation
+USdata %>%
+  filter(ThreatInverts >= 250) %>% # select rows (states) where ThreatInverts >= 250
+    select(ThreatInverts,EndInverts) %>% # subset to the columns ThreatInverts and EndInverts
+      View() # added on for ease of viewing final output
+```
+
+4. How would you create (mutate) a new column in `USdata` that stores the amount of protected areas in each state in units of square miles instead of acres?
+    + Note that `TotalProtectedAreasAcres` presents the total acreage of protected lands in each state. The units are acres, not 1000 acres.
+    
+```
+### Conversion factor for acres to miles^2
+acres_to_miles <- 1.56/1000 # multiplier to convert 1 acre to square miles
+
+### Create a new column that presents protected areas in units of square miles
+USdata <- USdata %>% # unlike before, we are going to store the output of these commands back in the USdata object
+  mutate(TotalProtectedAreasMi2 = TotalProtectedAreasAcres * acres_to_miles) # create a new column that stores protected area total spatial extent in miles^2, not acres
+  
+### If you want to see the changes to USdata in the spreadsheet viewer:
+View(USdata)
+
+### NOTE!
+  # If you want to store the outputs of functions applied to data tables, don't do this:
+my_output <- USdata %>% # unlike before, we are going to store the output of these commands back in the USdata object
+  mutate(TotalProtectedAreasMi2 = TotalProtectedAreasAcres * acres_to_miles) %>% # create a new column that stores protected area total spatial extent in miles^2, not acres
+  View() # this last View() command here, when assigned back to my_output is going to cause a problem...
+
+my_output #returns NULL (because R doesn't know how to "store" the spreadsheet viewer in an object)
+```
+
+5. Building on point D above, how would you create a column that stores the proportion of land protected in each state?
+
+```
+### Now assuming that we saved the outcome of the previous mutate function back in USdata, this command will work. Otherwise it won't because USdata doesn't have the new column TotalProtectedAreasMi2 unless you tell R to store it in USdata
+USdata %>%
+  mutate(protectedProportion = TotalProtectedAreasMi2 / StateLandAreaMi2)
+
+### Alternatively, if you didn't save the output of the mutate command before (no "USdata <-" at the beginning of the command), you'd have to re-run the mutate command to create TotalProtectedAreasMi2 here:
+
+  # Conversion factor for acres to miles^2
+acres_to_miles <- 1.56/1000 # multiplier to convert 1 acre to square miles
+
+  # Create a new column that presents protected areas in units of square miles
+USdata %>% # unlike before, we are going to store the output of these commands back in the USdata object
+  mutate(TotalProtectedAreasMi2 = TotalProtectedAreasAcres * acres_to_miles) %>% # create a new column that stores protected area total spatial extent in miles^2, not acres
+  mutate(protectedProportion = TotalProtectedAreasMi2 / StateLandAreaMi2) %>%
+  View()
+```
+
+6. How would you summarize the minimum (`min()`), mean (`mean()`), and maximum (`max()`) values for the proportion of land that is protected in each state?
+
+Note that because we didn't save the output of the two different versions of the answer to exercise 5 above, we will have to re-run those commands! Let's assume that we did run the answer to problem 4 as I specify (`USdata <- USdata %>% ...`).
+
+```
+### Generating a summary across all of the states
+USdata %>%
+  mutate(protectedProportion = TotalProtectedAreasMi2 / StateLandAreaMi2) %>%
+    summarize(minProtectedProportion = min(protectedProportion),
+              meanProtectedProportion = mean(protectedProportion),
+              maxProtectedProportion = max(protectedProportion))
+              
+### Modification in case you wanted to save your output in an object
+  # Let's call the object prop_land_summary
+prop_land_summary <- USdata %>%
+  mutate(protectedProportion = TotalProtectedAreasMi2 / StateLandAreaMi2) %>%
+    summarize(minProtectedProportion = min(protectedProportion),
+              meanProtectedProportion = mean(protectedProportion),
+              maxProtectedProportion = max(protectedProportion))
+
+  # Print out prop_land_summary
+prop_land_summary
+```
+
+# Combining operations using "pipes"
 
 What if you wanted to combine functions above and store the final products? For example, let's say that we wanted to:
 
