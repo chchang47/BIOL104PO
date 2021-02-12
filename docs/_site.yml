@@ -19,10 +19,10 @@ navbar:
         - text: "Manipulating data.frames"
           href:  Week2.html
         - text: "Week 3"
-        - text: "Plotting data"
+        - text: "Data subsetting"
           href:  Week3.html
         - text: "Week 4"
-        - text: "Grouping and summary operations"
+        - text: "Data visualization"
           href:  Week4.html
 output:
   html_document:
