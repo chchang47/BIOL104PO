@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="" />
+
+
+<title>Biodiversity &amp; prioritization</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Conservation Science</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Introduction
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 1</li>
+    <li>
+      <a href="Week1.html">The R and RStudio environments</a>
+    </li>
+    <li>
+      <a href="Week1b.html">Introduction to R</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 2</li>
+    <li>
+      <a href="Week2.html">Manipulating data.frames</a>
+    </li>
+    <li class="dropdown-header">Week 3</li>
+    <li>
+      <a href="Week3.html">Data subsetting</a>
+    </li>
+    <li class="dropdown-header">Week 4</li>
+    <li>
+      <a href="Week4.html">Data visualization</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Conservation analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 5</li>
+    <li>
+      <a href="Week5.html">Biodiversity &amp; prioritization</a>
+    </li>
+    <li class="dropdown-header">Week 6</li>
+    <li>
+      <a href="Week6.html">Combining social and ecological data</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Biodiversity &amp; prioritization</h1>
+
+</div>
+
+
+<div id="species-area-relationship" class="section level1">
+<h1><span class="header-section-number">1</span> Species-area relationship</h1>
+<p>Observations of species richness (counts of species) across islands (or habitat fragments–sometimes called patches) showed a <strong>consistent</strong> relationship where <strong>as islands became larger in area, they tended to support more species</strong>: that is, <em>larger habitat areas have higher species richness</em>. This is a pattern that has been consistent across different taxonomic groups (e.g. vascular plants, birds, insects, fish) and regions (e.g. California, Southeast Asia, the Florida keys, etc.).</p>
+<p>The species-area relationship holds that we can <em>predict</em> the number of species that would be found on a habitat of a given <em>area</em>. Specifically, if <span class="math inline">\(S\)</span> denotes the number of species (species richness), then <span class="math inline">\(S = c A^z\)</span> where <span class="math inline">\(A\)</span> is habitat area, and <span class="math inline">\(c\)</span> and <span class="math inline">\(z\)</span> are constants.</p>
+<pre class="r"><code>### Code to create a data table storing the Southeast Asian bird data
+seAsiaBirds &lt;- tibble::tibble(areaMi2=c(312000,290000,144000,70000,48000,25000,4500,8870,18000,4600),
+            birds=c(540,420,368,220,337,232,111,143,137,108))
+
+### Display first few rows of the Southeast Asia bird dataset
+seAsiaBirds</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    areaMi2 birds
+##      &lt;dbl&gt; &lt;dbl&gt;
+##  1  312000   540
+##  2  290000   420
+##  3  144000   368
+##  4   70000   220
+##  5   48000   337
+##  6   25000   232
+##  7    4500   111
+##  8    8870   143
+##  9   18000   137
+## 10    4600   108</code></pre>
+<pre class="r"><code>### Create a plot of bird richness versus island area
+p &lt;- ggplot(seAsiaBirds,aes(x=areaMi2, y=birds))
+p &lt;- p + geom_point()
+p &lt;- p + labs(x=&quot;Area (square miles)&quot;,y=&quot;Bird species richness&quot;)
+p &lt;- p + theme_classic()
+p</code></pre>
+<p><img src="Week5_files/figure-html/SEasia_birds-1.png" width="672" /></p>
+<p>Oof! What we can see in the previous plot are the issues I raised in class on Tuesday. Issue 1): The x-axis values and y-axis values are quite wide-ranging (x-axis range: [4500, 312000]; y-axis range: [108, 540]). Issue 2): The relationship looks like a power law. <a href="https://necsi.edu/power-law#:~:text=An%20example%20is%20the%20area,of%20a%20power%20law%20relationship.">New England Complex Systems Institute</a> has a great explainer for <em>power law</em> relationships and a familiar example: the area of a square, which is always a power of its length. We can turn this power law relationship between habitat area and species richness to a linear one, by taking the logs of both variables (area and species richness).</p>
+<div id="arriving-at-a-linear-log-log-species-area-relationship" class="section level2">
+<h2><span class="header-section-number">1.1</span> Arriving at a linear log-log species-area relationship</h2>
+<p>We expect that <span class="math inline">\(S = c A^z\)</span>. Let’s try an example! Given the values of <span class="math inline">\(c\)</span> and <span class="math inline">\(z\)</span> that you estimated in the <a href="https://docs.google.com/spreadsheets/d/1PhKKvHScqRbIkIudtnlERKusWP_NnEbtixWu1a3k0wQ/edit?usp=sharing">Google sheet activity</a>, let’s estimate how many birds we would expect for the smallest island, Palawan: <span class="math inline">\(S = 10^{0.76} 4500~\text{square miles}^{0.35}\)</span>, which yields around 109 species. In our dataset, Palawan in fact had 111 species - so we can see that this predicted richness of 109 species is not too far off from the actual richness!</p>
+<p>For this relationship between species and habitat area, <span class="math inline">\(S = c A^z\)</span>, how do we go about estimating <span class="math inline">\(c\)</span> and <span class="math inline">\(z\)</span>? This expression is a power law, so we can make it linear instead by taking a logarithm (henceforth, log) of both sides, such that: <span class="math inline">\(\log_{10}(S) = \log_{10}(c A^z)\)</span> <a href="https://mathbench.umd.edu/modules/misc_scaling/page11.htm">MathBench at Univ. of Maryland</a> has a great, intuitive explanation for why log-log transformations “linearize” power laws (that is, turn the relationship from a power law into a straight line).</p>
+<p>Can we simplify this algebra above? Yeah! Note that <span class="math inline">\(\log_{10}(c A^z)\)</span>, by the properties of logs (see below if you’d like refresher on log properties), can be re-expressed as <span class="math inline">\(\log_{10}(c) + \log_{10}(A^z)\)</span>, which can be further simplified to <span class="math inline">\(\log_{10}(c) + z \log_{10}(A)\)</span>. From here on, I’m going to be lazy and drop the <span class="math inline">\(()\)</span> and just write the above expression as <span class="math inline">\(\log_{10} c + z \log_{10} A\)</span>.</p>
+<p>Now we can take <span class="math inline">\(\log_{10} c + z \log_{10} A\)</span>, and substitute it in to the right-hand side of <span class="math inline">\(\log_{10}(S) = \log_{10}(c A^z)\)</span>, which yields <span class="math inline">\(\log_{10} S = \log_{10} c + z \log_{10} A\)</span>.</p>
+<p>Hm … this equation <span class="math inline">\(\log_{10} S = \log_{10} c + z \log_{10} A\)</span> looks awfully like the equation for a straight line, if we let <span class="math inline">\(y\)</span> denote <span class="math inline">\(\log_{10} S\)</span> and <span class="math inline">\(x\)</span> denote <span class="math inline">\(\log_{10} A\)</span>. Recall that the equation for a straight line is <span class="math inline">\(y = d + m x\)</span>, where <span class="math inline">\(d\)</span> is the y-intercept (the value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>) and <span class="math inline">\(m\)</span> is “rise over run”, or the slope, or simply how much <span class="math inline">\(y\)</span> changes with every unit change in <span class="math inline">\(x\)</span>. (<a href="http://www.montereyinstitute.org/courses/Algebra1/U04L1T1_RESOURCE/topicText.html#:~:text=In%20math%2C%20slope%20is%20the,is%20called%20the%20slope%20formula.">A nice explainer on slopes from the Monterey Institute.</a>)</p>
+<p>By substituting in the values from the linear species-area equation into the equation for a straight line, we realize that: <span class="math inline">\(y = \log_{10} S; d + mx = \log_{10} c + z \log_{10} A\)</span>. What does that mean? By pattern matching, we see that <span class="math inline">\(\log_{10} c\)</span> is playing the same role as <span class="math inline">\(d\)</span> (y-intercept) and <span class="math inline">\(z\)</span> is playing the same role as <span class="math inline">\(m\)</span> (slope or rise-over-run).</p>
+<p>Thus, given that the relationship between <span class="math inline">\(\log_{10} S\)</span> and <span class="math inline">\(\log_{10} A\)</span> is a straight line, we expect that we should be able to 1) use <span class="math inline">\(\log_{10}\)</span> to transform our actual species richness and habitat area data, then 2) fit a straight line to those <span class="math inline">\(\log_{10} - \log_{10}\)</span> transformed data.</p>
+<p>I show you how to calculate <span class="math inline">\(d\)</span> (where <span class="math inline">\(d = \log_{10} c\)</span> from the log-log linear species-area relationship) and <span class="math inline">\(z\)</span> in <code>R</code> below. <code>lm</code> is an <code>R</code> function to perform an <a href="https://www.r-bloggers.com/2017/07/ordinary-least-squares-ols-linear-regression-in-r/">ordinary least squares linear regression</a>. Don’t worry too much about the details for <code>lm</code>; we’ll look at <code>lm</code> in more depth in a later week’s tutorial.</p>
+<p>First, we confirm that the log-log transformation makes the Southeast Asian bird-habitat area relationship look linear. Second, we use <code>lm</code> to calculate <span class="math inline">\(d\)</span> and <span class="math inline">\(z\)</span>.</p>
+<pre class="r"><code>### Below, we first apply log10 to the columns of our data on SE Asian birds
+seAsiaBirds &lt;- seAsiaBirds %&gt;%
+  mutate(log10Area = log10(areaMi2), log10Birds = log10(birds))
+
+  # Display seAsiaBirds in the console
+seAsiaBirds</code></pre>
+<pre><code>## # A tibble: 10 x 4
+##    areaMi2 birds log10Area log10Birds
+##      &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1  312000   540      5.49       2.73
+##  2  290000   420      5.46       2.62
+##  3  144000   368      5.16       2.57
+##  4   70000   220      4.85       2.34
+##  5   48000   337      4.68       2.53
+##  6   25000   232      4.40       2.37
+##  7    4500   111      3.65       2.05
+##  8    8870   143      3.95       2.16
+##  9   18000   137      4.26       2.14
+## 10    4600   108      3.66       2.03</code></pre>
+<pre class="r"><code>  # Confirm that the log-log transformation linearized our data
+p &lt;- ggplot(seAsiaBirds,aes(x = log10Area, y = log10Birds))
+p &lt;- p + geom_point()
+p &lt;- p + labs(x=&quot;Area (log-transformed)&quot;,y=&quot;Birds (log-transformed)&quot;)
+p &lt;- p + theme_classic()
+p</code></pre>
+<p><img src="Week5_files/figure-html/SEasia_fit_c_z-1.png" width="672" /></p>
+<pre class="r"><code>### Use lm to calculate the values of d and z and store the model in the object speciesAreaModel
+speciesAreaModel &lt;- lm(log10Birds ~ log10Area, data=seAsiaBirds)
+  ## See the values estimates for d and z
+print(&quot;The cofficient names (Intercept) corresponds to d and log10Area to z&quot;)</code></pre>
+<pre><code>## [1] &quot;The cofficient names (Intercept) corresponds to d and log10Area to z&quot;</code></pre>
+<pre class="r"><code>coef(speciesAreaModel)</code></pre>
+<pre><code>## (Intercept)   log10Area 
+##   0.7553138   0.3506425</code></pre>
+<pre class="r"><code>  ## Store the estimates in the objects d and z
+d &lt;- coef(speciesAreaModel)[1] # first item in this two-item vector is the intercept of the straight line fit to our log-log transformed Southeast Asian birds dataset
+z &lt;- coef(speciesAreaModel)[2] # second item in the two-item vector is the slope</code></pre>
+<p>Now that we’ve estimated <span class="math inline">\(d\)</span> and <span class="math inline">\(z\)</span>, let’s use those values to calculate the expected species richness on the island of Timor, which is 18,000 square miles. Given that <span class="math inline">\(\log_{10} S = \log_{10} c + z \log_{10} A\)</span> and that <span class="math inline">\(d = \log_{10} c\)</span>, we can directly plug in our <span class="math inline">\(d\)</span> and <span class="math inline">\(z\)</span> values into: <span class="math inline">\(\log_{10} S = d + z \log_{10} A\)</span>. That’s annoying though, because we get a value for <span class="math inline">\(S\)</span> that is log-10 transformed. That is, in this case <span class="math inline">\(S\)</span> is described in powers of 10, rather than the actual number of species.</p>
+<p>Alternatively, we can get rid of the logs by raising both sides to the power of 10, yielding: <span class="math inline">\(10^{(\log_{10} S)} = 10^{(d + z \log_{10} A)} \rightarrow 10^{(\log_{10} S)} = 10^{(d \log_{10}(A^z))} \rightarrow S = 10^d A^z \implies S = c A^z\)</span>. Recall that <span class="math inline">\(d = \log_{10} c \implies 10^d = c\)</span>, so this ends up working out as we convert <span class="math inline">\(d\)</span> back to <span class="math inline">\(c\)</span> by raising 10 to the power of <span class="math inline">\(d\)</span>.</p>
+<p>Phew! Let’s go ahead and calculate the expected richness for Timor (18000 miles<span class="math inline">\(^2) = 10^d A^z\)</span>, which is about 176.76 species. The actual number of bird species on Timor is <code>filter(seAsiaBirds,areaMi2==18000) %&gt;% select(birds)</code>, which is 137 species. The numbers look pretty similar! However, it does appear that Timor has somewhat fewer species than expected (137 birds when given the other Southeast Asian island-bird data points, we’d expect 176.76 species).</p>
+<div id="quick-refresher-on-logarithms" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Quick refresher on logarithms</h3>
+<p><a href="https://www.wolframalpha.com/input/?i=log10%2810%29"><span class="math inline">\(\log_{10}\)</span> calculator from Wolfram Alpha</a>. Khan Academy has a great refresher series on <a href="https://youtu.be/Z5myJ8dg_rM">calculating logarithms</a> and <a href="https://youtu.be/PupNgv49_WY">logarithm properties</a>.</p>
+<p>You can also confirm the different rules of logs by using <code>R</code> as a calculator! Recall that in <a href="https://charlottehchang.github.io/BIOL104PO/Week1b.html">Week 1</a>, we learned about how <code>R</code> can also be used as a calculator in addition to statistical computing. Below, I show how you can confirm the properties of logs using <code>R</code>.</p>
+<p>Additionally, this is a friendly reminder that if you’re ever confused about a function, you can pull up a help page about it using <code>?functionname</code> (e.g. <code>?mutate</code> or <code>?geom_point</code>). One of the things I find most helpful on the help page is the <strong>examples</strong> that are typically provided at the bottom of the help page.</p>
+<pre class="r"><code>### Recall the log-log species-area relationship:
+### log S = log(c A^z) (Equation 1)
+### we can confirm that the previous equation is 
+### mathematically equivalent to the following one:
+### log S = log c + log(A^z) (Eqn. 2)
+### which is in turn equal to:
+### log S = log c + z log A (Eqn. 3)
+### For convenience, we&#39;ll call c and z something different:
+### c1 and z1
+### That way, we don&#39;t overwrite the previously calculated values
+### for c and z from the Southeast Asia bird dataset
+
+### Let c1 = 5, z1 = 0.28, A = 1000
+### We&#39;ll calculate both expressions
+### and confirm that they are identical
+c1 &lt;- 5
+z1 &lt;- 0.28
+A &lt;- 1000
+eqn1 &lt;- log10(c1*A^z1)
+eqn1 # value of the first equation</code></pre>
+<pre><code>## [1] 1.53897</code></pre>
+<pre class="r"><code>eqn2 &lt;- log10(c1) + log10(A^z1)
+eqn2 # value of second equation</code></pre>
+<pre><code>## [1] 1.53897</code></pre>
+<pre class="r"><code>eqn3 &lt;- log10(c1) + z1*log10(A)
+eqn3 # value of third equation</code></pre>
+<pre><code>## [1] 1.53897</code></pre>
+</div>
+</div>
+<div id="estimating-species-losses-from-habitat-loss" class="section level2">
+<h2><span class="header-section-number">1.2</span> Estimating species losses from habitat loss</h2>
+<p>One of the reasons why the species-area relationship is so central to conservation is that it gives us a way to estimate how habitat loss can reduce the number of species a location (a.k.a. site, patch, fragment) can support.</p>
+<p>However, we immediately encounter a problem. If we want to predict how species richness will change at one site, and we don’t have a local dataset to estimate <span class="math inline">\(c\)</span> and <span class="math inline">\(z\)</span>, what are we supposed to do? Past ecological research indicates that <span class="math inline">\(z\)</span> tends to fall in a fairly narrow range between [0.15, 0.39] (Preston 1962; MacArthur and Wilson 1967). However, values for <span class="math inline">\(c\)</span> vary widely, depending on the taxonomic group (e.g. birds have a very different y-intercept for their straight-line log-log species-area relationship than insects or microbes) and region.</p>
+<p>In a situation where we don’t have values of <span class="math inline">\(c\)</span> and <span class="math inline">\(z\)</span> for our system, while we can at least lean on these past values for <span class="math inline">\(z\)</span>, we’re going to want some way to get rid of <span class="math inline">\(c\)</span>.</p>
+<p>Let’s start with <span class="math inline">\(A_0\)</span> denoting the <strong>original amount (area) of habitat</strong> and <span class="math inline">\(A_1\)</span> denoting the <strong>amount of habitat left after some is destroyed</strong>; that is, <span class="math inline">\(A_1 &lt; A_0\)</span>. Similarly, <span class="math inline">\(S_0\)</span> denotes the initial number of species and <span class="math inline">\(S_1\)</span> the number of species after habitat conversion has brought the habitat area down from <span class="math inline">\(A_0\)</span> to <span class="math inline">\(A_1\)</span>.</p>
+<p>From the species-area (power law) relationship, we know that: <span class="math inline">\(S_1 = c A_1^z\)</span> <span class="math inline">\(S_0 = c A_0^z\)</span></p>
+<p>Maybe we can get rid of the pesky <span class="math inline">\(c\)</span> term by dividing the two equations like so… <span class="math inline">\(\frac{S_1}{S_0} = \frac{c A_1^z}{c A_0^z}\)</span></p>
+<p>We can cancel the two <span class="math inline">\(c\)</span> terms in the numerator and denominator of the right-hand side fraction, and then the equation simplifies to <span class="math inline">\(\frac{S_1}{S_0} = \frac{A_1^z}{A_0^z}\)</span></p>
+<p>We can simplify things further by noting that <span class="math inline">\(A_1\)</span> is always going to be some fraction of <span class="math inline">\(A_0\)</span>, as <span class="math inline">\(A_0\)</span> represents the original extent (area) of habitat, and <span class="math inline">\(A_1\)</span> the amount of that habitat that is still standing after destruction happens. That is, <span class="math inline">\(A_1 = R A_0\)</span> where <span class="math inline">\(R\)</span> stands for habitat <span class="math inline">\(R\)</span>emaining after loss.</p>
+<p>In that case, when we plug in this expression <span class="math inline">\(A_1 = R~A_0\)</span> to <span class="math inline">\(\frac{S_1}{S_0} = \frac{A_1^z}{A_0^z}\)</span> we arrive at: <span class="math inline">\(\frac{S_1}{S_0} = \frac{(R~A_0)^z}{A_0^z}\)</span></p>
+<p>Based on the <a href="https://www.mesacc.edu/~scotz47781/mat120/notes/exponents/review/review.html#:~:text=Product%20Rule%3A%20am%20%E2%88%99,base%20and%20add%20the%20powers.&amp;text=%2C%20this%20says%20that%20to%20divide,base%20and%20subtract%20the%20powers">product rule for exponents</a>, <span class="math inline">\(\frac{S_1}{S_0} = \frac{(RA_0)^z}{A_0^z}\)</span> is equivalent to: <span class="math inline">\(\frac{S_1}{S_0} = \frac{R^z A_0^z}{A_0^z}\)</span></p>
+<p>We can cancel out the two <span class="math inline">\(A_0^z\)</span> terms and finally land at: <span class="math inline">\(\frac{S_1}{S_0} = R^z\)</span> This equation gives us a way to calculate <strong>what proportion of species remain after some fraction of habitat is lost</strong>.</p>
+<p>We can multiply the denominator on the left hand side over, seeing that <span class="math inline">\(S_1 = S_0 R^z\)</span>. We can then also calculate the <strong>number of species lost</strong>, <span class="math inline">\(S_0 - S_1\)</span>, denoted as <span class="math inline">\(\Delta S\)</span> as: <span class="math inline">\(\Delta S = S_0 - S_1 \rightarrow S_0 - S_0 R^z \implies \Delta S = (1-R^z) S_0\)</span>.</p>
+<pre class="r"><code>### We can take the value of z that we calculated in the Southeast Asia
+### bird dataset and use that to calculate 1) what proportion of species
+### would remain after habitat loss and 2) what number of species would be
+### lost after habitat loss.
+S_0 = 111 # initially we have 111 species in this example (Palawan)
+R = 0.9 # We lose 10% of habitat in this example: (1-R)*100% = 10%
+species_proportion_surviving &lt;- R^z
+species_lost &lt;- S_0 * (1-R^z)</code></pre>
+<p>As such, we expect to keep 96.37% of the original species pool of 111 bird species after losing 10% of the habitat area. We expect that we will lose around 4 bird species after the loss of 10% of the habitat area.</p>
+</div>
+<div id="exercises" class="section level2">
+<h2><span class="header-section-number">1.3</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Follow the code above to calculate <span class="math inline">\(c\)</span> and <span class="math inline">\(z\)</span> for the Southeast Asia birds dataset.</li>
+<li>Using <span class="math inline">\(c\)</span> and <span class="math inline">\(z\)</span>, calculate the expected bird species richness for habitat patches that are 5000, 7500, 10000, 25000, 50000, 100000 square miles. Plot expected bird species richness on the y-axis and habitat area on the x-axis on a scatterplot.</li>
+<li>Generate a scatterplot that displays how many bird species will be lost from Palawan island if you lose 1%, 5%, 10%, 15%, 20%, and 25% of the habitat area.</li>
+</ol>
+</div>
+</div>
+<div id="prioritizing-decisions-in-conservation" class="section level1">
+<h1><span class="header-section-number">2</span> Prioritizing decisions in conservation</h1>
+<p>The Mace <em>et al.</em> (2007) reading for Week 5 describe different tools to <em>prioritize</em> scarce resources (such as money, labor, etc.) to <em>maximize</em> conservation gains. The other readings (Kareiva 2010; DeAngelis 2019) describe a debate in conservation: when is it more effective to concentrate effort on fewer (already nominally protected) sites versus expanding conservation effort to additional (unprotected/underprotected) sites?</p>
+<p>The activity below is intended to provide more insight into conservation prioritization/systematic conservation planning. We’ll consider a scenario where we are considering a landscape with 20 sites, each of which has a different cost to protect (perhaps costs to enact <a href="https://www.conservationeasement.us/what-is-a-conservation-easement/">easements on private lands</a>) and each of which has a different level of ecosystem service benefit. For purposes of this activity, we will assume that the benefits are <strong>additive</strong>.</p>
+<p>What would it mean if the benefits were not additive? Then, for example, if we conserved site 1 and it protected habitat for 100 species, and we conserved site 2 and it protected 50 species, we would need to calculate the overall sum total benefit correcting for the redundancy between the two sites. We couldn’t assume that we protected 150 distinct species. Instead, there could be an arbitrary number (1, 10, 27, or even 50) species shared between the two sites. The overall number of species that we protect would be less than 150–it would only be the number of <em>unique</em> species across both sites.</p>
+<p>Below, I first create a dataset where we have 20 sites. Each site has some cost to enact conservation and it offers some level of ecosystem benefits.</p>
+<pre class="r"><code>### Creating a simulated conservation dataset
+### This simulated data has 20 sites with different
+### costs and benefits. These could be 20 habitat patches,
+### or some other set of 20 locations where we have to
+### decide which sites we would prioritize for
+### conservation actions.
+set.seed(47) # instantiating random seed to ensure reproducibility
+conservationDF &lt;- tibble::tibble(
+  site_id = c(1:20), # site ID
+  costs = runif(20,min=200,max=1000), # cost of enacting conservation
+  value = 1/(1 + exp(-costs/max(costs))) * abs(rlnorm(20,2,0.5)) * 100 # ecosystem benefit of each site
+)
+
+conservationDF # display the conservation dataset</code></pre>
+<pre><code>## # A tibble: 20 x 3
+##    site_id costs value
+##      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1       1  982.  341.
+##  2       2  499.  471.
+##  3       3  809.  658.
+##  4       4  858.  209.
+##  5       5  659.  512.
+##  6       6  753.  706.
+##  7       7  511.  445.
+##  8       8  575.  893.
+##  9       9  635.  341.
+## 10      10  940.  523.
+## 11      11  311.  195.
+## 12      12  762.  573.
+## 13      13  330.  363.
+## 14      14  679.  607.
+## 15      15  605.  408.
+## 16      16  922.  340.
+## 17      17  520.  208.
+## 18      18  225.  129.
+## 19      19  257.  156.
+## 20      20  575.  481.</code></pre>
+<p>Let’s say that we have a maximum budget of <span class="math inline">\(1500\)</span>. What is the best, most effective (mathematically optimal) set of sites that we should conserve to maximize “bang-for-buck” (ecosystem service benefits for total amount spent)? We could plot, for the 20 sites, value versus cost and use that as one way to select sites.</p>
+<pre class="r"><code>### Generate scatterplot for value versus cost
+p &lt;- ggplot(conservationDF, aes(x=costs, y=value, label=site_id))
+p &lt;- p + geom_label(position=position_dodge2(width=0.8),fill=POMblue,alpha=0.4,label.padding=unit(0.2,&quot;lines&quot;),label.size=0) # plot site labels with commands to avoid overplotting, remove label border
+p &lt;- p + labs(x=&quot;Cost per site&quot;, y=&quot;Ecosystem service benefit&quot;) # change x- and y-axis labels
+p &lt;- p + theme_light() # change background appearance of plot
+p</code></pre>
+<p><img src="Week5_files/figure-html/plot_csdata-1.png" width="672" /></p>
+<p>We might look at the preceding graph and think that we should select all of the sites with the largest ecosystem service values (large conservation benefit) without exceeding our maximum budget of $1500. In that case, we’d select sites 8 and 6, totaling 1598.899 ecosystem service benefits at a cost of $1328.29. Below, I display the first four rows of this conservation decision making dataset</p>
+<pre class="r"><code>dplyr::arrange(conservationDF, desc(value))[1:4,]</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   site_id costs value
+##     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1       8  575.  893.
+## 2       6  753.  706.
+## 3       3  809.  658.
+## 4      14  679.  607.</code></pre>
+<p>However, is picking the sites with the largest ecosystem service values most effective or should we select the most cost-effective sites? If we wanted to focus on the cost-effective sites, how would we do that?</p>
+<pre class="r"><code>conservationDF &lt;- conservationDF %&gt;%
+  mutate(vpw = value/costs) # value per cost for each site
+
+p &lt;- ggplot(conservationDF, aes(x=value, y=vpw, label=site_id))
+p &lt;- p + geom_label(position=position_dodge2(width=0.8),fill=POMblue,alpha=0.4,label.padding=unit(0.2,&quot;lines&quot;),label.size=0) # plot site labels with commands to avoid overplotting, remove border
+p &lt;- p + labs(x=&quot;Benefit&quot;, y=&quot;Benefit/Cost&quot;) # change x- and y-axis labels
+p &lt;- p + theme_minimal() # change background theme
+p</code></pre>
+<p><img src="Week5_files/figure-html/modifyConsDF-1.png" width="672" /></p>
+<p>As we can see from this plot and the subset of the table below, when we include benefit per unit cost across the 20 sites, we may come to a different conclusion about which sites to prioritize. Namely, we may focus on sites 8 and 13, yielding a total level of 1256 ecosystem service benefit units at a cost of $905. However, how should we pick among the remaining sites that don’t break our budget?</p>
+<pre class="r"><code>dplyr::arrange(conservationDF, desc(vpw))[1:6,]</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   site_id costs value   vpw
+##     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1       8  575.  893. 1.55 
+## 2      13  330.  363. 1.10 
+## 3       2  499.  471. 0.943
+## 4       6  753.  706. 0.937
+## 5      14  679.  607. 0.893
+## 6       7  511.  445. 0.871</code></pre>
+<p>Based on that insight about cost effectiveness, we’ll run an algorithm that provides an approximate solution for optimally selecting sites to maximize ecosystem service benefits while not exceeding our budget. The problem that we are facing, in choosing which sites to select based on benefits and costs, is an example of a “knapsack problem” (a fellow undergraduate student, <a href="https://bephrem.com/">Mr. Benyam Ephrem</a> of Univ. Maryland, College Park c/o 2021, has created an <a href="https://youtu.be/xCbYmUPvc2Q">excellent video explainer–the first 3 minutes lays out the problem very nicely</a>).</p>
+<p>In the knapsack problem, you can only fit a certain number of objects in a backpack (a.k.a. knapsack in some flavors of Commonwealth English) before it gets too heavy or runs out of space–so you want to be strategic about which items you pick. For instance, I faced this exact problem when I went on a grocery shopping trip to our beloved chain in the Southland, <a href="https://www.latimes.com/food/story/2019-08-13/super-king-market-glendale">Super King</a> and walked over with my backpack when my car was getting fixed (IMO, no way to bike down there safely with all of the I-10 on-ramp traffic!). I could only fit so many items in my backpack, so I had to be judicious. Would I prioritize a big block of cheese over a tub of yogurt? How about tofu? How would I manage to get a good mix of fresh produce while also getting needed dry goods? At least chocolate, a high-value item for me, is not that big nor heavy–so it was definitely getting a spot in the shopping cart!</p>
+<p>Luckily, the knapsack problem offers a way to precisely solve for the most optimal solution to a problem where you have to trade-off between individual, discrete items with different costs (in my grocery case, the size and weight of items; in the conservation case, the cost of each site) and benefits (grocery: deliciousness/utility for cooking meals, conservation: preserving species or ecosystem services, etc.) subject to a constraint (grocery: the size of my backpack and the maximum weight I was willing to carry, conservation: our maximum budget or some maximum number of sites that is feasible for managing). Below, I provide a function that gives an approximate solution to our conservation site selection problem.</p>
+<p>Remember: we are looking to select some subset of our 20 sites in a principled way (maximizing benefits) while not exceeding our maximum budget ($1500).</p>
+<pre class="r"><code>## Function to solve for &quot;nearly-optimal&quot; selection of sites
+## to maximize biodiversity conservation
+    # Don&#39;t worry too much about the specifics of this function - just copy it into your R console
+    # It will use different rules of thumb to find which sites are (approximately) optimal for conserving
+conservation_site_selection &lt;- function(conservationDF, maxcost) {
+  knapsack &lt;- data.frame(conservationDF)
+  capacity &lt;- maxcost
+  
+  # 1) Greedy algorithm
+      # sort by value per weight
+  knapsack &lt;- knapsack[order(knapsack$vpw, decreasing = TRUE),]
+      # fill knapsack with all items taken in this sequence
+      # and still fitting into the knapsack
+  packed_items &lt;- c()
+  packed_weight &lt;- 0
+  packed_value &lt;- 0
+  for (id in 1:nrow(knapsack)) {
+    item &lt;- knapsack[id, ]
+    left_capacity &lt;- capacity - packed_weight
+    # check if next item in the sequence still fits into knapsack
+    if (left_capacity &gt; 0 &amp;&amp; item$costs &lt;= left_capacity) {
+      packed_items &lt;- c(packed_items, item$site_id)
+      packed_weight &lt;- packed_weight + item$costs
+      packed_value &lt;- packed_value + item$value
+    } 
+  }
+  
+    # 2) Addition to &quot;modified greedy&quot;
+      # determine most valuable single item fitting into knapsack
+  knapsack &lt;- knapsack[order(knapsack$value, decreasing = TRUE),]
+  best_single_item &lt;- 0
+  best_single_value &lt;- 0
+  best_single_weight &lt;- 0
+  for (id in 1:nrow(knapsack)) {
+    item &lt;- knapsack[id, ]
+    # check if next item in the sequence still fits into knapsack
+    if (item$costs &lt;= capacity) {
+      best_single_item &lt;- item$site_id
+      best_single_value &lt;- item$value
+      best_single_weight &lt;- item$costs
+      break
+    } 
+  }
+  
+  # now return best configuration
+  if (best_single_value &lt; packed_value) {
+    ret_val &lt;- tibble::tibble(Sites=paste(packed_items,collapse=&quot;, &quot;),
+                              TotalBiodiv=packed_value,
+                              TotalCost=packed_weight)
+  } else {
+    ret_val &lt;- tibble::tibble(Sites=best_single_item,
+                              TotalBiodiv=best_single_value,
+                              TotalCost=best_single_weight)
+  }
+  return(ret_val)
+}
+
+### Solving for the most optimal set of sites
+result &lt;- conservation_site_selection(conservationDF = conservationDF, maxcost=1500)</code></pre>
+<p>In this model, we have selected the following sites:</p>
+<pre class="r"><code>result</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   Sites    TotalBiodiv TotalCost
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;
+## 1 8, 13, 2       1727.     1404.</code></pre>
+<div id="excercise" class="section level2">
+<h2><span class="header-section-number">2.1</span> Excercise</h2>
+<p>What would we select if we increased our budget to $2000 or decreased it to $1200?</p>
+</div>
+<div id="learning-more-about-prioritization-in-conservation-site-selection" class="section level2">
+<h2><span class="header-section-number">2.2</span> Learning more about prioritization in conservation site selection</h2>
+<p>If you would like to learn more about reserve site selection algorithms, <a href="https://www.fs.fed.us/nrs/pubs/jrnl/2009/nrs_2009_haight_002.pdf">Haight and Snyder 2009</a> and <a href="https://experts.umn.edu/en/publications/a-mathematical-classification-of-conservation-prioritization-prob">Moilanen <em>et al.</em> 2009</a> provide two great overviews on how certain operations research optimization methods are used in conservation.</p>
+</div>
+</div>
+<div id="answers-to-exercises" class="section level1">
+<h1><span class="header-section-number">3</span> Answers to exercises</h1>
+<div id="species-area-relationship-1" class="section level2">
+<h2><span class="header-section-number">3.1</span> Species-area relationship</h2>
+<ol style="list-style-type: decimal">
+<li>Follow the code above to calculate <span class="math inline">\(c\)</span> and <span class="math inline">\(z\)</span> for the Southeast Asia birds dataset.</li>
+</ol>
+<p><em>Answer</em>: Run the code that I provide and make sure you confirm you get the same values for <span class="math inline">\(c\)</span> and <span class="math inline">\(z\)</span>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Using <span class="math inline">\(c\)</span> and <span class="math inline">\(z\)</span>, calculate the expected bird species richness for habitat patches that are 5000, 7500, 10000, 25000, 50000, 100000 square miles. Plot expected bird species richness on the y-axis and habitat area on the x-axis on a scatterplot.</li>
+</ol>
+<p><em>Answer</em>:</p>
+<pre class="r"><code>### Instead of repeating the same calculation over and over again, we can create a function to do that for us.
+### We&#39;ll specify the parameters for our function in the function(...) 
+### definition.
+calculating_expected_richness &lt;- function(habitat_area, d, z) {
+  c &lt;- 10^d # see reasons above for doing this.
+  expected_species &lt;- c*habitat_area^z
+  return(expected_species)
+}
+
+### Defining a vector to store habitat area
+habitat_area &lt;- c(5000, 7500, 10000, 25000, 50000, 100000)
+
+### We&#39;ll create a new data object to store these outputs
+### We&#39;ll call it expectedBirdsDF to stand for 
+### expected bird species richness data frame
+expectedBirdsDF &lt;- tibble::tibble(area = habitat_area,
+                    expBirds = calculating_expected_richness(habitat_area, d=d,z=z))
+
+### Display expectedBirdsDF
+expectedBirdsDF</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##     area expBirds
+##    &lt;dbl&gt;    &lt;dbl&gt;
+## 1   5000     113.
+## 2   7500     130.
+## 3  10000     144.
+## 4  25000     198.
+## 5  50000     253.
+## 6 100000     322.</code></pre>
+<pre class="r"><code>### Generate plot
+p &lt;- ggplot(expectedBirdsDF, aes(x=area, y=expBirds))
+p &lt;- p + geom_point()
+p &lt;- p + labs(x=&quot;Habitat area (sq. mi.)&quot;,y=&quot;Expected bird species richness&quot;)
+p &lt;- p + theme_classic()
+p</code></pre>
+<p><img src="Week5_files/figure-html/answer_2-1.png" width="672" /></p>
+<p><strong>Note</strong>: I have created two functions in this week’s tutorial. If you would like to learn more about how to create your own functions in <code>R</code> (not necessary at present for this class), please check out <a href="https://r4ds.had.co.nz/functions.html">R for Data Science, Chapter 19</a>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Generate a scatterplot that displays how many bird species will be lost from Palawan island (area = 4500 square miles, 111 bird species) if you lose 1%, 5%, 10%, 15%, 20%, and 25% of the habitat area.</li>
+</ol>
+<p><em>Answer</em>:</p>
+<pre class="r"><code>### Instead of repeating the same calculation over and over again, we can create a function to do that for us.
+### We&#39;ll specify the parameters for our function in the function(...) 
+### definition.
+calculating_number_species_lost &lt;- function(Remaining, z, S0) {
+  number_lost &lt;- (1-Remaining^z)*S0 # Remaining is habitat area remaining, z is the slope of the species-area relationship, and S0 is the initial species pool
+  return(number_lost)
+}
+
+### Defining a vector to store habitat area
+remaining_extent &lt;- 1 - c(1, 5, 10, 15, 20, 25)/100 # remaining proportion of habitat after habitat destruction happens
+
+### We&#39;ll create a new data object to store these outputs
+### We&#39;ll call it expectedBirdsLost to stand for 
+### expected bird species that are lost after habitat destruction
+expectedBirdsLost &lt;- tibble::tibble(remaining=remaining_extent,
+                    expLoss = calculating_number_species_lost(Remaining=remaining_extent,z=z,S0=111))
+
+### Display expectedBirdsDF
+expectedBirdsLost</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   remaining expLoss
+##       &lt;dbl&gt;   &lt;dbl&gt;
+## 1      0.99   0.390
+## 2      0.95   1.98 
+## 3      0.9    4.03 
+## 4      0.85   6.15 
+## 5      0.8    8.35 
+## 6      0.75  10.7</code></pre>
+<pre class="r"><code>### Generate plot
+p &lt;- ggplot(expectedBirdsLost, aes(x=remaining, y=expLoss))
+p &lt;- p + geom_point()
+p &lt;- p + labs(x=&quot;Proportion of habitat area remaining&quot;,y=&quot;Number of species lost&quot;)
+p &lt;- p + theme_classic()
+p</code></pre>
+<p><img src="Week5_files/figure-html/answer3-1.png" width="672" /></p>
+</div>
+<div id="systematic-prioritization-in-conservation" class="section level2">
+<h2><span class="header-section-number">3.2</span> Systematic prioritization in conservation</h2>
+<ol style="list-style-type: decimal">
+<li>What sites would we select if we increased our budget to $2000?</li>
+</ol>
+<p><em>Answer</em>:</p>
+<pre class="r"><code>### Perform site selection
+result &lt;- conservation_site_selection(conservationDF=conservationDF,maxcost=2000)
+
+### Display result
+result</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   Sites       TotalBiodiv TotalCost
+##   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;
+## 1 8, 13, 2, 7       2172.     1915.</code></pre>
+<p>We’d select sites 8, 13, 2, and 7.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>What sites would we select if we decreased our budget to $1200?</li>
+</ol>
+<p><em>Answer</em>:</p>
+<pre class="r"><code>### Perform site selection
+result &lt;- conservation_site_selection(conservationDF=conservationDF,maxcost=1200)
+
+### Display result
+result</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   Sites     TotalBiodiv TotalCost
+##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+## 1 8, 13, 19       1413.     1162.</code></pre>
+<p>We’d select sites 8, 13, and 19.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

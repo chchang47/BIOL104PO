@@ -1,0 +1,20 @@
+---
+title: "Combining social and ecological data"
+author: ""
+date: ""
+output: 
+  html_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Merging datasets
+
+Tentatively, the `R` tutorial for this week will focus on merging datasets. Specifically, we will see how to combine county-level socioeconomic data from the Census bureau with the ecological data on the [Provided Datasheet](https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv). 
+
+# Sustainable vs. unsustainable exploitation
+
+In a forthcoming `R Shiny` app, I will ask you to toggle different life history and harvest parameters for a fish species that is harvested. By manipulating these values, you will see how they affect the dynamics of the exploited fishery. 

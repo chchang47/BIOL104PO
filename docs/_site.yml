@@ -24,6 +24,14 @@ navbar:
         - text: "Week 4"
         - text: "Data visualization"
           href:  Week4.html
+    - text: "Conservation analyses"
+      menu:
+        - text: "Week 5"
+        - text: "Biodiversity & prioritization"
+          href: Week5.html
+        - text: "Week 6"
+        - text: "Combining social and ecological data"
+          href: Week6.html
 output:
   html_document:
     theme: flatly

@@ -52,7 +52,7 @@ p # calling p which will be displayed in the plot viewer
 
 ## Exercise
 
-How would you create a scatterplot of `iucn_threat_count_species` (y variable) against the total sum of bird, tree, reptile, and plant species (x variable) in each county in California? 
+How would you create a scatterplot of `iucn_threat_count_species` (y variable) against the total sum of bird, tree, reptile, and mammal species (x variable) in each county in California? 
 
 # Boxplot
 
