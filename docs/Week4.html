@@ -9,11 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="" />
 
 
 <title>Plotting</title>
 
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -349,12 +349,13 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Plotting</h1>
+<h4 class="author"></h4>
 
 </div>
 
 
-<div id="data-visualization-with-ggplot2" class="section level1">
-<h1><span class="header-section-number">1</span> Data visualization with <code>ggplot2</code></h1>
+<div id="data-visualization-with-ggplot2" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Data visualization with <code>ggplot2</code></h1>
 <p>One of the most powerful ways to explore your data is through data visualization. These activities will focus on three types of plots: scatterplots, boxplots, and histograms. We will use the <code>ggplot2</code> package to create plots in <code>R</code>.</p>
 <p><code>ggplot2</code> creates plots based on different layers. The three necessary components are:</p>
 <ul>
@@ -364,8 +365,8 @@ $(document).ready(function () {
 </ul>
 <p>While there are additional layering components that one can include, we will confine our attention to these three layers. For more information, please consult the <a href="https://ggplot2-book.org/">free, online ggplot2 Book</a>.</p>
 </div>
-<div id="creating-a-scatterplot" class="section level1">
-<h1><span class="header-section-number">2</span> Creating a scatterplot</h1>
+<div id="creating-a-scatterplot" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Creating a scatterplot</h1>
 <p>Scatterplots are most useful for visualizing two continuous, numeric variables. In defining a plot using <code>ggplot2</code>, we specify the data source (in the <code>ggplot</code> function), and the mapping of the variables (<code>aes</code>, short for aesthetic, within <code>ggplot</code>). Subsequently, we specify the type of <code>geom</code> (geometry) we want in the plot.</p>
 <p>Below, we will follow a convention where we assign an object (<code>p</code>) to store the plot. We specify what layers we want to add to the object <code>p</code> by using the <code>+</code> sign.</p>
 <p>In the code chunk here, we will create a scatterplot of protected area counts on the x-axis and protected area spatial extent in hectares on the y-axis across all of the 58 California counties in this dataset. To that end, we will specify <code>PAs_gapstatus1thru4_Cts</code> as the x variable and <code>PAs_gapstatus1thru4_HAs</code> as the y variable in the <code>aes</code>thetics field.</p>
@@ -385,13 +386,13 @@ p &lt;- ggplot(CA_county_data, aes(x=PAs_gapstatus1thru4_Cts, y=PAs_gapstatus1th
 p &lt;- p + geom_point() # adding on points to create a scatterplot
 p &lt;- p + labs(x=&quot;Protected area count&quot;, y=&quot;Protected area extent (ha)&quot;) # changing the default x and y axis labels to more informative labels
 p # calling p which will be displayed in the plot viewer</code></pre>
-<div id="exercise" class="section level2">
-<h2><span class="header-section-number">2.1</span> Exercise</h2>
+<div id="exercise" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Exercise</h2>
 <p>How would you create a scatterplot of <code>iucn_threat_count_species</code> (y variable) against the total sum of bird, tree, reptile, and mammal species (x variable) in each county in California?</p>
 </div>
 </div>
-<div id="boxplot" class="section level1">
-<h1><span class="header-section-number">3</span> Boxplot</h1>
+<div id="boxplot" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Boxplot</h1>
 <p>Boxplots are useful for depicting how different discrete categories within a variable exhibit variation. Below, we will specify the variable that we use to group our data (the categories of the 5 regions in California) as the x variable, and the values of interest as the y variable.</p>
 <pre><code>### Creating a boxplot
 p &lt;- ggplot(CA_county_data, aes(x=Region, y=iucn_threat_count_species))
@@ -400,13 +401,13 @@ p &lt;- p + labs(x=&quot;Region&quot;,y=&quot;IUCN Red-Listed species&quot;)
 # p &lt;- p + theme_classic() # compare and contrast what happens when you uncomment this line
 p &lt;- p + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) # here, we are specifying that R should rotate the x-axis text by 90 degrees to avoid the long regional names getting written over each other. No need to worry about this line of code too much.
 p</code></pre>
-<div id="exercise-1" class="section level2">
-<h2><span class="header-section-number">3.1</span> Exercise</h2>
+<div id="exercise-1" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Exercise</h2>
 <p>How would you create a boxplot of bird species richness across the 5 regions in California?</p>
 </div>
 </div>
-<div id="histogram" class="section level1">
-<h1><span class="header-section-number">4</span> Histogram</h1>
+<div id="histogram" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Histogram</h1>
 <p>Histograms are useful for displaying the distribution of values for a continuous, numeric variable. In this case, we are going to display the distribution of values for the area of all 58 counties in California in hectares by specifying <code>area_of_county_ha</code> as the x variable in the <code>aes</code>thetics field.</p>
 <pre><code>### Creating a histogram
 p &lt;- ggplot(CA_county_data, aes(x=area_of_county_ha))
@@ -414,15 +415,15 @@ p &lt;- p + geom_histogram()
 p &lt;- p + labs(x=&quot;County area (ha)&quot;)
 # p &lt;- p + theme_minimal() # compare and contrast what happens when you uncomment this line
 p</code></pre>
-<div id="exercise-2" class="section level2">
-<h2><span class="header-section-number">4.1</span> Exercise</h2>
+<div id="exercise-2" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Exercise</h2>
 <p>How would you create a histogram of reptile species richness in this dataset?</p>
 </div>
 </div>
-<div id="answers-to-exercises" class="section level1">
-<h1><span class="header-section-number">5</span> Answers to exercises</h1>
-<div id="scatterplot-of-iucn-red-listed-species-against-total-richness" class="section level2">
-<h2><span class="header-section-number">5.1</span> Scatterplot of IUCN Red-listed species against total richness</h2>
+<div id="answers-to-exercises" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Answers to exercises</h1>
+<div id="scatterplot-of-iucn-red-listed-species-against-total-richness" class="section level2" number="5.1">
+<h2 number="5.1"><span class="header-section-number">5.1</span> Scatterplot of IUCN Red-listed species against total richness</h2>
 <p>How would you create a scatterplot of <code>iucn_threat_count_species</code> (y variable) against the total sum of bird, tree, reptile, and plant species (x variable) in each county in California? Note that we will first have to use the <code>mutate</code> function to create a new variable that stores the sum of bird, tree, reptile, and plant species richness.</p>
 <pre><code>### Running mutate command and storing output in CA_county_data
 CA_county_data &lt;- CA_county_data %&gt;%
@@ -435,8 +436,8 @@ p &lt;- p + geom_point() # adding on points to create a scatterplot
 p &lt;- p + labs(x=&quot;Total species richness&quot;, y=&quot;IUCN Red-listed species&quot;) # changing the default x and y axis labels to more informative labels
 p # calling p which will be displayed in the plot viewer</code></pre>
 </div>
-<div id="boxplot-of-bird-species-richness" class="section level2">
-<h2><span class="header-section-number">5.2</span> Boxplot of bird species richness</h2>
+<div id="boxplot-of-bird-species-richness" class="section level2" number="5.2">
+<h2 number="5.2"><span class="header-section-number">5.2</span> Boxplot of bird species richness</h2>
 <p>How would you create a boxplot of bird species richness across the 5 regions in California?</p>
 <pre><code>### Creating a boxplot
 p &lt;- ggplot(CA_county_data, aes(x=Region, y=Birds))
@@ -446,8 +447,8 @@ p &lt;- p + theme_classic()
 p &lt;- p + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 p</code></pre>
 </div>
-<div id="histogram-of-reptile-richness" class="section level2">
-<h2><span class="header-section-number">5.3</span> Histogram of reptile richness</h2>
+<div id="histogram-of-reptile-richness" class="section level2" number="5.3">
+<h2 number="5.3"><span class="header-section-number">5.3</span> Histogram of reptile richness</h2>
 <p>How would you create a histogram of reptile species richness in this dataset?</p>
 <pre><code>### Creating a histogram for reptile species richness
 p &lt;- ggplot(CA_county_data, aes(x=Reptiles))
@@ -456,8 +457,8 @@ p &lt;- p + labs(x=&quot;Reptile richness&quot;)
 p</code></pre>
 </div>
 </div>
-<div id="homework" class="section level1">
-<h1><span class="header-section-number">6</span> Homework</h1>
+<div id="homework" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Homework</h1>
 <p>Generate a scatterplot with <code>farmland_proportion</code> on the x-axis and <code>Mammals</code> on the y-axis. Describe in 1-2 sentences what this plot displays.</p>
 </div>
 

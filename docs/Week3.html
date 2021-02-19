@@ -9,11 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="" />
 
 
 <title>Interacting with datasets and creating plots</title>
 
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -311,11 +311,28 @@ $(document).ready(function () {
     </li>
     <li class="dropdown-header">Week 3</li>
     <li>
-      <a href="Week3.html">Plotting data</a>
+      <a href="Week3.html">Data subsetting</a>
     </li>
     <li class="dropdown-header">Week 4</li>
     <li>
-      <a href="Week4.html">Grouping and summary operations</a>
+      <a href="Week4.html">Data visualization</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Conservation analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 5</li>
+    <li>
+      <a href="Week5.html">Biodiversity &amp; prioritization</a>
+    </li>
+    <li class="dropdown-header">Week 6</li>
+    <li>
+      <a href="Week6.html">Combining social and ecological data</a>
     </li>
   </ul>
 </li>
@@ -332,12 +349,13 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Interacting with datasets and creating plots</h1>
+<h4 class="author"></h4>
 
 </div>
 
 
-<div id="reading-in-the-provided-dataset-for-the-class-project" class="section level1">
-<h1><span class="header-section-number">1</span> Reading in the provided dataset for the class project</h1>
+<div id="reading-in-the-provided-dataset-for-the-class-project" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Reading in the provided dataset for the class project</h1>
 <p><a href="https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit?usp=sharing">More information on the class project here.</a> Friendly reminder about the:</p>
 <ul>
 <li><a href="https://docs.google.com/document/d/1mW6TsqO4IVRmawhp0D4UIyGkKDz3C0QLUJ0QBk_DY2Y/edit?usp=sharing">This Google doc</a> is where we can submit our own worst error and warning messages.
@@ -368,8 +386,8 @@ CA_county_data &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/cha
 CA_county_data</code></pre>
 <p>Awesome! You have 1) loaded the package <code>dplyr</code>, which is our toolkit for more elegant data manipulation in <code>R</code>, 2) read in the Provided Datasheet using the function <code>read_tsv</code> (read in tab-separated value files, sometimes also called <code>.txt</code> files, though <code>.tsv</code> is the format used here) from the package <code>readr</code>, 3) printed out the first 10 rows of the data table.</p>
 <p>One thing to note is that the packages we are using in <code>R</code> make “opinionated” decisions about how many columns to display. Because the provided datasheet has 26 columns, <code>R</code> only displays 6 or so of the columns and just lists the names of the remaining columns.</p>
-<div id="using-the-view-command" class="section level2">
-<h2><span class="header-section-number">1.1</span> Using the <code>View</code> command</h2>
+<div id="using-the-view-command" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Using the <code>View</code> command</h2>
 <p>Oftentimes, we may want a more intuitive way to see our data tables. It can be really annoying when <code>R</code> is too clever and only displays a subset of the columns of your spreadsheet. The <code>View()</code> function pulls up an Excel-style data viewer. Let’s try it below:</p>
 <pre><code>View(CA_county_data)</code></pre>
 <p>What just happened? <code>R</code> pulled up a spreadsheet data viewer in a new tab next to your <code>R</code> script. You can always press the <code>x</code> button on the upper right-hand side of the tab to close the viewer. And if you ever want to view your spreadsheet again, you can just re-run the command above! Another cool thing is that the spreadsheet viewer gives you options to sort (<code>dplyr::arrange</code>).</p>
@@ -380,10 +398,10 @@ CA_county_data</code></pre>
 </div>
 </div>
 </div>
-<div id="revisiting-pipes-to-link-up-data-manipulation-functions" class="section level1">
-<h1><span class="header-section-number">2</span> Revisiting pipes (<code>%&gt;%</code>) to link up data manipulation functions</h1>
-<div id="subsetting-data-tables-with-filter-and-select" class="section level2">
-<h2><span class="header-section-number">2.1</span> Subsetting data tables with <code>filter</code> and <code>select</code></h2>
+<div id="revisiting-pipes-to-link-up-data-manipulation-functions" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Revisiting pipes (<code>%&gt;%</code>) to link up data manipulation functions</h1>
+<div id="subsetting-data-tables-with-filter-and-select" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Subsetting data tables with <code>filter</code> and <code>select</code></h2>
 <p>The provided datasheet, stored in <code>CA_county_data</code>, has 58 rows and 26 columns. You can confirm this by running the command <code>dim(CA_county_data)</code> in the console or adding this on its own line in your <code>Week3.R</code> script and running it (hint: <code>?dim</code> for more details).</p>
 <p>26 columns is kind of a pain! We can’t view all of those columns nicely when we tell <code>R</code> to print out <code>CA_county_data</code>. Additionally, instead of looking at all 58 counties (rows) of <code>CA_county_data</code>, perhaps we want to focus on a subset of the data table that satisfies some condition. Fortunately, we can use <code>filter</code> to subset a data table into rows that meet our criterion and then we can <code>select</code> to only display certain columns.</p>
 <p>Let’s say that we want to:</p>
@@ -410,8 +428,8 @@ birdsTreesIUCN # display our subset of the CA_county_data data table</code></pre
 <li>Note: we could also run <code>View(birdsTreesIUCN)</code> in the console if we wanted to see the spreadsheet viewer display of this object.</li>
 </ul>
 </div>
-<div id="exercise" class="section level2">
-<h2><span class="header-section-number">2.2</span> Exercise</h2>
+<div id="exercise" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Exercise</h2>
 <p>How would you modify the code above take a subset of <code>CA_county_data</code> where the counties have more than 40 tree species and select the columns <code>County</code>, <code>Trees</code>, <code>Mammals</code>, and <code>PAs_gapstatus1thru4_Cts</code>? How would you store that in a new object called <code>treeSubset</code>?</p>
 <p><strong>Hint</strong>:</p>
 <pre><code>treeSubset &lt;- CA_county_data %&gt;%
@@ -423,8 +441,8 @@ treeSubset # print out treeSubset object
 # note that you could also run:
 # View(treeSubset) # uncomment by deleting the leading hashtag to run this command</code></pre>
 </div>
-<div id="generating-summaries-of-new-or-existing-columns-in-a-spreadsheet-using-mutate-and-group_by" class="section level2">
-<h2><span class="header-section-number">2.3</span> Generating summaries of new or existing columns in a spreadsheet using <code>mutate</code> and <code>group_by</code></h2>
+<div id="generating-summaries-of-new-or-existing-columns-in-a-spreadsheet-using-mutate-and-group_by" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Generating summaries of new or existing columns in a spreadsheet using <code>mutate</code> and <code>group_by</code></h2>
 <p>Let’s say that we want to do the following:</p>
 <ul>
 <li>Create a new column that stores our calculation for the proportion of land in each county that is farmland;</li>
@@ -456,8 +474,8 @@ CA_farm_summary &lt;- CA_county_data %&gt;%
 <li>Ultimately, what we store in the new object <code>CA_farm_summary</code> (defined at the top of this code chunk) is the output of all of these commands, linked together, which is the little summary data table you see at the end.</li>
 </ul>
 </div>
-<div id="exercise-1" class="section level2">
-<h2><span class="header-section-number">2.4</span> Exercise</h2>
+<div id="exercise-1" class="section level2" number="2.4">
+<h2 number="2.4"><span class="header-section-number">2.4</span> Exercise</h2>
 <p>How would you modify the code above to calculate the proportion of each county that is protected (GAP statuses 1-4 - you may want to use the column <code>PAs_gapstatus1thru4_HAs</code>) <em>and</em> summarize the mean values of that proportional protection across the 5 regions in California? How would you store that in a new object called <code>CA_protected_summary</code>?</p>
 <p><strong>Hint</strong>:</p>
 <pre><code>CA_protected_summary &lt;- CA_county_data %&gt;%
@@ -475,10 +493,10 @@ CA_protected_summary # print out the object CA_protected_summary in the console<
 # regionIUCNrichnessMean # how would you print this object in the console?</code></pre>
 </div>
 </div>
-<div id="answers-to-exercises" class="section level1">
-<h1><span class="header-section-number">3</span> Answers to exercises</h1>
-<div id="selecting-columns-and-storing-output" class="section level2">
-<h2><span class="header-section-number">3.1</span> Selecting columns and storing output</h2>
+<div id="answers-to-exercises" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Answers to exercises</h1>
+<div id="selecting-columns-and-storing-output" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Selecting columns and storing output</h2>
 <p>How would you modify the code above take a subset of <code>CA_county_data</code> where the counties have more than 40 tree species and select the columns <code>County</code>, <code>Trees</code>, <code>Mammals</code>, and <code>PAs_gapstatus1thru4_Cts</code>? How would you store that in a new object called <code>treeSubset</code>?</p>
 <p><strong>Answer</strong>:</p>
 <pre><code>treeSubset &lt;- CA_county_data %&gt;% # take CA_county_data and pipe it into the next function
@@ -490,8 +508,8 @@ treeSubset # print out treeSubset object
 # note that you could also run:
 # View(treeSubset) # uncomment by deleting the leading hashtag to run this command</code></pre>
 </div>
-<div id="performing-a-group_by-operation-and-generating-a-summary-across-categories-in-your-data" class="section level2">
-<h2><span class="header-section-number">3.2</span> Performing a <code>group_by</code> operation and generating a summary across categories in your data</h2>
+<div id="performing-a-group_by-operation-and-generating-a-summary-across-categories-in-your-data" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Performing a <code>group_by</code> operation and generating a summary across categories in your data</h2>
 <p>How would you modify the code above to calculate the proportion of each county that is protected (GAP statuses 1-4 - you may want to use the column <code>PAs_gapstatus1thru4_HAs</code>) <em>and</em> summarize the mean values of that proportional protection across the 5 regions in California? How would you store that in a new object called <code>CA_protected_summary</code>? Each region spans 11-13 counties.</p>
 <p><strong>Answer</strong>:</p>
 <pre><code>CA_protected_summary &lt;- CA_county_data %&gt;%
@@ -501,8 +519,8 @@ treeSubset # print out treeSubset object
     
 CA_protected_summary # print out the object CA_protected_summary in the console</code></pre>
 </div>
-<div id="second-group_by-and-summarize-exercise" class="section level2">
-<h2><span class="header-section-number">3.3</span> Second <code>group_by</code> and <code>summarize</code> exercise</h2>
+<div id="second-group_by-and-summarize-exercise" class="section level2" number="3.3">
+<h2 number="3.3"><span class="header-section-number">3.3</span> Second <code>group_by</code> and <code>summarize</code> exercise</h2>
 <p>How would you modify the code above to calculate the mean number of IUCN threatened species across the counties in each of the 5 regions in California? How would you store the output of these commands in a new object called <code>regionIUCNrichnessMean</code>?</p>
 <p><strong>Answer</strong>:</p>
 <pre><code>regionIUCNrichnessMean &lt;- CA_county_data %&gt;%
