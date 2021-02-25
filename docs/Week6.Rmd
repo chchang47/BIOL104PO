@@ -8,13 +8,217 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,message=FALSE) # folks using the Rmarkdown files - delete the ,eval=FALSE option here; otherwise knitr will not interpret the R code chunks below.
+
+### Load dplyr and stringr packages into R workspace
+library(dplyr)
+library(stringr)
 ```
 
 # Merging datasets
 
-Tentatively, the `R` tutorial for this week will focus on merging datasets. Specifically, we will see how to combine county-level socioeconomic data from the Census bureau with the ecological data on the [Provided Datasheet](https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv). 
+Sometimes, data that we want to combine for analyses are separated across different spreadsheets or data tables. How can we combine these different data tables? `Join` operations ([FMI on `join`ing two data tables](https://statisticsglobe.com/r-dplyr-join-inner-left-right-full-semi-anti)) offer a way to merge data across multiple data tables (also called data frames in `R` parlance).
+
+Below, I will first create two data tables that store different characteristics about fruit.
+
+```{r join_dfs}
+### Table storing colors of 5 fruits
+dt1 <- tibble::tibble(fruit=c("apple","pear","orange","kiwi","mangosteen"),
+                      color=c("red","green","orange","brown","purple"))
+dt1 # display table
+
+### Table storing prices of 3 fruits
+dt2 <- tibble::tibble(fruit=c("pear","orange","mangosteen","cherimoya"),
+                      price=c(1.25,1,5,4.7)) # price per pound
+dt2 # display table
+```
+
+All join operations assume there is some column between your data tables that has consistent values that you can use to merge the records in the data tables together. In the case of this simple example, the shared column is `fruit`.
+
+## Left join
+
+The first join that we will look at is the `left_join` function from the `dplyr` package. The `left_join` will keep all of the rows in the left-hand side table and attempt to match entries from the second (right-hand side) table. If there is no match, `R` will populate `NA` (missing value) at that missing join location.
+
+```{r lft_join}
+left_join(dt1, dt2)
+# Note that the left_join function detects that both data tables both have a column named "fruit". What would happen if they didn't have a column with the same name?
+```
+
+We see that `R` has merged the two data tables, `dt1` and `dt2` together; the resulting data table above has all of the unique columns across these two data tables (`fruit` - the column we used to merge the two data tables together, `color` from `dt1`, and `price` from `dt2`). We also see that `R` has matched the records across the two data tables--see for yourself for example that the row for `pear` has the correct values from `dt1` (`color=green`) and `dt2` (`price=1.25`).
+
+### What is going on with those weird `NA` values?
+
+What we see above is that because `dt2` didn't have any data for `apple` and `kiwi`, `R` has attempted to match all 5 fruits from `dt1` (left-hand side data table) with the fruits in `dt2`, and the fruits that were in `dt1` but not `dt2` get an `NA` value in the `price` column, which is merged from `dt2` to `dt1`. Note also that the fruit that is **only** in `dt2` but not `dt1` doesn't show up in the merged data table (no `cherimoya` row).
+
+## Right join
+
+In this case, `R` retains all of the records from `dt2`. Because `dt1` has some fruits that `dt2` does not, that means that the fruits that are **unique** to `dt1` *will not* show up in the merged data table.
+
+```{r right_join}
+right_join(dt1, dt2)
+```
+As before, because `cherimoya` is only defined in `dt2`, but not `dt1`, `R` populates an `NA` value for all of the columns that are coming from `dt1` (in this case, the column `color`) to the final merged data table.
+
+## Inner join
+
+In the `inner_join` function, only those rows that have exact matches across the two data tables are preserved in the final merged data table.
+
+
+```{r inr_join}
+inner_join(dt1, dt2)
+```
+
+We see that this resulting data table presents only the three fruits that are included in both `dt1` and `dt2`.
+
+## Full join
+
+In a full join operation, all unique elements across `dt1` and `dt2` are preserved in the final merged data table. For non-matching pairs, `R` will fill in an `NA` value.
+
+```{r fl_join}
+full_join(dt1, dt2)
+```
+
+We see that this merged table has all 6 unique fruits across the two data tables. We see that `R` has assigned `NA` in `price` (the column from `dt2`) for the two fruits that are in `dt1` but **not** `dt2` (`apple` and `kiwi`). We also see that there is an `NA` value in `color` (the column from `dt1`) for `cherimoya`, which is a fruit that was only listed in `dt2`.
+
+## The need for consistency to ensure successful joins
+
+`R` can't read our minds, for better or for worse. So if we notice that our data tables are not consistent in how they present the fruits, then we'll see different join behavior. `R` is looking for an exact match of the words in the joining column (`fruit`).
+
+```{r misspelling_fruits}
+
+### Modifying dt2
+dt2 <- tibble::tibble(fruit=c("Pear","Orange","Mangosteen","Cherimoya"),
+                      price=c(1.25,1,5,4.7)) # price per pound
+dt2 # display table
+
+# dt1 # display dt1 to compare the fruit column visually
+
+### See what happens - R can't join the fruits up - the words are not identical because R is case sensitive
+full_join(dt1,dt2) 
+```
+
+Dang! `R` has treated `pear` as a different value than `Pear`. That's really silly and unfortunate. It's not "automagically" joining up the data across the two tables because `R` is case sensitive (that is, `pear` is different from `Pear` to `R`).
+
+We can fix this example here by taking `dt2` and making the `fruit` column all lower-case then re-running the join operation.
+
+```{r new_dt2}
+### Let's fix this problem and make the fruit names consistent
+dt2new <- dt2 %>% 
+  mutate(fruit=tolower(fruit)) # a function that takes character/strings (words) and converts them to lower case
+dt2new # confirm that now the fruit names are lower case
+
+### Re-run full_join
+full_join(dt1,dt2new)
+```
+
+### Additional exercises to build understanding
+
+Given `dt1`, `dt2`, and `dt2new` that have just been defined above, run and contrast the outputs of the following:
+
+* `left_join(dt1, dt2)`
+  + versus: `left_join(dt1, dt2new)`
+* `right_join(dt1, dt2)`
+  + versus: `right_join(dt1, dt2new)`
+* `inner_join(dt1, dt2)`
+  + versus: `inner_join(dt1, dt2new)`
+  + notice that `inner_join(dt1, dt2)` tells you that it didn't find any matches! It produces a table that has `0 x 3` dimensions, or `0` rows because it didn't find any matching records across `dt1` and `dt2`.
+
+# Adding socioeconomic data to the Provided Datasheet
+
+As an additional illustration of data merging, I will illustrate below how one can add on socio-economic data from the USDA and the US Census to the [Provided Datasheet](https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv). In the code chunk below, I pull in data from the GitHub repository that stores the class `R` tutorials.
+
+```{r reading_in_data}
+### Read in data
+CA_county_data <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_protectedareas_datasheet.tsv") # this is a link to the Provided Datasheet for the class project
+  ### Take a look at the first few rows of the data table
+CA_county_data
+
+### Data on socio-economic statuses in California
+CA_county_SES <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_ses.tsv") # URL for spreadsheet storing socioeconomic data by county in California
+  ### Take a look at the first few rows of the data table
+CA_county_SES
+
+### Data on racial composition in California
+CA_county_demog <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_census.tsv")
+  ### Take a look at the first few rows of the data table
+CA_county_demog
+```
+
+## Data explanation
+
+Note that you can find a description of the [Provided Datasheet Data Explanation](https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit#bookmark=id.5xpubn6xluzn) here. 
+
+On the other hand, the columns in [`CA_county_SES`](https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_ses.tsv) are as follows:
+
+* `State`: Abbreviated name for California (`CA`)
+* `County`: County name
+* `rurban`: Rural or urban designation for the county
+* `PctPoverty`: The percentage of the county's population that lives in poverty in 2019
+* `PctChildPoverty`: The percentage of the county's children (ages 0-17) that live in poverty in 2019
+* `MedianHHincome`: Median annual household income in the county
+
+These data for California were modified from national [County-level Data setsat the USDA Economic Research Service](https://www.ers.usda.gov/data-products/county-level-data-sets/download-data/). The [county-level data sets website](https://www.ers.usda.gov/data-products/county-level-data-sets) opens up a data viewer; [here is the data viewer for California](https://data.ers.usda.gov/reports.aspx?ID=17826).
+
+The columns in [`CA_county_demog`](https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_census.tsv) are as follows:
+
+* `STNAME`: The name of the state
+* `CTYNAME`: The name of the county
+* `TOT_POP`: Total population of the county
+* `BAC`: The proportion of county residents who self-identify as  `Black or African-American alone or in combination` (`in combination` includes multiracial respondents)
+* `IAC`: The proportion of county residents who self-identify as `American Indian and Alaska Native alone or in combination`
+* `AAC`: The proportion of county residents who self-identify as `Asian alone or in combination`
+* `NAC`: The proportion of county residents who self-identify as `Native Hawaiian and Other Pacific Islander alone or in combination`
+* `LATINX`: The proportion of the county residents who self-identify as `Hispanic` and/or Latinx
+* `NHLATINX`: The proportion of the county residents who self-identify as `Not Hispanic` and/or not Latinx
+* `WA`: The proportion of the county residents who self-identify as `White`
+
+All of the racial/ethnic groupings above are those defined by the [US Census as described in the metadata document](https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/2010-2019/cc-est2019-alldata.pdf). These data were calculated from the [US Census Bureau County Population by Characteristics: 2010-2019](https://www.census.gov/data/tables/time-series/demo/popest/2010s-counties-detail.html); specifically the `Annual County Resident Population Estimates by Age, Sex, Race...` section of the site.
+
+## Performing iterative joining operations
+
+Let's say that for an analysis, you wanted to combine some information about biodiversity (say `Birds` species richness) with socio-economic data. We can use the data joining operations that we just covered above to merge these data tables together, which permits us to plot our data and (as we will see after Spring Break) perform other analyses such as linear regression models.
+
+We will join up `CA_county_data` (the Provided Datasheet with biodiversity and land use data) with `CA_county_SES` and `CA_county_demog`. To do so, we will merge the data tables based on the column that stores county names.
+
+The first thing that we will need to do is ensure that the county names are consistent (no weird issues with lower/upper case or anything else). What do we see?
+
+```{r display_county_strings}
+### Show the first six counties in each data table
+head(CA_county_data$County) # Here we are using the $ symbol to refer to a particular column that we want to pull out of a data table. This is pretty much equivalent to calling dplyr::select(CA_county_data, County)
+head(CA_county_SES$County)
+head(CA_county_demog$CTYNAME) # note that county in this data table is stored in a column called CTYNAME, not County
+```
+
+Oof! We see that our matches won't work--both `CA_county_SES` and `CA_county_demog` have `County` added to the end of each county's name, while `CA_county_data` does not. No problem there--we'll use a "string substitution" function (akin to using find and replace to search for then delete a string or replace it with something else) to remove ` County` from the end of the county names. We'll then check the county name columns in the two data tables to ensure that we've got names for counties that will match across all three data tables. 
+
+```{r cleaning_up_county_names}
+CA_county_SES$County <- str_replace_all(CA_county_SES$County," County","") # replace " County" at the end of the county names with nothing - basically like find and replace deleting the " County" string.
+CA_county_demog$CTYNAME <- str_replace_all(CA_county_demog$CTYNAME," County","")
+
+### Checking that we've removed " County" by inspecting the first few values in the county name columns
+head(CA_county_SES$County)
+head(CA_county_demog$CTYNAME) 
+```
+
+Below, we will use `inner_join` to first join `CA_county_data` with `CA_county_SES`, then `CA_county_demog`.
+
+```{r joiningCAdata}
+### First we will check the dimensions of the CA_county_data column
+dim(CA_county_data) # 58 rows by 26 columns
+
+### Merge the data table that has socioeconomic data to CA_county_data
+CA_merged <- inner_join(CA_county_data, CA_county_SES)
+dim(CA_merged) # now we have 31 columns
+
+### Merge the demographic data table to the merged data table above, which was stored in CA_merged
+CA_merged <- inner_join(CA_merged, CA_county_demog, by=c("County"="CTYNAME"))
+  # Remember my question earlier about doing matches across data tables where the column names aren't the same? Specifying by=c(columnNameForMatchingInDataTable1 = column_name_for_matching_in_data_table_2) is how we can tell R which columns to merge the data tables on.
+dim(CA_merged) # now we have 40 columns
+
+### Display the final merged data table
+# View(CA_merged) # uncomment to run
+```
 
 # Sustainable vs. unsustainable exploitation
 
-In a forthcoming `R Shiny` app, I will ask you to toggle different life history and harvest parameters for a fish species that is harvested. By manipulating these values, you will see how they affect the dynamics of the exploited fishery. 
+[At the `RShiny` app](https://chchang47.shinyapps.io/BIOL104PO/), I describe a model of harvesting species. I provide instructions on the different variables that you can manipulate using sliders; interacting with the sliders and seeing how the population dynamics of the harvested species changes is akin to running experiments where you compare different harvesting regimes for species with different [life histories](https://bio.libretexts.org/Sandboxes/mhayccdedu/Environmental_Science/02%3A_Ecology/2.02%3A_Populations/2.2.04%3A_Life_History). Note that I refer to this interactive model website in Question 12 for the Week 1-6 retrospective homework.
