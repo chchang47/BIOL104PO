@@ -18,7 +18,7 @@ library(ggplot2)
 
 To motivate learning about a way to explore associations between variables and to deepen engagement with the climate change materials, we will look at this dataset on butterfly phenology. The data for this tutorial are modified from [Kharouba and Vellend (2015)](https://sakai.claremont.edu/access/lessonbuilder/item/272255/group/CX_mtg_138439/9_Climate/KharoubaVellend_ButterflyPhenologyExample.pdf); the description of Tables 1 & 3 in the text may be helpful, but note that we are analyzing a modified dataset using a different procedure from the authors.
 
-These data also provide an example of how [historical museum collections data](https://youtu.be/SineKnme7vQ) can illuminate the impacts of global change over time on species.
+[These data](https://github.com/charlottehchang/BIOL104PO/blob/master/data/ButterflyPhenology.tsv) also provide an example of how [historical museum collections data](https://youtu.be/SineKnme7vQ) can illuminate the impacts of global change over time on species.
 
 ```{r reading_in_data}
 ### Reading in the data
