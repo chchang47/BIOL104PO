@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="" />
+
+
+<title>Linear regression of climate phenology</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Conservation Science</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Introduction
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 1</li>
+    <li>
+      <a href="Week1.html">The R and RStudio environments</a>
+    </li>
+    <li>
+      <a href="Week1b.html">Introduction to R</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 2</li>
+    <li>
+      <a href="Week2.html">Manipulating data.frames</a>
+    </li>
+    <li class="dropdown-header">Week 3</li>
+    <li>
+      <a href="Week3.html">Data subsetting</a>
+    </li>
+    <li class="dropdown-header">Week 4</li>
+    <li>
+      <a href="Week4.html">Data visualization</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Conservation analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 5</li>
+    <li>
+      <a href="Week5.html">Biodiversity &amp; prioritization</a>
+    </li>
+    <li class="dropdown-header">Week 6</li>
+    <li>
+      <a href="Week6.html">Combining social and ecological data</a>
+    </li>
+    <li class="dropdown-header">Week 9</li>
+    <li>
+      <a href="Week9.html">Linear regressions; climate impacts</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Linear regression of climate phenology</h1>
+
+</div>
+
+
+<div id="introduction-to-the-dataset" class="section level1">
+<h1><span class="header-section-number">1</span> Introduction to the dataset</h1>
+<p>To motivate learning about a way to explore associations between variables and to deepen engagement with the climate change materials, we will look at this dataset on butterfly phenology. The data for this tutorial are modified from <a href="https://sakai.claremont.edu/access/lessonbuilder/item/272255/group/CX_mtg_138439/9_Climate/KharoubaVellend_ButterflyPhenologyExample.pdf">Kharouba and Vellend (2015)</a>; the description of Tables 1 &amp; 3 in the text may be helpful, but note that we are analyzing a modified dataset using a different procedure from the authors.</p>
+<p>These data also provide an example of how <a href="https://youtu.be/SineKnme7vQ">historical museum collections data</a> can illuminate the impacts of global change over time on species.</p>
+<pre class="r"><code>### Reading in the data
+phenoDF &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/ButterflyPhenology.tsv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Species = col_character(),
+##   Year = col_double(),
+##   DayOfYear = col_double(),
+##   SpringTempC = col_double(),
+##   SummerTempC = col_double()
+## )</code></pre>
+<pre class="r"><code>### Display the first few rows of the data
+phenoDF</code></pre>
+<pre><code>## # A tibble: 144 x 5
+##    Species                Year DayOfYear SpringTempC SummerTempC
+##    &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1 Glaucopsyche lygdamus  1931       133        6.85        15.4
+##  2 Cupido amyntula        1931       143        6.85        15.4
+##  3 Cupido amyntula        1931       158        6.85        15.4
+##  4 Glaucopsyche lygdamus  1931       212        6.85        15.4
+##  5 Cupido amyntula        1933       142        5.4         14.9
+##  6 Glaucopsyche lygdamus  1933       154        5.4         14.9
+##  7 Glaucopsyche lygdamus  1933       156        5.4         14.9
+##  8 Coenonympha tullia     1933       168        5.4         14.9
+##  9 Coenonympha tullia     1937       186        6.4         15.2
+## 10 Glaucopsyche lygdamus  1938       138        6.78        15.8
+## # … with 134 more rows</code></pre>
+<p>The data present the following:</p>
+<ul>
+<li><code>Species</code>: The scientific name of different butterfly species in British Columbia, Canada</li>
+<li><code>Year</code>: The year of each observation</li>
+<li><code>DayOfYear</code>: This column presents the day of year (from day 1, January 1, to day 365 on non-leap years, December 31) where a butterfly specimen was collected. What that means is that the butterfly was flying in British Columbia that day (it was an adult butterfly that was capable of flying).</li>
+<li><code>SpringTempC</code>: Mean spring temperature that year in degrees Celsius</li>
+<li><code>SummerTempC</code>: Mean summer temperature that year in degrees Celsius</li>
+</ul>
+<p>At this point, you may be wondering why the authors focused on the timing of adult butterfly flight. What does that have to do with <em>phenology</em> and <em>climate change</em>? Note that many butterfly species (and the vast majority of species in this dataset, such as the anise swallowtail butterfly <em>Papilio zelicaon</em>) have a very short lifespan–on the order of a few days to a few weeks. As insects, <a href="https://alabama.butterflyatlas.usf.edu/lifecycle">butterfly life stage timing</a> responds strongly to temperature, among other environmental variables. As such, the short lifespan of butterflies and their responsiveness to temperature allows us to see how their phenology could be changing in response to regional or global change.</p>
+<div id="visualizing-the-dataset" class="section level2">
+<h2><span class="header-section-number">1.1</span> Visualizing the dataset</h2>
+<p>Below, we will look at one relationship of interest. What pattern do we see when we plot mean spring temperature against the time in which adult butterflies were active &amp; flying?</p>
+<pre class="r"><code>### Building on the ggplot tutorial from Week 4
+    # Specifically, the scatterplot exercise from Section 2
+    # Link: https://charlottehchang.github.io/BIOL104PO/Week4.html
+p &lt;- ggplot(phenoDF, aes(x=SpringTempC, y=DayOfYear))
+p &lt;- p + geom_point() # adding on points plotted at the locations given by x and y above
+p &lt;- p + labs(x=&quot;Mean spring temperature (°C)&quot;, y=&quot;Flight timing (day of year)&quot;) # changing the x and y-axis labels to be informative
+p &lt;- p + theme_classic() # modify the style of the plot
+p # display the plot, p</code></pre>
+<p><img src="Week9_files/figure-html/plot_springtime_flight-1.png" width="672" /> What pattern do we see between spring temperature and the timing of adult flight? There is some spread in the data, which we expect because we have multiple species. (Can you think of other reasons why we would see this spread in the data?)</p>
+<p>Is there some way that we could model the relationship between spring temperature and butterfly phenology, represented by the timing of adult butterfly flight?</p>
+</div>
+</div>
+<div id="linear-regression-modeling" class="section level1">
+<h1><span class="header-section-number">2</span> Linear regression modeling</h1>
+<p>It turns out that we can look into possible associations between temperature and butterfly phenology using a linear regression. Linear regression is used to model the relationship between a dependent (a.k.a. response) variable, which we will denote <span class="math inline">\(Y\)</span>, and one or more independent (a.k.a. explanatory) variables denoted as <span class="math inline">\(X_1, X_2, X_3, \dots, X_k\)</span> (representing a total of <span class="math inline">\(k\)</span> arbitrary independent variables). In the case of our butterfly data, the response variable <span class="math inline">\(Y\)</span> is <code>DayOfYear</code> and the independent variable <span class="math inline">\(X\)</span> is <code>SpringTempC</code>.</p>
+<p>Note that you have already performed linear regressions using the species-area relationship data!</p>
+<div id="what-does-linear-regression-do" class="section level2">
+<h2><span class="header-section-number">2.1</span> What does linear regression do?</h2>
+<p>Using a linear model, we are going to fit a line that describes the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Recall that the equation for a straight line is:</p>
+<p><span class="math inline">\(Y = b + mx\)</span></p>
+<p>In linear regression, we are estimating:</p>
+<p><span class="math inline">\(Y = \beta_0 + \beta_1 X_1\)</span></p>
+<p>Equivalently, in the case of our butterfly data, we are estimating:</p>
+<p><span class="math inline">\(\text{DayOfYear} = \beta_0 + \beta_1 \text{SpringTempC}\)</span></p>
+<p>Note that you can interpret <span class="math inline">\(\beta_0\)</span> to be the same as <span class="math inline">\(b\)</span> from the equation for a straight-line. That is, <span class="math inline">\(\beta_0\)</span> is the y-intercept: it tells us what the value of <span class="math inline">\(Y\)</span> would be when <span class="math inline">\(X_i = 0\)</span> for all of the independent variable(s). In this case, we only have 1 independent variable, so <span class="math inline">\(\beta_0\)</span> tells us what we would expect butterfly flight time to be when spring temperature is equal to 0. <span class="math inline">\(\beta_1\)</span> is the same as <span class="math inline">\(m\)</span>: it tells us the slope of the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1\)</span>.</p>
+</div>
+<div id="estimating-the-linear-regression-model-for-the-butterfly-data" class="section level2">
+<h2><span class="header-section-number">2.2</span> Estimating the linear regression model for the butterfly data</h2>
+<p>Below, we will use the <code>lm</code> command (short for linear model) in <code>R</code> to estimate the coefficients, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> for the butterfly data. <code>lm</code> performs a specific type of linear regression, which is known as “ordinary least squares” (OLS for short) regression.</p>
+<pre class="r"><code>### Running the lm command
+butterflyModel &lt;- lm(DayOfYear ~ SpringTempC, data=phenoDF)
+
+### Showing the coefficient estimates
+summary(butterflyModel)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = DayOfYear ~ SpringTempC, data = phenoDF)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -52.422 -17.824   0.801   7.084  82.785 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  245.988     13.945  17.640  &lt; 2e-16 ***
+## SpringTempC  -12.146      2.194  -5.536 1.45e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 25.27 on 142 degrees of freedom
+## Multiple R-squared:  0.1775, Adjusted R-squared:  0.1717 
+## F-statistic: 30.65 on 1 and 142 DF,  p-value: 1.45e-07</code></pre>
+<p>What have we done here?</p>
+<p>First, we have run a linear regression model relating butterfly flight to temperature using the syntax <code>DayOfYear ~ SpringTempC</code> where the <code>~</code> means “Day of year is distributed according to spring temperature”.</p>
+<p>We have stored the output of the linear regression in the object <code>butterflyModel</code>.</p>
+<p>Finally, we have used the <code>summary</code> command on the <code>butterflyModel</code> object to display information about the estimated values in the model, which include our coefficients <span class="math inline">\(\beta_0\)</span> (<code>(Intercept)</code>) and <span class="math inline">\(\beta_1\)</span> (<code>SpringTempC</code>).</p>
+</div>
+<div id="interpreting-these-values" class="section level2">
+<h2><span class="header-section-number">2.3</span> Interpreting these values</h2>
+<p>What do the values in the <code>summary</code> output reveal about the relationship between butterfly phenology and spring-time temperature? We’ll focus on the table in the <code>summary</code> output that begins with <code>Coefficients:</code>.</p>
+<p>The coefficients output is copied again here for convenience.</p>
+<pre><code>Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  245.988     13.945  17.640  &lt; 2e-16 ***
+SpringTempC  -12.146      2.194  -5.536 1.45e-07 ***</code></pre>
+<p>The <code>Coefficients:</code> table has two rows. Each row corresponds to our two variables: the intercept (<span class="math inline">\(\beta_0\)</span>) and spring temperature (<span class="math inline">\(\beta_1\)</span>).</p>
+<p>The <code>Estimate</code> column tells us the estimated values for the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> coefficients.</p>
+<p>The <code>Std. Error</code> column tells us the standard error of each coefficient, which is a measure of the uncertainty in the estimated value of the coefficient. Basically, when the relationship between <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y\)</span> has a lot of spread, the standard errors will grow larger. On the other hand, when there is a very close relationship between <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y\)</span> (less spread in the data), the standard errors become smaller.</p>
+<p>The <code>t-value</code> gives us the t-statistic for each coefficient, which is calculated as <code>Estimate / Std. Error</code>. Effectively, the <code>t value</code> is a measure of how far (in terms of standard deviations) each coefficient is from 0. That is, the <code>t value</code> is a statistic testing whether or not the true value of the coefficient, given our data and model, is likely to be 0 or not.</p>
+<p>Finally, <code>Pr(&gt;|t|)</code> shows us the probability value (or p-value) associated with each coefficient in the table. The p-values shown in the <code>Pr(&gt;|t|)</code> column tell us how probable it is that we would observe any value <span class="math inline">\(\geq\)</span> the coefficient estimate. One rule of thumb in (frequentist) statistics tradition is to interpret p-values less than 0.05 as an indicator of statistical significance. The tradition in which I was trained holds then that a p-value less than 0.05 indicates a clear directional relationship between some independent variable (<span class="math inline">\(X_i\)</span>) and the dependent variable (<span class="math inline">\(Y\)</span>). That is, when <span class="math inline">\(p &lt; 0.05\)</span>, we can reject the notion that there is no relationship (no relationship meaning that <span class="math inline">\(\beta_i\)</span> for <span class="math inline">\(X_i\)</span> = 0) between <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y\)</span>. Let’s see how this plays out with the butterfly example below.</p>
+<p>The value for <code>(Intercept)</code> (a.k.a. <span class="math inline">\(\beta_0\)</span>) tells us that when <code>SummerTempC=0</code>, we would predict that adult flight time is on day 245.99 of the year. In and of itself, this intercept is not super meaningful.</p>
+<p>The value for <code>SpringTempC</code> (a.k.a. <span class="math inline">\(\beta_1\)</span>), which is -12.14 (rounding to 1 or 2 decimal places is usually preferable to presenting a number with many floating points/decimal places), is more interesting. It tells us that as mean spring temperatures <strong>warm by 1 degree Celsius</strong> (<code>SpringTempC + 1</code>), butterfly flight time would shift <em>earlier</em> by 12.1 days. Alternatively, if mean spring temperatures <strong>cool down</strong> by 1 degree Celsius (<code>SpringTempC - 1</code>), butterfly flight time would shift <em>later</em> by 12.1 days.</p>
+<p>Our model for <span class="math inline">\(\text{DayOfYear} = \beta_0 + \beta_1 \text{SpringTempC}\)</span> can therefore be described as <code>Day of year = 245.99 - 12.1 Spring temperature in Celsius</code>.</p>
+<p>For <code>SpringTempC</code>, we see that the “p-value” associated with this coefficient estimate using a t-test is <span class="math inline">\(1.45 * 10^{-7}\)</span>. That is a really, really tiny number and certainly it is <span class="math inline">\(&lt; 0.05\)</span>, one threshold for statistical significance. Based on this p-value, the data indicate that there is a negative relationship (<span class="math inline">\(\beta_1 = -12.1 &lt; 0\)</span>) between spring temperature and butterfly flight time.</p>
+</div>
+<div id="plotting-the-linear-model" class="section level2">
+<h2><span class="header-section-number">2.4</span> Plotting the linear model</h2>
+<p>We can add our linear model regression line to the plot we created above.</p>
+<pre class="r"><code>### Generating plot with line
+p &lt;- ggplot(phenoDF, aes(x=SpringTempC, y=DayOfYear))
+p &lt;- p + geom_point() # adding on points plotted at the locations given by x and y above
+p &lt;- p + geom_smooth(method=&quot;lm&quot;, fill=NA)
+p &lt;- p + labs(x=&quot;Mean spring temperature (°C)&quot;, y=&quot;Flight timing (day of year)&quot;) # changing the x and y-axis labels to be informative
+p &lt;- p + theme_bw() # modify the style of the plot
+p # display the plot, p</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="Week9_files/figure-html/plot_springtime_lm-1.png" width="672" /></p>
+</div>
+<div id="additional-resources" class="section level2">
+<h2><span class="header-section-number">2.5</span> Additional resources</h2>
+<p>In case you are curious about learning more about linear regression models:</p>
+<ul>
+<li>How does <code>R</code> estimate the values for the coefficients in the linear model? <a href="https://setosa.io/ev/ordinary-least-squares-regression/">Please check out this really great interactive website that describes how those values are found. You can find them yourself by toggling the sliders!</a></li>
+<li><a href="https://youtu.be/yMgFHbjbAW8">This Khan Academy video</a> also presents a nice visual description of how those coefficient values (the <span class="math inline">\(\beta\)</span>s) are found.</li>
+<li>Does linear regression always work? When does it work better at analyzing associations between variables? <a href="https://statisticsbyjim.com/regression/ols-linear-regression-assumptions/">Statistics by Jim</a> provides a helpful answer to these questions.</li>
+</ul>
+</div>
+</div>
+<div id="homework-assignment" class="section level1">
+<h1><span class="header-section-number">3</span> Homework assignment</h1>
+<p>Please navigate to the <a href="https://www.gradescope.com/courses/236844/assignments/1108241">Gradescope assignment</a> to see where and how to submit your answer. The code chunk below can help you in submitting your response. Note that I run through the entire process of loading packages, reading in the data, running the model, and plotting the output below.</p>
+<p>It is your job to modify the code below to ensure that it works. Namely, you will need to replace any <code>...</code> in the code. If you plan to use the Rmarkdown file for this tutorial (<a href="https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/docs/Week9.Rmd">raw file</a> and <a href="https://github.com/charlottehchang/BIOL104PO/blob/master/docs/Week9.Rmd">display version</a>), you will need to delete the <code>eval=FALSE</code> flag below.</p>
+<pre class="r"><code>### Load the ggplot2 package into the R workspace
+library(ggplot2)
+
+### Reading in the data
+phenoDF &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/ButterflyPhenology.tsv&quot;)
+
+### Display the first few rows of the data
+phenoDF
+
+### Running the lm command
+summerButterflyModel &lt;- lm(DayOfYear ~ ..., data=phenoDF)
+
+### Showing the coefficient estimates
+summary(summerButterflyModel)
+
+### Generating plot with line
+p &lt;- ggplot(phenoDF, aes(x=..., y=DayOfYear))
+p &lt;- p + geom_point() # adding on points plotted at the locations given by x and y above
+p &lt;- p + geom_smooth(method=&quot;lm&quot;, fill=NA, color=&quot;purple&quot;) # add on the regression line; note that you can change the color to whatever you prefer.
+p &lt;- p + labs(x=&quot;... (°C)&quot;, y=&quot;...&quot;) # changing the x and y-axis labels to be informative
+# p &lt;- p + theme_bw() # modify the style of the plot; uncomment by deleting leading # hashtag sign to run
+p # display the plot, p</code></pre>
+<div id="philosophical-sidebar" class="section level2">
+<h2><span class="header-section-number">3.1</span> Philosophical sidebar</h2>
+<p>Note that linear regressions and other types of statistical models are often <em>stochastic</em> models (looking at random variables with noise) rather than <em>deterministic</em> ones (an expected pattern based on logic/theory with no random noise). The harvesting model from <a href="https://charlottehchang.github.io/BIOL104PO/Week6.html">Week 6, Section 3</a> is an example of a <em>deterministic</em> model; given values of <span class="math inline">\(r\)</span>, <span class="math inline">\(K\)</span>, and <span class="math inline">\(H\)</span>, and given the logic expressed in the model, we should be able to perfectly explain the dynamics of a harvested species. On the other hand, linear regression focuses on looking at how two or more variables (<span class="math inline">\(Y\)</span> and <span class="math inline">\(X_i\)</span> where <span class="math inline">\(i\)</span> indexes different <span class="math inline">\(X\)</span> independent variables) <strong>co-vary</strong> together. In the modeling philosophies that prevail in environmental science, linear regression is therefore silent on <strong>casuality</strong>–we do not infer that changes in <span class="math inline">\(X_i\)</span> will always and forever affect <span class="math inline">\(Y\)</span> in pre-determined ways. Rather, we seek to evaluate evidence that there is some kind of (positive/negative or increasing/decreasing) association between the <span class="math inline">\(X_i\)</span> variable(s) and <span class="math inline">\(Y\)</span>.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

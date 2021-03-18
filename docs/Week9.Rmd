@@ -1,0 +1,185 @@
+---
+title: "Linear regression of climate phenology"
+author: ""
+date: ""
+output: 
+  html_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+### Load the ggplot2 package into the R workspace
+library(ggplot2)
+```
+
+# Introduction to the dataset
+
+To motivate learning about a way to explore associations between variables and to deepen engagement with the climate change materials, we will look at this dataset on butterfly phenology. The data for this tutorial are modified from [Kharouba and Vellend (2015)](https://sakai.claremont.edu/access/lessonbuilder/item/272255/group/CX_mtg_138439/9_Climate/KharoubaVellend_ButterflyPhenologyExample.pdf); the description of Tables 1 & 3 in the text may be helpful, but note that we are analyzing a modified dataset using a different procedure from the authors.
+
+These data also provide an example of how [historical museum collections data](https://youtu.be/SineKnme7vQ) can illuminate the impacts of global change over time on species.
+
+```{r reading_in_data}
+### Reading in the data
+phenoDF <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/ButterflyPhenology.tsv")
+
+### Display the first few rows of the data
+phenoDF
+```
+
+The data present the following:
+
+* `Species`: The scientific name of different butterfly species in British Columbia, Canada
+* `Year`: The year of each observation
+* `DayOfYear`: This column presents the day of year (from day 1, January 1, to day 365 on non-leap years, December 31) where a butterfly specimen was collected. What that means is that the butterfly was flying in British Columbia that day (it was an adult butterfly that was capable of flying).
+* `SpringTempC`: Mean spring temperature that year in degrees Celsius
+* `SummerTempC`: Mean summer temperature that year in degrees Celsius
+
+At this point, you may be wondering why the authors focused on the timing of adult butterfly flight. What does that have to do with *phenology* and *climate change*? Note that many butterfly species (and the vast majority of species in this dataset, such as the anise swallowtail butterfly *Papilio zelicaon*) have a very short lifespan--on the order of a few days to a few weeks. As insects, [butterfly life stage timing](https://alabama.butterflyatlas.usf.edu/lifecycle) responds strongly to temperature, among other environmental variables.  As such, the short lifespan of butterflies and their responsiveness to temperature allows us to see how their phenology could be changing in response to regional or global change.
+
+## Visualizing the dataset
+
+Below, we will look at one relationship of interest. What pattern do we see when we plot mean spring temperature against the time in which adult butterflies were active & flying?
+
+```{r plot_springtime_flight}
+### Building on the ggplot tutorial from Week 4
+    # Specifically, the scatterplot exercise from Section 2
+    # Link: https://charlottehchang.github.io/BIOL104PO/Week4.html
+p <- ggplot(phenoDF, aes(x=SpringTempC, y=DayOfYear))
+p <- p + geom_point() # adding on points plotted at the locations given by x and y above
+p <- p + labs(x="Mean spring temperature (°C)", y="Flight timing (day of year)") # changing the x and y-axis labels to be informative
+p <- p + theme_classic() # modify the style of the plot
+p # display the plot, p
+```
+What pattern do we see between spring temperature and the timing of adult flight? There is some spread in the data, which we expect because we have multiple species. (Can you think of other reasons why we would see this spread in the data?)
+
+Is there some way that we could model the relationship between spring temperature and butterfly phenology, represented by the timing of adult butterfly flight?
+
+# Linear regression modeling
+
+It turns out that we can look into possible associations between temperature and butterfly phenology using a linear regression. Linear regression is used to model the relationship between a dependent (a.k.a. response) variable, which we will denote $Y$, and one or more independent (a.k.a. explanatory) variables denoted as $X_1, X_2, X_3, \dots, X_k$ (representing a total of $k$ arbitrary independent variables). In the case of our butterfly data, the response variable $Y$ is `DayOfYear` and the independent variable $X$ is `SpringTempC`.
+
+Note that you have already performed linear regressions using the species-area relationship data!
+
+## What does linear regression do?
+
+Using a linear model, we are going to fit a line that describes the relationship between $X$ and $Y$. Recall that the equation for a straight line is:
+
+$Y = b + mx$
+
+In linear regression, we are estimating:
+
+$Y = \beta_0 + \beta_1 X_1$
+
+Equivalently, in the case of our butterfly data, we are estimating:
+
+$\text{DayOfYear} = \beta_0 + \beta_1 \text{SpringTempC}$
+
+Note that you can interpret $\beta_0$ to be the same as $b$ from the equation for a straight-line. That is, $\beta_0$ is the y-intercept: it tells us what the value of $Y$ would be when $X_i = 0$ for all of the independent variable(s). In this case, we only have 1 independent variable, so $\beta_0$ tells us what we would expect butterfly flight time to be when spring temperature is equal to 0. $\beta_1$ is the same as $m$: it tells us the slope of the relationship between $Y$ and $X_1$.
+
+## Estimating the linear regression model for the butterfly data
+
+Below, we will use the `lm` command (short for linear model) in `R` to estimate the coefficients, $\beta_0$ and $\beta_1$ for the butterfly data. `lm` performs a specific type of linear regression, which is known as "ordinary least squares" (OLS for short) regression.
+
+```{r springtime_lm}
+### Running the lm command
+butterflyModel <- lm(DayOfYear ~ SpringTempC, data=phenoDF)
+
+### Showing the coefficient estimates
+summary(butterflyModel)
+```
+What have we done here?
+
+First, we have run a linear regression model relating butterfly flight to temperature using the syntax `DayOfYear ~ SpringTempC` where the `~` means "Day of year is distributed according to spring temperature".
+
+We have stored the output of the linear regression in the object `butterflyModel`.
+
+Finally, we have used the `summary` command on the `butterflyModel` object to display information about the estimated values in the model, which include our coefficients $\beta_0$ (`(Intercept)`) and $\beta_1$ (`SpringTempC`).
+
+## Interpreting these values
+
+What do the values in the `summary` output reveal about the relationship between butterfly phenology and spring-time temperature? We'll focus on the table in the `summary` output that begins with `Coefficients:`.
+
+The coefficients output is copied again here for convenience.
+```
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  245.988     13.945  17.640  < 2e-16 ***
+SpringTempC  -12.146      2.194  -5.536 1.45e-07 ***
+```
+
+The `Coefficients:` table has two rows. Each row corresponds to our two variables: the intercept ($\beta_0$) and spring temperature ($\beta_1$). 
+
+The `Estimate` column tells us the estimated values for the $\beta_0$ and $\beta_1$ coefficients. 
+
+The `Std. Error` column tells us the standard error of each coefficient, which is a measure of the uncertainty in the estimated value of the coefficient. Basically, when the relationship between $X_i$ and $Y$ has a lot of spread, the standard errors will grow larger. On the other hand, when there is a very close relationship between $X_i$ and $Y$ (less spread in the data), the standard errors become smaller. 
+
+The `t-value` gives us the t-statistic for each coefficient, which is calculated as `Estimate / Std. Error`. Effectively, the `t value` is a measure of how far (in terms of standard deviations) each coefficient is from 0. That is, the `t value` is a statistic testing whether or not the true value of the coefficient, given our data and model, is likely to be 0 or not.
+
+Finally, `Pr(>|t|)` shows us the probability value (or p-value) associated with each coefficient in the table. The p-values shown in the `Pr(>|t|)` column tell us how probable it is that we would observe any value $\geq$ the coefficient estimate. One rule of thumb in (frequentist) statistics tradition is to interpret p-values less than 0.05 as an indicator of statistical significance. The tradition in which I was trained holds then that a p-value less than 0.05 indicates a clear directional relationship between some independent variable ($X_i$) and the dependent variable ($Y$). That is, when $p < 0.05$, we can reject the notion that there is no relationship (no relationship meaning that $\beta_i$ for $X_i$ = 0) between $X_i$ and $Y$. Let's see how this plays out with the butterfly example below.
+
+The value for `(Intercept)` (a.k.a. $\beta_0$) tells us that when `SummerTempC=0`, we would predict that adult flight time is on day 245.99 of the year. In and of itself, this intercept is not super meaningful.
+
+The value for `SpringTempC` (a.k.a. $\beta_1$), which is -12.14 (rounding to 1 or 2 decimal places is usually preferable to presenting a number with many floating points/decimal places), is more interesting. It tells us that as mean spring temperatures **warm by 1 degree Celsius** (`SpringTempC + 1`), butterfly flight time would shift *earlier* by 12.1 days. Alternatively, if mean spring temperatures **cool down** by 1 degree Celsius (`SpringTempC - 1`), butterfly flight time would shift *later* by 12.1 days.
+
+Our model for $\text{DayOfYear} = \beta_0 + \beta_1 \text{SpringTempC}$ can therefore be described as `Day of year = 245.99 - 12.1 Spring temperature in Celsius`.
+
+For `SpringTempC`, we see that the "p-value" associated with this coefficient estimate using a t-test is $1.45 * 10^{-7}$. That is a really, really tiny number and certainly it is $< 0.05$, one threshold for statistical significance. Based on this p-value, the data indicate that there is a negative relationship ($\beta_1 = -12.1 < 0$) between spring temperature and butterfly flight time.
+
+## Plotting the linear model
+
+We can add our linear model regression line to the plot we created above.
+
+```{r plot_springtime_lm}
+### Generating plot with line
+p <- ggplot(phenoDF, aes(x=SpringTempC, y=DayOfYear))
+p <- p + geom_point() # adding on points plotted at the locations given by x and y above
+p <- p + geom_smooth(method="lm", fill=NA)
+p <- p + labs(x="Mean spring temperature (°C)", y="Flight timing (day of year)") # changing the x and y-axis labels to be informative
+p <- p + theme_bw() # modify the style of the plot
+p # display the plot, p
+```
+
+## Additional resources
+
+In case you are curious about learning more about linear regression models:
+
+* How does `R` estimate the values for the coefficients in the linear model? [Please check out this really great interactive website that describes how those values are found. You can find them yourself by toggling the sliders!](https://setosa.io/ev/ordinary-least-squares-regression/) 
+* [This Khan Academy video](https://youtu.be/yMgFHbjbAW8) also presents a nice visual description of how those coefficient values (the $\beta$s) are found.
+* Does linear regression always work? When does it work better at analyzing associations between variables? [Statistics by Jim](https://statisticsbyjim.com/regression/ols-linear-regression-assumptions/) provides a helpful answer to these questions.
+
+# Homework assignment
+
+Please navigate to the [Gradescope assignment](https://www.gradescope.com/courses/236844/assignments/1108241) to see where and how to submit your answer. The code chunk below can help you in submitting your response. Note that I run through the entire process of loading packages, reading in the data, running the model, and plotting the output below.
+
+It is your job to modify the code below to ensure that it works. Namely, you will need to replace any `...` in the code. If you plan to use the Rmarkdown file for this tutorial ([raw file](https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/docs/Week9.Rmd) and [display version](https://github.com/charlottehchang/BIOL104PO/blob/master/docs/Week9.Rmd)), you will need to delete the `eval=FALSE` flag below.
+
+```{r week9, eval=FALSE}
+### Load the ggplot2 package into the R workspace
+library(ggplot2)
+
+### Reading in the data
+phenoDF <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/ButterflyPhenology.tsv")
+
+### Display the first few rows of the data
+phenoDF
+
+### Running the lm command
+summerButterflyModel <- lm(DayOfYear ~ ..., data=phenoDF)
+
+### Showing the coefficient estimates
+summary(summerButterflyModel)
+
+### Generating plot with line
+p <- ggplot(phenoDF, aes(x=..., y=DayOfYear))
+p <- p + geom_point() # adding on points plotted at the locations given by x and y above
+p <- p + geom_smooth(method="lm", fill=NA, color="purple") # add on the regression line; note that you can change the color to whatever you prefer.
+p <- p + labs(x="... (°C)", y="...") # changing the x and y-axis labels to be informative
+# p <- p + theme_bw() # modify the style of the plot; uncomment by deleting leading # hashtag sign to run
+p # display the plot, p
+```
+
+## Philosophical sidebar
+
+Note that linear regressions and other types of statistical models are often *stochastic* models (looking at random variables with noise) rather than *deterministic* ones (an expected pattern based on logic/theory with no random noise). The harvesting model from [Week 6, Section 3](https://charlottehchang.github.io/BIOL104PO/Week6.html) is an example of a *deterministic* model; given values of $r$, $K$, and $H$, and given the logic expressed in the model, we should be able to perfectly explain the dynamics of a harvested species. On the other hand, linear regression focuses on looking at how two or more variables ($Y$ and $X_i$ where $i$ indexes different $X$ independent variables) **co-vary** together. In the modeling philosophies that prevail in environmental science, linear regression is therefore silent on **casuality**--we do not infer that changes in $X_i$ will always and forever affect $Y$ in pre-determined ways. Rather, we seek to evaluate evidence that there is some kind of (positive/negative or increasing/decreasing) association between the $X_i$ variable(s) and $Y$.

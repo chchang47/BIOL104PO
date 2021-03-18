@@ -32,6 +32,9 @@ navbar:
         - text: "Week 6"
         - text: "Combining social and ecological data"
           href: Week6.html
+        - text: "Week 9"
+        - text: "Linear regressions; climate impacts"
+          href: Week9.html
 output:
   html_document:
     theme: flatly

@@ -9,11 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="" />
 
 
 <title>Combining social and ecological data</title>
 
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -334,6 +334,10 @@ $(document).ready(function () {
     <li>
       <a href="Week6.html">Combining social and ecological data</a>
     </li>
+    <li class="dropdown-header">Week 9</li>
+    <li>
+      <a href="Week9.html">Linear regressions; climate impacts</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -349,12 +353,13 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Combining social and ecological data</h1>
+<h4 class="author"></h4>
 
 </div>
 
 
-<div id="merging-datasets" class="section level1">
-<h1><span class="header-section-number">1</span> Merging datasets</h1>
+<div id="merging-datasets" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Merging datasets</h1>
 <p>Sometimes, data that we want to combine for analyses are separated across different spreadsheets or data tables. How can we combine these different data tables? <code>Join</code> operations (<a href="https://statisticsglobe.com/r-dplyr-join-inner-left-right-full-semi-anti">FMI on <code>join</code>ing two data tables</a>) offer a way to merge data across multiple data tables (also called data frames in <code>R</code> parlance).</p>
 <p>Below, I will first create two data tables that store different characteristics about fruit.</p>
 <pre class="r"><code>### Table storing colors of 5 fruits
@@ -381,8 +386,8 @@ dt2 # display table</code></pre>
 ## 3 mangosteen  5   
 ## 4 cherimoya   4.7</code></pre>
 <p>All join operations assume there is some column between your data tables that has consistent values that you can use to merge the records in the data tables together. In the case of this simple example, the shared column is <code>fruit</code>.</p>
-<div id="left-join" class="section level2">
-<h2><span class="header-section-number">1.1</span> Left join</h2>
+<div id="left-join" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Left join</h2>
 <p>The first join that we will look at is the <code>left_join</code> function from the <code>dplyr</code> package. The <code>left_join</code> will keep all of the rows in the left-hand side table and attempt to match entries from the second (right-hand side) table. If there is no match, <code>R</code> will populate <code>NA</code> (missing value) at that missing join location.</p>
 <pre class="r"><code>left_join(dt1, dt2)</code></pre>
 <pre><code>## # A tibble: 5 x 3
@@ -395,13 +400,13 @@ dt2 # display table</code></pre>
 ## 5 mangosteen purple  5</code></pre>
 <pre class="r"><code># Note that the left_join function detects that both data tables both have a column named &quot;fruit&quot;. What would happen if they didn&#39;t have a column with the same name?</code></pre>
 <p>We see that <code>R</code> has merged the two data tables, <code>dt1</code> and <code>dt2</code> together; the resulting data table above has all of the unique columns across these two data tables (<code>fruit</code> - the column we used to merge the two data tables together, <code>color</code> from <code>dt1</code>, and <code>price</code> from <code>dt2</code>). We also see that <code>R</code> has matched the records across the two data tables–see for yourself for example that the row for <code>pear</code> has the correct values from <code>dt1</code> (<code>color=green</code>) and <code>dt2</code> (<code>price=1.25</code>).</p>
-<div id="what-is-going-on-with-those-weird-na-values" class="section level3">
-<h3><span class="header-section-number">1.1.1</span> What is going on with those weird <code>NA</code> values?</h3>
+<div id="what-is-going-on-with-those-weird-na-values" class="section level3" number="1.1.1">
+<h3 number="1.1.1"><span class="header-section-number">1.1.1</span> What is going on with those weird <code>NA</code> values?</h3>
 <p>What we see above is that because <code>dt2</code> didn’t have any data for <code>apple</code> and <code>kiwi</code>, <code>R</code> has attempted to match all 5 fruits from <code>dt1</code> (left-hand side data table) with the fruits in <code>dt2</code>, and the fruits that were in <code>dt1</code> but not <code>dt2</code> get an <code>NA</code> value in the <code>price</code> column, which is merged from <code>dt2</code> to <code>dt1</code>. Note also that the fruit that is <strong>only</strong> in <code>dt2</code> but not <code>dt1</code> doesn’t show up in the merged data table (no <code>cherimoya</code> row).</p>
 </div>
 </div>
-<div id="right-join" class="section level2">
-<h2><span class="header-section-number">1.2</span> Right join</h2>
+<div id="right-join" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Right join</h2>
 <p>In this case, <code>R</code> retains all of the records from <code>dt2</code>. Because <code>dt1</code> has some fruits that <code>dt2</code> does not, that means that the fruits that are <strong>unique</strong> to <code>dt1</code> <em>will not</em> show up in the merged data table.</p>
 <pre class="r"><code>right_join(dt1, dt2)</code></pre>
 <pre><code>## # A tibble: 4 x 3
@@ -413,8 +418,8 @@ dt2 # display table</code></pre>
 ## 4 cherimoya  &lt;NA&gt;    4.7</code></pre>
 <p>As before, because <code>cherimoya</code> is only defined in <code>dt2</code>, but not <code>dt1</code>, <code>R</code> populates an <code>NA</code> value for all of the columns that are coming from <code>dt1</code> (in this case, the column <code>color</code>) to the final merged data table.</p>
 </div>
-<div id="inner-join" class="section level2">
-<h2><span class="header-section-number">1.3</span> Inner join</h2>
+<div id="inner-join" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Inner join</h2>
 <p>In the <code>inner_join</code> function, only those rows that have exact matches across the two data tables are preserved in the final merged data table.</p>
 <pre class="r"><code>inner_join(dt1, dt2)</code></pre>
 <pre><code>## # A tibble: 3 x 3
@@ -425,8 +430,8 @@ dt2 # display table</code></pre>
 ## 3 mangosteen purple  5</code></pre>
 <p>We see that this resulting data table presents only the three fruits that are included in both <code>dt1</code> and <code>dt2</code>.</p>
 </div>
-<div id="full-join" class="section level2">
-<h2><span class="header-section-number">1.4</span> Full join</h2>
+<div id="full-join" class="section level2" number="1.4">
+<h2 number="1.4"><span class="header-section-number">1.4</span> Full join</h2>
 <p>In a full join operation, all unique elements across <code>dt1</code> and <code>dt2</code> are preserved in the final merged data table. For non-matching pairs, <code>R</code> will fill in an <code>NA</code> value.</p>
 <pre class="r"><code>full_join(dt1, dt2)</code></pre>
 <pre><code>## # A tibble: 6 x 3
@@ -440,8 +445,8 @@ dt2 # display table</code></pre>
 ## 6 cherimoya  &lt;NA&gt;    4.7</code></pre>
 <p>We see that this merged table has all 6 unique fruits across the two data tables. We see that <code>R</code> has assigned <code>NA</code> in <code>price</code> (the column from <code>dt2</code>) for the two fruits that are in <code>dt1</code> but <strong>not</strong> <code>dt2</code> (<code>apple</code> and <code>kiwi</code>). We also see that there is an <code>NA</code> value in <code>color</code> (the column from <code>dt1</code>) for <code>cherimoya</code>, which is a fruit that was only listed in <code>dt2</code>.</p>
 </div>
-<div id="the-need-for-consistency-to-ensure-successful-joins" class="section level2">
-<h2><span class="header-section-number">1.5</span> The need for consistency to ensure successful joins</h2>
+<div id="the-need-for-consistency-to-ensure-successful-joins" class="section level2" number="1.5">
+<h2 number="1.5"><span class="header-section-number">1.5</span> The need for consistency to ensure successful joins</h2>
 <p><code>R</code> can’t read our minds, for better or for worse. So if we notice that our data tables are not consistent in how they present the fruits, then we’ll see different join behavior. <code>R</code> is looking for an exact match of the words in the joining column (<code>fruit</code>).</p>
 <pre class="r"><code>### Modifying dt2
 dt2 &lt;- tibble::tibble(fruit=c(&quot;Pear&quot;,&quot;Orange&quot;,&quot;Mangosteen&quot;,&quot;Cherimoya&quot;),
@@ -494,8 +499,8 @@ full_join(dt1,dt2new)</code></pre>
 ## 4 kiwi       brown  NA   
 ## 5 mangosteen purple  5   
 ## 6 cherimoya  &lt;NA&gt;    4.7</code></pre>
-<div id="additional-exercises-to-build-understanding" class="section level3">
-<h3><span class="header-section-number">1.5.1</span> Additional exercises to build understanding</h3>
+<div id="additional-exercises-to-build-understanding" class="section level3" number="1.5.1">
+<h3 number="1.5.1"><span class="header-section-number">1.5.1</span> Additional exercises to build understanding</h3>
 <p>Given <code>dt1</code>, <code>dt2</code>, and <code>dt2new</code> that have just been defined above, run and contrast the outputs of the following:</p>
 <ul>
 <li><code>left_join(dt1, dt2)</code>
@@ -515,8 +520,8 @@ full_join(dt1,dt2new)</code></pre>
 </div>
 </div>
 </div>
-<div id="adding-socioeconomic-data-to-the-provided-datasheet" class="section level1">
-<h1><span class="header-section-number">2</span> Adding socioeconomic data to the Provided Datasheet</h1>
+<div id="adding-socioeconomic-data-to-the-provided-datasheet" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Adding socioeconomic data to the Provided Datasheet</h1>
 <p>As an additional illustration of data merging, I will illustrate below how one can add on socio-economic data from the USDA and the US Census to the <a href="https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv">Provided Datasheet</a>. In the code chunk below, I pull in data from the GitHub repository that stores the class <code>R</code> tutorials.</p>
 <pre class="r"><code>### Read in data
 CA_county_data &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_protectedareas_datasheet.tsv&quot;) # this is a link to the Provided Datasheet for the class project
@@ -580,8 +585,8 @@ CA_county_demog</code></pre>
 ##  9 Califo… El Dorado…  185976 0.0165 0.0278 0.0599 0.00545  0.127    0.873 0.890
 ## 10 Califo… Fresno Co…  976830 0.0679 0.0421 0.121  0.00517  0.527    0.473 0.764
 ## # … with 48 more rows</code></pre>
-<div id="data-explanation" class="section level2">
-<h2><span class="header-section-number">2.1</span> Data explanation</h2>
+<div id="data-explanation" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Data explanation</h2>
 <p>Note that you can find a description of the <a href="https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit#bookmark=id.5xpubn6xluzn">Provided Datasheet Data Explanation</a> here.</p>
 <p>On the other hand, the columns in <a href="https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_ses.tsv"><code>CA_county_SES</code></a> are as follows:</p>
 <ul>
@@ -608,8 +613,8 @@ CA_county_demog</code></pre>
 </ul>
 <p>All of the racial/ethnic groupings above are those defined by the <a href="https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/2010-2019/cc-est2019-alldata.pdf">US Census as described in the metadata document</a>. These data were calculated from the <a href="https://www.census.gov/data/tables/time-series/demo/popest/2010s-counties-detail.html">US Census Bureau County Population by Characteristics: 2010-2019</a>; specifically the <code>Annual County Resident Population Estimates by Age, Sex, Race...</code> section of the site.</p>
 </div>
-<div id="performing-iterative-joining-operations" class="section level2">
-<h2><span class="header-section-number">2.2</span> Performing iterative joining operations</h2>
+<div id="performing-iterative-joining-operations" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Performing iterative joining operations</h2>
 <p>Let’s say that for an analysis, you wanted to combine some information about biodiversity (say <code>Birds</code> species richness) with socio-economic data. We can use the data joining operations that we just covered above to merge these data tables together, which permits us to plot our data and (as we will see after Spring Break) perform other analyses such as linear regression models.</p>
 <p>We will join up <code>CA_county_data</code> (the Provided Datasheet with biodiversity and land use data) with <code>CA_county_SES</code> and <code>CA_county_demog</code>. To do so, we will merge the data tables based on the column that stores county names.</p>
 <p>The first thing that we will need to do is ensure that the county names are consistent (no weird issues with lower/upper case or anything else). What do we see?</p>
@@ -648,8 +653,8 @@ dim(CA_merged) # now we have 40 columns</code></pre>
 # View(CA_merged) # uncomment to run</code></pre>
 </div>
 </div>
-<div id="sustainable-vs.-unsustainable-exploitation" class="section level1">
-<h1><span class="header-section-number">3</span> Sustainable vs. unsustainable exploitation</h1>
+<div id="sustainable-vs.-unsustainable-exploitation" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Sustainable vs. unsustainable exploitation</h1>
 <p><a href="https://chchang47.shinyapps.io/BIOL104PO/">At the <code>RShiny</code> app</a>, I describe a model of harvesting species. I provide instructions on the different variables that you can manipulate using sliders; interacting with the sliders and seeing how the population dynamics of the harvested species changes is akin to running experiments where you compare different harvesting regimes for species with different <a href="https://bio.libretexts.org/Sandboxes/mhayccdedu/Environmental_Science/02%3A_Ecology/2.02%3A_Populations/2.2.04%3A_Life_History">life histories</a>. Note that I refer to this interactive model website in Question 12 for the Week 1-6 retrospective homework.</p>
 </div>
 
