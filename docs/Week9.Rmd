@@ -9,9 +9,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
-### Load the ggplot2 package into the R workspace
-library(ggplot2)
 ```
 
 # Introduction to the dataset
@@ -20,7 +17,10 @@ To motivate learning about a way to explore associations between variables and t
 
 [These data](https://github.com/charlottehchang/BIOL104PO/blob/master/data/ButterflyPhenology.tsv) also provide an example of how [historical museum collections data](https://youtu.be/SineKnme7vQ) can illuminate the impacts of global change over time on species.
 
-```{r reading_in_data}
+```{r reading_in_data, warning=FALSE}
+### Load the ggplot2 package into the R workspace
+library(ggplot2)
+
 ### Reading in the data
 phenoDF <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/ButterflyPhenology.tsv")
 

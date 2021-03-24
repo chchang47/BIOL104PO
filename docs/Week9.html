@@ -361,7 +361,10 @@ $(document).ready(function () {
 <h1><span class="header-section-number">1</span> Introduction to the dataset</h1>
 <p>To motivate learning about a way to explore associations between variables and to deepen engagement with the climate change materials, we will look at this dataset on butterfly phenology. The data for this tutorial are modified from <a href="https://sakai.claremont.edu/access/lessonbuilder/item/272255/group/CX_mtg_138439/9_Climate/KharoubaVellend_ButterflyPhenologyExample.pdf">Kharouba and Vellend (2015)</a>; the description of Tables 1 &amp; 3 in the text may be helpful, but note that we are analyzing a modified dataset using a different procedure from the authors.</p>
 <p><a href="https://github.com/charlottehchang/BIOL104PO/blob/master/data/ButterflyPhenology.tsv">These data</a> also provide an example of how <a href="https://youtu.be/SineKnme7vQ">historical museum collections data</a> can illuminate the impacts of global change over time on species.</p>
-<pre class="r"><code>### Reading in the data
+<pre class="r"><code>### Load the ggplot2 package into the R workspace
+library(ggplot2)
+
+### Reading in the data
 phenoDF &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/ButterflyPhenology.tsv&quot;)</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
