@@ -1,0 +1,1373 @@
+Region	State	County	Nitrogen	MMI
+1	Maine	Aroostook	150	67.68773163
+1	Maine	Aroostook	245	69.77789683
+1	Maine	Aroostook	351	67.68792477
+1	Maine	Aroostook	401	86.01354295
+1	Maine	Piscataquis	268	75.41918645
+1	Maine	Aroostook	439	42.8693316
+1	Maine	Somerset	285	76.09079281
+1	Maine	Somerset	275	81.86545329
+1	Maine	Aroostook	715	51.46429938
+1	Vermont	Franklin	405	32.61442025
+1	Vermont	Orleans	375	76.04810957
+1	Maine	Franklin	283	75.27599027
+1	New Hampshire	Coos	290	79.45924062
+1	Maine	Somerset	270	56.22080251
+1	Maine	Piscataquis	178	79.8181309
+1	Maine	Penobscot	483	41.87255402
+1	Maine	Penobscot	304	38.6590206
+1	Vermont	Washington	320	22.02674672
+1	Vermont	Caledonia	341	69.40282138
+1	Maine	Franklin	159	47.45422263
+1	Maine	Oxford	115	72.3635306
+1	Maine	Somerset	212	78.16304102
+1	Maine	Hancock	283	68.3318408
+1	Vermont	Orange	239	74.32630326
+1	Vermont	Addison	109	64.16155968
+1	New Hampshire	Grafton	308	68.11459714
+1	New Hampshire	Carroll	268	83.29363431
+1	Vermont	Bennington	324	44.96081526
+1	New Hampshire	Cheshire	213	51.24355095
+1	New Hampshire	Strafford	671	52.30481127
+1	Maine	York	603	20.89615937
+1	Massachusetts	Franklin	436	68.08958964
+1	New Hampshire	Hillsborough	271	58.75577073
+1	New Hampshire	Rockingham	824	13.83905764
+1	Connecticut	Litchfield	605	60.70132079
+1	Connecticut	Tolland	491	63.43140977
+1	Massachusetts	Norfolk	788	52.30365365
+1	Massachusetts	Plymouth	1276	17.38103379
+1	Connecticut	Fairfield	368	53.38832072
+1	Connecticut	Hartford	890	62.77384758
+1	Connecticut	New London	2319	52.20380751
+1	Rhode Island	Newport	849	70.07610834
+2	New York	Orange	604	9.42253158
+2	New York	Cattaraugus	258	48.94993633
+2	New York	Madison	4163	21.3751457
+2	New York	Franklin	476	29.24652065
+2	New Jersey	Monmouth	1595	57.76948883
+2	New York	Cayuga	2969	0
+2	New York	Fulton	516	32.11426461
+2	New Jersey	Camden	1266	18.36924179
+2	New York	Clinton	524	47.93561957
+2	New Jersey	Burlington	2049	48.56163182
+2	New York	Livingston	834	38.62918289
+2	New York	Sullivan	355	6.252851706
+2	New York	Rensselaer	383	69.8633156
+2	New York	Herkimer	643	5.619295958
+2	New York	Livingston	899	11.63485026
+2	New York	Columbia	830	19.86961896
+2	New York	Niagara	1418	3.416440979
+2	New York	Chenango	379	5.811270933
+2	New York	St. Lawrence	648	19.43088981
+2	New York	Schuyler	358	19.73072266
+2	New Jersey	Somerset	804	65.461058
+2	New York	Dutchess	681	46.47010708
+2	New York	Monroe	898	1.379071379
+2	New York	Schoharie	226	61.58143512
+2	New York	Schoharie	216	56.55314764
+2	New York	Jefferson	318	49.62534566
+2	New Jersey	Warren	1818	20.06230951
+2	New York	Wayne	1438	0
+2	New York	Cortland	743	73.84815154
+2	New York	Columbia	1409	1.825218795
+2	New York	St. Lawrence	661	79.29107932
+3	Pennsylvania	Chester	2475	40.14621466
+3	Delaware	Sussex	7856	49.97672284
+3	West Virginia	Webster	231	46.90930775
+3	West Virginia	Ritchie	339	55.54466734
+3	Pennsylvania	Jefferson	209	8.550471205
+3	Maryland	Baltimore	1868	24.42617681
+3	Pennsylvania	Huntingdon	1818	27.8520856
+3	Maryland	Garrett	1026	77.63941141
+3	West Virginia	Gilmer	245	37.2424595
+3	Pennsylvania	York	5881	46.66582983
+3	Pennsylvania	Potter	999	5.764411028
+3	Pennsylvania	Blair	586	43.4710033
+3	Pennsylvania	Mercer	1099	61.77745754
+3	West Virginia	Upshur	263	24.25041757
+3	Pennsylvania	Lancaster	11338	10.78170627
+3	Pennsylvania	Beaver	6288	19.13069276
+3	Maryland	Cecil	1686	49.14888092
+3	Maryland	Worcester	624	28.88383653
+3	Maryland	Montgomery	1714	13.6502419
+3	Pennsylvania	Tioga	516	54.68727034
+3	Maryland	Carroll	3231	36.56361653
+3	Pennsylvania	Susquehanna	366	54.69463476
+3	Pennsylvania	Snyder	940	47.53960126
+3	Maryland	Carroll	2381	19.28373677
+3	West Virginia	Randolph	726	81.84493608
+3	West Virginia	Calhoun	185	42.31876616
+3	Pennsylvania	Northumberland	749	19.2077228
+3	West Virginia	Hampshire	273	55.32943175
+3	Pennsylvania	Fayette	2384	2.305208382
+3	Maryland	St. Mary's	271	69.82461022
+3	Pennsylvania	Indiana	1641	43.22484572
+3	Pennsylvania	Jefferson	369	46.7853321
+3	Maryland	Allegany	406	0
+3	Pennsylvania	Montgomery	2644	39.20647703
+3	Pennsylvania	Crawford	1218	54.96876612
+3	Maryland	Prince George's	1431	49.00790769
+3	Pennsylvania	Schuylkill	109	55.62570642
+3	West Virginia	Marion	206	42.60802479
+3	Pennsylvania	Montgomery	328	12.98205628
+3	Maryland	Charles	381	77.82381785
+3	Pennsylvania	Butler	3631	22.32442237
+3	Pennsylvania	Washington	674	22.88071289
+3	Delaware	New Castle	2078	68.2938634
+3	West Virginia	Fayette	394	32.2275994
+3	Maryland	Prince George's	1054	25.79433426
+3	Pennsylvania	Tioga	595	72.8712129
+3	Pennsylvania	Cameron	127	75.97930584
+3	Virginia	Floyd	605	47.61493902
+3	Virginia	Buchanan	76	66.4761591
+3	Virginia	Fauquier	785	32.17420348
+3	Virginia	Patrick	90	52.6207872
+3	Virginia	Scott	66	62.60744211
+3	Virginia	Rockbridge	348	47.91268284
+3	Virginia	Prince Edward	438	10.81617534
+3	Virginia	Pittsylvania	185	37.7396734
+3	Virginia	Pulaski	1235	39.38552783
+3	Virginia	Augusta	276	49.54554607
+3	Virginia	Bedford	440	39.92623922
+3	Virginia	Smyth	761	54.09732126
+3	Virginia	Albemarle	155	60.50472946
+3	Virginia	Nelson	100	62.78228006
+3	Virginia	Brunswick	264	26.87594617
+3	Virginia	Halifax	335	14.11480818
+3	Virginia	Carroll	781	51.15391591
+3	Virginia	Middlesex	1840	46.98640629
+3	Virginia	Campbell	996	42.48174187
+3	Virginia	Franklin	718	56.32286954
+3	Virginia	Spotsylvania	355	20.37399067
+3	Virginia	Loudoun	566	23.30474847
+3	Virginia	Bedford	561	17.83689618
+3	Virginia	Goochland	150	35.10379682
+3	Virginia	Henry	579	32.07629968
+3	Virginia	Appomattox	286	46.24433755
+3	Virginia	Scott	684	51.86547915
+3	Virginia	Madison	344	61.68608377
+3	Virginia	Shenandoah	135	82.90115265
+3	Virginia	Alleghany	128	62.54644502
+3	Virginia	Bath	130	73.2841763
+3	Virginia	Amelia	580	36.33151628
+3	Virginia	Lunenburg	1509	12.37879452
+3	Virginia	Craig	343	47.7288111
+3	Virginia	Smyth	568	86.23595678
+3	Virginia	Nelson	298	52.7446739
+3	Virginia	Buckingham	198	61.31494
+3	Virginia	Patrick	535	65.98712998
+3	Virginia	Wythe	170	53.27525298
+3	Virginia	Bedford	674	59.23370549
+4	Kentucky	Leslie	815	36.98270105
+4	Alabama	Dekalb	963	34.90310062
+4	Alabama	Jefferson	93	34.78422732
+4	South Carolina	Oconee	130	19.73905959
+4	Kentucky	Jefferson	220	16.07147454
+4	Georgia	Gilmer	150	53.23140864
+4	Georgia	Morgan	521	35.76032855
+4	Tennessee	Houston	414	51.42428468
+4	Alabama	Clarke	379	53.30851048
+4	Kentucky	Whitley	1026	10.72895055
+4	Tennessee	Sullivan	1640	22.61798182
+4	Tennessee	Lawrence	890	64.08449518
+4	Kentucky	Warren	2189	28.91839184
+4	Tennessee	Cocke	99	57.66830704
+4	Alabama	St. Clair	856	56.93033374
+4	North Carolina	Alleghany	1550	32.25670815
+4	Georgia	White	1000	27.17647916
+4	North Carolina	Alleghany	844	62.04179032
+4	Tennessee	Sevier	471	56.8199048
+4	Tennessee	Sumner	462	35.64667617
+4	Tennessee	Cocke	393	36.17154387
+4	North Carolina	Wilkes	71	56.09352249
+4	Kentucky	Breckinridge	1449	28.08204439
+4	Tennessee	Henderson	244	30.68536052
+4	Mississippi	Jones	506	57.06971864
+4	North Carolina	Davidson	1303	15.49266399
+4	Mississippi	Clarke	221	51.95001928
+4	Kentucky	Martin	444	32.04265587
+4	Kentucky	Pike	1280	28.21712232
+4	Kentucky	Christian	4300	27.62882104
+4	Florida	Escambia	1376	36.78802855
+4	Tennessee	Greene	1680	34.94289837
+4	Florida	Duval	513	31.69528246
+4	Alabama	Coffee	399	61.16417034
+4	Mississippi	Calhoun	213	45.90940667
+4	Alabama	Lee	684	9.292990274
+4	Kentucky	Fleming	798	26.11739725
+4	Georgia	Gordon	1860	25.83060165
+4	Tennessee	Claiborne	344	26.71248249
+4	Georgia	Chattooga	320	50.64135244
+4	Alabama	Coosa	340	28.43806585
+4	North Carolina	Haywood	74	77.39220471
+4	Kentucky	Grant	770	14.68622768
+4	North Carolina	Burke	143	43.29745981
+4	Georgia	Lumpkin	56	51.73533197
+4	Kentucky	Carter	367	48.72281526
+4	Kentucky	Daviess	1301	10.05153587
+4	Tennessee	Greene	1883	40.99080248
+4	Mississippi	Hancock	458	75.02250888
+4	Georgia	Meriwether	294	20.895721
+4	Alabama	Jefferson	521	18.64023824
+4	Kentucky	Monroe	1100	43.46131257
+4	North Carolina	Buncombe	1530	40.34888694
+4	Tennessee	Bledsoe	645	4.638233479
+4	North Carolina	Greene	2181	2.083333333
+4	Alabama	Calhoun	129	34.54783263
+4	North Carolina	Avery	236	70.10819272
+4	Tennessee	Morgan	225	59.59134153
+4	Kentucky	Morgan	552	44.34509055
+4	Kentucky	Whitley	720	49.84167124
+4	Mississippi	Washington	508	53.35696933
+4	Alabama	Jefferson	294	27.25934046
+4	North Carolina	Clay	74	71.42625284
+4	Florida	Jefferson	643	19.29138688
+4	North Carolina	Buncombe	1289	36.73280076
+4	Tennessee	Bradley	360	15.9885633
+4	Georgia	Jones	153	12.19654721
+4	Alabama	Marion	160	60.62294392
+4	South Carolina	Calhoun	154	91.95305279
+4	North Carolina	Mecklenburg	290	19.99715436
+4	Tennessee	Robertson	1628	33.55578398
+4	Alabama	Monroe	331	69.58378925
+4	Georgia	Greene	133	22.51664298
+4	Mississippi	Amite	225	61.98647939
+4	Tennessee	Campbell	68	38.7059967
+4	Mississippi	Simpson	534	38.54795473
+4	North Carolina	Swain	244	76.61509234
+4	Tennessee	Grundy	514	3.222480021
+4	Tennessee	Hardin	296	59.94850748
+4	Florida	Escambia	268	64.50081194
+4	North Carolina	Mcdowell	25	69.68686794
+4	Georgia	Bartow	54	60.70445284
+4	North Carolina	Avery	470	76.33218231
+4	North Carolina	Cherokee	61	41.36971142
+4	North Carolina	Moore	444	48.11770832
+4	Mississippi	Marshall	366	43.21675835
+4	Alabama	Coosa	179	50.16897507
+4	Tennessee	Union	678	54.077726
+4	Kentucky	Wolfe	104	51.43021441
+4	Tennessee	Union	641	51.9158906
+4	Alabama	Jackson	337	25.93104922
+4	Alabama	Shelby	94	38.38188277
+4	North Carolina	Transylvania	334	49.58723502
+4	Kentucky	Franklin	948	30.48209321
+4	Georgia	Murray	38	54.99771621
+4	South Carolina	Fairfield	295	6.039426371
+4	Kentucky	Lawrence	196	55.00273314
+4	Mississippi	Carroll	101	67.51676726
+5	Illinois	Bureau	9994	60.42501706
+5	Wisconsin	Wood	1075	31.30016758
+5	Michigan	Iosco	564	42.03215336
+5	Wisconsin	Eau Claire	3876	16.49474664
+5	Illinois	Madison	474	29.23740382
+5	Michigan	Gogebic	391	40.41686323
+5	Wisconsin	Grant	15650	3.494702149
+5	Minnesota	Aitkin	1024	45.25609558
+5	Illinois	Hancock	634	39.25584218
+5	Minnesota	Sibley	3438	38.05617956
+5	Illinois	Effingham	9538	11.35581623
+5	Ohio	Adams	509	33.89200719
+5	Minnesota	Chisago	898	43.07380857
+5	Wisconsin	Sauk	1406	19.85113662
+5	Wisconsin	Douglas	924	25.28967575
+5	Ohio	Licking	1700	18.65855689
+5	Wisconsin	Jackson	324	42.9243837
+5	Michigan	Menominee	545	61.38148986
+5	Indiana	Clay	941	23.86027296
+5	Ohio	Mahoning	231	23.48182354
+5	Illinois	Bond	1379	13.87781552
+5	Ohio	Stark	881	21.7307187
+5	Michigan	Lake	191	62.28793433
+5	Wisconsin	Langlade	610	19.29679377
+5	Wisconsin	Forest	234	65.25937995
+5	Illinois	Vermilion	4606	53.18779104
+5	Wisconsin	Waukesha	2469	40.16191392
+5	Ohio	Fairfield	513	53.79877723
+5	Minnesota	Mille Lacs	1129	36.9765086
+5	Michigan	Alger	640	71.58308958
+5	Indiana	Kosciusko	2647	10.13403409
+5	Michigan	Oceana	687	45.19364511
+5	Wisconsin	Rusk	625	45.19353673
+5	Indiana	Rush	2292	82.58597693
+5	Michigan	St. Joseph	1488	34.72522379
+5	Ohio	Seneca	1591	22.48410472
+5	Illinois	Union	745	43.58084477
+5	Ohio	Brown	1348	52.38225158
+5	Minnesota	Beltrami	638	40.43220473
+5	Michigan	Clare	320	54.57946985
+5	Ohio	Monroe	295	49.4947396
+5	Minnesota	Cook	518	49.93034943
+5	Ohio	Ashtabula	1469	47.09770746
+5	Minnesota	Goodhue	3213	78.34240683
+5	Minnesota	Pine	913	70.51090545
+5	Illinois	Henry	11069	38.24235093
+5	Ohio	Lawrence	670	22.78045193
+5	Minnesota	Meeker	1861	37.59708497
+5	Wisconsin	Vernon	3980	5.496630579
+5	Wisconsin	Shawano	989	29.57060747
+5	Indiana	Carroll	3750	51.3312642
+5	Ohio	Geauga	329	16.10248783
+5	Illinois	Dekalb	33350	10.17506185
+5	Ohio	Hancock	564	48.41346685
+5	Michigan	Lapeer	858	31.85457442
+5	Wisconsin	La Crosse	1971	31.43841356
+5	Wisconsin	Marinette	234	58.20035413
+5	Indiana	Johnson	6188	63.94247129
+5	Wisconsin	Dodge	7725	32.59732487
+5	Minnesota	Ramsey	581	34.86917287
+5	Michigan	Ontonagon	618	30.11936027
+5	Illinois	Mchenry	6056	16.58382755
+5	Wisconsin	Sawyer	717	30.89465255
+5	Illinois	Tazewell	11625	41.72475187
+5	Minnesota	Jackson	23925	31.05247254
+5	Indiana	Randolph	2058	12.48576323
+5	Michigan	Lapeer	399	35.05615007
+5	Wisconsin	Chippewa	996	17.09697296
+5	Michigan	Van Buren	1239	51.47976398
+5	Ohio	Licking	1005	47.51352485
+5	Minnesota	St. Louis	1186	50.61849895
+5	Ohio	Richland	4125	53.3817484
+5	Michigan	Barry	745	30.7261463
+5	Michigan	Midland	1413	29.29455586
+5	Wisconsin	Marathon	2806	47.55709444
+5	Ohio	Belmont	468	32.3653767
+5	Wisconsin	Dunn	1363	23.17735429
+5	Illinois	Greene	2756	37.00362247
+5	Wisconsin	Iowa	4019	14.06353152
+5	Wisconsin	Sawyer	329	50.12783255
+5	Illinois	Fulton	376	38.62083705
+5	Minnesota	Blue Earth	7988	73.85911674
+5	Illinois	Cook	5163	5.024509804
+5	Wisconsin	Bayfield	160	60.47278386
+5	Indiana	Allen	8406	25.81198128
+5	Indiana	Parke	430	43.95832904
+5	Wisconsin	Winnebago	13475	19.57903667
+5	Illinois	Fayette	2328	41.32580287
+5	Ohio	Athens	86	43.83475734
+5	Minnesota	Marshall	2663	38.47125723
+5	Michigan	Newaygo	230	70.84688115
+5	Wisconsin	Oneida	508	26.57240341
+5	Ohio	Guernsey	220	9.832228082
+5	Indiana	Lawrence	390	22.77040497
+5	Michigan	Schoolcraft	778	45.46172517
+5	Wisconsin	Calumet	8816	40.53877083
+5	Illinois	Scott	828	49.36011615
+5	Indiana	Perry	240	30.21704697
+5	Wisconsin	Price	583	37.68760484
+5	Indiana	Adams	836	25.28449321
+5	Wisconsin	Winnebago	1046	8.488477429
+5	Indiana	Wayne	1828	59.63837044
+5	Michigan	Hillsdale	2113	50.60825049
+5	Ohio	Erie	1738	36.13898999
+5	Ohio	Stark	1150	8.123660064
+5	Minnesota	St. Louis	311	29.08182064
+5	Illinois	Ogle	9424	31.097094040000002
+5	Wisconsin	Clark	384	10.20552717
+5	Minnesota	Mcleod	9693	29.66588093
+5	Michigan	Ontonagon	329	44.52012477
+5	Minnesota	Carlton	796	22.61385831
+5	Illinois	Moultrie	4454	13.39833875
+6	Arkansas	Little River	1694	21.18446334
+6	Texas	Hamilton	546	63.71478537
+6	Louisiana	Natchitoches	2400	27.61786097
+6	New Mexico	Sandoval	143	24.0172201
+6	Texas	Wharton	1350	24.19485335
+6	New Mexico	Rio Arriba	106	44.71191229
+6	Arkansas	Scott	254	45.17922675
+6	Texas	San Jacinto	169	35.15923678
+6	Texas	Burnet	155	46.59572183
+6	Oklahoma	Payne	1214	7.436837809
+6	Arkansas	Arkansas	1069	6.781349797
+6	Oklahoma	Garvin	1858	5.237741894
+6	Texas	Freestone	505	53.83005363
+6	Arkansas	Yell	412	31.0079602
+6	Louisiana	Beauregard	109	45.7755471
+6	Texas	Cass	603	12.9621324
+6	Arkansas	Lawrence	114	45.20919889
+6	Arkansas	Independence	428	31.50559454
+6	New Mexico	Colfax	152	43.15437549
+6	Arkansas	Marion	976	52.05768995
+6	Texas	Houston	658	48.53705761
+6	Louisiana	St. Helena	576	76.11967715
+6	Texas	Fannin	898	44.0449744
+6	Arkansas	Pope	718	23.41605754
+6	Louisiana	Iberia	1372	10.8328559
+6	Arkansas	Izard	154	32.16070668
+6	Oklahoma	Caddo	633	29.77002329
+6	Arkansas	Searcy	109	40.87912395
+6	New Mexico	Rio Arriba	277	17.82178653
+6	Oklahoma	Le Flore	148	23.89823899
+6	Texas	Tyler	348	60.13488019
+6	Louisiana	St. Tammany	954	4.89866021
+6	Louisiana	Acadia	1237	10.61032089
+6	Texas	Rusk	603	53.28567563
+6	Arkansas	Greene	962	28.6396206
+6	Texas	Gillespie	225	67.32047071
+6	Oklahoma	Creek	499	57.33801552
+6	Arkansas	Grant	566	14.57206518
+6	Louisiana	East Baton Rouge	908	26.52633353
+6	Oklahoma	Jefferson	1455	41.37707219
+6	Texas	Reeves	1061	16.61399663
+6	Louisiana	Beauregard	671	44.41175717
+6	Texas	Wood	636	43.08860301
+6	Texas	Bexar	1372	15.91894271
+6	Oklahoma	Dewey	514	33.38297118
+6	Arkansas	Woodruff	4250	13.44716719
+6	Louisiana	Vernon	333	44.9301139
+6	Oklahoma	Ottawa	1253	9.960923268
+6	Oklahoma	Le Flore	101	20.32959565
+6	Louisiana	Union	1954	22.33735603
+6	Louisiana	Livingston	1085	35.10874366
+6	Texas	Throckmorton	1010	41.38629964
+6	Texas	Brazoria	1059	36.7479856
+6	Louisiana	Rapides	230	62.24603862
+6	New Mexico	Sandoval	363	29.9992135
+6	Oklahoma	Haskell	419	23.63178312
+6	Oklahoma	Muskogee	373	11.30281156
+6	Louisiana	Evangeline	917	3.611902501
+6	Oklahoma	Tillman	2213	13.18851751
+6	Texas	Harris	3706	3.914609054
+6	Louisiana	Calcasieu	1438	19.64082271
+6	Texas	Camp	195	39.6208959
+6	Louisiana	St. Landry	761	17.30602838
+6	Texas	Fannin	629	41.02422977
+6	Louisiana	Ouachita	1449	26.35971702
+6	Texas	Erath	109	67.89593757
+6	Arkansas	Logan	1434	16.46475058
+6	Oklahoma	Pushmataha	250	43.00051155
+6	Arkansas	Fulton	187	17.33900139
+6	Arkansas	Cleburne	146	40.0508753
+6	Texas	Rusk	338	15.96446818
+6	New Mexico	Taos	110	35.47056841
+6	Oklahoma	Mayes	828	46.4533787
+6	Arkansas	Polk	144	37.32573203
+6	Texas	Jefferson	273	15.72451516
+6	Texas	Mclennan	449	74.56297848
+6	Oklahoma	Ellis	494	38.81407343
+6	Arkansas	Crawford	226	44.03541334
+6	Texas	Shelby	1199	32.37788351
+6	Texas	Wharton	1440	25.51518527
+6	Oklahoma	Osage	314	64.67002745
+6	Texas	Sabine	176	64.51570931
+6	New Mexico	Rio Arriba	338	10.90825529
+6	Arkansas	Pike	71	53.88292149
+6	Texas	Polk	253	56.04500204
+6	Texas	Bee	539	52.75731944
+6	Arkansas	Crittenden	1099	3.957976161
+6	Oklahoma	Okfuskee	904	24.48052765
+6	Arkansas	Lincoln	447	41.31050636
+6	Oklahoma	Johnston	499	47.41008274
+6	Louisiana	Franklin	1171	21.71481648
+6	Texas	Newton	344	73.02953669
+6	Louisiana	Allen	560	41.5893902
+6	Arkansas	Independence	214	41.71606309
+6	Oklahoma	Kiowa	2159	1.94436285
+6	Louisiana	Rapides	1590	6.223841211
+6	Texas	Madison	1513	5.409464742
+6	Louisiana	Tangipahoa	80	62.41117986
+6	New Mexico	Catron	88	22.11684016
+6	Texas	Hutchinson	3069	22.66263612
+6	Arkansas	Lonoke	2054	16.87215296
+6	New Mexico	Sandoval	590	30.24630179
+6	New Mexico	Rio Arriba	204	66.17219832
+6	Arkansas	Hempstead	455	62.75576182
+6	Texas	Denton	989	31.79342208
+7	Iowa	Boone	23300	28.07098906
+7	Iowa	Pottawattamie	8644	39.89505731
+7	Iowa	Fayette	9838	41.69709899
+7	Iowa	Webster	2214	73.01367453
+7	Iowa	Fayette	5288	35.78716514
+7	Iowa	Chickasaw	6250	52.43820583
+7	Iowa	Sioux	1938	15.88905378
+7	Iowa	Ida	16588	28.69615961
+7	Iowa	Pottawattamie	10750	59.23912914
+7	Iowa	Page	15925	42.50609704
+7	Iowa	Clinton	3638	16.922832
+7	Iowa	Black Hawk	4638	49.12421649
+7	Iowa	Monona	5363	22.06054507
+7	Iowa	Sac	10475	65.95411287
+7	Iowa	Clay	13138	15.71184009
+7	Iowa	Plymouth	20250	15.55121876
+7	Iowa	Ringgold	5863	6.290678408
+7	Iowa	Taylor	5063	39.89173523
+7	Iowa	Johnson	9094	31.76811919
+7	Iowa	Jones	6413	40.96192602
+7	Iowa	Monona	3450	41.35181057
+7	Iowa	Sac	15588	46.67497043
+7	Iowa	Winnebago	14475	19.07291989
+7	Iowa	Plymouth	13250	36.16413392
+7	Iowa	Page	9225	35.00308253
+7	Iowa	Muscatine	2214	38.52148539
+7	Iowa	Carroll	21538	10.34064689
+7	Iowa	Plymouth	11988	31.48116009
+7	Iowa	Wright	13338	42.56390762
+7	Iowa	Clayton	6838	38.94786956
+7	Iowa	Davis	639	53.41515163
+7	Iowa	Cerro Gordo	5581	68.74969897
+7	Iowa	Bremer	887	40.86622699
+7	Iowa	Tama	19125	47.35085605
+7	Iowa	Pocahontas	12550	6.83647983
+7	Iowa	Allamakee	10344	22.18466871
+7	Iowa	Dubuque	8763	22.82052899
+7	Missouri	Scott	909	28.45133543
+7	Missouri	Maries	154	28.75047173
+7	Nebraska	Saunders	3156	37.81253539
+7	Kansas	Labette	699	38.08581288
+7	Kansas	Anderson	1969	26.55661634
+7	Missouri	Miller	468	32.55558179
+7	Nebraska	Kearney	2233	17.70639784
+7	Kansas	Barber	1956	15.22296637
+7	Missouri	Macon	1135	45.40521839
+7	Kansas	Harvey	403	31.97108737
+7	Missouri	Audrain	759	42.51658409
+7	Nebraska	Cedar	43650	16.11635587
+7	Missouri	Greene	394	20.59625788
+7	Nebraska	Sioux	1114	26.93365715
+7	Missouri	Jackson	609	60.72183603
+7	Nebraska	Madison	5781	20.68181806
+7	Kansas	Kingman	4800	53.48271533
+7	Missouri	Moniteau	681	39.18119495
+7	Missouri	Macon	974	33.0402845
+7	Missouri	Washington	180	70.64449056
+7	Kansas	Jewell	1265	13.81079531
+7	Missouri	Ray	724	26.11377587
+7	Kansas	Lyon	454	68.93887496
+7	Missouri	Montgomery	1919	39.73015881
+7	Nebraska	Richardson	716	29.7638393
+7	Nebraska	Thurston	3881	19.59106109
+7	Missouri	Ripley	168	41.5955391
+7	Nebraska	Keya Paha	709	32.12161433
+7	Nebraska	York	5831	19.41433875
+7	Missouri	St. Clair	191	54.92806983
+7	Kansas	Lincoln	784	17.14926675
+7	Missouri	Holt	2097	51.2845258
+7	Missouri	Adair	424	43.91127675
+7	Missouri	Henry	238	52.34374797
+7	Missouri	Howard	638	40.57544197
+7	Kansas	Pottawatomie	1889	27.10784314
+8	Colorado	Pueblo	451	46.29537784
+8	Colorado	Jefferson	484	35.28733959
+8	Colorado	Prowers	2436	19.1247868
+8	Colorado	El Paso	275	78.72486847
+8	Colorado	El Paso	179	44.5777521
+8	Colorado	Las Animas	566	10.82657691
+8	Colorado	Boulder	131	33.21119676
+8	Colorado	Douglas	128	57.44080011
+8	Colorado	Las Animas	1708	5.555863565
+8	Colorado	Prowers	3636	14.80265747
+8	Colorado	Otero	425	17.50941632
+8	Colorado	Pueblo	276	29.7308805
+8	Colorado	Bent	656	0.021971578
+8	Colorado	Boulder	298	63.92350903
+8	Colorado	Archuleta	76	60.77479738
+8	Colorado	Pitkin	106	43.65967679
+8	Colorado	Gunnison	88	46.21661943
+8	Colorado	Rio Blanco	566	23.66018726
+8	Colorado	Saguache	159	48.79738691
+8	Colorado	Mineral	58	59.14010875
+8	Colorado	Prowers	6981	33.40986063
+8	Colorado	Jackson	89	56.05980342
+8	Colorado	Routt	255	52.44836647
+8	Colorado	Ouray	124	45.96588657
+8	Colorado	Jefferson	370	16.8876405
+8	Colorado	Rio Blanco	280	42.07553115
+8	Colorado	Boulder	180	41.13679388
+8	Colorado	Lincoln	470	27.21028385
+8	Colorado	Routt	409	72.1198363
+8	Colorado	Rio Blanco	1220	31.52171251
+8	Colorado	Mesa	135	47.91949187
+8	Colorado	La Plata	168	32.16902766
+8	Colorado	Douglas	224	67.83705233
+8	Colorado	Jackson	290	22.81191642
+8	Colorado	Hinsdale	145	45.44515775
+8	Colorado	Boulder	229	28.34978732
+8	Colorado	Routt	150	69.48351219
+8	Colorado	San Miguel	95	57.36394913
+8	Colorado	Park	181	25.4709204
+8	Colorado	Garfield	315	40.90060769
+8	Colorado	Gunnison	133	51.93671033
+8	Colorado	Chaffee	196	49.33714662
+8	Colorado	Moffat	390	63.67020831
+8	Colorado	San Miguel	439	42.47418485
+8	Colorado	Montezuma	263	31.6747086
+8	Colorado	Clear Creek	151	36.81645086
+8	Colorado	Saguache	224	3.6006486620000002
+8	Colorado	Douglas	166	29.97624662
+8	Colorado	Summit	223	0
+8	Colorado	Gunnison	131	19.42963955
+8	Colorado	Costilla	106	40.67472001
+8	Colorado	Jackson	244	60.44493149
+8	Colorado	Rio Blanco	199	37.74579007
+8	Colorado	Montezuma	566	28.02072315
+8	Colorado	Lake	141	38.194001
+8	Colorado	Garfield	109	37.38703414
+8	Colorado	Grand	114	59.63768898
+8	Colorado	Montezuma	250	52.05991552
+8	Colorado	Bent	500	8.329505436
+8	Montana	Cascade	38	42.26830091
+8	Montana	Jefferson	183	53.57950237
+8	Montana	Park	67	46.08946057
+8	Montana	Ravalli	223	41.67834001
+8	Montana	Chouteau	209	40.36081771
+8	Montana	Flathead	44	79.48887366
+8	Montana	Lewis And Clark	98	49.68071142
+8	Montana	Beaverhead	34	51.97379721
+8	Montana	Madison	85	74.84938337
+8	Montana	Meagher	83	42.27304407
+8	Montana	Meagher	900	61.61919394
+8	Montana	Flathead	49	70.09316245
+8	Montana	Fallon	556	30.13163031
+8	Montana	Flathead	66	58.51775388
+8	Montana	Mineral	76	71.37063946
+8	Montana	Granite	95	56.90555679
+8	Montana	Fergus	885	46.95991284
+8	Montana	Wheatland	114	36.74609877
+8	Montana	Jefferson	128	47.4634633
+8	Montana	Sheridan	4200	22.12001418
+8	Montana	Powder River	789	37.95722471
+8	Montana	Phillips	1334	12.8676689
+8	Montana	Powder River	455	37.22622685
+8	Montana	Beaverhead	134	10.40973673
+8	Montana	Golden Valley	154	28.77929902
+8	Montana	Silver Bow	129	44.15595212
+8	Montana	Gallatin	134	11.89684859
+8	Montana	Carbon	161	42.65954291
+8	Montana	Flathead	185	30.82961111
+8	Montana	Missoula	64	69.2231541
+8	Montana	Meagher	210	74.97481893
+8	Montana	Teton	1633	55.28965024
+8	Montana	Park	128	49.29992899
+8	Montana	Stillwater	629	68.74326877
+8	Montana	Meagher	71	46.385043
+8	Montana	Blaine	194	68.37608814
+8	Montana	Beaverhead	113	79.16749086
+8	Montana	Lewis And Clark	176	41.92015524
+8	Montana	Silver Bow	99	55.90267085
+8	Montana	Madison	306	33.76419949
+8	Montana	Chouteau	115	86.87605507
+8	Montana	Valley	1060	19.46075286
+8	Montana	Beaverhead	226	13.91882251
+8	Montana	Powell	788	13.44283131
+8	Montana	Park	138	57.09468361
+8	Montana	Yellowstone	616	40.89175088
+8	Montana	Granite	203	15.56277948
+8	Montana	Gallatin	163	45.73909456
+8	Montana	Glacier	83	41.13925827
+8	Montana	Cascade	174	94.25437485
+8	Montana	Madison	78	48.46289925
+8	North Dakota	Cavalier	954	34.3194488
+8	North Dakota	Traill	1994	56.39333774
+8	North Dakota	Grant	948	58.52803631
+8	North Dakota	Grant	814	49.73204684
+8	North Dakota	Billings	3500	24.26907406
+8	North Dakota	Grant	926	62.15252491
+8	North Dakota	Oliver	1128	25.08482547
+8	North Dakota	Morton	976	61.09126796
+8	North Dakota	Mercer	569	20.30431644
+8	North Dakota	Walsh	5133	5.346862406
+8	North Dakota	Dunn	809	66.28591184
+8	North Dakota	Walsh	1250	34.34537381
+8	North Dakota	Rolette	1701	36.61488085
+8	North Dakota	Hettinger	1723	47.42001158
+8	North Dakota	Sargent	2215	47.67792967
+8	North Dakota	Traill	1645	23.68096006
+8	North Dakota	Stark	1089	56.07717181
+8	North Dakota	Sioux	870	52.12642013
+8	North Dakota	Ward	2420	3.528534583
+8	North Dakota	Walsh	1014	15.51948581
+8	North Dakota	Rolette	1575	31.1866768
+8	North Dakota	Billings	533	24.30480318
+8	North Dakota	Emmons	972	74.62692681
+8	North Dakota	Pembina	558	28.56050329
+8	North Dakota	Dunn	772	39.37489498
+8	North Dakota	Grand Forks	671	35.18269276
+8	North Dakota	Wells	3410	32.61081448
+8	North Dakota	Mchenry	1425	25.49288315
+8	North Dakota	Mchenry	1600	9.803626934
+8	North Dakota	Cass	1559	29.33364706
+8	North Dakota	Dunn	914	53.79263973
+8	North Dakota	Eddy	2261	31.96596749
+8	North Dakota	Steele	1128	41.01377107
+8	North Dakota	Bowman	3823	20.34792905
+8	North Dakota	Hettinger	1120	31.31949764
+8	North Dakota	Sioux	812	72.16856455
+8	North Dakota	Adams	1014	45.5931479
+8	North Dakota	Slope	1089	32.87004715
+8	North Dakota	Traill	1668	25.59787327
+8	North Dakota	Mountrail	1713	39.98381976
+8	North Dakota	Hettinger	1949	31.5815035
+8	North Dakota	Oliver	864	41.82423624
+8	North Dakota	Cavalier	725	17.57093572
+8	North Dakota	Richland	1965	49.44090385
+8	South Dakota	Shannon	1468	85.70178564
+8	South Dakota	Lawrence	209	13.27653203
+8	South Dakota	Corson	771	49.60053122
+8	South Dakota	Deuel	3475	21.82616859
+8	South Dakota	Mccook	1958	6.628503095
+8	South Dakota	Tripp	920	26.9944547
+8	South Dakota	Mellette	964	19.25118757
+8	South Dakota	Butte	718	49.85751823
+8	South Dakota	Ziebach	956	13.91275
+8	South Dakota	Charles Mix	15625	9.283651069
+8	South Dakota	Jackson	525	59.79117785
+8	South Dakota	Perkins	1135	34.63563141
+8	South Dakota	Campbell	3070	20.57224667
+8	South Dakota	Todd	1166	34.07874584
+8	South Dakota	Shannon	1613	22.95618045
+8	South Dakota	Jackson	779	51.68703667
+8	South Dakota	Perkins	1609	44.21382367
+8	South Dakota	Corson	947	70.74252078
+8	South Dakota	Potter	1016	25.69793543
+8	South Dakota	Turner	2728	20.66221296
+8	South Dakota	Pennington	443	40.26619203
+8	South Dakota	Jackson	1735	67.79509818
+8	South Dakota	Corson	444	35.68191538
+8	South Dakota	Roberts	1748	30.83835336
+8	South Dakota	Gregory	1186	25.53108028
+8	South Dakota	Butte	581	18.19989892
+8	South Dakota	Shannon	783	68.679457
+8	South Dakota	Lawrence	144	38.9378089
+8	South Dakota	Corson	1034	19.68572119
+8	South Dakota	Ziebach	1273	21.41129694
+8	South Dakota	Pennington	251	36.93728384
+8	South Dakota	Meade	246	72.2114083
+8	South Dakota	Harding	719	24.33742417
+8	South Dakota	Brule	1021	21.82554482
+8	South Dakota	Brown	3295	40.9002966
+8	South Dakota	Turner	1308	8.430003113
+8	South Dakota	Meade	353	42.82579119
+8	South Dakota	Ziebach	1289	44.59819668
+8	South Dakota	Gregory	453	64.85563019
+8	South Dakota	Shannon	556	59.44141246
+8	South Dakota	Meade	654	63.7813191
+8	South Dakota	Corson	1810	35.13563915
+8	South Dakota	Lyman	134	11.70406473
+8	South Dakota	Gregory	2028	35.93962733
+8	South Dakota	Pennington	268	40.53745886
+8	South Dakota	Shannon	750	43.52136117
+8	South Dakota	Harding	693	54.36685566
+8	South Dakota	Perkins	1139	63.92712824
+8	South Dakota	Jones	1831	19.68264992
+8	South Dakota	Moody	901	56.1362236
+8	South Dakota	Fall River	866	27.38415873
+8	South Dakota	Todd	613	22.84898942
+8	South Dakota	Corson	803	42.5865666
+8	South Dakota	Yankton	9481	2.861099908
+8	South Dakota	Mellette	799	50.26005912
+8	South Dakota	Perkins	1503	23.45666452
+8	South Dakota	Fall River	734	16.28843958
+8	South Dakota	Todd	1041	65.07680714
+8	South Dakota	Meade	415	48.50729033
+8	South Dakota	Corson	949	12.57445286
+8	Utah	Summit	274	72.83153607
+8	Utah	Garfield	1055	54.20500574
+8	Utah	Duchesne	225	61.83507724
+8	Utah	Morgan	579	23.55937106
+8	Utah	Summit	146	65.52113348
+8	Utah	Sanpete	316	14.79384023
+8	Utah	Grand	131	68.84619296
+8	Utah	Garfield	185	31.79412297
+8	Utah	Summit	140	62.9072185
+8	Utah	Uintah	286	37.11780099
+8	Utah	Duchesne	1383	25.57464773
+8	Utah	Morgan	433	26.28318277
+8	Utah	Kane	219	46.64643503
+8	Utah	Kane	103	50.51206316
+8	Utah	Duchesne	249	63.96111533
+8	Utah	Sanpete	6381	32.28358891
+8	Utah	Carbon	541	55.75842666
+8	Utah	Cache	129	67.35761128
+8	Utah	Iron	191	27.933072
+8	Utah	Washington	293	30.12176865
+8	Utah	Summit	91	52.21596485
+8	Utah	Uintah	181	59.55275762
+8	Utah	Salt Lake	391	34.68392973
+8	Utah	Sanpete	605	64.75525515
+8	Utah	Uintah	313	16.08683037
+8	Utah	Grand	179	61.1380369
+8	Utah	Grand	915	25.70063554
+8	Utah	Sevier	459	51.46745108
+8	Utah	Emery	679	37.90778603
+8	Utah	Sevier	2784	4.649060818
+8	Utah	Morgan	504	31.23572852
+8	Utah	Emery	456	59.69831297
+8	Utah	Piute	2251	4.266000041
+8	Utah	Weber	1478	24.04805334
+8	Utah	Washington	811	37.12469935
+8	Utah	Summit	505	31.17855124
+8	Utah	Utah	123	40.32759337
+8	Utah	Garfield	124	15.5820901
+8	Utah	Washington	165	30.10521056
+8	Utah	Sevier	249	26.03155925
+8	Utah	Juab	165	75.20765511
+8	Utah	Duchesne	383	68.11833428
+8	Utah	Salt Lake	1794	23.57705506
+8	Utah	Wayne	963	39.50376715
+8	Utah	Box Elder	648	55.33201354
+8	Wyoming	Park	115	41.41359457
+8	Wyoming	Lincoln	228	17.94898361
+8	Wyoming	Big Horn	135	30.315981
+8	Wyoming	Sweetwater	173	56.98839114
+8	Wyoming	Natrona	270	33.30918331
+8	Wyoming	Lincoln	184	34.17679531
+8	Wyoming	Carbon	238	77.80683193
+8	Wyoming	Lincoln	125	53.63478586
+8	Wyoming	Johnson	319	18.25932467
+8	Wyoming	Washakie	390	16.09347858
+8	Wyoming	Park	65	61.19109942
+8	Wyoming	Johnson	424	18.59526483
+8	Wyoming	Sheridan	569	32.92918933
+8	Wyoming	Park	174	65.77936543
+8	Wyoming	Fremont	721	51.36361006
+8	Wyoming	Park	39	56.43956844
+8	Wyoming	Park	180	54.47530945
+8	Wyoming	Fremont	115	47.60536772
+8	Wyoming	Park	131	65.69468487
+8	Wyoming	Sublette	66	52.48014985
+8	Wyoming	Sheridan	98	51.48541531
+8	Wyoming	Teton	76	56.72352174
+8	Wyoming	Fremont	148	65.68339222
+8	Wyoming	Washakie	353	60.64350069
+8	Wyoming	Carbon	296	61.26801706
+8	Wyoming	Natrona	361	43.23039162
+8	Wyoming	Lincoln	50	52.1631633
+8	Wyoming	Lincoln	78	32.0494542
+8	Wyoming	Park	38	54.10597519
+8	Wyoming	Fremont	343	21.02082357
+8	Wyoming	Washakie	119	30.78926009
+8	Wyoming	Washakie	531	39.0134294
+8	Wyoming	Park	95	68.99930406
+8	Wyoming	Fremont	691	23.57948375
+8	Wyoming	Johnson	296	51.60989788
+8	Wyoming	Campbell	18775	28.2760152
+8	Wyoming	Park	109	85.46579701
+8	Wyoming	Park	125	30.61305304
+8	Wyoming	Hot Springs	149	60.8318257
+8	Wyoming	Fremont	209	64.89846214
+8	Wyoming	Park	115	48.37611706
+8	Wyoming	Sweetwater	121	61.81015449
+8	Wyoming	Carbon	141	64.58011965
+8	Wyoming	Lincoln	113	18.16601357
+8	Wyoming	Sublette	79	30.57425325
+8	Wyoming	Sublette	181	46.93425522
+8	Wyoming	Crook	1735	12.12468374
+8	Wyoming	Albany	395	9.427146182
+8	Wyoming	Lincoln	182	65.08240931
+8	Wyoming	Fremont	137	52.45359101
+8	Wyoming	Sublette	131	63.04140902
+8	Wyoming	Big Horn	351	43.20834442
+8	Wyoming	Albany	401	13.90713751
+8	Wyoming	Albany	419	27.17532289
+8	Wyoming	Teton	158	16.35453988
+8	Wyoming	Crook	338	64.99509726
+8	Wyoming	Fremont	104	67.51426148
+8	Wyoming	Natrona	189	43.79266192
+8	Wyoming	Campbell	1494	16.72567232
+8	Wyoming	Carbon	109	59.333398270000004
+8	Wyoming	Carbon	305	55.46090822
+8	Wyoming	Fremont	125	57.25886928
+8	Wyoming	Uinta	229	45.57828733
+8	Wyoming	Park	476	28.16402628
+8	Wyoming	Sublette	198	80.90574455
+8	Wyoming	Washakie	679	62.71152802
+8	Wyoming	Albany	258	41.48914572
+8	Wyoming	Goshen	425	28.84156896
+8	Wyoming	Park	68	55.38697602
+8	Wyoming	Sublette	856	13.97744462
+9	Arizona	Greenlee	930	53.64267493
+9	Arizona	Navajo	310	24.99238501
+9	Arizona	Yavapai	166	44.13895702
+9	Arizona	Apache	324	27.15364347
+9	Arizona	Gila	371	8.42529927
+9	Arizona	Yavapai	174	34.52367067
+9	Arizona	Greenlee	66	53.34096029
+9	Arizona	Coconino	64	58.47416606
+9	Arizona	Coconino	61	51.92887243
+9	Arizona	Greenlee	174	46.78245665
+9	Arizona	Greenlee	363	40.40822973
+9	Arizona	Yavapai	684	40.2715661
+9	Arizona	Gila	265	27.77315803
+9	Arizona	Greenlee	91	12.59805476
+9	Arizona	Apache	285	16.34907813
+9	Arizona	Navajo	155	2.380952381
+9	Arizona	Mohave	410	25.81713225
+9	Arizona	Apache	110	30.7542866
+9	Arizona	Apache	210	46.18226619
+9	Arizona	Greenlee	133	30.8995535
+9	Arizona	Apache	55	19.12937668
+9	Arizona	Apache	494	7.856200113
+9	Arizona	Mohave	392	37.199415
+9	Arizona	Yavapai	109	5.066233295
+9	Arizona	Apache	141	40.64957277
+9	Arizona	Navajo	771	16.35468977
+9	Arizona	Graham	113	70.34693836
+9	Arizona	Coconino	74	57.53491657
+9	Arizona	Greenlee	210	48.20676243
+9	Arizona	Apache	409	52.74429894
+9	Arizona	Gila	119	46.78964586
+9	Arizona	Yavapai	115	30.64926625
+9	Arizona	Apache	1706	13.01776583
+9	Arizona	Gila	250	0.003330669
+9	Arizona	Coconino	1523	27.40078838
+9	Arizona	Gila	190	14.72176349
+9	Arizona	Coconino	81	49.23294222
+9	Arizona	Apache	404	13.97130803
+9	Arizona	Greenlee	119	43.46009677
+9	Arizona	Gila	98	14.844244
+9	Arizona	Apache	455	15.01307913
+9	California	Ventura	91	46.88071454
+9	California	Mariposa	63	68.5799133
+9	California	Trinity	94	71.38596403
+9	California	Modoc	248	49.59683329
+9	California	Fresno	71	60.76053984
+9	California	Tehama	579	77.06624014
+9	California	Sierra	59	57.9140773
+9	California	Plumas	101	72.30861791
+9	California	Tehama	203	64.95779479
+9	California	Los Angeles	468	31.43509585
+9	California	Ventura	188	22.93790624
+9	California	Ventura	63	53.03586582
+9	California	Riverside	304	27.84140365
+9	California	Ventura	289	21.27422731
+9	California	Santa Barbara	253	58.68713268
+9	California	San Bernardino	228	37.5627481
+9	California	Los Angeles	286	42.4635757
+9	California	Los Angeles	280	17.94891908
+9	California	Ventura	110	25.40867425
+9	California	Los Angeles	104	33.27763875
+9	California	Trinity	65	75.86383187
+9	California	Trinity	135	19.46519426
+9	California	Siskiyou	70	62.98177926
+9	California	Trinity	509	49.32376051
+9	California	Mendocino	94	23.14023332
+9	California	Siskiyou	91	45.0862958
+9	California	Trinity	174	82.36784488
+9	California	Siskiyou	50	59.48758876
+9	California	Humboldt	244	23.29574348
+9	California	Siskiyou	100	75.25395034
+9	California	Humboldt	74	53.90226468
+9	California	Mendocino	106	61.12708188
+9	California	Siskiyou	98	74.90436681
+9	California	Sonoma	140	44.86342698
+9	California	Humboldt	101	45.24108321
+9	California	Mendocino	141	21.20560548
+9	California	Sacramento	5113	29.24637872
+9	California	Shasta	70	68.73616097
+9	California	Alpine	51	55.54397385
+9	California	Ventura	48219	17.48586563
+9	California	Riverside	145	25.75468744
+9	California	San Diego	141	40.08597931
+9	California	San Bernardino	348	38.99451628
+9	California	San Bernardino	119	61.92999166
+9	California	Santa Barbara	154	79.92031446
+9	California	San Diego	141	20.34793277
+9	California	Los Angeles	226	19.86801195
+9	California	Ventura	110	56.88665652
+9	California	Tuolumne	171	50.8201564
+9	California	Shasta	48	74.78022018
+9	California	Ventura	141	63.92704411
+9	California	Butte	1433	65.67467457
+9	California	Alameda	7400	11.37107123
+9	California	Humboldt	15	26.63992036
+9	California	Siskiyou	44	80.24016607
+9	California	Siskiyou	64	38.85975002
+9	California	Mono	105	64.51483115
+9	California	Lassen	63	29.46370382
+9	California	El Dorado	81	49.67179117
+9	California	Siskiyou	40	54.71165445
+9	California	Tulare	308	30.32234224
+9	California	Glenn	88	69.45651287
+9	California	Trinity	94	68.10132247
+9	California	Los Angeles	81	40.76023543
+9	California	Santa Barbara	175	42.43802825
+9	California	San Diego	130	33.49403228
+9	California	Santa Barbara	12150	2.836134454
+9	California	San Bernardino	74	12.36846619
+9	California	Riverside	131	28.62806873
+9	California	Ventura	84	13.95579613
+9	California	Santa Barbara	48	65.87566753
+9	California	San Diego	209	27.82423472
+9	California	Ventura	89	47.00207623
+9	California	San Bernardino	3720	33.06170322
+9	California	Ventura	1641	50.52864719
+9	California	Mendocino	159	52.45060466
+9	California	Siskiyou	53	64.5555893
+9	California	Trinity	318	50.31030255
+9	California	Mendocino	113	33.50060244
+9	California	Trinity	98	67.9382051
+9	California	Humboldt	38	40.0923758
+9	California	Trinity	93	74.08752008
+9	California	Mendocino	45	67.31865511
+9	California	Siskiyou	576	50.97460651
+9	California	Sonoma	349	55.09626222
+9	California	Mendocino	46	29.50241976
+9	California	Humboldt	98	46.20048674
+9	California	Trinity	26	77.55835671
+9	California	Humboldt	56	73.77077624
+9	California	Siskiyou	180	65.26680323
+9	California	Mono	104	74.59993854
+9	California	Shasta	80	83.2735125
+9	California	Riverside	60	48.05378973
+9	California	Contra Costa	580	32.16690537
+9	California	Santa Clara	221	80.14559941
+9	California	Calaveras	129	44.3940289
+9	California	San Diego	7244	8.524183007
+9	California	Ventura	228	26.69458924
+9	California	San Bernardino	180	58.71346606
+9	California	Los Angeles	364	27.63808989
+9	California	Santa Barbara	718	50.53680539
+9	California	Santa Barbara	1271	26.82603196
+9	California	San Diego	279	6.957359126
+9	California	Ventura	83	35.91299375
+9	California	Santa Clara	110	83.23516441
+9	California	Shasta	98	58.63641183
+9	California	Riverside	7744	42.49488172
+9	California	Alpine	55	61.76663153
+9	California	Siskiyou	1539	25.02479594
+9	California	Tulare	59	34.29287157
+9	California	Humboldt	181	79.19874938
+9	California	San Bernardino	288	64.69049139
+9	California	San Bernardino	226	31.86440912
+9	California	San Diego	174	26.40668853
+9	California	San Diego	193	12.99022272
+9	California	San Bernardino	179	43.40360247
+9	California	Los Angeles	124	52.41963956
+9	California	Ventura	1639	20.00819979
+9	California	Santa Barbara	90	44.72394845
+9	California	Riverside	8525	32.61589263
+9	California	Santa Barbara	24	72.46845133
+9	California	San Bernardino	418	37.5612859
+9	California	Santa Barbara	179	74.51396516
+9	California	Sonoma	296	19.96517785
+9	California	Glenn	60	82.8532034
+9	California	Humboldt	439	33.06644285
+9	California	Trinity	43	70.58256832
+9	California	Trinity	99	48.80530131
+9	California	Humboldt	216	60.44705551
+9	California	Humboldt	90	40.5853149
+9	California	Trinity	80	70.82461486
+9	California	Humboldt	108	64.49847632
+9	California	Siskiyou	126	41.88908507
+9	California	Lake	33	61.23284625
+9	California	Humboldt	96	82.68938673
+9	California	Siskiyou	73	56.3419482
+9	California	Glenn	96	13.88682606
+9	California	Humboldt	76	54.56568704
+9	California	Humboldt	38	54.70443416
+9	California	Trinity	75	60.43901176
+9	California	Humboldt	244	69.68233881
+9	California	Siskiyou	100	81.14781679
+9	California	Humboldt	66	67.04873992
+9	California	Santa Cruz	134	51.97895995
+9	California	Shasta	82	67.4345613
+9	California	Santa Barbara	278	50.62842999
+9	California	Mariposa	706	16.63569334
+9	California	Humboldt	73	23.8367232
+9	California	Del Norte	349	65.72328764
+9	California	San Diego	8756	16.69888572
+9	California	San Bernardino	209	40.34950084
+9	California	San Diego	8063	13.77521626
+9	California	San Bernardino	41	15.94019117
+9	Nevada	Lander	353	67.12147465
+9	Nevada	Nye	773	38.04443425
+9	Nevada	Eureka	764	19.46044415
+9	Nevada	Lincoln	704	9.872431078
+9	Nevada	Elko	91	62.44862814
+9	Nevada	Elko	194	41.6225229
+9	Nevada	Lyon	423	49.38275246
+9	Nevada	Washoe	271	44.80224977
+9	Nevada	Elko	1898	68.34889948
+9	Nevada	Elko	501	56.04041652
+9	Nevada	Lincoln	575	35.68502668
+9	Nevada	White Pine	1729	25.23726171
+9	Nevada	Humboldt	525	36.39471928
+9	Nevada	Elko	464	57.59520222
+9	Nevada	Lander	123	44.0886719
+9	Nevada	Nye	285	14.4295778
+9	Nevada	Humboldt	228	72.68516409
+9	Nevada	Elko	836	32.84547011
+9	Nevada	Humboldt	246	30.28238325
+9	Nevada	Lincoln	576	32.2095794
+9	Nevada	Elko	366	31.61677592
+9	Nevada	Lander	234	32.60558871
+9	Nevada	White Pine	210	63.38922115
+9	Nevada	Humboldt	359	37.78101397
+9	Nevada	Lander	171	49.14452989
+9	Nevada	White Pine	575	8.1232493
+9	Nevada	Elko	623	68.5780796
+9	Nevada	Elko	127	52.97477421
+9	Nevada	Washoe	1798	17.73016888
+9	Nevada	Elko	364	16.09813058
+9	Nevada	Humboldt	54	40.60581041
+9	Nevada	Elko	246	65.60879409
+9	Nevada	Lander	553	50.63140883
+9	Nevada	Humboldt	639	34.07527691
+9	Nevada	Elko	516	32.10221618
+9	Nevada	Elko	155	66.99472213
+9	Nevada	Nye	978	37.29416318
+9	Nevada	Elko	450	63.85969358
+9	Nevada	Elko	253	54.81416511
+9	Nevada	Elko	1402	7.718746404
+9	Nevada	Carson City	486	34.03204613
+9	Nevada	Elko	168	31.81023648
+9	Nevada	Elko	118	47.68348584
+9	Nevada	Nye	225	9.981670264
+9	Nevada	Washoe	505	51.59538907
+9	Nevada	Elko	73	42.6070887
+9	Nevada	Elko	64	83.05747528
+9	Nevada	Nye	76	60.02683866
+9	Nevada	Elko	1089	35.08721484
+9	Nevada	Eureka	335	58.74014092
+10	Oregon	Jackson	50	89.07033587
+10	Idaho	Idaho	213	66.90981795
+10	Idaho	Boise	49	79.15395329
+10	Idaho	Latah	79	36.68962909
+10	Idaho	Kootenai	39	73.15887455
+10	Idaho	Elmore	139	67.95606851
+10	Idaho	Bonner	399	58.42913003
+10	Idaho	Camas	69	42.50265426
+10	Idaho	Lemhi	59	65.53346388
+10	Idaho	Washington	214	80.09783885
+10	Idaho	Idaho	81	77.85202597
+10	Idaho	Lemhi	68	86.75874215
+10	Idaho	Elmore	98	34.78715847
+10	Idaho	Adams	185	58.41501104
+10	Idaho	Idaho	254	72.76630126
+10	Idaho	Owyhee	344	33.157161
+10	Idaho	Clearwater	38	63.19482274
+10	Idaho	Lemhi	141	44.40204914
+10	Idaho	Idaho	54	84.71026395
+10	Idaho	Caribou	166	17.11417236
+10	Idaho	Lemhi	64	50.89913752
+10	Idaho	Clearwater	128	57.831641
+10	Idaho	Butte	119	61.96994095
+10	Idaho	Valley	76	65.05306211
+10	Idaho	Idaho	78	52.79487189
+10	Idaho	Boundary	99	47.036277750000004
+10	Idaho	Blaine	55	8.726164608
+10	Idaho	Clearwater	99	55.09975751
+10	Idaho	Bear Lake	179	54.43853932
+10	Idaho	Clark	83	57.80344063
+10	Idaho	Boise	94	51.577115
+10	Idaho	Nez Perce	767	62.17500422
+10	Idaho	Benewah	148	26.22195104
+10	Idaho	Bonneville	84	49.79194242
+10	Idaho	Custer	66	51.74834689
+10	Idaho	Clearwater	136	54.45132696
+10	Idaho	Latah	151	30.36310808
+10	Idaho	Caribou	138	56.67210841
+10	Idaho	Shoshone	89	46.52733342
+10	Idaho	Valley	121	69.88232311
+10	Idaho	Idaho	144	56.94158276
+10	Idaho	Owyhee	221	60.02491083
+10	Idaho	Custer	104	48.42324728
+10	Idaho	Valley	83	63.1631208
+10	Idaho	Oneida	319	64.03287269
+10	Oregon	Lane	55	48.60696594
+10	Oregon	Columbia	153	62.92878286
+10	Oregon	Coos	250	65.7173976
+10	Oregon	Lake	66	55.9474033
+10	Oregon	Clackamas	11	16.66666667
+10	Oregon	Grant	35	66.40103389
+10	Oregon	Klamath	703	8.140851058
+10	Oregon	Lake	53	41.49007417
+10	Oregon	Wallowa	166	61.9855781
+10	Oregon	Coos	228	74.13312533
+10	Oregon	Harney	211	61.76729317
+10	Oregon	Baker	520	41.85629056
+10	Oregon	Wheeler	85	55.34276375
+10	Oregon	Grant	250	53.1727448
+10	Oregon	Grant	25	21.61262584
+10	Oregon	Grant	105	22.36796196
+10	Oregon	Umatilla	78	84.01693223
+10	Oregon	Grant	348	15.44693858
+10	Oregon	Wheeler	125	34.38429906
+10	Oregon	Grant	141	11.4718364
+10	Oregon	Wasco	74	45.36058624
+10	Oregon	Grant	76	80.12189017
+10	Oregon	Grant	39	60.17557662
+10	Oregon	Grant	424	22.34525513
+10	Oregon	Wasco	63	57.11226341
+10	Oregon	Gilliam	339	75.04982268
+10	Oregon	Grant	35	52.03729257
+10	Oregon	Grant	46	32.49225436
+10	Oregon	Wasco	164	74.26190455
+10	Oregon	Grant	79	61.17597824
+10	Oregon	Umatilla	191	45.49189882
+10	Oregon	Grant	156	20.966125
+10	Oregon	Grant	260	55.12378042
+10	Oregon	Marion	55	83.95033296
+10	Oregon	Lane	120	63.25164938
+10	Oregon	Clatsop	535	66.31775606
+10	Oregon	Morrow	1096	27.7342226
+10	Oregon	Lake	133	8.366277834
+10	Oregon	Yamhill	275	9.55750622
+10	Oregon	Wallowa	314	37.47356249
+10	Oregon	Deschutes	55	77.3545445
+10	Oregon	Morrow	259	12.04293507
+10	Oregon	Umatilla	115	64.72357214
+10	Oregon	Grant	140	28.63514896
+10	Oregon	Grant	45	61.44607775
+10	Oregon	Wasco	66	70.55388169
+10	Oregon	Grant	95	64.37372321
+10	Oregon	Grant	193	36.04947133
+10	Oregon	Grant	41	23.54035088
+10	Oregon	Grant	134	17.026997
+10	Oregon	Grant	459	69.21960057
+10	Oregon	Grant	68	63.26858387
+10	Oregon	Marion	645	57.53945324
+10	Oregon	Tillamook	744	47.95106971
+10	Oregon	Morrow	156	58.54244275
+10	Oregon	Baker	219	50.98720517
+10	Oregon	Douglas	346	12.55212309
+10	Oregon	Grant	133	29.27295809
+10	Oregon	Wheeler	134	35.77878699
+10	Oregon	Umatilla	76	68.4248241
+10	Oregon	Wheeler	190	45.3977166
+10	Oregon	Grant	250	49.7714706
+10	Oregon	Grant	155	71.52022651
+10	Oregon	Wheeler	166	22.37042026
+10	Oregon	Grant	174	60.96014081
+10	Oregon	Grant	135	53.62035212
+10	Oregon	Wasco	35	40.33517707
+10	Oregon	Grant	124	62.0616213
+10	Oregon	Tillamook	259	43.72974303
+10	Oregon	Crook	292	10.57049888
+10	Oregon	Linn	219	78.59439454
+10	Oregon	Lane	67	63.17417966
+10	Oregon	Baker	527	50.17158861
+10	Oregon	Douglas	265	54.57851849
+10	Oregon	Wallowa	80	35.18658994
+10	Oregon	Umatilla	211	62.81935225
+10	Oregon	Grant	137	70.29669477
+10	Oregon	Wasco	24	48.39145657
+10	Oregon	Gilliam	500	66.52537756
+10	Oregon	Grant	37	45.74377401
+10	Oregon	Grant	198	34.77031662
+10	Oregon	Grant	68	51.45083747
+10	Oregon	Morrow	148	43.87104429
+10	Oregon	Grant	108	48.18601492
+10	Oregon	Grant	128	60.83904054
+10	Oregon	Grant	73	24.75740459
+10	Oregon	Tillamook	168	76.57591797
+10	Oregon	Wheeler	102	35.55966053
+10	Oregon	Lane	209	49.10605801
+10	Oregon	Klamath	219	45.63030253
+10	Oregon	Union	284	40.64691161
+10	Oregon	Jefferson	176	56.71343464
+10	Oregon	Douglas	169	51.76223748
+10	Oregon	Lane	141	63.99221376
+10	Oregon	Wheeler	78	57.25339912
+10	Oregon	Wheeler	220	43.48877439
+10	Oregon	Umatilla	84	54.25376721
+10	Oregon	Wasco	166	39.2097046
+10	Oregon	Wheeler	333	5.380154932
+10	Oregon	Grant	76	45.07548305
+10	Oregon	Morrow	237	47.98149597
+10	Oregon	Grant	187	58.08023526
+10	Oregon	Grant	625	11.90476191
+10	Oregon	Morrow	132	57.49631732
+10	Oregon	Coos	128	62.98855453
+10	Oregon	Clackamas	147	76.80932358
+10	Oregon	Umatilla	354	61.12919763
+10	Oregon	Grant	174	5.138328437
+10	Oregon	Grant	171	37.68287776
+10	Oregon	Grant	93	73.79758921
+10	Oregon	Grant	126	69.81078564
+10	Oregon	Grant	351	65.08831561
+10	Oregon	Linn	53	90.12828712
+10	Oregon	Douglas	56	69.88491213
+10	Oregon	Lane	158	63.6987569
+10	Oregon	Harney	290	75.04199201
+10	Oregon	Grant	73	51.61547879
+10	Washington	Yakima	33	68.7579708
+10	Washington	Kittitas	163	63.14677268
+10	Washington	Ferry	63	76.56307073
+10	Washington	Yakima	133	54.2379994
+10	Washington	King	43	68.6507149
+10	Washington	Snohomish	89	42.99411456
+10	Washington	Yakima	150	58.83130482
+10	Washington	Chelan	228	17.67963248
+10	Washington	Pacific	326	60.23076754
+10	Washington	Okanogan	133	41.82716552
+10	Washington	Clallam	201	8.96724797
+10	Washington	Jefferson	90	72.04244417
+10	Washington	Pacific	229	39.15121077
+10	Washington	Ferry	86	54.26267079
+10	Washington	Chelan	36	79.38131607
+10	Washington	Chelan	49	82.78523694
+10	Washington	Chelan	51	72.54202864
+10	Washington	Chelan	50	67.62092718
+10	Washington	Chelan	38	33.44923137
+10	Washington	Chelan	66	57.84168744
+10	Washington	Chelan	21	64.59350351
+10	Washington	Chelan	39	57.43060121
+10	Washington	Chelan	64	33.8057128
+10	Washington	Chelan	53	28.42200075
+10	Washington	Chelan	75	56.47899894
+10	Washington	Chelan	55	66.95297853
+10	Washington	King	95	74.39782809
+10	Washington	Okanogan	118	81.08015242
+10	Washington	Jefferson	46	55.93486587
+10	Washington	Ferry	109	62.74684967
+10	Washington	Columbia	143	73.0576413
+10	Washington	Pierce	29	72.22092339
+10	Washington	Ferry	144	70.19948028
+10	Washington	Lewis	43	73.8393342
+10	Washington	Jefferson	80	60.02794508
+10	Washington	Cowlitz	300	64.29537538
+10	Washington	Chelan	15	32.82665028
+10	Washington	Chelan	23	68.83126489
+10	Washington	Chelan	120	35.76133077
+10	Washington	Chelan	60	64.34246896
+10	Washington	Chelan	84	65.22335993
+10	Washington	Chelan	38	51.24461997
+10	Washington	Chelan	79	33.83222621
+10	Washington	Chelan	45	76.12018522
+10	Washington	Chelan	45	57.3406535
+10	Washington	Snohomish	79	50.42518839
+10	Washington	Lewis	35	71.62560868
+10	Washington	Clallam	100	56.61659154
+10	Washington	Garfield	79	74.91439519
+10	Washington	Yakima	65	64.8070336
+10	Washington	Yakima	28	67.83176168
+10	Washington	Skamania	46	45.87493662
+10	Washington	Lewis	24	80.00452874
+10	Washington	Walla Walla	5541	3.673811297
+10	Washington	Chelan	28	53.07352744
+10	Washington	Chelan	64	67.73883101
+10	Washington	Mason	384	40.3934738
+10	Washington	Skagit	1242	49.98840655
+10	Washington	Chelan	50	67.49228103
+10	Washington	Chelan	47	39.70906112
+10	Washington	Chelan	41	46.69951664
+10	Washington	Chelan	80	59.55562194
+10	Washington	Chelan	40	51.54151532
+10	Washington	Chelan	18	65.65776386
+10	Washington	Chelan	88	54.49103671
+10	Washington	Chelan	87	62.69457935
+10	Washington	King	34	50.37220826
+10	Washington	Snohomish	35	60.9683535
+10	Washington	Lewis	43	58.59130998
+10	Washington	Jefferson	99	72.54475603
+10	Washington	Pierce	66	72.64214793
+10	Washington	Grays Harbor	210	7.994873942
+10	Washington	Stevens	73	41.34984541
+10	Washington	Spokane	2004	37.73242144
+10	Washington	Chelan	33	54.6185421
+10	Washington	Chelan	46	61.49229296
+10	Washington	Chelan	85	65.61128332
+10	Washington	Chelan	44	46.26089242
+10	Washington	Chelan	47	51.18332596
+10	Washington	Chelan	55	75.55182448
+10	Washington	Chelan	54	55.58005929
+10	Washington	Chelan	82	63.87841141
+10	Washington	Chelan	43	74.4702532
+10	Washington	Chelan	46	58.07011662
+10	Washington	Chelan	88	77.37129432
+10	Washington	Chelan	46	60.30181306
+10	Washington	Chelan	66	62.07943951
+10	Washington	Chelan	173	45.18674193
+10	Washington	Chelan	25	51.69115575
