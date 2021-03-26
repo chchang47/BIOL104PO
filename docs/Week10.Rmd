@@ -1,0 +1,174 @@
+---
+title: "Comparing pollution across streams in the US"
+author: ""
+date: ""
+output: 
+  html_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=F)
+```
+
+# Introduction to the dataset
+
+This dataset was compiled by the US Environmental Protection Agency (EPA) and **each row presents a stream** that was randomly sampled across the US to evaluate stream health and nutrient pollution. These data present measurements on the levels of [nitrogen](https://www.epa.gov/national-aquatic-resource-surveys/indicators-nitrogen), henceforth also denoted by N, and [benthic macroinvertebrates](https://www.epa.gov/national-aquatic-resource-surveys/indicators-benthic-macroinvertebrates) as a metric of stream biodiversity. We will be using these data to complement the readings.
+
+```{r reading_in_data, warning=FALSE, message=FALSE, eval=T}
+### Loading in packages
+library(ggplot2) # package for plotting
+library(dplyr) # package for manipulating data
+
+### Reading in the data
+EPAdf <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/EPAstreams.tsv")
+
+### Display the first few rows of the data
+EPAdf
+```
+
+The columns in the data are:
+
+* `Region`: The EPA region (see map below)
+* `State`: The state that the stream was located in
+* `County`: The county where the stream was located
+* `Nitrogen`: The level of nitrogen in the stream, measured in units of micrograms () per Liter of stream water
+* `MMI`: `MMI` stands for the "multi-metric index" of stream macroinvertebrates. The values of `MMI` range from 0, representing an unhealthy stream macroinvertebrate community, to 100, representing a healthy stream macroinvertebrate community.
+
+Note that the nitrogen measure includes all organic and inorganic nitrogen-containing compounds in the water. Inorganic nitrogeon includes the compounds nitrate ($NO_3^-$), nitrite ($NO_2^-$), ammounia ($NH_3$), and ammonium ($NH_4^+$).
+
+The map below displays the different EPA regions.
+
+![Map of EPA regions](https://upload.wikimedia.org/wikipedia/commons/c/cf/Regions_of_the_United_States_EPA.svg)
+
+We will use the activities below to generate plots that you can directly upload and interpret to the [Gradescope assignment](https://www.gradescope.com/courses/236844/assignments/1127675).
+
+## Upper limits for nitrogen in streams
+
+Below, we will create a data table that compiles the maximum levels of nitrogen that are acceptable by EPA standards in streams in each region. We see that some regions have lower upper limits for N (nitrogen) than others. For example, Region 4 (spanning the Southeast) has much higher maximum nitrogen limits than Region 10 (Pacific Northwest). These differences in maximum N by region are due to differences in geology, land use, ecosystem type, and nutrient conditions across these regions.
+
+```{r display_N, eval=T}
+### Creating a data table to store maximum nitrogen levels by region
+  # Compiled from https://tinyurl.com/nb9zxtj6 and https://www.epa.gov/nutrient-policy-data/ecoregional-nutrient-criteria-rivers-and-streams
+maxN <- tibble::tibble(Region=c(1:10),
+                  RegionName=c("New England","NY and NJ","Mid-Atlantic","Southeast",
+                               "Upper Midwest","South","Midwest","Intermountain West","Pacific SW","Pacific NW"),
+                  MaxNitrogen=c(380,540,710,900,900,690,880,880,380,380))
+
+### Display the first few rows of the data
+maxN
+```
+
+Subsequently, we will revisit the `left_join` ([Week 6](https://charlottehchang.github.io/BIOL104PO/Week6.html)) and `mutate` ([Week 2](https://charlottehchang.github.io/BIOL104PO/Week2.html)) commands. Our goal here is:
+
+1. Add on the max N values for each region (use `left_join` to add on the `MaxNitrogen` column from `maxN` to `EPAdf`)
+2. For each stream, determine if its N levels exceed the limit (use `mutate` to create a new column called `HighN`)
+
+If a stream's nitrogen level exceeds the region's N threshold, then we will assign `"High"` to the `HighN` column; otherwise it will be labelled as `"Low"`. Let `"High"` denote streams that are clearly experiencing N pollution.
+
+```{r high_N, eval=T}
+### Add on a column that takes all of the new columns from maxN 
+### (MaxNitrogen and RegionName) and joins them to the EPAdf data table.
+### This way, we can see for each stream in each region if 
+### its N level is too high.
+EPAdf <- EPAdf %>%
+  left_join(maxN,by=c("Region"="Region"))
+
+### View the columns Region, Nitrogen, and MaxNitrogen
+EPAdf[,c("Region","Nitrogen","MaxNitrogen")] # equivalent to:
+# dplyr::select(EPAdf, Region, Nitrogen, MaxNitrogen) # uncomment to run to see that it produces the same output
+
+### Create a new column that tracks if each stream's N levels are too high
+EPAdf <- EPAdf %>%
+  mutate(HighN = ifelse(Nitrogen>MaxNitrogen,"High","Low")) # the ifelse function (?ifelse) assigns the value 1 if the stream's N level is too high (>MaxNitrogen). Otherwise, if the stream's N level is less than or equal to MaxNitrogen, that stream gets a 0.
+
+### View the columns Region, Nitrogen, Max nitrogen in that region, and High nitrogen
+  # A value of 1 for High nitrogen indicates that this stream has too much nitrogen
+EPAdf %>%
+  dplyr::select(Region,Nitrogen,MaxNitrogen,HighN)
+```
+
+# Visualizing the distribution of nitrogen by region
+
+We will use boxplots (from [Week 4](https://charlottehchang.github.io/BIOL104PO/Week4.html)) to examine the variation in N levels in streams across the different EPA regions. If you'd like to see more information about boxplots, you can always call the help documentation with `?geom_boxplot` or `help(geom_boxplot)` (note that `?` is equivalent to `help`). 
+
+[Khan Academy](https://youtu.be/b2C9I8HuCe4) provides a nice, ecology-themed refresher on interpreting boxplots.
+
+```{r EPA_region_N_boxplots, warning=FALSE}
+### Below, we are going to use the arrange function from dplyr
+### to re-order the rows in EPAdf based on the levels of N
+### in each stream
+EPAdf <- EPAdf %>% 
+  dplyr::arrange(desc(Nitrogen)) # order in terms of decreasing values of Nitrogen, from most to least
+
+### Generate boxplots for stream nitrogen levels across regions
+p <- ggplot(EPAdf, aes(x=RegionName,y=Nitrogen)) # Initialize plot; x-axis (grouping variable) is region, y-axis is stream N levels
+p <- p + geom_boxplot(outlier.shape = NA) # suppress outliers 
+p <- p + ylim(0,20000) # limit the y-axis range
+p <- p + labs(x="EPA Region",y="Nitrogen (μg per L)") # add more informative x- and y-axis labels
+p <- p + coord_flip() # reverse the x- and y-axes because the region names are long
+p <- p + theme_linedraw() # change the theme of the plot
+p
+```
+Hm. So when you run the code, you will see that there are differences in the levels of N observed in each stream across the EPA regions. However, this plot is a little tough to read. It would be easier to interpret if we could arrange the boxplots in increasing order of nitrogen level for instance. We'll achieve that by using the function `reorder` below.
+
+```{r reordering_boxplot}
+### Generate boxplots where each boxplot is ordered by its relative nitrogen levels
+p <- ggplot(EPAdf, aes(x=reorder(RegionName,-Nitrogen),y=Nitrogen)) # Initialize plot; x-axis will now be ordered based on the values of nitrogen, y-axis is stream N levels
+p <- p + geom_boxplot(outlier.shape = NA) # suppress outliers 
+p <- p + ylim(0,20000) # limit the y-axis range
+p <- p + labs(x="EPA Region",y="Nitrogen (μg per L)") # add more informative x- and y-axis labels
+p <- p + coord_flip() # reverse the x- and y-axes because the region names are long
+p <- p + theme_classic() # change the theme
+p
+```
+## Evaluating the proportion of streams that are nitrogen-polluted
+
+Below, we will use the `summarize` and `group_by` commands to calculate the proportion of streams in each EPA region that are nitrogen-polluted. For purposes of this homework, we will define a stream as being polluted if its N level is higher than the threshold value for that region.
+
+```{r nitrogen_summary_table, eval=T}
+### Create a summary table to store the proportion of
+### streams in each region that have excessive 
+### levels of nitrogen
+N_summary_table <- EPAdf %>%
+  group_by(RegionName) %>%
+  summarize(ProportionHigh = signif( length( which( HighN=="High") ) /n(), 2)) 
+# this is a bit convoluted but we are seeing which 
+# streams have "High" levels of nitrogen (in excess of 
+# threshold values for each region), then we see how 
+# many there are (using length), and finally, 
+# we reduce the number of digits reported 
+# to 2 "significant figures"
+
+### Clean up summary table by displaying 
+### the results in ascending order of 
+### the proportion of streams that have
+### excessively high N levels
+N_summary_table <- N_summary_table %>%
+  dplyr::arrange(ProportionHigh) # arrange in ascending order of proportion of streams exceeding N limit
+
+### Display the data table using 
+### htmlTable from the package htmlTable
+### and change the column names
+names(N_summary_table) <- c("Region","Proportion streams with excess N")
+htmlTable::htmlTable(N_summary_table,rname=FALSE)
+```
+
+# Visualizing the relationship between stream biodiversity and N
+
+Below, we will look at the relationship between nitrogen levels in streams and benthic macroinvertebrate diversity. Recall that a value of 0 indicates that the benthic macroinvertebrate community is very unhealthy or negatively impacted while 100 indicates that the benthic macroinvertebrate community is very healthy.
+
+Below, we'll modify our call to create a boxplot by adding the argument `notch = TRUE` in `geom_boxplot`. That will show us the 95% confidence interval for the median and provides additional visual insight into how the groups may or may not differ. If the notches don't overlap, then that is strong evidence that the medians between the groups differ.   
+
+```{r high_low_MMI}
+### Control the order of plotting High versus Low for the HighN column
+EPAdf$HighN <- factor(EPAdf$HighN,levels = c("Low","High")) # make Low come before High, rather than the default which is alphabetical order
+
+### Create a boxplot that visualizes stream biodiversity 
+### across nitrogen polluted and non-polluted streams
+p <- ggplot(EPAdf, aes(x=HighN, y=MMI)) # initiate plot with HighN on x-axis; MMI on y-axis
+p <- p + geom_boxplot(notch = TRUE) # add boxplots with notches
+p <- p + theme_bw() # change the plotting theme
+p <- p + labs(x="Nitrogen level in stream",y="Benthic macroinvertebrate diversity score") # change x- and y-axis labels
+p
+```

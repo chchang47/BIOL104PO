@@ -35,6 +35,9 @@ navbar:
         - text: "Week 9"
         - text: "Linear regressions; climate impacts"
           href: Week9.html
+        - text: "Week 10"
+        - text: "Comparing pollution across streams in the US"
+          href: Week10.html
 output:
   html_document:
     theme: flatly
