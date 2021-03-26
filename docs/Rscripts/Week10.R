@@ -106,12 +106,12 @@ N_summary_table <- N_summary_table %>%
 names(N_summary_table) <- c("Region","Proportion streams with excess N")
 htmlTable::htmlTable(N_summary_table,rname=FALSE)
 
-### Control the order of plotting High versus Low for the HighN column
-EPAdf$HighN <- factor(EPAdf$HighN,levels = c("Low","High")) # make Low come before High, rather than the default which is alphabetical order
-
 ###========================================
 ### Section 3
 ###========================================
+
+### Control the order of plotting High versus Low for the HighN column
+EPAdf$HighN <- factor(EPAdf$HighN,levels = c("Low","High")) # make Low come before High, rather than the default which is alphabetical order
 
 ### Create a boxplot that visualizes stream biodiversity 
 ### across nitrogen polluted and non-polluted streams
