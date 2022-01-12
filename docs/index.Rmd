@@ -1,9 +1,9 @@
 ---
-title: "Syllabus"
+title: "Conservation Biology Syllabus"
 author: ""
 date: "`r Sys.Date()`"
 output: html_document
-bibliography: /Users/chc02006/Documents/Teaching/BIOL104PO/bio104.bib
+bibliography: /Users/chc02006/Documents/Teaching/BIOL104/BIOL104PO/bio104.bib
 link-citations: true
 ---
 
@@ -20,7 +20,7 @@ If these are questions that you find urgent, exciting, or otherwise fascinating,
 Ultimately, the threats facing species and ecosystems are driven by human behaviors and societal decisions. Finding solutions therefore requires the combination of the social sciences alongside ecology. Most of the material that we will cover in class will take the form of conceptual models linked to "lessons learned" from conservation successes or failures. The course will be centered on discussions and collaborative group work. In this course, you will also be introduced to key computational tools used by conservation scientists and you will apply these skills in your own projects.
 
 * *Reading*: You will interpret, synthesize, extend, and question core principles in conservation biology and science.
-* *Presentation*: Describing complex issues with clarity and persuasion is a highly translatable skill. This course will offer many opportunities to further develop your presentation skills, including speed presentations on readings and group presentations.
+* *Communication and Presentation*: Describing complex issues with clarity and persuasion is a highly translatable skill. This course will offer many opportunities to further develop your presentation skills, including speed presentations on readings and group presentations.
 * *Synthesis*: Creating socio-ecological conceptual models is a critical skill for conservation science. This course will allow you to build your skills in concept-mapping and interpreting claims in the literature.
 * *Data management, analysis, and visualization*: This course has a computational component where you will be able to develop skills in statistical programming using the `R` programming language. I do not assume any prior experience with programming.
 
@@ -35,28 +35,48 @@ By the end of the course, a successful learner will be able to:
 
 ## General information
 
-**Location**: [Zoom](https://sakai.claremont.edu/portal/directtool/3ade948b-6922-4f24-bcbf-4129e17cdfd5/)
+**Location**: 
 
-**Schedule**: Tuesdays & Thursdays, 9:15-10:30am PST (January 25 - May 7, 2021)
+* For the first two weeks of course, we are tentatively going to meet on Zoom for lecture and lab. Please refer to the [Sakai Zoom Pomona tab](https://sakai.claremont.edu/portal/directtool/849bf64f-4434-4de3-a6d9-ca3a71a16b7d/) for call links.
+* Lecture: Seaver South Room 52
+* Lab: Seaver Biology Room 140 or the Bernard Field Station Outdoors Classroom when posted.
 
-**Office Hours**: I am always happy to talk to you. Please schedule a chat at my [Calendly](https://calendly.com/chchang47/officechat).
+**Schedule**: Tuesdays & Thursdays, 9:35-10:30am PST (January-May 2022), Labs Thursdays 1:15-5pm PST
+
+**Office Hours**: I am always happy to talk to you. Please schedule a chat at my [Calendly](https://calendly.com/chchang47/small-group-meetings).
 
 **Prerequisites**: Bio 41E (Intro Ecol & Evolutionary Bio w/Lab) or instructor permission
 
 **Readings**: This course will use a combination of the primary literature, popular science books, and the free, online textbook [*Conservation Biology for All*](https://conbio.org/publications/free-textbook).
 
-**Student Well-Being**: In addition to the course policies below, I emphasize that I prioritize your health and well-being. Physical or mental illness, personal crises, family care, and other responsibilities can strongly impact your ability to participate in this course. Please let me and/or staff in the Student Affairs or related offices know if any of these issues pose severe obstacles to you and we will work together to come up with solutions. I am also more than happy to work with you and a representative from Student Affairs in situations where sensitive information is involved.
+**Student Well-Being**: Our health, both mental and physical, is paramount. We must consider the health of others inside and outside the classroom. All Claremont Colleges students have signed agreements regulating on-campus behavior during the pandemic; in the classroom, we will uphold these agreements. We need to take care of each other for this course to be successful. I ask you therefore to adhere to the following principles: 
+
+* There is a mask mandate for all indoor spaces on campus. You must wear a mask for the entire class; eating and drinking in indoors classroom spaces are not permitted. Your mask must cover your mouth and nose. The college has zero-tolerance for violations of this policy, and our shared commitment to the health and safety of our community members means if you come to class unmasked you will have to leave class for the day. 
+* Class attendance is important, but if you need to miss class for health reasons, concerning symptoms, suspected COVID exposure, unexpected dependent care, technology issues, or other emergency reasons I will work with you. Let me underscore this: **please make your decisions always based on health, safety, and wellness—yours and others**—and I will work with you at the other end. *Take any potential symptoms seriously; we’re counting on each other.*
+* If you, or a family member, are experiencing hardship because of the pandemic, talk to me or to someone in the Dean of Students office. You are not alone during this time. 
+
+In addition to the course policies below, I emphasize that I prioritize your health and well-being. Physical or mental illness, personal crises, family care, and other responsibilities can strongly impact your ability to participate in this course. Please let me and/or staff in the Student Affairs or related offices know if any of these issues pose severe obstacles to you and we will work together to come up with solutions. I am also more than happy to work with you and a representative from Student Affairs in situations where sensitive information is involved.
+
+**Digital ethics**: One of the tools we will use from time to time in this course is Zoom. To facilitate access, I may occasionally record Zoom meetings. I will inform students when recordings are in progress. I expect that students in my class will respect one another and my privacy. To that end, students will not record any other member of the class--including the instructor--without obtaining their consent in advance. Students will also not share information about other members of this course in any type of public fora, such as social media. As the instructor, I own the copyright to my instructional materials. These materials cannot be distributed in whole or in part to any person or entity other than other members of the current class without my prior written consent.
 
 ## Course assessment
 
-* Content and coding assessments (20%)
-  + 2 lowest grades dropped for `R` homework assignments
-  + There will be an open-book summative homework before spring break and before the end of the semester to reflect on the concepts that we are building up in this class. These scores will not be dropped.
-* Facilitating discussion and providing incisive discussion points (20%)
-  + Lowest forum post grades will be dropped
-* Speed Talks: Interpreting articles (20%)
-* Project 1A (20%)
-* Project 1B (20%)
+* Discussion contributions: 10%
+  + Weekly self-assessments: 5%
+  + Article reflection questions: 5%
+* Lab and lecture assignments: 20%
+* Case study presentation and discussion facilitation: 15%
+  + Case study presentation: 10%
+  + Discussion facilitation: 5%
+* California county conservation analysis: 20%
+  + Presentation: 5%
+  + Report: 15%
+* Independent project: 15%
+  + Presentation: 10%
+  + Reflection report: 5%
+* Final paper: 20%
+  + Report: 15%
+  + Viva voce: 5%
 
 ## Mutual expectations
 
@@ -72,9 +92,9 @@ A key component of my role as an instructor is office hours. During office hours
 
 ## General course policies
 
-*Office hours, email, and class Slack channel*: During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course. If you would like to discuss a particular problem or topic that would benefit from preparation on my part, please give me advance notice via [Calendly](https://calendly.com/chchang47/officechat). 
+*Office hours, email, and class Slack channel*: During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course. If you would like to discuss a particular problem or topic that would benefit from preparation on my part, please give me advance notice via [Calendly](https://calendly.com/chchang47/small-group-meetings). 
 
-I have email boundaries and I encourage you to find your own. Mine include not answering emails after 6pm, or on weekends or holidays. Finally, I request that emails only be used for interactions that are truly one-on-one (e.g. requesting extensions to assignments or accomodations); in general, to help create an atmosphere of transparency and group learning, I request that questions about content and assignments be directed to the #bio104 Slack channel in the Pomona College Division-II workspace.
+I have email boundaries and I encourage you to find your own. Mine include not answering emails after 6pm, or on weekends or holidays. Finally, I request that emails only be used for interactions that are truly one-on-one (e.g. requesting extensions to assignments or accommodations); in general, to help create an atmosphere of transparency and group learning, I request that **questions about content and assignments be directed to the #bio104sp22 Slack channel** in the Pomona College Division-II workspace.
 
 *Learning diversity & accommodations*: Pomona College welcomes and accommodates students with disabilities. As your instructor, I care about you and your growth as an environmental scholar. If you encounter obstacles to your success, please let me know immediately so that we can work together to identify ways to overcome any limitations of current course design. If you feel you need a reasonable accommodation to participate in this class, complete course requirements, or benefit from the College’s programs or services, you are also welcome to contact the student accessibility resource office at your College to begin this conversation or to establish accommodations for this or other courses.
 
@@ -95,7 +115,7 @@ Below is a list of the relevant accessibility resource offices at each of the Co
 4. [PZ Writing Center](https://www.pitzer.edu/writing-center/)
 5. [SC Writing Center](https://www.scrippscollege.edu/departments/writing-program/writing-center)
 
-*Late assignments*:  When assignments are handed in late without prior notice, I reserve the right to apply a grade deduction penalty (1 grade reduction for each day late).
+*Late assignments*:  When assignments are handed in late without prior notice, I reserve the right to apply a grade deduction penalty (up to 1 grade reduction for each day late).
 
 *Academic integrity*: Academic honesty is a core value of Pomona College and the Claremont Colleges. Plagiarism undermines academic integrity and is a threat to communal ethics. I will assign plagiarized assignments a failing grade and will report any instance of plagiarism to the College.
 
@@ -103,23 +123,35 @@ Below is a list of the relevant accessibility resource offices at each of the Co
 
 Please note that this schedule is subject to change; this syllabus is very much a *living document* that will change to reflect the unique conditions of this semester. I reserve the right to exercise some flexibility in scheduling, usually in favor of giving more time to students.
 
-<!--Week 1; n=26 students?; 8 small groups Note that **L** denotes lecture and **B** lab.-->
-<!--Books: Magurran, Key-Topics-In-Conservation-Biology, Sutherland_ConservationScienceAction-->
+```{r, echo=F, warning=F, message=F}
+library(dplyr)
+library(googlesheets4)
+library(htmlTable)
+library(knitr)
+library(flextable)
 
-| Week | Topic       | Resources |
-|------|-----------------------------------|---------------|
-| 1/26 | Introduction: Personal motivations, Biodiversity overview, Getting set up with `RStudio Server` | @berkes2004rethinking; @mace2014whose; @sandbrook2019global; [Conservation Biology for All, Chapter 2](https://conbio.org/images/content_publications/Chapter2.pdf) | <!--Future of conservation-->
-| 2/2  | Measuring biodiversity, the global extinction crisis, introduction to objects and data types in `R` | @myers2000biodiversity; @pimmExtinctionChapter; @ceballos2015accelerated | <!--Students do talks on biodiversity?--> 
-| 2/9  | Why should society care? Ecosystem services, manipulating `data.frame`s in `R` |  [Conservation Biology for All, Chapter 3](https://conbio.org/images/content_publications/Chapter3.pdf); [Valuation of Ecosystem Services](https://www.youtube.com/watch?v=q8AZHtF2f50); @mccauley2006selling; @armsworth2007ecosystem; @tallis2011natural; @cardinale2012biodiversity | <!--Theme 2: Problems and some limited solutions; muradian2013payments?-->
-| 2/16 | Habitat loss, generating plots in `R` | [Conservation Biology for All, Chapter 4 - subset](https://conbio.org/images/content_publications/Chapter4.pdf); [Conservation Biology for All, Chapter 5](https://conbio.org/images/content_publications/Chapter5.pdf); @mueller2012closing |
-| 2/23 | How do we prioritize locating nature reserves given limited resources? When is PADDD strategic? | @mace2007prioritizing; @balmford2003should; @kareiva2010trade; @deangelis2019modelling | 
-| 3/2  | Over-exploitation, joining data | [Conservation Biology for All, Chapter 6](https://conbio.org/images/content_publications/Chapter6.pdf); @peres2001synergistic; @dirzo2014defaunation; [Will the oceans ever run out of fish?](https://youtu.be/WNdR808jMSA) |
-| 3/9  | Spring recess | |
-| 3/16 | Introduced species, Guest lecture by Prof. Marty Meyer | [Conservation Biology for All, Chapter 7](https://conbio.org/images/content_publications/Chapter7.pdf); @cardoso2011seven |  <!--Conserving harvested species, plotting multiple variables |  @mangel1996principles; [Fisheries Economics Video](https://www.youtube.com/watch?v=7DNhqtYf47E); [Diekert pages 1-5](https://www.uio.no/studier/emner/sv/oekonomi/ECON4925/h10/undervisningsmateriale/lecture_11-12_renew(1511).pdf) |--> 
-| 3/23 | Climate change | [Conservation Biology for All, Chapter 8](https://conbio.org/images/content_publications/Chapter8.pdf); @walther2002ecological; [TedEd video on phenology](https://youtu.be/RNs3XpRmRfI); [Project BudBurst phenology video](https://youtu.be/Kpp9NE1i2zM) - note that the videos are optional |
-| 3/30 | Consumer behaviors & pollution | @lenzen2012international; @oneill2018conversation; @erisman2013consequences; [video on sampling stream macroinvertebrates](https://youtu.be/E5M3LvX6bO0); [video on nitrogen pollution](https://youtu.be/Gv5kfXRARN0) | <!--Theme 3: Solutions; maybe first 19 pages of https://prod-cat-files.macmillan.cloud/CMS/SampleChapters/NDP000DHB/1682_1205_Kareiva_Chapter1.pdf-->
-| 4/6  | Guest lectures by Drs. [Hope Ovie Usieta](https://leventisfoundation.org.ng/the-management/) and [Emma Fuller](https://www.ioes.ucla.edu/person/emma-fuller/) | Readings posted to Sakai | <!--Week 4-->
-| 4/13 | Describing extinction risk: the IUCN Red List | @collen2016clarifying; @akccakaya2018quantifying; [The IUCN Red List: A Barometer of Life](https://youtu.be/VukyqMajAOU); [ZSL video](https://youtu.be/LqRq-Gd63a0) |
-| 4/20 | Population dynamics in conservation | [Morris, Doak, et al., Chapters 1, 2, and **4**](https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf); additional videos TBD | <!--@levin2014public; @dietz2003struggle; @rohlf1991six; [Wild Hope, Chapter 3](https://www.press.uchicago.edu/ucp/books/book/chicago/W/bo13823467.html); [Safe Harbors and RCWs](https://www.youtube.com/watch?v=fNWC4fTUU08); Decisions at the scale of individuals and societies | @stern1992psychological; @larigauderie2010intergovernmental; @kahan2012polarizing; @pascual2017valuing;  [Lessons from Kyoto](https://www.youtube.com/watch?v=bcxL7jN4akw); -->
-| 4/27 | Conservation of common pool resources | [Ostrom Nobel Prize speech](https://sakai.claremont.edu/portal/directtool/03e44dc3-80e8-422c-bb24-52af386ba822/); [Montreal Protocol](https://www.youtube.com/watch?v=OINKJNWtSiE); [Climate negotiations - a brief history](https://youtu.be/B11kASPfYxY); [select one of the 4 case studies at the Week 14 site](https://sakai.claremont.edu/portal/directtool/03e44dc3-80e8-422c-bb24-52af386ba822/) | <!--@dunlap2000NEP; @burivalova2017critical-->
-| 5/4  | Making conservation a success story, Course retrospective, Final project 1B due | |
+## Pull in Google sheet schedule
+schedDF <- googlesheets4::read_sheet("
+https://docs.google.com/spreadsheets/d/1JIh8EzjAGdTWxuCF7ha7yI4RTIGbn0Smq4EpV5WTtWo/edit?usp=sharing",sheet = "Schedule",col_types="ccccc")
+
+## Hack-y workaround to do zebra banding color automagically (based on NA values)
+zebra_cols <- rep("none",dim(schedDF)[1])
+zebra_cols[which(is.na(schedDF$Topic))] <- "#adc2d8"
+
+#ft <- flextable(schedDF)
+#ft <- theme_vanilla(ft)
+#ft
+
+schedDF$Week[1] <- "1  "
+
+schedDF %>% 
+  addHtmlTableStyle(col.rgroup = zebra_cols,
+                    align = "llccc",
+                    css.cell = "border-bottom: solid 0.5px",
+                    css.cgroup=c("width: 1000px;","width: 100px;","width: 300px;","width: 100px;","width: 300px;")) %>% # doesn't make a difference! must be getting overridden by knitr.
+  htmlTable(rnames=FALSE) # can't figure out for now how to merge cells - whatever
+```
+
+## Reading list
+
+<div id="refs"></div>

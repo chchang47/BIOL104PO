@@ -13,7 +13,7 @@ We will use the package `swirl` to learn more about several fundamental concepts
  
 ## Steps
 
-1. Log-in at [https://rstudio.pomona.edu](https://rstudio.pomona.edu)
+1. Log-in at [https://rstudio.cloud](https://rstudio.cloud)
 2. In the console, type in `library(swirl)`
     + All subsequent steps should be run in the console.
 3. Type in `swirl()`
@@ -92,6 +92,4 @@ I recommend typing in `2` (representing "No") at the `Selection:` field.
 ```
 In response to the blue `Selection:` query, please type 0.
 
-15. When you have completed the first `swirl` course, please navigate to the [Gradescope POM](https://sakai.claremont.edu/portal/directtool/cf1b6e41-4bb4-47f6-824d-a35660ddf375/) subpage in our Sakai site and select the correct option for the `Completion of swirl class (Basic Building Blocks)` assignment.
-
-**If you have been working on this swirl class for an amount of time that feels really excessive (e.g. > 2 hours), please don't keep on hitting your head against the wall.** Reach out to me via Slack DM or email.
+15. When you have completed the first `swirl` course, please navigate to the [Gradescope POM](https://sakai.claremont.edu/portal/directtool/bed484e9-cce5-4661-9413-5cd48ecea551/) subpage in our Sakai site and select the correct option for the `Completion of swirl class (Basic Building Blocks)` assignment.

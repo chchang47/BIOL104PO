@@ -1,7 +1,7 @@
 name: "BIOL104"
 output_dir: "."
 navbar:
-  title: "Conservation Science"
+  title: "Conservation Biology"
   left:
     - text: "Syllabus"
       icon: fa-home
@@ -13,31 +13,31 @@ navbar:
           href: Week1.html
         - text: "Introduction to R"
           href: Week1b.html
-    - text: "Data manipulation"
-      menu:
-        - text: "Week 2"
-        - text: "Manipulating data.frames"
-          href:  Week2.html
-        - text: "Week 3"
-        - text: "Data subsetting"
-          href:  Week3.html
-        - text: "Week 4"
-        - text: "Data visualization"
-          href:  Week4.html
-    - text: "Conservation analyses"
-      menu:
-        - text: "Week 5"
-        - text: "Biodiversity & prioritization"
-          href: Week5.html
-        - text: "Week 6"
-        - text: "Combining social and ecological data"
-          href: Week6.html
-        - text: "Week 9"
-        - text: "Linear regressions; climate impacts"
-          href: Week9.html
-        - text: "Week 10"
-        - text: "Comparing pollution across streams in the US"
-          href: Week10.html
+#    - text: "Data manipulation"
+#      menu:
+        #- text: "Week 2"
+    #     - text: "Manipulating data.frames"
+    #       href:  Week2.html
+    #     - text: "Week 3"
+    #     - text: "Data subsetting"
+    #       href:  Week3.html
+    #     - text: "Week 4"
+    #     - text: "Data visualization"
+    #       href:  Week4.html
+    # - text: "Conservation analyses"
+    #   menu:
+    #     - text: "Week 5"
+    #     - text: "Biodiversity & prioritization"
+    #       href: Week5.html
+    #     - text: "Week 6"
+    #     - text: "Combining social and ecological data"
+    #       href: Week6.html
+    #     - text: "Week 9"
+    #     - text: "Linear regressions; climate impacts"
+    #       href: Week9.html
+    #     - text: "Week 10"
+    #     - text: "Comparing pollution across streams in the US"
+    #       href: Week10.html
 output:
   html_document:
     theme: flatly

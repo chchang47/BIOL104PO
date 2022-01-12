@@ -11,9 +11,9 @@
 
 <meta name="author" content="" />
 
-<meta name="date" content="2021-04-23" />
+<meta name="date" content="2022-01-11" />
 
-<title>Syllabus</title>
+<title>Conservation Biology Syllabus</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,18 +21,31 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -45,32 +58,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -81,10 +69,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -101,40 +85,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -162,7 +119,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -174,7 +131,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -185,10 +142,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -200,7 +170,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -272,7 +241,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Conservation Science</a>
+      <a class="navbar-brand" href="index.html">Conservation Biology</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -299,52 +268,6 @@ $(document).ready(function () {
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Data manipulation
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Week 2</li>
-    <li>
-      <a href="Week2.html">Manipulating data.frames</a>
-    </li>
-    <li class="dropdown-header">Week 3</li>
-    <li>
-      <a href="Week3.html">Data subsetting</a>
-    </li>
-    <li class="dropdown-header">Week 4</li>
-    <li>
-      <a href="Week4.html">Data visualization</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Conservation analyses
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Week 5</li>
-    <li>
-      <a href="Week5.html">Biodiversity &amp; prioritization</a>
-    </li>
-    <li class="dropdown-header">Week 6</li>
-    <li>
-      <a href="Week6.html">Combining social and ecological data</a>
-    </li>
-    <li class="dropdown-header">Week 9</li>
-    <li>
-      <a href="Week9.html">Linear regressions; climate impacts</a>
-    </li>
-    <li class="dropdown-header">Week 10</li>
-    <li>
-      <a href="Week10.html">Comparing pollution across streams in the US</a>
-    </li>
-  </ul>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -353,12 +276,12 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
-<h1 class="title toc-ignore">Syllabus</h1>
-<h4 class="date">2021-04-23</h4>
+<h1 class="title toc-ignore">Conservation Biology Syllabus</h1>
+<h4 class="date">2022-01-11</h4>
 
 </div>
 
@@ -369,7 +292,7 @@ $(document).ready(function () {
 <p>Ultimately, the threats facing species and ecosystems are driven by human behaviors and societal decisions. Finding solutions therefore requires the combination of the social sciences alongside ecology. Most of the material that we will cover in class will take the form of conceptual models linked to “lessons learned” from conservation successes or failures. The course will be centered on discussions and collaborative group work. In this course, you will also be introduced to key computational tools used by conservation scientists and you will apply these skills in your own projects.</p>
 <ul>
 <li><em>Reading</em>: You will interpret, synthesize, extend, and question core principles in conservation biology and science.</li>
-<li><em>Presentation</em>: Describing complex issues with clarity and persuasion is a highly translatable skill. This course will offer many opportunities to further develop your presentation skills, including speed presentations on readings and group presentations.</li>
+<li><em>Communication and Presentation</em>: Describing complex issues with clarity and persuasion is a highly translatable skill. This course will offer many opportunities to further develop your presentation skills, including speed presentations on readings and group presentations.</li>
 <li><em>Synthesis</em>: Creating socio-ecological conceptual models is a critical skill for conservation science. This course will allow you to build your skills in concept-mapping and interpreting claims in the literature.</li>
 <li><em>Data management, analysis, and visualization</em>: This course has a computational component where you will be able to develop skills in statistical programming using the <code>R</code> programming language. I do not assume any prior experience with programming.</li>
 </ul>
@@ -385,28 +308,54 @@ $(document).ready(function () {
 </div>
 <div id="general-information" class="section level2">
 <h2>General information</h2>
-<p><strong>Location</strong>: <a href="https://sakai.claremont.edu/portal/directtool/3ade948b-6922-4f24-bcbf-4129e17cdfd5/">Zoom</a></p>
-<p><strong>Schedule</strong>: Tuesdays &amp; Thursdays, 9:15-10:30am PST (January 25 - May 7, 2021)</p>
-<p><strong>Office Hours</strong>: I am always happy to talk to you. Please schedule a chat at my <a href="https://calendly.com/chchang47/officechat">Calendly</a>.</p>
+<p><strong>Location</strong>:</p>
+<ul>
+<li>For the first two weeks of course, we are tentatively going to meet on Zoom for lecture and lab. Please refer to the <a href="https://sakai.claremont.edu/portal/directtool/849bf64f-4434-4de3-a6d9-ca3a71a16b7d/">Sakai Zoom Pomona tab</a> for call links.</li>
+<li>Lecture: Seaver South Room 52</li>
+<li>Lab: Seaver Biology Room 140 or the Bernard Field Station Outdoors Classroom when posted.</li>
+</ul>
+<p><strong>Schedule</strong>: Tuesdays &amp; Thursdays, 9:35-10:30am PST (January-May 2022), Labs Thursdays 1:15-5pm PST</p>
+<p><strong>Office Hours</strong>: I am always happy to talk to you. Please schedule a chat at my <a href="https://calendly.com/chchang47/small-group-meetings">Calendly</a>.</p>
 <p><strong>Prerequisites</strong>: Bio 41E (Intro Ecol &amp; Evolutionary Bio w/Lab) or instructor permission</p>
 <p><strong>Readings</strong>: This course will use a combination of the primary literature, popular science books, and the free, online textbook <a href="https://conbio.org/publications/free-textbook"><em>Conservation Biology for All</em></a>.</p>
-<p><strong>Student Well-Being</strong>: In addition to the course policies below, I emphasize that I prioritize your health and well-being. Physical or mental illness, personal crises, family care, and other responsibilities can strongly impact your ability to participate in this course. Please let me and/or staff in the Student Affairs or related offices know if any of these issues pose severe obstacles to you and we will work together to come up with solutions. I am also more than happy to work with you and a representative from Student Affairs in situations where sensitive information is involved.</p>
+<p><strong>Student Well-Being</strong>: Our health, both mental and physical, is paramount. We must consider the health of others inside and outside the classroom. All Claremont Colleges students have signed agreements regulating on-campus behavior during the pandemic; in the classroom, we will uphold these agreements. We need to take care of each other for this course to be successful. I ask you therefore to adhere to the following principles:</p>
+<ul>
+<li>There is a mask mandate for all indoor spaces on campus. You must wear a mask for the entire class; eating and drinking in indoors classroom spaces are not permitted. Your mask must cover your mouth and nose. The college has zero-tolerance for violations of this policy, and our shared commitment to the health and safety of our community members means if you come to class unmasked you will have to leave class for the day.</li>
+<li>Class attendance is important, but if you need to miss class for health reasons, concerning symptoms, suspected COVID exposure, unexpected dependent care, technology issues, or other emergency reasons I will work with you. Let me underscore this: <strong>please make your decisions always based on health, safety, and wellness—yours and others</strong>—and I will work with you at the other end. <em>Take any potential symptoms seriously; we’re counting on each other.</em></li>
+<li>If you, or a family member, are experiencing hardship because of the pandemic, talk to me or to someone in the Dean of Students office. You are not alone during this time.</li>
+</ul>
+<p>In addition to the course policies below, I emphasize that I prioritize your health and well-being. Physical or mental illness, personal crises, family care, and other responsibilities can strongly impact your ability to participate in this course. Please let me and/or staff in the Student Affairs or related offices know if any of these issues pose severe obstacles to you and we will work together to come up with solutions. I am also more than happy to work with you and a representative from Student Affairs in situations where sensitive information is involved.</p>
+<p><strong>Digital ethics</strong>: One of the tools we will use from time to time in this course is Zoom. To facilitate access, I may occasionally record Zoom meetings. I will inform students when recordings are in progress. I expect that students in my class will respect one another and my privacy. To that end, students will not record any other member of the class–including the instructor–without obtaining their consent in advance. Students will also not share information about other members of this course in any type of public fora, such as social media. As the instructor, I own the copyright to my instructional materials. These materials cannot be distributed in whole or in part to any person or entity other than other members of the current class without my prior written consent.</p>
 </div>
 <div id="course-assessment" class="section level2">
 <h2>Course assessment</h2>
 <ul>
-<li>Content and coding assessments (20%)
+<li>Discussion contributions: 10%
 <ul>
-<li>2 lowest grades dropped for <code>R</code> homework assignments</li>
-<li>There will be an open-book summative homework before spring break and before the end of the semester to reflect on the concepts that we are building up in this class. These scores will not be dropped.</li>
+<li>Weekly self-assessments: 5%</li>
+<li>Article reflection questions: 5%</li>
 </ul></li>
-<li>Facilitating discussion and providing incisive discussion points (20%)
+<li>Lab and lecture assignments: 20%</li>
+<li>Case study presentation and discussion facilitation: 15%
 <ul>
-<li>Lowest forum post grades will be dropped</li>
+<li>Case study presentation: 10%</li>
+<li>Discussion facilitation: 5%</li>
 </ul></li>
-<li>Speed Talks: Interpreting articles (20%)</li>
-<li>Project 1A (20%)</li>
-<li>Project 1B (20%)</li>
+<li>California county conservation analysis: 20%
+<ul>
+<li>Presentation: 5%</li>
+<li>Report: 15%</li>
+</ul></li>
+<li>Independent project: 15%
+<ul>
+<li>Presentation: 10%</li>
+<li>Reflection report: 5%</li>
+</ul></li>
+<li>Final paper: 20%
+<ul>
+<li>Report: 15%</li>
+<li>Viva voce: 5%</li>
+</ul></li>
 </ul>
 </div>
 <div id="mutual-expectations" class="section level2">
@@ -423,8 +372,8 @@ $(document).ready(function () {
 </div>
 <div id="general-course-policies" class="section level2">
 <h2>General course policies</h2>
-<p><em>Office hours, email, and class Slack channel</em>: During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course. If you would like to discuss a particular problem or topic that would benefit from preparation on my part, please give me advance notice via <a href="https://calendly.com/chchang47/officechat">Calendly</a>.</p>
-<p>I have email boundaries and I encourage you to find your own. Mine include not answering emails after 6pm, or on weekends or holidays. Finally, I request that emails only be used for interactions that are truly one-on-one (e.g. requesting extensions to assignments or accomodations); in general, to help create an atmosphere of transparency and group learning, I request that questions about content and assignments be directed to the #bio104 Slack channel in the Pomona College Division-II workspace.</p>
+<p><em>Office hours, email, and class Slack channel</em>: During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course. If you would like to discuss a particular problem or topic that would benefit from preparation on my part, please give me advance notice via <a href="https://calendly.com/chchang47/small-group-meetings">Calendly</a>.</p>
+<p>I have email boundaries and I encourage you to find your own. Mine include not answering emails after 6pm, or on weekends or holidays. Finally, I request that emails only be used for interactions that are truly one-on-one (e.g. requesting extensions to assignments or accommodations); in general, to help create an atmosphere of transparency and group learning, I request that <strong>questions about content and assignments be directed to the #bio104sp22 Slack channel</strong> in the Pomona College Division-II workspace.</p>
 <p><em>Learning diversity &amp; accommodations</em>: Pomona College welcomes and accommodates students with disabilities. As your instructor, I care about you and your growth as an environmental scholar. If you encounter obstacles to your success, please let me know immediately so that we can work together to identify ways to overcome any limitations of current course design. If you feel you need a reasonable accommodation to participate in this class, complete course requirements, or benefit from the College’s programs or services, you are also welcome to contact the student accessibility resource office at your College to begin this conversation or to establish accommodations for this or other courses.</p>
 <p>Below is a list of the relevant accessibility resource offices at each of the Colleges:</p>
 <ol style="list-style-type: decimal">
@@ -443,106 +392,378 @@ $(document).ready(function () {
 <li><a href="https://www.pitzer.edu/writing-center/">PZ Writing Center</a></li>
 <li><a href="https://www.scrippscollege.edu/departments/writing-program/writing-center">SC Writing Center</a></li>
 </ol>
-<p><em>Late assignments</em>: When assignments are handed in late without prior notice, I reserve the right to apply a grade deduction penalty (1 grade reduction for each day late).</p>
+<p><em>Late assignments</em>: When assignments are handed in late without prior notice, I reserve the right to apply a grade deduction penalty (up to 1 grade reduction for each day late).</p>
 <p><em>Academic integrity</em>: Academic honesty is a core value of Pomona College and the Claremont Colleges. Plagiarism undermines academic integrity and is a threat to communal ethics. I will assign plagiarized assignments a failing grade and will report any instance of plagiarism to the College.</p>
 </div>
 <div id="course-schedule" class="section level2">
 <h2>Course Schedule</h2>
 <p>Please note that this schedule is subject to change; this syllabus is very much a <em>living document</em> that will change to reflect the unique conditions of this semester. I reserve the right to exercise some flexibility in scheduling, usually in favor of giving more time to students.</p>
-<!--Week 1; n=26 students?; 8 small groups Note that **L** denotes lecture and **B** lab.-->
-<!--Books: Magurran, Key-Topics-In-Conservation-Biology, Sutherland_ConservationScienceAction-->
-<table>
-<colgroup>
-<col width="10%" />
-<col width="62%" />
-<col width="26%" />
-</colgroup>
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead>
-<tr class="header">
-<th>Week</th>
-<th>Topic</th>
-<th>Resources</th>
+<tr>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Week
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Date
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Topic
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Resources
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Lab
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>1/26</td>
-<td>Introduction: Personal motivations, Biodiversity overview, Getting set up with <code>RStudio Server</code></td>
-<td><span class="citation">Berkes (<a href="#ref-berkes2004rethinking" role="doc-biblioref">2004</a>)</span>; <span class="citation">Mace (<a href="#ref-mace2014whose" role="doc-biblioref">2014</a>)</span>; <span class="citation">Sandbrook et al. (<a href="#ref-sandbrook2019global" role="doc-biblioref">2019</a>)</span>; <a href="https://conbio.org/images/content_publications/Chapter2.pdf">Conservation Biology for All, Chapter 2</a></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+1
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+1/18
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Introduction to conservation biology &amp; biodiversity overview
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<span class="citation">Berkes (<a href="#ref-berkes2004rethinking" role="doc-biblioref">2004</a>)</span>; <span class="citation">Mace (<a href="#ref-mace2014whose" role="doc-biblioref">2014</a>)</span>; <span class="citation">Sandbrook et al. (<a href="#ref-sandbrook2019global" role="doc-biblioref">2019</a>)</span>; <a href="https://conbio.org/images/content_publications/Chapter2.pdf">Conservation Biology for All Chapter 2</a>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Getting set up with <code>RStudio.Cloud</code> and <code>R</code> introduction
+</td>
 </tr>
-<tr class="even">
-<td>2/2</td>
-<td>Measuring biodiversity, the global extinction crisis, introduction to objects and data types in <code>R</code></td>
-<td><span class="citation">Myers et al. (<a href="#ref-myers2000biodiversity" role="doc-biblioref">2000</a>)</span>; <span class="citation">Pimm (<a href="#ref-pimmExtinctionChapter" role="doc-biblioref">2009</a>)</span>; <span class="citation">Ceballos et al. (<a href="#ref-ceballos2015accelerated" role="doc-biblioref">2015</a>)</span></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+2
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+1/25
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Measuring biodiversity &amp; the global extinction crisis
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<span class="citation">Myers et al. (<a href="#ref-myers2000biodiversity" role="doc-biblioref">2000</a>)</span>; <span class="citation">Pimm (<a href="#ref-pimmExtinctionChapter" role="doc-biblioref">2009</a>)</span>; <span class="citation">Ceballos et al. (<a href="#ref-ceballos2015accelerated" role="doc-biblioref">2015</a>)</span>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Introduction to objects and data types in <code>R</code> &amp; data wrangling overview
+</td>
 </tr>
-<tr class="odd">
-<td>2/9</td>
-<td>Why should society care? Ecosystem services, manipulating <code>data.frame</code>s in <code>R</code></td>
-<td><a href="https://conbio.org/images/content_publications/Chapter3.pdf">Conservation Biology for All, Chapter 3</a>; <a href="https://www.youtube.com/watch?v=q8AZHtF2f50">Valuation of Ecosystem Services</a>; <span class="citation">McCauley (<a href="#ref-mccauley2006selling" role="doc-biblioref">2006</a>)</span>; <span class="citation">Armsworth et al. (<a href="#ref-armsworth2007ecosystem" role="doc-biblioref">2007</a>)</span>; <span class="citation">Tallis et al. (<a href="#ref-tallis2011natural" role="doc-biblioref">2011</a>)</span>; <span class="citation">Cardinale et al. (<a href="#ref-cardinale2012biodiversity" role="doc-biblioref">2012</a>)</span></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+3
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+2/1
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Why should society care? Defining ecosystem services.
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<a href="https://conbio.org/images/content_publications/Chapter3.pdf">Conservation Biology for All, Chapter 3</a>; <a href="https://www.youtube.com/watch?v=q8AZHtF2f50">Valuation of Ecosystem Services</a>; <span class="citation">McCauley (<a href="#ref-mccauley2006selling" role="doc-biblioref">2006</a>)</span>; <span class="citation">Armsworth et al. (<a href="#ref-armsworth2007ecosystem" role="doc-biblioref">2007</a>)</span>; <span class="citation">Tallis et al. (<a href="#ref-tallis2011natural" role="doc-biblioref">2011</a>)</span>; <span class="citation">Cardinale et al. (<a href="#ref-cardinale2012biodiversity" role="doc-biblioref">2012</a>)</span>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Exploration of the class California county biodiversity dataset
+</td>
 </tr>
-<tr class="even">
-<td>2/16</td>
-<td>Habitat loss, generating plots in <code>R</code></td>
-<td><a href="https://conbio.org/images/content_publications/Chapter4.pdf">Conservation Biology for All, Chapter 4 - subset</a>; <a href="https://conbio.org/images/content_publications/Chapter5.pdf">Conservation Biology for All, Chapter 5</a>; <span class="citation">Mueller et al. (<a href="#ref-mueller2012closing" role="doc-biblioref">2012</a>)</span></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+4
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+2/8
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Describing extinction risk: the IUCN Red List
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<span class="citation">Collen et al. (<a href="#ref-collen2016clarifying" role="doc-biblioref">2016</a>)</span>; <span class="citation">Akçakaya et al. (<a href="#ref-akccakaya2018quantifying" role="doc-biblioref">2018</a>)</span>; <a href="https://youtu.be/VukyqMajAOU">The IUCN Red List: A Barometer of Life</a>; <a href="https://youtu.be/LqRq-Gd63a0">ZSL video</a>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+IUCN data analysis activity
+</td>
 </tr>
-<tr class="odd">
-<td>2/23</td>
-<td>How do we prioritize locating nature reserves given limited resources? When is PADDD strategic?</td>
-<td><span class="citation">Mace, Possingham, and Leader-Williams (<a href="#ref-mace2007prioritizing" role="doc-biblioref">2007</a>)</span>; <span class="citation">Balmford and Whitten (<a href="#ref-balmford2003should" role="doc-biblioref">2003</a>)</span>; <span class="citation">Kareiva (<a href="#ref-kareiva2010trade" role="doc-biblioref">2010</a>)</span>; <span class="citation">DeAngelis (<a href="#ref-deangelis2019modelling" role="doc-biblioref">2019</a>)</span></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+5
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+2/15
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Habitat loss
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<a href="https://conbio.org/images/content_publications/Chapter4.pdf">Conservation Biology for All, Chapter 4 - subset</a>; <a href="https://conbio.org/images/content_publications/Chapter5.pdf">Conservation Biology for All, Chapter 5</a>; <span class="citation">Mueller et al. (<a href="#ref-mueller2012closing" role="doc-biblioref">2012</a>)</span>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Systematic conservation planning activity
+</td>
 </tr>
-<tr class="even">
-<td>3/2</td>
-<td>Over-exploitation, joining data</td>
-<td><a href="https://conbio.org/images/content_publications/Chapter6.pdf">Conservation Biology for All, Chapter 6</a>; <span class="citation">Peres (<a href="#ref-peres2001synergistic" role="doc-biblioref">2001</a>)</span>; <span class="citation">Dirzo et al. (<a href="#ref-dirzo2014defaunation" role="doc-biblioref">2014</a>)</span>; <a href="https://youtu.be/WNdR808jMSA">Will the oceans ever run out of fish?</a></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+6
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+2/22
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+How do we prioritize locating nature reserves given limited resources? When is PADDD strategic?
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<span class="citation">Mace, Possingham, and Leader-Williams (<a href="#ref-mace2007prioritizing" role="doc-biblioref">2007</a>)</span>; <span class="citation">Balmford and Whitten (<a href="#ref-balmford2003should" role="doc-biblioref">2003</a>)</span>; <span class="citation">Kareiva (<a href="#ref-kareiva2010trade" role="doc-biblioref">2010</a>)</span>; <span class="citation">DeAngelis (<a href="#ref-deangelis2019modelling" role="doc-biblioref">2019</a>)</span>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Biodiversity surveys: observational surveys of birds, plants, or insects as a focal taxon
+</td>
 </tr>
-<tr class="odd">
-<td>3/9</td>
-<td>Spring recess</td>
-<td></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+7
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+3/1
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Over-exploitation as a threat to species
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<a href="https://conbio.org/images/content_publications/Chapter6.pdf">Conservation Biology for All, Chapter 6</a>; <span class="citation">Peres (<a href="#ref-peres2001synergistic" role="doc-biblioref">2001</a>)</span>; <span class="citation">Dirzo et al. (<a href="#ref-dirzo2014defaunation" role="doc-biblioref">2014</a>)</span>; <a href="https://youtu.be/WNdR808jMSA">Will the oceans ever run out of fish?</a>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Biodiversity surveys continued
+</td>
 </tr>
-<tr class="even">
-<td>3/16</td>
-<td>Introduced species, Guest lecture by Prof. Marty Meyer</td>
-<td><a href="https://conbio.org/images/content_publications/Chapter7.pdf">Conservation Biology for All, Chapter 7</a>; <span class="citation">Cardoso et al. (<a href="#ref-cardoso2011seven" role="doc-biblioref">2011</a>)</span></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+8
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+3/8
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Population dynamics in conservation
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<a href="https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf">Morris, Doak, et al., Chapters 1, 2, and <strong>4</strong></a>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+California county short presentations &amp; bioacoustics introduction
+</td>
 </tr>
-<tr class="odd">
-<td>3/23</td>
-<td>Climate change</td>
-<td><a href="https://conbio.org/images/content_publications/Chapter8.pdf">Conservation Biology for All, Chapter 8</a>; <span class="citation">Walther et al. (<a href="#ref-walther2002ecological" role="doc-biblioref">2002</a>)</span>; <a href="https://youtu.be/RNs3XpRmRfI">TedEd video on phenology</a>; <a href="https://youtu.be/Kpp9NE1i2zM">Project BudBurst phenology video</a> - note that the videos are optional</td>
+<tr style="background-color: #adc2d8;">
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+3/13
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+California county conservation report due
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
 </tr>
-<tr class="even">
-<td>3/30</td>
-<td>Consumer behaviors &amp; pollution</td>
-<td><span class="citation">Lenzen et al. (<a href="#ref-lenzen2012international" role="doc-biblioref">2012</a>)</span>; <span class="citation">O’Neill (<a href="#ref-oneill2018conversation" role="doc-biblioref">2018</a>)</span>; <span class="citation">Erisman et al. (<a href="#ref-erisman2013consequences" role="doc-biblioref">2013</a>)</span>; <a href="https://youtu.be/E5M3LvX6bO0">video on sampling stream macroinvertebrates</a>; <a href="https://youtu.be/Gv5kfXRARN0">video on nitrogen pollution</a></td>
+<tr style="background-color: #adc2d8;">
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+9
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+3/15
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+Week of spring break
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
 </tr>
-<tr class="odd">
-<td>4/6</td>
-<td>Guest lectures by Drs. <a href="https://leventisfoundation.org.ng/the-management/">Hope Ovie Usieta</a> and <a href="https://www.ioes.ucla.edu/person/emma-fuller/">Emma Fuller</a></td>
-<td>Readings posted to Sakai</td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+10
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+3/22
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Climate change
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<a href="https://conbio.org/images/content_publications/Chapter8.pdf">Conservation Biology for All, Chapter 8</a>; <span class="citation">Walther et al. (<a href="#ref-walther2002ecological" role="doc-biblioref">2002</a>)</span>; <a href="https://youtu.be/RNs3XpRmRfI">TedEd video on phenology</a>; <a href="https://youtu.be/Kpp9NE1i2zM">Project BudBurst phenology video</a>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Bioacoustics / site visit to Uncommon Good
+</td>
 </tr>
-<tr class="even">
-<td>4/13</td>
-<td>Describing extinction risk: the IUCN Red List</td>
-<td><span class="citation">Collen et al. (<a href="#ref-collen2016clarifying" role="doc-biblioref">2016</a>)</span>; <span class="citation">Akçakaya et al. (<a href="#ref-akccakaya2018quantifying" role="doc-biblioref">2018</a>)</span>; <a href="https://youtu.be/VukyqMajAOU">The IUCN Red List: A Barometer of Life</a>; <a href="https://youtu.be/LqRq-Gd63a0">ZSL video</a></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+11
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+3/29
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Consumer behaviors &amp; pollution
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<span class="citation">Lenzen et al. (<a href="#ref-lenzen2012international" role="doc-biblioref">2012</a>)</span>; <span class="citation">O’Neill (<a href="#ref-oneill2018conversation" role="doc-biblioref">2018</a>)</span>; <span class="citation">Erisman et al. (<a href="#ref-erisman2013consequences" role="doc-biblioref">2013</a>)</span>; <a href="https://youtu.be/E5M3LvX6bO0">video on sampling stream macroinvertebrates</a>; <a href="https://youtu.be/Gv5kfXRARN0">video on nitrogen pollution</a>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Bioacoustics / site visit to Huerta del Valle
+</td>
 </tr>
-<tr class="odd">
-<td>4/20</td>
-<td>Population dynamics in conservation</td>
-<td><a href="https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf">Morris, Doak, et al., Chapters 1, 2, and <strong>4</strong></a>; additional videos TBD</td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+12
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+4/5
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Tentative: Guest lectures on conservation practice
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+TBD
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Independent projects
+</td>
 </tr>
-<tr class="even">
-<td>4/27</td>
-<td>Conservation of common pool resources</td>
-<td><a href="https://sakai.claremont.edu/portal/directtool/03e44dc3-80e8-422c-bb24-52af386ba822/">Ostrom Nobel Prize speech</a>; <a href="https://www.youtube.com/watch?v=OINKJNWtSiE">Montreal Protocol</a>; <a href="https://youtu.be/B11kASPfYxY">Climate negotiations - a brief history</a>; <a href="https://sakai.claremont.edu/portal/directtool/03e44dc3-80e8-422c-bb24-52af386ba822/">select one of the 4 case studies at the Week 14 site</a></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+13
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+4/12
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Introduced and invasive species
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<a href="https://conbio.org/images/content_publications/Chapter7.pdf">Conservation Biology for All, Chapter 7</a>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Independent projects
+</td>
 </tr>
-<tr class="odd">
-<td>5/4</td>
-<td>Making conservation a success story, Course retrospective, Final project 1B due</td>
-<td></td>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+14
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+4/19
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Conservation of common pool resources
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<a href="https://sakai.claremont.edu/portal/directtool/03e44dc3-80e8-422c-bb24-52af386ba822/">Elinor Ostrom Nobel Prize speech</a>; <a href="https://www.youtube.com/watch?v=OINKJNWtSiE">Montreal Protocol</a>; <a href="https://youtu.be/B11kASPfYxY">Climate negotiations - a brief history</a>; <a href="link%20TBD">select one of the 4 case studies at the Week 14 site</a>
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Independent projects
+</td>
+</tr>
+<tr style="background-color: #adc2d8;">
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+4/24
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+Independent project report due
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+15
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+4/26
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Making conservation a success story
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Case studies TBD
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Independent project presentations and end of semester celebration
+</td>
+</tr>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+16
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+5/3
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+Course retrospective and end of semester celebration
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+</td>
+</tr>
+<tr style="background-color: #adc2d8;">
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+5/4
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+End of semester
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
+</tr>
+<tr style="background-color: #adc2d8;">
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+5/8
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+Final project report due
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
+</tr>
+<tr style="background-color: #adc2d8;">
+<td style="border-bottom: 2px solid grey; background-color: #adc2d8; text-align: left;">
+</td>
+<td style="border-bottom: 2px solid grey; background-color: #adc2d8; text-align: left;">
+5/11
+</td>
+<td style="border-bottom: 2px solid grey; background-color: #adc2d8; text-align: center;">
+</td>
+<td style="border-bottom: 2px solid grey; background-color: #adc2d8; text-align: center;">
+<a href="https://www.oxbridgeessays.com/blog/the-viva-exam/">Short viva voce</a> of your ideas in your final project
+</td>
+<td style="border-bottom: 2px solid grey; background-color: #adc2d8; text-align: center;">
+Seniors will arrange a time with me before the end of semester.
+</td>
 </tr>
 </tbody>
 </table>
-<div id="refs" class="references">
+</div>
+<div id="reading-list" class="section level2">
+<h2>Reading list</h2>
+<div id="refs">
 <div id="ref-akccakaya2018quantifying">
 <p>Akçakaya, H Resit, Elizabeth L Bennett, Thomas M Brooks, Molly K Grace, Anna Heath, Simon Hedges, Craig Hilton-Taylor, et al. 2018. “Quantifying Species Recovery and Conservation Success to Develop an Iucn Green List of Species.” <em>Conservation Biology</em> 32 (5): 1128–38.</p>
 </div>
@@ -557,9 +778,6 @@ $(document).ready(function () {
 </div>
 <div id="ref-cardinale2012biodiversity">
 <p>Cardinale, Bradley J, J Emmett Duffy, Andrew Gonzalez, David U Hooper, Charles Perrings, Patrick Venail, Anita Narwani, et al. 2012. “Biodiversity Loss and Its Impact on Humanity.” <em>Nature</em> 486 (7401): 59.</p>
-</div>
-<div id="ref-cardoso2011seven">
-<p>Cardoso, Pedro, Terry L Erwin, Paulo AV Borges, and Tim R New. 2011. “The Seven Impediments in Invertebrate Conservation and How to Overcome Them.” <em>Biological Conservation</em> 144 (11): 2647–55.</p>
 </div>
 <div id="ref-ceballos2015accelerated">
 <p>Ceballos, Gerardo, Paul R Ehrlich, Anthony D Barnosky, Andrés Garcı́a, Robert M Pringle, and Todd M Palmer. 2015. “Accelerated Modern Human–Induced Species Losses: Entering the Sixth Mass Extinction.” <em>Science Advances</em> 1 (5): e1400253.</p>
@@ -628,7 +846,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -646,7 +864,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

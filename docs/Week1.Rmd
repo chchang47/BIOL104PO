@@ -25,7 +25,7 @@ We will write code in `R`, a statistical programming language, using RStudio. RS
 
 ## How do I access RStudio?
 
-You will navigate to [https://rstudio.pomona.edu](https://rstudio.pomona.edu) and use your Pomona credentials to log in. Pomona students: please use your existing user ID. Non-Pomona students: if you do not already have a Pomona account, please email [helpdesk@pomona.edu](mailto:helpdesk@pomona.edu?subject=BIO104%20PO%20Student%20RStudio%20Access) and cc me (`chchang@pomona.edu`) or use the chat feature at [http://its.pomona.edu](http://its.pomona.edu) to request an account. ITS will "require that a student provides proof of their identity by sending us a photo of themselves holding their 7C ID card (since they can't come in person to the Service Desk right now)."
+You will navigate to [https://rstudio.cloud](https://rstudio.cloud) and use your Claremont College credentials to log in. Pomona students: please use your existing user ID and navigate through the SSO window. Non-Pomona students: please use your campus email (e.g. `athenas47@scrippscollege.edu`) and set-up a memorable but distinct password. You can also use password generators like [LastPass](https://www.lastpass.com/) or your browser's password manager (e.g. [Firefox](https://support.mozilla.org/en-US/kb/password-manager-remember-delete-edit-logins?redirectslug=password-manager-remember-delete-change-and-import&redirectlocale=en-US)) to generate a secure password and store it for you. It is important to have good [digital hygiene](https://www.wired.com/2016/05/password-tips-experts/)--which includes strong, random passwords.
 
 ## What does RStudio have anyway?
 
