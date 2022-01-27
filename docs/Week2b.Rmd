@@ -133,7 +133,3 @@ p <- p + geom_histogram()
 p <- p + labs(x="Reptile richness")
 p
 ```
-
-# Homework
-
-Generate a scatterplot with `farmland_proportion` on the x-axis and `Mammals` on the y-axis. Describe in 1-2 sentences what this plot displays.
