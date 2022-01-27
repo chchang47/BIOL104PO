@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Combining social and ecological data</title>
+
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Conservation Biology</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Introduction
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 1</li>
+    <li>
+      <a href="Week1.html">The R and RStudio environments</a>
+    </li>
+    <li>
+      <a href="Week1b.html">Introduction to R</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 2</li>
+    <li>
+      <a href="Week2_CAcounty.html">Manipulating data.frames</a>
+    </li>
+    <li>
+      <a href="Week2b.html">Data visualization</a>
+    </li>
+    <li>
+      <a href="Week2_Joins.html">Joining data</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Combining social and ecological data</h1>
+<h4 class="author"></h4>
+
+</div>
+
+
+<div id="merging-datasets" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Merging datasets</h1>
+<p>Sometimes, data that we want to combine for analyses are separated across different spreadsheets or data tables. How can we combine these different data tables? <code>Join</code> operations (<a href="https://statisticsglobe.com/r-dplyr-join-inner-left-right-full-semi-anti">FMI on <code>join</code>ing two data tables</a>) offer a way to merge data across multiple data tables (also called data frames in <code>R</code> parlance).</p>
+<p>Below, I will first create two data tables that store different characteristics about fruit.</p>
+<pre class="r"><code>### Table storing colors of 5 fruits
+dt1 &lt;- tibble::tibble(fruit=c(&quot;apple&quot;,&quot;pear&quot;,&quot;orange&quot;,&quot;kiwi&quot;,&quot;mangosteen&quot;),
+                      color=c(&quot;red&quot;,&quot;green&quot;,&quot;orange&quot;,&quot;brown&quot;,&quot;purple&quot;))
+dt1 # display table</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   fruit      color 
+##   &lt;chr&gt;      &lt;chr&gt; 
+## 1 apple      red   
+## 2 pear       green 
+## 3 orange     orange
+## 4 kiwi       brown 
+## 5 mangosteen purple</code></pre>
+<pre class="r"><code>### Table storing prices of 3 fruits
+dt2 &lt;- tibble::tibble(fruit=c(&quot;pear&quot;,&quot;orange&quot;,&quot;mangosteen&quot;,&quot;cherimoya&quot;),
+                      price=c(1.25,1,5,4.7)) # price per pound
+dt2 # display table</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   fruit      price
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 pear        1.25
+## 2 orange      1   
+## 3 mangosteen  5   
+## 4 cherimoya   4.7</code></pre>
+<p>All join operations assume there is some column between your data tables that has consistent values that you can use to merge the records in the data tables together. In the case of this simple example, the shared column is <code>fruit</code>.</p>
+<div id="left-join" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Left join</h2>
+<p>The first join that we will look at is the <code>left_join</code> function from the <code>dplyr</code> package. The <code>left_join</code> will keep all of the rows in the left-hand side table and attempt to match entries from the second (right-hand side) table. If there is no match, <code>R</code> will populate <code>NA</code> (missing value) at that missing join location.</p>
+<pre class="r"><code>left_join(dt1, dt2)</code></pre>
+<pre><code>## # A tibble: 5 x 3
+##   fruit      color  price
+##   &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;
+## 1 apple      red    NA   
+## 2 pear       green   1.25
+## 3 orange     orange  1   
+## 4 kiwi       brown  NA   
+## 5 mangosteen purple  5</code></pre>
+<pre class="r"><code># Note that the left_join function detects that both data tables both have a column named &quot;fruit&quot;. What would happen if they didn&#39;t have a column with the same name?</code></pre>
+<p>We see that <code>R</code> has merged the two data tables, <code>dt1</code> and <code>dt2</code> together; the resulting data table above has all of the unique columns across these two data tables (<code>fruit</code> - the column we used to merge the two data tables together, <code>color</code> from <code>dt1</code>, and <code>price</code> from <code>dt2</code>). We also see that <code>R</code> has matched the records across the two data tables–see for yourself for example that the row for <code>pear</code> has the correct values from <code>dt1</code> (<code>color=green</code>) and <code>dt2</code> (<code>price=1.25</code>).</p>
+<div id="what-is-going-on-with-those-weird-na-values" class="section level3" number="1.1.1">
+<h3 number="1.1.1"><span class="header-section-number">1.1.1</span> What is going on with those weird <code>NA</code> values?</h3>
+<p>What we see above is that because <code>dt2</code> didn’t have any data for <code>apple</code> and <code>kiwi</code>, <code>R</code> has attempted to match all 5 fruits from <code>dt1</code> (left-hand side data table) with the fruits in <code>dt2</code>, and the fruits that were in <code>dt1</code> but not <code>dt2</code> get an <code>NA</code> value in the <code>price</code> column, which is merged from <code>dt2</code> to <code>dt1</code>. Note also that the fruit that is <strong>only</strong> in <code>dt2</code> but not <code>dt1</code> doesn’t show up in the merged data table (no <code>cherimoya</code> row).</p>
+</div>
+</div>
+<div id="right-join" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Right join</h2>
+<p>In this case, <code>R</code> retains all of the records from <code>dt2</code>. Because <code>dt1</code> has some fruits that <code>dt2</code> does not, that means that the fruits that are <strong>unique</strong> to <code>dt1</code> <em>will not</em> show up in the merged data table.</p>
+<pre class="r"><code>right_join(dt1, dt2)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   fruit      color  price
+##   &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;
+## 1 pear       green   1.25
+## 2 orange     orange  1   
+## 3 mangosteen purple  5   
+## 4 cherimoya  &lt;NA&gt;    4.7</code></pre>
+<p>As before, because <code>cherimoya</code> is only defined in <code>dt2</code>, but not <code>dt1</code>, <code>R</code> populates an <code>NA</code> value for all of the columns that are coming from <code>dt1</code> (in this case, the column <code>color</code>) to the final merged data table.</p>
+</div>
+<div id="inner-join" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Inner join</h2>
+<p>In the <code>inner_join</code> function, only those rows that have exact matches across the two data tables are preserved in the final merged data table.</p>
+<pre class="r"><code>inner_join(dt1, dt2)</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   fruit      color  price
+##   &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;
+## 1 pear       green   1.25
+## 2 orange     orange  1   
+## 3 mangosteen purple  5</code></pre>
+<p>We see that this resulting data table presents only the three fruits that are included in both <code>dt1</code> and <code>dt2</code>.</p>
+</div>
+<div id="full-join" class="section level2" number="1.4">
+<h2 number="1.4"><span class="header-section-number">1.4</span> Full join</h2>
+<p>In a full join operation, all unique elements across <code>dt1</code> and <code>dt2</code> are preserved in the final merged data table. For non-matching pairs, <code>R</code> will fill in an <code>NA</code> value.</p>
+<pre class="r"><code>full_join(dt1, dt2)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   fruit      color  price
+##   &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;
+## 1 apple      red    NA   
+## 2 pear       green   1.25
+## 3 orange     orange  1   
+## 4 kiwi       brown  NA   
+## 5 mangosteen purple  5   
+## 6 cherimoya  &lt;NA&gt;    4.7</code></pre>
+<p>We see that this merged table has all 6 unique fruits across the two data tables. We see that <code>R</code> has assigned <code>NA</code> in <code>price</code> (the column from <code>dt2</code>) for the two fruits that are in <code>dt1</code> but <strong>not</strong> <code>dt2</code> (<code>apple</code> and <code>kiwi</code>). We also see that there is an <code>NA</code> value in <code>color</code> (the column from <code>dt1</code>) for <code>cherimoya</code>, which is a fruit that was only listed in <code>dt2</code>.</p>
+</div>
+<div id="the-need-for-consistency-to-ensure-successful-joins" class="section level2" number="1.5">
+<h2 number="1.5"><span class="header-section-number">1.5</span> The need for consistency to ensure successful joins</h2>
+<p><code>R</code> can’t read our minds, for better or for worse. So if we notice that our data tables are not consistent in how they present the fruits, then we’ll see different join behavior. <code>R</code> is looking for an exact match of the words in the joining column (<code>fruit</code>).</p>
+<pre class="r"><code>### Modifying dt2
+dt2 &lt;- tibble::tibble(fruit=c(&quot;Pear&quot;,&quot;Orange&quot;,&quot;Mangosteen&quot;,&quot;Cherimoya&quot;),
+                      price=c(1.25,1,5,4.7)) # price per pound
+dt2 # display table</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   fruit      price
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 Pear        1.25
+## 2 Orange      1   
+## 3 Mangosteen  5   
+## 4 Cherimoya   4.7</code></pre>
+<pre class="r"><code># dt1 # display dt1 to compare the fruit column visually
+### See what happens - R can&#39;t join the fruits up - the words are not identical because R is case sensitive
+full_join(dt1,dt2) </code></pre>
+<pre><code>## # A tibble: 9 x 3
+##   fruit      color  price
+##   &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;
+## 1 apple      red    NA   
+## 2 pear       green  NA   
+## 3 orange     orange NA   
+## 4 kiwi       brown  NA   
+## 5 mangosteen purple NA   
+## 6 Pear       &lt;NA&gt;    1.25
+## 7 Orange     &lt;NA&gt;    1   
+## 8 Mangosteen &lt;NA&gt;    5   
+## 9 Cherimoya  &lt;NA&gt;    4.7</code></pre>
+<p>Dang! <code>R</code> has treated <code>pear</code> as a different value than <code>Pear</code>. That’s really silly and unfortunate. It’s not “automagically” joining up the data across the two tables because <code>R</code> is case sensitive (that is, <code>pear</code> is different from <code>Pear</code> to <code>R</code>).</p>
+<p>We can fix this example here by taking <code>dt2</code> and making the <code>fruit</code> column all lower-case then re-running the join operation.</p>
+<pre class="r"><code>### Let&#39;s fix this problem and make the fruit names consistent
+dt2new &lt;- dt2 %&gt;% 
+  mutate(fruit=tolower(fruit)) # a function that takes character/strings (words) and converts them to lower case
+dt2new # confirm that now the fruit names are lower case</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##   fruit      price
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 pear        1.25
+## 2 orange      1   
+## 3 mangosteen  5   
+## 4 cherimoya   4.7</code></pre>
+<pre class="r"><code>### Re-run full_join
+full_join(dt1,dt2new)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   fruit      color  price
+##   &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;
+## 1 apple      red    NA   
+## 2 pear       green   1.25
+## 3 orange     orange  1   
+## 4 kiwi       brown  NA   
+## 5 mangosteen purple  5   
+## 6 cherimoya  &lt;NA&gt;    4.7</code></pre>
+<div id="additional-exercises-to-build-understanding" class="section level3" number="1.5.1">
+<h3 number="1.5.1"><span class="header-section-number">1.5.1</span> Additional exercises to build understanding</h3>
+<p>Given <code>dt1</code>, <code>dt2</code>, and <code>dt2new</code> that have just been defined above, run and contrast the outputs of the following:</p>
+<ul>
+<li><code>left_join(dt1, dt2)</code>
+<ul>
+<li>versus: <code>left_join(dt1, dt2new)</code></li>
+</ul></li>
+<li><code>right_join(dt1, dt2)</code>
+<ul>
+<li>versus: <code>right_join(dt1, dt2new)</code></li>
+</ul></li>
+<li><code>inner_join(dt1, dt2)</code>
+<ul>
+<li>versus: <code>inner_join(dt1, dt2new)</code></li>
+<li>notice that <code>inner_join(dt1, dt2)</code> tells you that it didn’t find any matches! It produces a table that has <code>0 x 3</code> dimensions, or <code>0</code> rows because it didn’t find any matching records across <code>dt1</code> and <code>dt2</code>.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="adding-socioeconomic-data-to-the-provided-datasheet" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Adding socioeconomic data to the Provided Datasheet</h1>
+<p>As an additional illustration of data merging, I will illustrate below how one can add on socio-economic data from the USDA and the US Census to the <a href="https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv">Provided Datasheet</a>. In the code chunk below, I pull in data from the GitHub repository that stores the class <code>R</code> tutorials.</p>
+<pre class="r"><code>### Read in data
+CA_county_data &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_protectedareas_datasheet.tsv&quot;) # this is a link to the Provided Datasheet for the class project
+  ### Take a look at the first few rows of the data table
+CA_county_data</code></pre>
+<pre><code>## # A tibble: 58 x 26
+##    County     Birds Trees Reptiles Mammals area_of_county_ha lat_county_centroi…
+##    &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;             &lt;dbl&gt;               &lt;dbl&gt;
+##  1 Alameda      235    30       27      54           212722.                37.7
+##  2 Alpine       174    29       15      71           192485                 38.6
+##  3 Amador       172    41       21      69           156940.                38.4
+##  4 Butte        184    45       21      67           434375.                39.7
+##  5 Calaveras    173    39       21      66           268563.                38.2
+##  6 Colusa       189    40       20      58           299495.                39.2
+##  7 Contra Co…   233    35       25      57           208175                 37.9
+##  8 Del Norte    199    56       19      71           318486.                41.7
+##  9 El Dorado    174    41       21      71           462662.                38.8
+## 10 Fresno       173    38       25      72          1556855.                36.8
+## # … with 48 more rows, and 19 more variables: long_county_centroid_x &lt;dbl&gt;,
+## #   PAs_gapstatus1_HAs &lt;dbl&gt;, PAs_gapstatus2_HAs &lt;dbl&gt;,
+## #   PAs_gapstatus3_HAs &lt;dbl&gt;, PAs_gapstatus4_HAs &lt;dbl&gt;,
+## #   PAs_gapstatus1thru4_HAs &lt;dbl&gt;, PAs_gapstatus1_Ct &lt;dbl&gt;,
+## #   PAs_gapstatus2_Ct &lt;dbl&gt;, PAs_gapstatus3_Ct &lt;dbl&gt;, PAs_gapstatus4_Ct &lt;dbl&gt;,
+## #   PAs_gapstatus1thru4_Cts &lt;dbl&gt;, farmland_value_USDperHA &lt;dbl&gt;,
+## #   farmland_area_HAs &lt;dbl&gt;, iucn_NT_status &lt;dbl&gt;, iucn_VU_status &lt;dbl&gt;,
+## #   iucn_EN_status &lt;dbl&gt;, iucn_CR_status &lt;dbl&gt;,
+## #   iucn_threat_count_species &lt;dbl&gt;, Region &lt;chr&gt;</code></pre>
+<pre class="r"><code>### Data on socio-economic statuses in California
+CA_county_SES &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_ses.tsv&quot;) # URL for spreadsheet storing socioeconomic data by county in California
+  ### Take a look at the first few rows of the data table
+CA_county_SES</code></pre>
+<pre><code>## # A tibble: 58 x 6
+##    State County              rurban PctPoverty PctChildPoverty MedianHHincome
+##    &lt;chr&gt; &lt;chr&gt;               &lt;chr&gt;       &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
+##  1 CA    Alameda County      Urban         8.9             9.8         107589
+##  2 CA    Alpine County       Rural        17.2            29.6          58112
+##  3 CA    Amador County       Rural         9.8            12.5          62640
+##  4 CA    Butte County        Urban        16.1            16.1          58394
+##  5 CA    Calaveras County    Rural        12.1            19.6          68248
+##  6 CA    Colusa County       Rural        12              15.3          59048
+##  7 CA    Contra Costa County Urban         7.9             9.9         106555
+##  8 CA    Del Norte County    Rural        17.9            25.8          48979
+##  9 CA    El Dorado County    Urban         8.7             9.1          86202
+## 10 CA    Fresno County       Urban        20.5            29            56926
+## # … with 48 more rows</code></pre>
+<pre class="r"><code>### Data on racial composition in California
+CA_county_demog &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_census.tsv&quot;)
+  ### Take a look at the first few rows of the data table
+CA_county_demog</code></pre>
+<pre><code>## # A tibble: 58 x 10
+##    STNAME  CTYNAME    TOT_POP    BAC    IAC    AAC     NAC LATINX NHLATINX    WA
+##    &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+##  1 Califo… Alameda C… 1650950 0.133  0.0235 0.334  0.0162   0.224    0.776 0.493
+##  2 Califo… Alpine Co…    1047 0.0143 0.233  0.0210 0.00287  0.100    0.900 0.729
+##  3 Califo… Amador Co…   37429 0.0289 0.0418 0.0244 0.00532  0.134    0.866 0.900
+##  4 Califo… Butte Cou…  226231 0.0296 0.0445 0.0616 0.00653  0.160    0.840 0.858
+##  5 Califo… Calaveras…   45322 0.0159 0.0390 0.0259 0.00519  0.116    0.884 0.914
+##  6 Califo… Colusa Co…   21496 0.0203 0.0377 0.0228 0.00791  0.587    0.413 0.911
+##  7 Califo… Contra Co… 1137268 0.111  0.0221 0.202  0.0113   0.254    0.746 0.654
+##  8 Califo… Del Norte…   27382 0.0424 0.127  0.0452 0.00427  0.196    0.804 0.782
+##  9 Califo… El Dorado…  185976 0.0165 0.0278 0.0599 0.00545  0.127    0.873 0.890
+## 10 Califo… Fresno Co…  976830 0.0679 0.0421 0.121  0.00517  0.527    0.473 0.764
+## # … with 48 more rows</code></pre>
+<div id="data-explanation" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Data explanation</h2>
+<p>Note that you can find a description of the <a href="https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit#bookmark=id.5xpubn6xluzn">Provided Datasheet Data Explanation</a> here.</p>
+<p>On the other hand, the columns in <a href="https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_ses.tsv"><code>CA_county_SES</code></a> are as follows:</p>
+<ul>
+<li><code>State</code>: Abbreviated name for California (<code>CA</code>)</li>
+<li><code>County</code>: County name</li>
+<li><code>rurban</code>: Rural or urban designation for the county</li>
+<li><code>PctPoverty</code>: The percentage of the county’s population that lives in poverty in 2019</li>
+<li><code>PctChildPoverty</code>: The percentage of the county’s children (ages 0-17) that live in poverty in 2019</li>
+<li><code>MedianHHincome</code>: Median annual household income in the county</li>
+</ul>
+<p>These data for California were modified from national <a href="https://www.ers.usda.gov/data-products/county-level-data-sets/download-data/">County-level Data setsat the USDA Economic Research Service</a>. The <a href="https://www.ers.usda.gov/data-products/county-level-data-sets">county-level data sets website</a> opens up a data viewer; <a href="https://data.ers.usda.gov/reports.aspx?ID=17826">here is the data viewer for California</a>.</p>
+<p>The columns in <a href="https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_census.tsv"><code>CA_county_demog</code></a> are as follows:</p>
+<ul>
+<li><code>STNAME</code>: The name of the state</li>
+<li><code>CTYNAME</code>: The name of the county</li>
+<li><code>TOT_POP</code>: Total population of the county</li>
+<li><code>BAC</code>: The proportion of county residents who self-identify as <code>Black or African-American alone or in combination</code> (<code>in combination</code> includes multiracial respondents)</li>
+<li><code>IAC</code>: The proportion of county residents who self-identify as <code>American Indian and Alaska Native alone or in combination</code></li>
+<li><code>AAC</code>: The proportion of county residents who self-identify as <code>Asian alone or in combination</code></li>
+<li><code>NAC</code>: The proportion of county residents who self-identify as <code>Native Hawaiian and Other Pacific Islander alone or in combination</code></li>
+<li><code>LATINX</code>: The proportion of the county residents who self-identify as <code>Hispanic</code> and/or Latinx</li>
+<li><code>NHLATINX</code>: The proportion of the county residents who self-identify as <code>Not Hispanic</code> and/or not Latinx</li>
+<li><code>WA</code>: The proportion of the county residents who self-identify as <code>White</code></li>
+</ul>
+<p>All of the racial/ethnic groupings above are those defined by the <a href="https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/2010-2019/cc-est2019-alldata.pdf">US Census as described in the metadata document</a>. These data were calculated from the <a href="https://www.census.gov/data/tables/time-series/demo/popest/2010s-counties-detail.html">US Census Bureau County Population by Characteristics: 2010-2019</a>; specifically the <code>Annual County Resident Population Estimates by Age, Sex, Race...</code> section of the site.</p>
+</div>
+<div id="performing-iterative-joining-operations" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Performing iterative joining operations</h2>
+<p>Let’s say that for an analysis, you wanted to combine some information about biodiversity (say <code>Birds</code> species richness) with socio-economic data. We can use the data joining operations that we just covered above to merge these data tables together, which permits us to plot our data and (as we will see after Spring Break) perform other analyses such as linear regression models.</p>
+<p>We will join up <code>CA_county_data</code> (the Provided Datasheet with biodiversity and land use data) with <code>CA_county_SES</code> and <code>CA_county_demog</code>. To do so, we will merge the data tables based on the column that stores county names.</p>
+<p>The first thing that we will need to do is ensure that the county names are consistent (no weird issues with lower/upper case or anything else). What do we see?</p>
+<pre class="r"><code>### Show the first six counties in each data table
+head(CA_county_data$County) # Here we are using the $ symbol to refer to a particular column that we want to pull out of a data table. This is pretty much equivalent to calling dplyr::select(CA_county_data, County)</code></pre>
+<pre><code>## [1] &quot;Alameda&quot;   &quot;Alpine&quot;    &quot;Amador&quot;    &quot;Butte&quot;     &quot;Calaveras&quot; &quot;Colusa&quot;</code></pre>
+<pre class="r"><code>head(CA_county_SES$County)</code></pre>
+<pre><code>## [1] &quot;Alameda County&quot;   &quot;Alpine County&quot;    &quot;Amador County&quot;    &quot;Butte County&quot;    
+## [5] &quot;Calaveras County&quot; &quot;Colusa County&quot;</code></pre>
+<pre class="r"><code>head(CA_county_demog$CTYNAME) # note that county in this data table is stored in a column called CTYNAME, not County</code></pre>
+<pre><code>## [1] &quot;Alameda County&quot;   &quot;Alpine County&quot;    &quot;Amador County&quot;    &quot;Butte County&quot;    
+## [5] &quot;Calaveras County&quot; &quot;Colusa County&quot;</code></pre>
+<p>Oof! We see that our matches won’t work–both <code>CA_county_SES</code> and <code>CA_county_demog</code> have <code>County</code> added to the end of each county’s name, while <code>CA_county_data</code> does not. No problem there–we’ll use a “string substitution” function (akin to using find and replace to search for then delete a string or replace it with something else) to remove <code>County</code> from the end of the county names. We’ll then check the county name columns in the two data tables to ensure that we’ve got names for counties that will match across all three data tables.</p>
+<pre class="r"><code>CA_county_SES$County &lt;- str_replace_all(CA_county_SES$County,&quot; County&quot;,&quot;&quot;) # replace &quot; County&quot; at the end of the county names with nothing - basically like find and replace deleting the &quot; County&quot; string.
+CA_county_demog$CTYNAME &lt;- str_replace_all(CA_county_demog$CTYNAME,&quot; County&quot;,&quot;&quot;)
+### Checking that we&#39;ve removed &quot; County&quot; by inspecting the first few values in the county name columns
+head(CA_county_SES$County)</code></pre>
+<pre><code>## [1] &quot;Alameda&quot;   &quot;Alpine&quot;    &quot;Amador&quot;    &quot;Butte&quot;     &quot;Calaveras&quot; &quot;Colusa&quot;</code></pre>
+<pre class="r"><code>head(CA_county_demog$CTYNAME) </code></pre>
+<pre><code>## [1] &quot;Alameda&quot;   &quot;Alpine&quot;    &quot;Amador&quot;    &quot;Butte&quot;     &quot;Calaveras&quot; &quot;Colusa&quot;</code></pre>
+<p>Below, we will use <code>inner_join</code> to first join <code>CA_county_data</code> with <code>CA_county_SES</code>, then <code>CA_county_demog</code>.</p>
+<pre class="r"><code>### First we will check the dimensions of the CA_county_data column
+dim(CA_county_data) # 58 rows by 26 columns</code></pre>
+<pre><code>## [1] 58 26</code></pre>
+<pre class="r"><code>### Merge the data table that has socioeconomic data to CA_county_data
+CA_merged &lt;- inner_join(CA_county_data, CA_county_SES)
+dim(CA_merged) # now we have 31 columns</code></pre>
+<pre><code>## [1] 58 31</code></pre>
+<pre class="r"><code>### Merge the demographic data table to the merged data table above, which was stored in CA_merged
+CA_merged &lt;- inner_join(CA_merged, CA_county_demog, by=c(&quot;County&quot;=&quot;CTYNAME&quot;))
+  # Remember my question earlier about doing matches across data tables where the column names aren&#39;t the same? Specifying by=c(columnNameForMatchingInDataTable1 = column_name_for_matching_in_data_table_2) is how we can tell R which columns to merge the data tables on.
+dim(CA_merged) # now we have 40 columns</code></pre>
+<pre><code>## [1] 58 40</code></pre>
+<pre class="r"><code>### Display the final merged data table
+# View(CA_merged) # uncomment to run</code></pre>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
