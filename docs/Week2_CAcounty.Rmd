@@ -1,0 +1,430 @@
+---
+title: "Interacting with the class CA county dataset in `R`"
+author: ""
+date: ""
+output: 
+  html_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE,message=FALSE,warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+CA_county_data <- readr::read_tsv("~/Documents/Teaching/BIOL104/BIOL104PO/CA_protectedareas_datasheet.tsv")
+library(fontawesome)
+library(dplyr)
+```
+
+For the California biodiversity & protected areas project, I have created a [Provided Datasheet](https://github.com/chchang47/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv) that compiles data for the 58 counties in California. [The Provided Datasheet section of the class project description document](https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit#bookmark=id.5xpubn6xluzn) describes the columns of the datasheet. 
+
+# Interacting with datasets using the `dplyr` package
+
+In this class, we will use the [Tidyverse](https://r4ds.had.co.nz/) developed by RStudio statisticians and `R` aficianados. Relative to other ways of interacting with data in ("base") `R`, the Tidyverse has the advantage of featuring syntax that more directly translates to other data science tool kits and languages, such as Python or SQL. [`dplyr`](https://github.com/tidyverse/dplyr/) is one of the Tidyverse packages that extends core `R` functions to make `R` more modern and elegant in interacting with real-world data.
+
+# Data operations
+
+One of the core data types that is integral to the modern world is spreadsheet-like data organized into a matrix format. In `R` parlance, such data are typically represented by a type of object called a `data.frame`. In many contexts, these types of data are also called data tables.
+
+In this module, we will focus on the following types of queries for data tables:
+
+* `filter()`: subsetting a data table based on values in **rows**
+* `select()`: subset a data table based on specific **columns** given by their names
+* `arrange()`: sort rows based on values in columns
+* `mutate()`: create new columns for a data table based on some operation applied to existing columns
+* `summarize()`: summarize data table, usually yielding a data table with fewer rows
+
+# Scripting
+
+Today, we will also embark on writing `R` scripts to store our commands. We will even be able to execute the code interactively from the script editor (much like a text editor or some other type of notepad). 
+
+NB: If you have used `.Rmd` (R Markdown) files before, you are more than welcome to use an R Markdown file. But for purposes of the general teaching in this class, I will introduce `R` scripts.
+
+# Steps
+
+1. Please navigate to either:
+    a. [The class Conservation Biology Spring 2022 workspace Week 2 assignment](https://rstudio.cloud/spaces/207567/project/3495829) - this assumes that you have a Pomona account and the SSO is working. If you have a Pomona account, please try and send us screenshots of any errors that you see.
+    b. [My private ConBioChangSpace Week 2 assignment](https://rstudio.cloud/spaces/209043/project/3495822) - this is reserved only for students who cannot log into option `a` above.
+    
+2. Opening up a new `.R` script
+    + I am not sure this will work but I have created a placeholder `Week2.R` script that may be visible for you in the `Files` pane. If not then ...
+    + Note that you can navigate to the bars in between each pane until you see a `r fa("arrows-alt", fill="black")` icon, which you can use to drag the panes to be larger or smaller 
+
+![3a) Opening up the script pane](figures/openingRscript.png)
+
+![3b) R script editor pane](figures/Rscript.png)
+
+4. I also recommend creating a folder to store your work:
+    + In the bottom right-hand corner (Viewer/Plots/Files pane), click on `Files`
+    + Click on `New Folder`
+    + Give your folder a name. I recommend `BIOL104`
+5. Click in the text editor pane in the top left-hand side, which will currently either be named `Week2.R` (if the assignments work how I think they do) or `Untitled1` (if they don't copy over files for you all) at the top.
+6. Subsequently, copy the code below into the `R` script:
+    + Note that below, any line starting with the pound sign `#` is a *comment*.
+    + Comments are text that are not executed by `R`.
+    + In general, it is good practice to "comment your code" -- that is, use comments to annotate your code for future reference.
+When you've copied in the code into the `R` script, it will look something like this:
+
+![R script with initial commands](figures/InitialRScript.png)
+
+7. Next, save the `Untitled1` file using the `r fa("save")` icon and give it an informative name.
+    + I recommend selecting the `BIOL104` folder (or whatever you previously named the folder) as the location to save this file.
+    + I went ahead and gave this file the name `Week2.R`
+8. Now you can run the code **from the script editor directly**! 
+9. The easiest way to run the code is to highlight each line of code and either type `⌘ + Enter` (people who have Mac OS) or `CTRL + Enter` (Windows and Linux).
+You can also highlight each line of code with your mouse and use the "run code" button at the top right-hand side of the text editor pane:
+![run code](figures/runCode.png)
+10. Note that running each line of code from the text editor (from the `R` script in this case) is the same as typing the commands into the console. You typed commands directly into the console last week in your initial interactions with `R`.
+11. Writing scripts is advantageous because you can store your commands somewhere convenient and revisit or edit the file anytime.
+
+
+# Interacting with the class dataset
+
+## Reading in the data
+
+```{r, eval=F}
+### Loading packages with helpful functions
+library(dplyr) 
+  # R will let you know if loading in this package over-rides any existing function names; don't worry about this message for now.
+
+### Reading in data
+CA_county_data <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_protectedareas_datasheet.tsv") # this is a link to the Provided Datasheet for the class project
+
+### Take a look at the first few rows of the data table
+CA_county_data
+```
+
+Awesome! You have 1) loaded the package `dplyr`, which is our toolkit for more elegant data manipulation in `R`, 2) read in the Provided Datasheet using the function `read_tsv` (read in tab-separated value files, sometimes also called `.txt` files, though `.tsv` is the format used here) from the package `readr`, 3) printed out the first 10 rows of the data table.
+
+One thing to note is that the packages we are using in `R` make "opinionated" decisions about how many columns to display. Because the provided datasheet has 26 columns, `R` only displays 6 or so of the columns and just lists the names of the remaining columns.
+
+## Using the `View` command
+
+Oftentimes, we may want a more intuitive way to see our data tables. It can be really annoying when `R` is too clever and only displays a subset of the columns of your spreadsheet. The `View()` function pulls up an Excel-style data viewer. Let's try it below:
+
+```
+View(CA_county_data)
+```
+
+What just happened? `R` pulled up a spreadsheet data viewer in a new tab next to your `R` script. You can always press the `x` button on the upper right-hand side of the tab to close the viewer. And if you ever want to view your spreadsheet again, you can just re-run the command above! Another cool thing is that the spreadsheet viewer gives you options to sort (`dplyr::arrange`). 
+
+The other thing to note is that the `View()` output (as well as just typing `CA_county_data` in the console) tells you the *dimensions* of your data - how many *rows* and *columns* are in your data. This is a handy way of confirming if the output of your functions are working correctly.
+
+If you ever don't know what a function does, note that you can use the `?` command before a function's name to pull up a help page for that function. For example, you could run `?View` in the console (remember, where you see the `>` carat symbol awaiting your command -- or you can copy `?View` to the text editor pane then run that line). Calling `?View` will pull up the `Help` pane in the lower right-hand corner of RStudio Server, which will display a help document with the title **Invoke a Data Viewer**. You can do this `?` help command with `?mean` (pull up the help display for the arithmetic mean function), `?mutate` (pulls up a help display for `mutate`).
+
+![Sorting the `CA_county_data` spreadsheet in the Viewer pane by the number of birds (highest to lowest)](figures/Viewer.png)
+
+## Performing operations on the data
+
+### Filtering rows
+
+Let's say we want to only focus on the counties that have 50 or more tree species. How do we do that?
+
+```
+### Subsetting our data by rows
+filter(CA_county_data, Trees >= 50) # select all rows (each row is a county) where there are 50 or more tree species
+```
+
+Note that we can also always open up a convenient spreadsheet viewer for our data. I'm going to use the pipe operator `%>%` to daisy chain commands together into a sequence. It is a handy way to make a complex operation with intermediate steps more transparent. The visualization below describes what pipes do in `R` in linking up functions:
+
+![Schematic of the pipe `%>%` operator in `R` (Altaf Ali)](figures/Rpipeoperator.png)
+
+```
+filter(CA_county_data, Trees >= 50) %>% View() # filter to counties with 50 or more tree species then open up a spreadsheet viewer
+```
+
+Here are examples of additional filtering operations:
+
+```
+filter(CA_county_data, Region=="San Joaquin Valley" | Region=="Southern California") # select all rows corresponding to counties in the San Joaquin Valley OR Southern California regions. The vertical bar (|) denotes an "OR" operation
+filter(CA_county_data, Mammals > 60 & Birds > 200) # select all rows with more than 70 mammal and more than 150 bird species
+```
+
+### Selecting columns
+
+Now let's say that we want to focus on particular variables, or columns, in our data. For instance, how would we just pull out the column that tells us the number of threatened species (`iucn_threat_count_species`) in the dataset?
+
+```
+### Selecting columns from the data table
+select(CA_county_data, iucn_threat_count_species) # Here, we are selecting the column of threatened species richness
+```
+
+As before, we can open up a viewer for our output:
+
+```
+select(CA_county_data, iucn_threat_count_species) %>% View() # select the column then open up the viewer
+```
+
+Additional examples:
+
+```
+select(CA_county_data, farmland_area_HAs) # Here, we are selecting the column storing the land area that is agricultural (in units of hectares, or HA for short)
+select(CA_county_data, Reptiles, Trees) # Here, we are selecting two columns: reptile species richness and tree species richness
+```
+
+### Data sorting
+
+How do I sort the data based on increasing or decreasing values? Let's say we want to see which counties in California have the most protected area under GAP Status 1.
+
+```
+### Sorting the data table based on the level of threatened bird richness
+dplyr::arrange(CA_county_data, PAs_gapstatus1_HAs) %>% # the :: is R syntax to refer to a function from a package; I wanted to show this explicitly here.
+  select(County, PAs_gapstatus1_HAs) # not included in the question but I add it here for clarity
+
+  # Sometimes the :: is necessary when multiple packages have functions of the same name. Then if you load a second package after dplyr that also has an "arrange" function, that package's arrange function would be the default one that you call on.
+```
+
+### Creating new variables
+
+Often, we are pulling data into `R` in order to perform additional analyses. For instance, we may seek to transform our variables.
+
+Here is how you would calculate the proportion of land in each county that is covered by farmland. `mutate` is the command to either alter an existing column or create a new column in the data.
+
+```
+CA_county_data %>%
+      mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha) # create a new column called farmland_proportion to calculate the proportion farmland in each county
+```
+
+### Creating summaries of the data
+
+How can we calculate summary statistics across all 58 counties for the number of bird species?
+
+```
+summarize(CA_county_data, min_birds = min(Birds), 
+mean_birds = mean(Birds),
+max_birds = max(Birds)) # Creating a small table that summarizes the minimum, mean, and maximum species richness of birds across all 58 counties
+```
+
+Let's say that we want to do a more elaborate summary: we want to know the mean proportion of land that is farmland across all the counties in each of the 5 regions in California. We realize that we don't have the right data. We need to perform a calculation using variables in the dataset. We will:
+
+* Calculate the proportion of land in each county that is farmland (we just did this above!);
+* Generate a summary across the 5 regions in California for the mean proportion of each county's area that is farmland.
+
+We will do that below using the `%>%` pipe operator to link up commands:
+
+```
+### Using pipes to 1) calculate proportion farmland in each county
+### and 2) summarize proportion farmland across the 5 regions in CA.
+### We will store the output in a new object called CA_farm_summary
+CA_farm_summary <- CA_county_data %>%
+      mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha) %>%
+      group_by(Region) %>%
+      summarize(mean_farmland_proportion = mean(farmland_proportion))
+      
+### Uncomment the line below (delete the leading # pound sign)
+### to print the CA_farm_summary at the console
+# CA_farm_summary
+```
+
+Nice! By running the code above (including uncommenting the `CA_farm_summary` line by deleting the leading `#` from `# CA_farm_summary`) we will generate this:
+
+![Summary of average amount of land that is farmland across all counties in each of the 5 regions in California](figures/Week3_mutate_groupby.png)
+
+What we have done above is:
+
+* Used the `%>%` pipe operator to pass `CA_county_data`, our data table object into the `mutate` command;
+* The `mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha)` line creates a new column called `farmland_proportion` that divides `farmland_area_HAs` over `area_of_county_ha`;
+  + Note though that we are not storing this column long-term in `CA_county_data` (We would need to modify the specification of this code chunk to store that `mutate` output into an object.)
+* We pass the output of the `mutate` command into a `group_by` function call.
+* `group_by` splits a data table into groups based on distinct values a variable that has **categories**. In this case, we tell `group_by` to divide up the `CA_county_data` data table into groups based on the values of `Region`;
+* Subsequently, we take the output of the `group_by` function forward into a `summarize` function, which tells `R` to calculate the `mean` value of the new `farmland_proportion` column (created by the `mutate` operation above) across the groups given by `Region`;
+* Ultimately, what we store in the new object `CA_farm_summary` (defined at the top of this code chunk) is the output of all of these commands, linked together, which is the little summary data table you see at the end.
+
+*Food for thought*: In this example, I am creating new object (`CA_farm_summary`) to store the outputs of the commands (via the `<--` command). Why is that useful here? 
+
+What happens when we just run this code below:
+
+```
+CA_county_data %>%
+      mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha)
+      
+select(CA_county_data, farmland_proportion) # this will throw an error! Why? How can we deal with that?
+```
+
+If we want out outputs to be something we can continue using, then we need to make sure that we are storing them as needed. Here is one way to ensure that we create a column, `farmland_proportion` **and** store it in `CA_county_data`.
+
+```
+CA_county_data <- CA_county_data %>%
+      mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha)
+      
+select(CA_county_data, farmland_proportion) # this now works. Why?
+```
+
+# Exercises
+
+Congratulations on several exciting achievements! You have 1) read in data from an online source into `R`, 2) learned how to perform different operations to select rows or columns from the data, and 3) started to see how to summarize your data.
+
+To help you make forward progress, here are several exercises. Please work through them with your groups in lab.
+
+1. How would you subset (filter) rows from `CA_county_data` where `Reptiles` is greater than or equal to 25?
+    + Note that you can use the command `names(CA_county_data)` (you can add this to your script or run it any time in the console) to see the names of all of the columns in your data table
+2. How would you select the column `area_of_county_ha`?
+3. How would you filter to rows where `iucn_threat_count_species` is $\geq 30$ **and** subset your data to the columns `iucn_threat_count_species` and `Birds`?
+4. How would you calculate a new column in `CA_county_data` that stores the ratio of threatened species to all vertebrate (bird, mammal, and reptile) species?
+5. How would you create a column that stores the proportion of land protected in each county?
+    + NB: In each county, the protected lands are designed as GAP statuses 1-4 - you may want to use the column `PAs_gapstatus1thru4_HAs`)
+6. How would you summarize the minimum (`min()`), mean (`mean()`), and maximum (`max()`) values for the proportion of land that is protected in each county?
+
+**Hint**:
+
+```
+CA_protected_summary <- CA_county_data %>%
+    mutate(propLandProtected = ...) %>% # replace the ... with the correct command
+    group_by(...) %>% replace by the correct column of data to define the groups
+    summarize(minProp = ...) # replace ... with the correct function applied to the correct column
+    
+CA_protected_summary # print out the object CA_protected_summary in the console
+```
+
+7. How would you calculate the mean number of IUCN threatened species across the counties in each of the 5 regions in California? How would you store the output of these commands in a new object called `regionIUCNrichnessMean`?
+
+**Hint for question 7**:
+
+```
+    <- CA_county_data %>%
+    group_by(...) %>% # which column would you use to divide the data into groups?
+    summarize(mean_IUCN_richness = ...) # what function would you use and what column would you apply it to?
+
+# regionIUCNrichnessMean # how would you print this object in the console?
+```
+
+8. How would you take a subset of `CA_county_data` where the counties have more than 40 tree species and select the columns `County`, `Trees`, `Mammals`, and `PAs_gapstatus1thru4_Cts`? How would you store that in a new object called `treeSubset`?
+
+**Hint**:
+
+```
+treeSubset <- CA_county_data %>%
+    filter(Trees > ...) %>% # replace the ... with some value (maybe 40)
+    select(...) # replace ... with the comma-separated set of column names (maybe County, Trees, Mammals, PAs_gapstatus1thru4_Cts)
+
+treeSubset # print out treeSubset object
+
+# note that you could also run:
+# View(treeSubset) # uncomment by deleting the leading hashtag to run this command
+```
+
+Please attempt to work through these exercises. I provide answers below but you will learn the most by thinking through and doing these questions.
+
+## Answers to the exercises above
+
+1. How would you subset (filter) rows from `CA_county_data` where `Reptiles` is greater than or equal to 25?
+    
+```
+### Let's run names(CA_county_data) for fun to see what happens!
+names(CA_county_data)
+
+### Subsetting rows (using pipes!)
+CA_county_data %>%
+  filter(Reptiles >= 25) %>%
+    View() # not part of original question, but opens that nice spreadsheet viewer
+    
+### The code above is equivalent to:
+View( filter(CA_county_data, Reptiles >= 25) )
+```
+
+2. How would you select the column `area_of_county_ha`?
+
+```
+### Selecting one column from CA_county_data
+CA_county_data %>%
+  select(area_of_county_ha)
+  
+### The above syntax is equivalent to:
+select(CA_county_data, area_of_county_ha)
+```
+
+3. How would you filter to rows where `iucn_threat_count_species` is $\geq 30$ **and** subset your data to the columns `iucn_threat_count_species` and `Birds`?
+
+```
+### Performing a row and column subsetting operation
+CA_county_data %>%
+  filter(iucn_threat_count_species >= 30) %>% # select rows (states) where threatened species >= 30
+    select(iucn_threat_count_species, Birds) %>% # subset to the columns threatened species and bird richness
+      View() # added on for ease of viewing final output
+```
+
+4. How would you calculate a new column in `CA_county_data` that stores the ratio of threatened species to all vertebrate (bird, mammal, and reptile) species?
+    
+```
+CA_county_data %>%
+  mutate(threatenedRatio = iucn_threat_count_species/(Mammals+Birds+Reptiles)) %>%
+  select(threatenedRatio)
+  
+### Again however, note that if you just run:
+select(CA_county_data, threatenedRatio) # this will throw an error!
+```
+
+5. How would you create a column that stores the proportion of land protected in each county?
+
+```
+CA_county_data %>%
+  mutate(propLandProtected = PAs_gapstatus1thru4_HAs / area_of_county_ha) # create a new column that divides protected area extent in HAs by county land area in HAs
+
+View(CA_county_data)
+
+### Because we haven't assigned the output back to CA_county_data,
+### the code below will not work:
+select(CA_county_data, propLandProtected)
+``` 
+
+6. How would you summarize the minimum (`min()`), mean (`mean()`), and maximum (`max()`) values for the proportion of land that is protected in each county?
+
+Note that because we didn't save the output of the two different versions of the answer to exercise 5 above, we will have to re-run those commands!
+
+```
+### Generating a summary across all of the states
+CA_county_data %>%
+  mutate(propLandProtected = PAs_gapstatus1thru4_HAs / area_of_county_ha) %>%
+    summarize(minpropLandProtected = min(propLandProtected),
+              meanpropLandProtected = mean(propLandProtected),
+              maxpropLandProtected = max(propLandProtected))
+              
+### Modification in case you wanted to save your output in an object
+  # Let's call the object prop_land_summary
+prop_land_summary <- CA_county_data %>%
+  mutate(propLandProtected = PAs_gapstatus1thru4_HAs / area_of_county_ha) %>%
+    summarize(minpropLandProtected = min(propLandProtected),
+              meanpropLandProtected = mean(propLandProtected),
+              maxpropLandProtected = max(propLandProtected))
+
+  # Print out prop_land_summary
+prop_land_summary
+```
+
+Let's assume that we did store our outputs in problem 5 as I specify below (`CA_county_data <- CA_county_data %>% ...`).
+
+```
+CA_county_data <- CA_county_data %>%
+  mutate(propLandProtected = PAs_gapstatus1thru4_HAs / area_of_county_ha)
+  
+CA_county_data %>%
+    summarize(minpropLandProtected = min(propLandProtected),
+              meanpropLandProtected = mean(propLandProtected),
+              maxpropLandProtected = max(propLandProtected))
+
+### Because we assigned the output back to CA_county_data,
+### the code below will now work:
+select(CA_county_data, propLandProtected)
+```
+
+7. How would you calculate the mean number of IUCN threatened species across the counties in each of the 5 regions in California? How would you store the output of these commands in a new object called `regionIUCNrichnessMean`?
+
+
+```
+regionIUCNrichnessMean <- CA_county_data %>%
+    group_by(Region) %>% # which column would you use to divide the data into groups?
+    summarize(mean_IUCN_richness = mean(iucn_threat_count_species)) # what function would you use and what column would you apply it to?
+
+regionIUCNrichnessMean # how would you print this object in the console?
+```
+
+8. How would you take a subset of `CA_county_data` where the counties have more than 40 tree species and select the columns `County`, `Trees`, `Mammals`, and `PAs_gapstatus1thru4_Cts`? How would you store that in a new object called `treeSubset`?
+
+```
+treeSubset <- CA_county_data %>% # take CA_county_data and pipe it into the next function
+    filter(Trees > 40) %>% # subset to the counties (rows) with > 40 tree species, pipe into the next function
+    select(County, Trees, Mammals, PAs_gapstatus1thru4_Cts) # selecting subset of columns
+
+treeSubset # print out treeSubset object
+
+# note that you could also run:
+# View(treeSubset) # uncomment by deleting the leading hashtag to run this command
+```

@@ -37,7 +37,7 @@ library(dplyr)
 library(ggplot2)
 
 ### Read in data
-CA_county_data <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_protectedareas_datasheet.tsv") # this is a link to the Provided Datasheet for the class project
+CA_county_data <- readr::read_tsv("https://raw.githubusercontent.com/chchang47/BIOL104PO/master/data/CA_protectedareas_datasheet.tsv") # this is a link to the Provided Datasheet for the class project
 
 ### Take a look at the first few rows of the data table
 CA_county_data
