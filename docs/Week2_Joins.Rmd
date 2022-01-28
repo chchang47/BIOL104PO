@@ -9,9 +9,6 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,message=FALSE) # folks using the Rmarkdown files - delete the ,eval=FALSE option here; otherwise knitr will not interpret the R code chunks below.
-### Load dplyr and stringr packages into R workspace
-library(dplyr)
-library(stringr)
 ```
 
 # Merging datasets
@@ -20,7 +17,11 @@ Sometimes, data that we want to combine for analyses are separated across differ
 
 Below, I will first create two data tables that store different characteristics about fruit.
 
-```{r join_dfs}
+```{r join_dfs, warning=FALSE,message=FALSE}
+### Load dplyr and stringr packages into R workspace
+library(dplyr)
+library(stringr)
+
 ### Table storing colors of 5 fruits
 dt1 <- tibble::tibble(fruit=c("apple","pear","orange","kiwi","mangosteen"),
                       color=c("red","green","orange","brown","purple"))
