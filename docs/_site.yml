@@ -20,6 +20,8 @@ navbar:
           href:  Week2_CAcounty.html
         - text: "Data visualization"
           href:  Week2b.html
+        - text: "Joining data"
+          href: Week2_Joins.html
     # - text: "Conservation analyses"
     #   menu:
     #     - text: "Week 5"
