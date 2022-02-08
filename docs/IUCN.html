@@ -11,7 +11,7 @@
 
 
 
-<title>The R and RStudio environments</title>
+<title>IUCN Red List activity</title>
 
 <script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -310,79 +310,85 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">The R and RStudio environments</h1>
+<h1 class="title toc-ignore">IUCN Red List activity</h1>
 <h4 class="author"></h4>
 
 </div>
 
 
-<div id="getting-started-with-data-in-r" class="section level2">
-<h2>Getting started with data in <code>R</code></h2>
-<p>Key concepts that you will learn:</p>
-<ul>
-<li>What is <code>R</code>?</li>
-<li>What is RStudio?</li>
-<li>How do I code in <code>R</code>?</li>
-</ul>
+<div id="overview" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Overview</h1>
+<p>In this discussion activity, you will work with your small groups to query the IUCN Red List using its application programming interface, or <a href="https://en.wikipedia.org/wiki/API">API</a> for short.</p>
+<p>The objective of this activity is to better understand the criteria for Red-Listing species based on IUCN species narratives. Table 1 in the <a href="https://drive.google.com/file/d/1aRs5wXF2wS66sOH5ylV6U-VRB5Ou23Wk/view?usp=sharing">Collen paper</a> presents a great overview of the listing criteria.</p>
+<p>Note that an organism is listed based on the <strong>most severe category</strong> of threat. Thus, if any condition meets the criteria for Endangered, that is the status that would apply, even if under other conditions the species is Vulnerable or Near-Threatened (lower threat categories).</p>
 </div>
-<div id="what-are-r-and-rstudio" class="section level2">
-<h2>What are <code>R</code> and RStudio?</h2>
-<p>We will write code in <code>R</code>, a statistical programming language, using RStudio. RStudio is an “IDE” or an integrated development environment. Basically, if <code>R</code> is the engine of our (statistical programming) car, then RStudio is our dashboard, with all of the controls that we’d be more familiar with (plotting window, file visualization pane, help pane, etc.).</p>
-<div class="figure">
-<img src="figures/R_vs_RStudio_1.png" alt="" />
-<p class="caption">Image from Ismay <em>et al.</em> (2020)</p>
+<div id="code" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Code</h1>
+<p>Please work in groups to execute the following code within the project <a href="https://rstudio.cloud/spaces/207567/project/3555746">Listing Species</a>. It should be visible in the <code>Files</code> pane (bottom right-hand side) as <code>IUCNactivity.R</code>.</p>
+<p>For convenience, I also include it here:</p>
+<pre><code>###==================================================
+### Loading packages &amp; keys
+###==================================================
+library(&quot;rredlist&quot;) # load rredlist package
+library(&quot;dplyr&quot;)    # load package for wrangling data
+  # API = application programming interface
+
+###==================================================
+### Obtaining data from the IUCN Red List
+###==================================================
+
+### Specify your species
+species_to_study &lt;- &quot;Pezoporus occidentalis&quot; # change this to your species
+
+### Obtain the species narrative for your organism
+IUCN_REDLIST_KEY &lt;- Sys.getenv(&#39;IUCN_REDLIST_KEY&#39;) # if the key isn&#39;t working in line 19,
+# IUCN_REDLIST_KEY &lt;- Sys.getenv(&#39;IUCN_REDLIST_KEY_2&#39;) # then uncomment and run this line
+IUCN_data &lt;- rl_narrative(species_to_study, key=IUCN_REDLIST_KEY)
+
+###==================================================
+### Viewing your IUCN Red List output
+###==================================================
+
+### Creating a cleaner output
+IUCN_table &lt;- IUCN_data$result # extract the outputs and store as a &quot;tibble&quot; (tidy table)
+
+### Viewing the overall table
+View(IUCN_table)
+
+### Getting the names of the columns
+names(IUCN_table)
+
+### Viewing the rationale for your species
+IUCN_table %&gt;% 
+  dplyr::select(rationale) # selecting the column rationale
+
+### Viewing the geographic range for your species
+IUCN_table %&gt;%
+  dplyr::select(geographicrange)
+
+### Viewing the population trend for your species
+IUCN_table %&gt;%
+  dplyr::select(populationtrend)
+
+### Viewing the population summary for your species
+IUCN_table %&gt;%
+  dplyr::select(...) # what would you type here to select the column population?
+
+### Viewing additional variables
+IUCN_table %&gt;%
+  dplyr::select(...) # what would you type here to select the column habitat?
+
+### Viewing additional variables
+IUCN_table %&gt;%
+  dplyr::select(...) # what would you type here to select the column threats, or conservationmeasures, or usetrade?</code></pre>
 </div>
-</div>
-<div id="how-do-i-access-rstudio" class="section level2">
-<h2>How do I access RStudio?</h2>
-<p>You will navigate to <a href="https://rstudio.cloud/spaces/207567/">https://rstudio.cloud/</a> and use your Claremont College credentials to log in. Pomona students: please use your existing user ID and navigate through the SSO window. Non-Pomona students: please use your campus email (e.g. <code>athenas47@scrippscollege.edu</code>) and set-up a memorable but distinct password. You can also use password generators like <a href="https://www.lastpass.com/">LastPass</a> or your browser’s password manager (e.g. <a href="https://support.mozilla.org/en-US/kb/password-manager-remember-delete-edit-logins?redirectslug=password-manager-remember-delete-change-and-import&amp;redirectlocale=en-US">Firefox</a>) to generate a secure password and store it for you. It is important to have good <a href="https://www.wired.com/2016/05/password-tips-experts/">digital hygiene</a>–which includes strong, random passwords.</p>
-</div>
-<div id="what-does-rstudio-have-anyway" class="section level2">
-<h2>What does RStudio have anyway?</h2>
-<p>RStudio has 3 different panes:</p>
-<div class="figure">
-<img src="figures/rstudio_ide_image.png" alt="" />
-<p class="caption">Image from Bailey (2018)</p>
-</div>
-</div>
-<div id="what-do-each-of-these-panes-do" class="section level2">
-<h2>What do each of these panes do?</h2>
-<ul>
-<li>Console: where you enter commands that <code>R</code> interprets
-<ul>
-<li>Running code: the act of telling <code>R</code> to perform an act by giving it commands in the console.</li>
-</ul></li>
-<li>Environment: lists all objects/data/functions available to you in the current session
-<ul>
-<li>Session: the current instance that you have logged into RStudio (NB: unlike other software, the session doesn’t necessarily end when you close the browser window! Instead, it can preserve its state over time).</li>
-</ul></li>
-<li>Output: later on, we will interact with this pane most often to display plots that you generate!
-<ul>
-<li>The other tabs in this pane can be used to navigate through files, see available packages that extend the functionality of <code>R</code>, view help, and view spreadsheets (<code>Viewer</code>).</li>
-</ul></li>
-</ul>
-</div>
-<div id="running-your-first-r-code" class="section level2">
-<h2>Running your first <code>R</code> code!</h2>
-<p>Copy the code below into the console and hit enter. What do you see?</p>
-<pre class="r"><code>x &lt;- c(1,2,3)
-x</code></pre>
-<p>You should see the following:</p>
-<pre><code>## [1] 1 2 3</code></pre>
-<p>Congratulations! You have created your first object in <code>R</code>: a vector storing the numbers 1, 2, and 3.</p>
-<p>You achieved that by using the assignment operator <code>&lt;-</code> to tell <code>R</code> to create a new object, <code>x</code>, that stores the values 1, 2, and 3 in a vector, denoted by <code>c(...)</code> where the <code>...</code> is just a placeholder for whatever you’d like to enter (where each element is separated by commas).</p>
-<p>I encourage you to try the following:</p>
-<ul>
-<li>How would you create an object to store your first name?
-<ul>
-<li>Hint: what about <code>myName &lt;- "..."</code></li>
-<li>How would you see what <code>myName</code> contains? (Hint: think about what happened when we entered <code>x</code> in the console earlier.)</li>
-</ul></li>
-<li>How would you modify the command above to have <code>x</code> store the values 1, 47, 4747, and 474747?
-<ul>
-<li>Hint: what is wrong with this command? <code>x &lt;- 1,47,4747,474747</code>? What does that pesky error message say?</li>
-</ul></li>
-</ul>
+<div id="accessing-the-class-workspace" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Accessing the class workspace</h1>
+<p>If you are still having issues accessing the <a href="https://sso.rstudio.cloud/pomona?redirect=https%3A%2F%2Frstudio.cloud%2Fspaces%2F207567%2Fjoin%3Faccess_code%3DUNcH0jSAmoMr_18KgJB1_0526sWkwlWQNBpwRfhb">Class workspace</a>, please:</p>
+<ol style="list-style-type: decimal">
+<li>Clear browser cache/cookies and open an incognito window</li>
+<li>Open this link in the private/incognito window <a href="https://sso.rstudio.cloud/pomona">https://sso.rstudio.cloud/pomona</a></li>
+</ol>
 </div>
 
 

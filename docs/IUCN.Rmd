@@ -1,0 +1,91 @@
+---
+title: "IUCN Red List activity"
+author: ""
+date: ""
+output: 
+  html_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Overview
+
+In this discussion activity, you will work with your small groups to query the IUCN Red List using its application programming interface, or [API](https://en.wikipedia.org/wiki/API) for short.
+
+The objective of this activity is to better understand the criteria for Red-Listing species based on IUCN species narratives. Table 1 in the [Collen paper](https://drive.google.com/file/d/1aRs5wXF2wS66sOH5ylV6U-VRB5Ou23Wk/view?usp=sharing) presents a great overview of the listing criteria. 
+
+Note that an organism is listed based on the **most severe category** of threat. Thus, if any condition meets the criteria for Endangered, that is the status that would apply, even if under other conditions the species is Vulnerable or Near-Threatened (lower threat categories).
+
+# Code
+
+Please work in groups to execute the following code within the project [Listing Species](https://rstudio.cloud/spaces/207567/project/3555746). It should be visible in the `Files` pane (bottom right-hand side) as `IUCNactivity.R`.
+
+For convenience, I also include it here:
+
+```
+###==================================================
+### Loading packages & keys
+###==================================================
+library("rredlist") # load rredlist package
+library("dplyr")    # load package for wrangling data
+  # API = application programming interface
+
+###==================================================
+### Obtaining data from the IUCN Red List
+###==================================================
+
+### Specify your species
+species_to_study <- "Pezoporus occidentalis" # change this to your species
+
+### Obtain the species narrative for your organism
+IUCN_REDLIST_KEY <- Sys.getenv('IUCN_REDLIST_KEY') # if the key isn't working in line 19,
+# IUCN_REDLIST_KEY <- Sys.getenv('IUCN_REDLIST_KEY_2') # then uncomment and run this line
+IUCN_data <- rl_narrative(species_to_study, key=IUCN_REDLIST_KEY)
+
+###==================================================
+### Viewing your IUCN Red List output
+###==================================================
+
+### Creating a cleaner output
+IUCN_table <- IUCN_data$result # extract the outputs and store as a "tibble" (tidy table)
+
+### Viewing the overall table
+View(IUCN_table)
+
+### Getting the names of the columns
+names(IUCN_table)
+
+### Viewing the rationale for your species
+IUCN_table %>% 
+  dplyr::select(rationale) # selecting the column rationale
+
+### Viewing the geographic range for your species
+IUCN_table %>%
+  dplyr::select(geographicrange)
+
+### Viewing the population trend for your species
+IUCN_table %>%
+  dplyr::select(populationtrend)
+
+### Viewing the population summary for your species
+IUCN_table %>%
+  dplyr::select(...) # what would you type here to select the column population?
+
+### Viewing additional variables
+IUCN_table %>%
+  dplyr::select(...) # what would you type here to select the column habitat?
+
+### Viewing additional variables
+IUCN_table %>%
+  dplyr::select(...) # what would you type here to select the column threats, or conservationmeasures, or usetrade?
+```
+
+# Accessing the class workspace
+
+If you are still having issues accessing the [Class workspace](https://sso.rstudio.cloud/pomona?redirect=https%3A%2F%2Frstudio.cloud%2Fspaces%2F207567%2Fjoin%3Faccess_code%3DUNcH0jSAmoMr_18KgJB1_0526sWkwlWQNBpwRfhb), please:
+
+1. Clear browser cache/cookies and open an incognito window
+2. Open this link in the private/incognito window [https://sso.rstudio.cloud/pomona](https://sso.rstudio.cloud/pomona) 
