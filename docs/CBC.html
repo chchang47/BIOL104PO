@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Claremont CBC data analysis</title>
+
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Conservation Biology</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Introduction
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 1</li>
+    <li>
+      <a href="Week1.html">The R and RStudio environments</a>
+    </li>
+    <li>
+      <a href="Week1b.html">Introduction to R</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Data manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 2</li>
+    <li>
+      <a href="Week2_CAcounty.html">Manipulating data.frames</a>
+    </li>
+    <li>
+      <a href="Week2b.html">Data visualization</a>
+    </li>
+    <li>
+      <a href="Week2_Joins.html">Joining data</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Conservation analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="IUCN.html">IUCN Red List</a>
+    </li>
+    <li>
+      <a href="CBC.html">CBC</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Claremont CBC data analysis</h1>
+<h4 class="author"></h4>
+
+</div>
+
+
+<div id="overview" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Overview</h1>
+<p><a href="http://www.pomonavalleyaudubon.org/uploads/3/4/9/5/34958940/2018_2019_winter.pdf">Claremont, CA</a> has had a local winter <a href="https://www.audubon.org/conservation/history-christmas-bird-count">Christmas Bird Count (CBC for short)</a> station since 1972. We are going to interact with the CBC data for four focal species:</p>
+<ul>
+<li><code>COHA</code> - Cooper’s Hawk</li>
+<li><code>ACWO</code> - Acorn woodpecker</li>
+<li><code>SPTO</code> - Spotted towhee</li>
+<li><code>YRWA</code> - Yellow-rumped warbler</li>
+</ul>
+<p>In the following exercises, please discuss as a group:</p>
+<ul>
+<li>What pattern, if any, do you observe for your species (or pair of species)?
+<ul>
+<li>How is their population abundance, proxied by CBC data, changing through time?</li>
+</ul></li>
+<li>What differences do you see between the plots for <code>Number</code> and <code>NumNormal</code>?</li>
+<li>What processes do you think drive these differences?
+<ul>
+<li>What factors might be driven by the CBC itself?</li>
+</ul></li>
+</ul>
+<p>Note that in the assignment <a href="https://rstudio.cloud/spaces/207567/project/3569413">ClaremontCBC</a>, you’ll see a <code>ClaremontCBC.R</code> script that you can use to follow along with this discussion activity.</p>
+</div>
+<div id="loading-packages" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Loading packages</h1>
+<p>First, let’s load the packages that we’ll need.</p>
+<pre class="r"><code>###==================================================
+### Loading packages &amp; keys
+###==================================================
+library(&quot;dplyr&quot;)    # load package for wrangling data
+library(&quot;readr&quot;)    # package for reading tabular data
+library(&quot;ggplot2&quot;)  # package for plotting</code></pre>
+<div id="importing-the-data" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Importing the data</h2>
+<pre class="r"><code>###==================================================
+### Importing the data
+###==================================================
+claremontCBC &lt;- read_tsv(&quot;https://raw.githubusercontent.com/chchang47/BIOL104PO/master/data/ClaremontCBCdata.txt&quot;) # pulling in the spreadsheet from this internet location and storing it in claremontCBC
+
+### Inspecting the data
+claremontCBC %&gt;%
+  head() %&gt;%
+  View()
+
+# The above is equivalent to:
+# View( head( claremontCBC )) # delete the leading # to run</code></pre>
+<p>The Claremont CBC data has these four columns:</p>
+<ul>
+<li><code>Species</code>: the shortened code for each species</li>
+<li><code>Year</code>: the year of the CBC observation</li>
+<li><code>Number</code>: the number of each species observed in that year</li>
+<li><code>NumNormal</code>: <code>Number</code>/effort, where effort is the number of people participating that year</li>
+</ul>
+</div>
+</div>
+<div id="filtering-the-data" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Filtering the data</h1>
+<p>Your task is to:</p>
+<ul>
+<li>Generate a plot for one (or more) species</li>
+<li>Contrast the <code>Number</code> and <code>NumNormal</code> columns</li>
+</ul>
+<p>First, let’s consider how to filter the data to just one of the species.</p>
+<pre class="r"><code>### Create your subset data
+clareSub &lt;- claremontCBC %&gt;%
+  filter(Species==&quot;...&quot;) # select one of the 4 species and replace the ... with its short code name
+
+### View your subset data
+clareSub</code></pre>
+<div id="generating-a-plot" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Generating a plot</h2>
+<p>Of the different plots (see <a href="https://chchang47.github.io/BIOL104PO/Week2b.html">Week2b</a> FMI), because we have observations of distinct numeric x- and y-variables (x = time and y = species counts), a scatterplot would be appropriate.</p>
+<pre class="r"><code>### Creating a scatterplot
+  # Note that we will store the scatterplot in an object named &quot;p&quot; for plot
+p &lt;- ggplot(clareSub, aes(x=Year, y=Number)) # specifying an aesthetic where x is Year and y is the count of that species
+p &lt;- p + geom_point() # adding on points to create a scatterplot
+p &lt;- p + labs(x=&quot;...&quot;, y=&quot;...&quot;) # changing the default x and y axis labels to more informative labels (replace the ... with your text)
+p # calling p which will be displayed in the plot viewer
+
+### Slightly more advanced move to save plots using commands
+  # ?ggsave # uncomment and run to load the help page
+#ggsave(plot= p, filename=&quot;BirdPlot.jpeg&quot;) # replace filename with something more informative; remove leading # to run</code></pre>
+<div id="exercise" class="section level3" number="3.1.1">
+<h3 number="3.1.1"><span class="header-section-number">3.1.1</span> Exercise</h3>
+<p>How would you repeat the plot above but have <code>NumNormal</code> on the y-axis? Why might this be more appropriate in some cases?</p>
+</div>
+</div>
+<div id="plotting-two-or-more-species" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Plotting two or more species</h2>
+<p>We’ll start by modifying the data filter to include two species.</p>
+<p>First, let’s consider how to filter the data to just one of the species.</p>
+<pre class="r"><code>### Create your subset data
+clareSub &lt;- claremontCBC %&gt;%
+  filter(Species==&quot;...&quot; | Species==&quot;...&quot;) # select two of the 4 species and replace the ... with their short code name
+  # NB: the | symbol means OR - match species 1 OR species 2
+
+### View your subset data
+clareSub</code></pre>
+</div>
+<div id="generating-a-plot-1" class="section level2" number="3.3">
+<h2 number="3.3"><span class="header-section-number">3.3</span> Generating a plot</h2>
+<p>Of the different plots (see <a href="https://chchang47.github.io/BIOL104PO/Week2b.html">Week2b</a> FMI), because we have observations of distinct numeric x- and y-variables (x = time and y = species counts), a scatterplot would be appropriate.</p>
+<pre class="r"><code>### Creating a scatterplot
+  # Note that we will store the scatterplot in an object named &quot;p&quot; for plot
+p &lt;- ggplot(clareSub, aes(x=Year, y=Number, color=Species)) # specifying an aesthetic where x is Year and y is the count of that species
+  # We&#39;re adding on another dimension to the visualization, which is using color to differentiate species
+p &lt;- p + geom_point() # adding on points to create a scatterplot
+p &lt;- p + labs(x=&quot;...&quot;, y=&quot;...&quot;) # changing the default x and y axis labels to more informative labels (replace the ... with your text)
+p &lt;- p + theme_classic() # choosing a simpler black and white background
+p # calling p which will be displayed in the plot viewer
+
+### Slightly more advanced move to save plots using commands
+  # ?ggsave # uncomment and run to load the help page
+#ggsave(plot= p, filename=&quot;BirdPlot2.jpeg&quot;) # replace filename with something more informative; remove leading # to run</code></pre>
+<div id="exercise-1" class="section level3" number="3.3.1">
+<h3 number="3.3.1"><span class="header-section-number">3.3.1</span> Exercise</h3>
+<p>How would you repeat the plot above but have <code>NumNormal</code> on the y-axis? Why might this be more appropriate in some cases?</p>
+</div>
+</div>
+</div>
+<div id="answers-to-exercises" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Answers to exercises</h1>
+<div id="single-species-version" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Single-species version</h2>
+<pre class="r"><code>### Creating a scatterplot
+  # Note that we will store the scatterplot in an object named &quot;p&quot; for plot
+p &lt;- ggplot(clareSub, aes(x=Year, y=NumNormal)) # specifying an aesthetic where x is Year and y is the count of that species
+p &lt;- p + geom_point() # adding on points to create a scatterplot
+p &lt;- p + labs(x=&quot;Year&quot;, y=&quot;Count (normalized)&quot;) # changing the default x and y axis labels to more informative labels (replace the ... with your text)
+p # calling p which will be displayed in the plot viewer
+
+### Slightly more advanced move to save plots using commands
+  # ?ggsave # uncomment and run to load the help page
+#ggsave(plot= p, filename=&quot;BirdPlot.jpeg&quot;) # replace filename with something more informative; remove leading # to run</code></pre>
+</div>
+<div id="multi-species-version" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> Multi-species version</h2>
+<pre class="r"><code>### Creating a scatterplot
+  # Note that we will store the scatterplot in an object named &quot;p&quot; for plot
+p &lt;- ggplot(clareSub, aes(x=Year, y=NumNormal, color=Species)) # specifying an aesthetic where x is Year and y is the count of that species
+  # We&#39;re adding on another dimension to the visualization, which is using color to differentiate species
+p &lt;- p + geom_point() # adding on points to create a scatterplot
+p &lt;- p + labs(x=&quot;Year&quot;, y=&quot;Count (normalized)&quot;) # changing the default x and y axis labels to more informative labels (replace the ... with your text)
+p &lt;- p + theme_classic() # choosing a simpler black and white background
+p # calling p which will be displayed in the plot viewer
+
+### Slightly more advanced move to save plots using commands
+  # ?ggsave # uncomment and run to load the help page
+#ggsave(plot= p, filename=&quot;BirdPlot2.jpeg&quot;) # replace filename with something more informative; remove leading # to run</code></pre>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

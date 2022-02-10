@@ -1,0 +1,180 @@
+---
+title: "Claremont CBC data analysis"
+author: ""
+date: ""
+output: 
+  html_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
+```
+
+# Overview
+
+[Claremont, CA](http://www.pomonavalleyaudubon.org/uploads/3/4/9/5/34958940/2018_2019_winter.pdf) has had a local winter [Christmas Bird Count (CBC for short)](https://www.audubon.org/conservation/history-christmas-bird-count) station since 1972. We are going to interact with the CBC data for four focal species:
+
+* `COHA` - Cooper's Hawk
+* `ACWO` - Acorn woodpecker
+* `SPTO` - Spotted towhee
+* `YRWA` - Yellow-rumped warbler
+
+In the following exercises, please discuss as a group:
+
+* What pattern, if any, do you observe for your species (or pair of species)?
+    + How is their population abundance, proxied by CBC data, changing through time?
+* What differences do you see between the plots for `Number` and `NumNormal`? 
+* What processes do you think drive these differences?
+    + What factors might be driven by the CBC itself?
+
+Note that in the assignment [ClaremontCBC](https://rstudio.cloud/spaces/207567/project/3569413), you'll see a `ClaremontCBC.R` script that you can use to follow along with this discussion activity.
+
+# Loading packages
+
+First, let's load the packages that we'll need.
+
+```{r}
+###==================================================
+### Loading packages & keys
+###==================================================
+library("dplyr")    # load package for wrangling data
+library("readr")    # package for reading tabular data
+library("ggplot2")  # package for plotting
+```
+
+## Importing the data
+
+```{r}
+###==================================================
+### Importing the data
+###==================================================
+claremontCBC <- read_tsv("https://raw.githubusercontent.com/chchang47/BIOL104PO/master/data/ClaremontCBCdata.txt") # pulling in the spreadsheet from this internet location and storing it in claremontCBC
+
+### Inspecting the data
+claremontCBC %>%
+  head() %>%
+  View()
+
+# The above is equivalent to:
+# View( head( claremontCBC )) # delete the leading # to run
+```
+
+The Claremont CBC data has these four columns:
+
+* `Species`: the shortened code for each species
+* `Year`: the year of the CBC observation
+* `Number`: the number of each species observed in that year
+* `NumNormal`: `Number`/effort, where effort is the number of people participating that year
+
+# Filtering the data
+
+Your task is to:
+
+* Generate a plot for one (or more) species
+* Contrast the `Number` and `NumNormal` columns
+
+First, let's consider how to filter the data to just one of the species.
+
+```{r}
+### Create your subset data
+clareSub <- claremontCBC %>%
+  filter(Species=="...") # select one of the 4 species and replace the ... with its short code name
+
+### View your subset data
+clareSub
+```
+
+## Generating a plot
+
+Of the different plots (see [Week2b](https://chchang47.github.io/BIOL104PO/Week2b.html) FMI), because we have observations of distinct numeric x- and y-variables (x = time and y = species counts), a scatterplot would be appropriate.
+
+```{r}
+### Creating a scatterplot
+  # Note that we will store the scatterplot in an object named "p" for plot
+p <- ggplot(clareSub, aes(x=Year, y=Number)) # specifying an aesthetic where x is Year and y is the count of that species
+p <- p + geom_point() # adding on points to create a scatterplot
+p <- p + labs(x="...", y="...") # changing the default x and y axis labels to more informative labels (replace the ... with your text)
+p # calling p which will be displayed in the plot viewer
+
+### Slightly more advanced move to save plots using commands
+  # ?ggsave # uncomment and run to load the help page
+#ggsave(plot= p, filename="BirdPlot.jpeg") # replace filename with something more informative; remove leading # to run
+```
+
+### Exercise
+
+How would you repeat the plot above but have `NumNormal` on the y-axis? Why might this be more appropriate in some cases?
+
+## Plotting two or more species
+
+We'll start by modifying the data filter to include two species.
+
+First, let's consider how to filter the data to just one of the species.
+
+```{r}
+### Create your subset data
+clareSub <- claremontCBC %>%
+  filter(Species=="..." | Species=="...") # select two of the 4 species and replace the ... with their short code name
+  # NB: the | symbol means OR - match species 1 OR species 2
+
+### View your subset data
+clareSub
+```
+
+## Generating a plot
+
+Of the different plots (see [Week2b](https://chchang47.github.io/BIOL104PO/Week2b.html) FMI), because we have observations of distinct numeric x- and y-variables (x = time and y = species counts), a scatterplot would be appropriate.
+
+```{r}
+### Creating a scatterplot
+  # Note that we will store the scatterplot in an object named "p" for plot
+p <- ggplot(clareSub, aes(x=Year, y=Number, color=Species)) # specifying an aesthetic where x is Year and y is the count of that species
+  # We're adding on another dimension to the visualization, which is using color to differentiate species
+p <- p + geom_point() # adding on points to create a scatterplot
+p <- p + labs(x="...", y="...") # changing the default x and y axis labels to more informative labels (replace the ... with your text)
+p <- p + theme_classic() # choosing a simpler black and white background
+p # calling p which will be displayed in the plot viewer
+
+### Slightly more advanced move to save plots using commands
+  # ?ggsave # uncomment and run to load the help page
+#ggsave(plot= p, filename="BirdPlot2.jpeg") # replace filename with something more informative; remove leading # to run
+```
+
+### Exercise
+
+How would you repeat the plot above but have `NumNormal` on the y-axis? Why might this be more appropriate in some cases?
+
+# Answers to exercises
+
+## Single-species version
+
+```{r}
+### Creating a scatterplot
+  # Note that we will store the scatterplot in an object named "p" for plot
+p <- ggplot(clareSub, aes(x=Year, y=NumNormal)) # specifying an aesthetic where x is Year and y is the count of that species
+p <- p + geom_point() # adding on points to create a scatterplot
+p <- p + labs(x="Year", y="Count (normalized)") # changing the default x and y axis labels to more informative labels (replace the ... with your text)
+p # calling p which will be displayed in the plot viewer
+
+### Slightly more advanced move to save plots using commands
+  # ?ggsave # uncomment and run to load the help page
+#ggsave(plot= p, filename="BirdPlot.jpeg") # replace filename with something more informative; remove leading # to run
+```
+
+## Multi-species version
+
+```{r}
+### Creating a scatterplot
+  # Note that we will store the scatterplot in an object named "p" for plot
+p <- ggplot(clareSub, aes(x=Year, y=NumNormal, color=Species)) # specifying an aesthetic where x is Year and y is the count of that species
+  # We're adding on another dimension to the visualization, which is using color to differentiate species
+p <- p + geom_point() # adding on points to create a scatterplot
+p <- p + labs(x="Year", y="Count (normalized)") # changing the default x and y axis labels to more informative labels (replace the ... with your text)
+p <- p + theme_classic() # choosing a simpler black and white background
+p # calling p which will be displayed in the plot viewer
+
+### Slightly more advanced move to save plots using commands
+  # ?ggsave # uncomment and run to load the help page
+#ggsave(plot= p, filename="BirdPlot2.jpeg") # replace filename with something more informative; remove leading # to run
+```

@@ -26,6 +26,8 @@ navbar:
       menu:
         - text: "IUCN Red List"
           href: IUCN.html
+        - text: "CBC"
+          href: CBC.html
     #     - text: "Biodiversity & prioritization"
     #       href: Week5.html
     #     - text: "Week 6"
