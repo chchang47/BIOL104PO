@@ -28,6 +28,8 @@ navbar:
           href: IUCN.html
         - text: "CBC"
           href: CBC.html
+        - text: "Species-area"
+          href: SpeciesArea.html
     #     - text: "Biodiversity & prioritization"
     #       href: Week5.html
     #     - text: "Week 6"
