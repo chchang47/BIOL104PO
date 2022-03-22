@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Population viability analyses</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Conservation Biology</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Introduction
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 1</li>
+    <li>
+      <a href="Week1.html">The R and RStudio environments</a>
+    </li>
+    <li>
+      <a href="Week1b.html">Introduction to R</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Data manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 2</li>
+    <li>
+      <a href="Week2_CAcounty.html">Manipulating data.frames</a>
+    </li>
+    <li>
+      <a href="Week2b.html">Data visualization</a>
+    </li>
+    <li>
+      <a href="Week2_Joins.html">Joining data</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Conservation analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="IUCN.html">IUCN Red List</a>
+    </li>
+    <li>
+      <a href="CBC.html">CBC</a>
+    </li>
+    <li>
+      <a href="SpeciesArea.html">Species-area</a>
+    </li>
+    <li>
+      <a href="PVA.html">PVA</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Population viability analyses</h1>
+<h4 class="author"></h4>
+
+</div>
+
+
+<!--Popbio version 2.7 in 2022 RStudioCloud-->
+<div id="modeling-stage-structured-populations-with-projection-matrices" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Modeling st/age structured populations with projection matrices</h1>
+<p>Below, we will see how to model a population where individuals in different ages or stages make different contributions to population change over time.</p>
+<p>First, we will build up intuition about <span class="math inline">\(\lambda\)</span> in the context of projection matrices. How is it possible that we can extract a number that presents the average per-individual growth rate when there is age, stage, or size structure?</p>
+<p>We’ll begin by defining a projection matrix <span class="math inline">\(A\)</span> for a species (say an annual plant) which has seedlings and adults that die at the end of the year. Both classes contribute in creating new offspring within the year though. We will also start with an initial population vector, <span class="math inline">\(n_0\)</span>.</p>
+<pre class="r"><code>### Defining the projection matrix and initial population vector
+A &lt;- matrix(c(1,4,0.5,0),byrow=TRUE,nrow=2) # projection matrix
+A # display the projection matrix
+n0 &lt;- matrix(c(6,0),nrow=2) # initial population vector
+n0 # display the initial population vector</code></pre>
+<pre class="r"><code>### Running through 9 years in our model and seeing how 
+### the population changes over time
+n0 &lt;- matrix(c(6,0),nrow=2) # initial population vector ; redefine here to make sure we get consistent results below.
+for (i in 1:9) {
+  nt &lt;- A%*%n0
+  rownames(nt) &lt;- c(&quot;Seedling&quot;,&quot;Adult&quot;)
+  colnames(nt) &lt;- paste(&quot;Pop&#39;n @ time:&quot;,i,collapse=&quot; &quot;)
+  print(nt)
+  print(paste(&quot;Seedling to adult ratio:&quot;,signif(nt[1,1]/nt[2,1],2),collapse=&quot; &quot;))
+  print(paste(&quot;Growth rate:&quot;,signif(sum(nt)/sum(n0), 3), collapse=&quot;&quot;))
+  n0 &lt;- nt # update n0 to take on the previous step&#39;s nt value
+}</code></pre>
+<div id="khaya-senegalensis-example" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> <em>Khaya senegalensis</em> example</h2>
+<p>Below, we’ll start by importing data on the projection matrices of <em>Khaya senegalensis</em>. There are four matrices. Two correspond to low levels of harvest and two correspond to high levels of harvest for <em>K. senegalensis</em> trees; all of the matrices come from the Sudano-Guinean region in central Benin, which is a transition zone between the more arid north and the humid savannah central/south region of the country.</p>
+<pre class="r"><code>### Loading packages
+library(dplyr)    # data wrangling package
+library(magrittr) # pipe %&gt;% function
+library(ggplot2)  # plotting library
+library(readr)    # interacting with data tables
+library(popbio)   # load popbio package</code></pre>
+<pre class="r"><code>### Reading in the data
+KhayaDF &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/chchang47/BIOL104PO/master/data/KhayaMatrices.tsv&quot;)
+
+### Vector storing the different names for the conditions
+khaya_conditions &lt;- c(&quot;High S&quot;,&quot;High B&quot;,&quot;Low S&quot;,&quot;Low B&quot;) # high harvest or low harvest in the Sakarou (S) 
+                    # or Boukoussera (B) populations in Central Benin
+
+### Processing the data to extract the matrices
+khaya_matrices &lt;- list()
+khaya_stages &lt;- c(&quot;Seed&quot;,&quot;Sap&quot;,&quot;Juv&quot;,&quot;SmAd&quot;,&quot;LgAd&quot;) # Seedling, Sapling, Juvenile, Small adult tree, and Large adult tree
+for (i in 1:length(khaya_conditions)) { # iterate through the 4 matrix conditions
+  condition &lt;- khaya_conditions[i] # select condition number i (element number i) from the khaya_conditions vector
+  # Below, we walk through the spreadsheet and programmatically extract each 
+  khaya_mat_i &lt;- KhayaDF %&gt;% 
+    dplyr::filter(Condition==condition) %&gt;% # filter the rows in the spreadsheet corresponding to this condition
+    dplyr::select(A1:A5) # select the columns that store the matrix data
+  # Now we store that corresponding matrix
+  khaya_matrices[[i]] &lt;- as.matrix(khaya_mat_i) # convert the data to a matrix format
+  colnames(khaya_matrices[[i]]) &lt;- khaya_stages # store the stage names
+  rownames(khaya_matrices[[i]]) &lt;- khaya_stages
+}
+names(khaya_matrices) &lt;- gsub(&quot; &quot;,&quot;&quot;,khaya_conditions) # assigning names to the projection matrices</code></pre>
+<pre class="r"><code>### Here we will calculate the population growth rate, lambda
+### for each of the four projection matrices.
+khaya_popbio &lt;- tibble::tibble(Popn = khaya_conditions,
+  lambdas = sapply( khaya_matrices, lambda)) # initiate a data table
+
+khaya_popbio # print our data table
+
+### Q: Which populations are growing or declining? Are any staying stable?</code></pre>
+<pre class="r"><code>### Here we display a heat map of one of the projection matrices
+### Specifically, we will pick the second matrix (High harvest in Boukoussera),
+### which has lambda = 0.98
+image2(khaya_matrices$HighB) # equivalently, image2(khaya_matrices[[2]])
+
+### What is the survivorship rate for large adult trees?
+### How many offspring do large adult trees produce?</code></pre>
+</div>
+</div>
+<div id="showing-trajectories-for-k.-senegalensis-populations" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Showing trajectories for <em>K. senegalensis</em> populations</h1>
+<p>In the code below, we will plot the population trajectories for the two Boukoussera populations. One is experiencing high levels of harvest (<code>HighB</code>) and the other low levels of harvest (<code>LowB</code>).</p>
+<pre class="r"><code>### First, we will specify a starting population vector
+n0 &lt;- c(500, 200, 100, 80, 50) # 500 seedlings, 200 saplings, 100 juveniles, 80 small adult, and 50 large adult trees
+# You can arbitrarily change these 5 values to any (&gt;= 0) number you like
+number_years &lt;- 100</code></pre>
+<pre class="r"><code>### Use the popbio package to calculate projections for our populations
+highB_Nt &lt;- pop.projection(A=khaya_matrices$HighB, n=n0, iterations = number_years) 
+  # We project the population forward using the projection matrix A, 
+  # the starting population vector n0, and for number_years time duration.
+lowB_Nt &lt;- pop.projection(A=khaya_matrices$LowB, n=n0, iterations = number_years)</code></pre>
+<pre class="r"><code>### Creating a data table to store the outputs
+B_Nt_DF &lt;- tibble::tibble(Time = rep(1:number_years, 2), # time steps
+           Nt = c(highB_Nt$pop.sizes, lowB_Nt$pop.sizes),
+           Harvest = c(rep(&quot;High&quot;,number_years),rep(&quot;Low&quot;,number_years)))</code></pre>
+<pre class="r"><code>### Plotting the population model for the two Boukoussera populations
+p &lt;- ggplot(B_Nt_DF, aes(x=Time,y=Nt,color=Harvest))
+p &lt;- p + geom_point() + geom_line()
+p &lt;- p + scale_color_manual(values=c(&quot;purple&quot;,&quot;orange&quot;))
+p &lt;- p + theme_classic() + theme(legend.direction = &quot;horizontal&quot;,legend.position=&quot;top&quot;)
+p &lt;- p + labs(x=&quot;Years&quot;,y=&quot;Population size&quot;)
+p
+
+### What do we see?</code></pre>
+<pre class="r"><code>### What does the distribution of stage classes look like?
+stage_colors &lt;- c(&quot;#fc8d62&quot;,&quot;#8da0cb&quot;,&quot;#e78ac3&quot;,&quot;#a6d854&quot;,&quot;#66c2a5&quot;) # from https://colorbrewer2.org/#type=qualitative&amp;scheme=Set2&amp;n=5
+stage.vector.plot(lowB_Nt$stage.vectors, col=stage_colors, main=&quot;Low harvest population stage plot&quot;) </code></pre>
+<pre class="r"><code>### What does the distribution of stage claasses look like
+### for the High harvest population?
+stage.vector.plot(highB_Nt$stage.vectors, col=stage_colors, main=&quot;High harvest population stage plot&quot;,ylim=c(0,0.6)) </code></pre>
+</div>
+<div id="population-viability-analysis" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Population viability analysis</h1>
+<p>Now, let’s take a look at all four of the <em>K. senegalensis</em> matrices and use those to examine how the relative frequency of the different projection matrices influence extinction probability.</p>
+<p>In situations where we don’t model stochasticity, looking at the <span class="math inline">\(\lambda\)</span> for the projection matrix would be enough to tell us if the population was going to be in trouble or not (<span class="math inline">\(\lambda &lt; 1\)</span>). However, when there is variation, which leads to different possible demographic rates for populations, we need to account for that somehow. Simulation models using these projection matrices let us do that type of analysis.</p>
+<pre class="r"><code>### Let&#39;s take a look again at those values 
+### of lambda associated with each population&#39;s
+### projection matrix
+khaya_popbio # print our data table</code></pre>
+<pre class="r"><code>### Setting up our parameters for our stochastic projection
+popn_probabilities &lt;- c(0.3, 0.3, 0.2, 0.2) # this is the most critical parameter.
+  # This specifies that the high harvest conditions occur 30% of the time for each population.
+  # and the low harvest conditions 20% of the time
+n0 &lt;- c(500, 200, 100, 80, 50) # 500 seedlings, 200 saplings, 100 juveniles, 80 small adult, and 50 large adult trees
+  # You can arbitrarily change these 5 values to any (&gt;= 0) number you like
+number_years &lt;- 100 # number of time steps to run each simulation
+n_sims &lt;- 1000 # number of simulations to run</code></pre>
+<pre class="r"><code>### Running the stochastic population simulation
+khaya_stoch &lt;- stoch.projection(khaya_matrices, n0 = n0, tmax = number_years, nreps=n_sims, prob=popn_probabilities)
+
+### Storing outputs at the end of each simulation
+khaya_stoch_sum &lt;- rowSums(khaya_stoch) # final population size for each of the n_sim number of simulations 
+
+### Returning the stochastic growth rate
+  # We store the output in a variable called sgr for
+  # stochastic growth rate
+sgr &lt;- stoch.growth.rate(khaya_matrices,
+                  maxt = number_years, # maximum number of years
+                  prob = popn_probabilities) # probability of observing each population projection matrix in the wild
+
+### Calculating lambda
+exp(sgr$approx) # we exponentiate because this method calculates a log of the stochastic growth rate</code></pre>
+<pre class="r"><code>### Data frame to store the simulated outputs
+khaya_stoch_DF &lt;-  tibble::tibble(simRun = 1:n_sims, # simulated run index
+                    Nend = khaya_stoch_sum) # final population size for each simulation                  
+
+head(khaya_stoch_DF) # view first few entries</code></pre>
+<pre class="r"><code>### Visualize our distribution of final population sizes
+p &lt;- ggplot(khaya_stoch_DF, aes(x=Nend))
+p &lt;- p + geom_histogram()
+p &lt;- p + labs(x=&quot;Final population size&quot;,y=&quot;Frequency&quot;)
+p &lt;- p + geom_vline(xintercept = 500, color=&quot;red&quot;, linetype=2, lwd=2)
+p &lt;- p + theme_bw()
+p
+  # The vertical red dashed line corresponds to one threshold for 
+  # &quot;minimum viable population&quot; size--500 individual trees.
+  # What do we observe below? 
+  # (And is there some way to see when we fall below that extinction threshold?)</code></pre>
+<pre class="r"><code>### Assess extinction probability through time
+nExt &lt;- 500 # extinction threshold; otherwise we use the same parameters as above
+khaya_stoch_ext &lt;- stoch.quasi.ext(matrices = khaya_matrices, n0 = n0, Nx = nExt, 
+                    tmax = number_years, nreps = n_sims)</code></pre>
+<pre class="r"><code>### Plotting the cumulative probability of extinction across
+### 10 model runs where each simulation had n_sims number of ### simulated populations for number_years time.
+ext_title &lt;- paste(&quot;Time to reach a quasi-extinction threshold of&quot;,nExt,&quot;individuals&quot;,collapse=&quot;&quot;)
+matplot(khaya_stoch_ext, xlab=&quot;Years&quot;, ylab=&quot;Quasi-extinction probability&quot;,
+ type=&#39;l&#39;, lty=1, col=rainbow(10), las=1,
+ main=ext_title)</code></pre>
+</div>
+<div id="performing-thought-experiments-in-conservation" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Performing thought experiments in conservation</h1>
+<p>One advantage of these matrix models is that we can examine which parameters are most important in changing the overall trajectory of a population. We saw above that <span class="math inline">\(\lambda\)</span> for the high harvest population in Boukoussera is around 0.98.</p>
+<p>As conservation biologists, how would we need to manage the population to ensure that it is viable? That is, what parameters would need to change so that <span class="math inline">\(\lambda \geq 1\)</span>?</p>
+<pre class="r"><code>expMat &lt;- khaya_matrices$HighB # experimental matrix storing the high harvest Boukoussera matrix
+image2(khaya_matrices$HighB)
+## Here we will re-assign the value for juvenile survivorship
+  # Note that survivorship should not exceed 1 in total!
+expMat[3,3] &lt;- 0.95 # increasing juvenile survivorship
+lambda(expMat)
+
+# Re-setting those values here for expMat to the observed values for High harvest.
+expMat &lt;- khaya_matrices$HighB # You can comment this out to examine layering changes together
+
+## Re-assigning adult survivorship
+expMat[4,4] &lt;- 0.93 # increasing small adult tree survivorship
+  # You can toggle this value differently
+lambda(expMat)
+expMat &lt;- khaya_matrices$HighB
+
+## Re-assigning adult seedling production / fecundity
+expMat[1,5] &lt;- 4 # increasing large tree seedling production
+lambda(expMat)</code></pre>
+<pre class="r"><code>### It turns out that we can see which values have 
+### the largest proportional contribution to changing lambda
+elasticity(khaya_matrices$HighB) %&gt;%
+  image2()
+
+# What does this show?</code></pre>
+</div>
+<div id="exploring-these-concepts-further" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Exploring these concepts further</h1>
+<p>Manipulate the values in the exercises we did above. I’ve copied the code here and indicated which ones you could change. How does that affect what you observe?</p>
+<pre class="r"><code>### Setting up our parameters for our stochastic projection
+popn_probabilities &lt;- c(P1, P2, P3, P4) # this is the most critical parameter.
+  # Change these values yourself to probabilities that sum to 1.
+n0 &lt;- c(500, 200, 100, 80, 50) # 500 seedlings, 200 saplings, 100 juveniles, 80 small adult, and 50 large adult trees
+  # You can arbitrarily change these 5 values to any (&gt;= 0) number you like
+nExt &lt;- 500 # extinction threshold; you could change this
+  # Past conservation papers have recommended a 50/100/500 threshold</code></pre>
+<pre class="r"><code>### Running the stochastic population simulation
+khaya_stoch &lt;- stoch.projection(khaya_matrices, n0 = n0, tmax = number_years, nreps=n_sims, prob=popn_probabilities)
+
+### Returning the stochastic growth rate
+  # We store the output in a variable called sgr for
+  # stochastic growth rate
+sgr &lt;- stoch.growth.rate(khaya_matrices,
+                  maxt = number_years, # maximum number of years
+                  prob = popn_probabilities) # probability of observing each population projection matrix in the wild
+
+### Calculating lambda
+exp(sgr$approx) # we exponentiate because this method calculates a log of the stochastic growth rate
+
+khaya_stoch_sum &lt;- rowSums(khaya_stoch) # final population size for each of the n_sim number of simulations</code></pre>
+<pre class="r"><code>### Data frame to store the simulated outputs
+khaya_stoch_DF &lt;-  tibble::tibble(simRun = 1:n_sims, # simulated run index
+                    Nend = khaya_stoch_sum) # final population size for each simulation                  
+
+# head(khaya_stoch_DF) # view first few entries; uncomment by deleting leading # to run</code></pre>
+<pre class="r"><code>### Visualize our distribution of final population sizes
+p &lt;- ggplot(khaya_stoch_DF, aes(x=Nend))
+p &lt;- p + geom_histogram()
+p &lt;- p + labs(x=&quot;Final population size&quot;,y=&quot;Frequency&quot;)
+p &lt;- p + geom_vline(xintercept = 500, color=&quot;red&quot;, linetype=2, lwd=2)
+p &lt;- p + theme_bw()
+p
+  # The vertical red dashed line corresponds to one threshold for 
+  # &quot;minimum viable population&quot; size--500 individual trees.
+  # What do we observe below in the plot?</code></pre>
+<pre class="r"><code>### Calculating cumulative probabilities over time of falling below the quasi-extinction threshold
+khaya_stoch_ext &lt;- stoch.quasi.ext(matrices = khaya_matrices, n0 = n0, Nx = nExt, 
+                    tmax = number_years, nreps = n_sims,
+                    prob=popn_probabilities)</code></pre>
+<pre class="r"><code>### Plotting the cumulative probability of extinction across
+### 10 model runs where each simulation had n_sims number of ### simulated populations for number_years time.
+ext_title &lt;- paste(&quot;Time to reach a quasi-extinction threshold of&quot;,nExt,&quot;individuals&quot;,collapse=&quot;&quot;)
+matplot(khaya_stoch_ext, xlab=&quot;Years&quot;, ylab=&quot;Quasi-extinction probability&quot;,
+ type=&#39;l&#39;, lty=1, col=rainbow(10), las=1,
+ main=ext_title)</code></pre>
+<pre class="r"><code>### Based on what you&#39;ve observed today,
+### what values might you be especially concerned
+### about, prioritize for additional surveying
+### to assess accuracy, or prioritize for
+### conservation interventions?
+expMat &lt;- khaya_matrices$HighS # experimental matrix storing the high harvest Sakarou matrix
+  # this population is in a very bad way - lambda ~ 0.85
+image2(khaya_matrices$HighS) # use a heatmap to display the values of projection matrix HighS</code></pre>
+<pre class="r"><code>### Which vital rates have the largest 
+### proportional contribution to changing lambda?
+elasticity(khaya_matrices$HighS) %&gt;%
+  image2()</code></pre>
+<pre class="r"><code>## Here we will re-assign the value for juvenile survivorship
+  # Note that survivorship should not exceed 1 in total!
+expMat[X,Y] &lt;- VALUE # change X and Y to the row and column you seek to change
+  # change VALUE to the VALUE you&#39;d want to change that matrix entry to.
+  # e.g. maybe I&#39;d write:
+  # expMat[5,5] &lt;- 0.7 # to increase adult survivorship from 0.625 to 0.7
+lambda(expMat)
+
+# expMat &lt;- khaya_matrices$HighS # uncomment to restore the values of HighS to exp(erimental) Mat(rix)
+  # Changing another value
+expMat[X,Y] &lt;- VALUE # change X and Y to the row and column you seek to change
+  # change VALUE to the VALUE you&#39;d want to change that matrix entry to.
+lambda(expMat)</code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

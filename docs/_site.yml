@@ -30,6 +30,8 @@ navbar:
           href: CBC.html
         - text: "Species-area"
           href: SpeciesArea.html
+        - text: "PVA"
+          href: PVA.html
     #     - text: "Biodiversity & prioritization"
     #       href: Week5.html
     #     - text: "Week 6"
