@@ -32,17 +32,6 @@ navbar:
           href: SpeciesArea.html
         - text: "PVA"
           href: PVA.html
-    #     - text: "Biodiversity & prioritization"
-    #       href: Week5.html
-    #     - text: "Week 6"
-    #     - text: "Combining social and ecological data"
-    #       href: Week6.html
-    #     - text: "Week 9"
-    #     - text: "Linear regressions; climate impacts"
-    #       href: Week9.html
-    #     - text: "Week 10"
-    #     - text: "Comparing pollution across streams in the US"
-    #       href: Week10.html
 output:
   html_document:
     theme: flatly
