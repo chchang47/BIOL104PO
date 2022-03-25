@@ -1,5 +1,7 @@
 name: "BIOL104"
 output_dir: "."
+include: [index.Rmd, PVA.Rmd, CBC.Rmd, IUCN.Rmd, Week2*.Rmd, Week1*.Rmd, Week5.Rmd]
+exclude: [old/*.Rmd]
 navbar:
   title: "Conservation Biology"
   left:
