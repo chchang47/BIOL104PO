@@ -65,18 +65,15 @@ In addition to the course policies below, I emphasize that I prioritize your hea
   + Weekly self-assessments: 5%
   + Article reflection questions: 5%
 * Lab and lecture assignments: 20%
-* Case study presentation and discussion facilitation: 15%
-  + Case study presentation: 10%
+* Case study presentation and discussion facilitation: 20%
+  + Case study presentation: 15%
   + Discussion facilitation: 5%
-* California county conservation analysis: 20%
-  + Presentation: 5%
-  + Report: 15%
-* Independent project: 15%
+* California county conservation analysis: 30%
   + Presentation: 10%
-  + Reflection report: 5%
-* Final paper: 20%
-  + Report: 15%
-  + Viva voce: 5%
+  + Report: 20%
+* Independent project: 20%
+  + Presentation: 10%
+  + Group report: 10%
 
 ## Mutual expectations
 
