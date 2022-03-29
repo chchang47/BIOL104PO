@@ -34,6 +34,8 @@ navbar:
           href: SpeciesArea.html
         - text: "PVA"
           href: PVA.html
+        - text: "Climate"
+          href: Climate.html
 output:
   html_document:
     theme: flatly
