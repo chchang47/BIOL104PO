@@ -1,0 +1,103 @@
+---
+title: "Acoustic ecology - studying environments through sound"
+author: ""
+date: ""
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+html_tag_audio <- function(file, type = c("wav")) {
+  type <- match.arg(type)
+  htmltools::tags$audio(
+    controls = "",
+    htmltools::tags$source(
+      src = file,
+      type = glue::glue("audio/{type}", type = type)
+    )
+  )
+}
+```
+
+# Overview {.tabset .tabset-fade}
+
+In this tutorial, we'll take a look at sound data collected at the Bernard Field Station over spring break.
+
+In this tutorial, you will learn:
+
+* what are different ways to interact with sound data in `R`?
+* how can we visualize sound data using spectrograms?
+* how can we calculate indices of acoustic diversity?
+
+#  A brief description of sound
+
+When we vocalize, we are making vibrations that move through the air like a wave. Microphones detect these vibrations. These vibrations are then recorded into numbers which can be processed by computers. It turns out that we can get quite a bit of information from these numbers.
+
+Let's start by loading the packages that we will need.
+
+```{r, message=FALSE, warning=FALSE}
+### Loading packages
+library(seewave)
+library(tuneR)
+```
+
+## Waveforms
+
+Let's pull in one of the recorded files from the BFS. You can play the recording below.
+
+```{r,echo=FALSE}
+html_tag_audio('20220313_063000.WAV')
+```
+
+Now, let's visualize this recording using an oscillogram. The output from the function `oscillo` shows how how the amplitude (or loudness) changes over the whole recording. We're going to focus on visualizing the recording from 1:01 to 1:05
+
+```{r,echo=FALSE}
+## Read in the sound data
+BFS_am_1 <-tuneR::readWave('20220313_063000.WAV')
+## Show the oscillogram
+## which is a plot of amplitude over time
+## We'll focus on the first minute of the recording
+oscillo(BFS_am_1, from = 0, to = 60, fastdisp=TRUE)
+```
+
+One thing to note is that these data were recorded at a frequency of 48,000 records per second. So even though each sound file is only 5 minutes long, it has a total of 14,400,000 data points! (This is equal to 5 minutes * 60 seconds / minute * 48000 records/second.)
+
+## Spectrogram
+
+Another way that we can visualize sound is to use the fact that sound has the property of frequency (pitch) at particular times. We can also include amplitude (loudness) as a color. A spectrogram let's us display all three elements of an acoustic signal: its time/duration, the frequency (pitch) of the sound, and the loudness of the sound at each frequency (pitch).
+
+We see that the frequencies in this sound recording are mostly located from 0 to 5000 Hz (or 5 kHz).
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+## Use spectro to display the spectogram of this data
+spectro(BFS_am_1, fastdisp=TRUE)
+```
+
+# Soundscape indices
+
+From observational data of species, we can calculate metrics such as species richness, Shannon's index, etc. Similarly, from sound data, we can calculate metrics of acoustic complexity, which theoretically should be related to the overall biodiversity of vocalizing animals.
+
+First, let's now also read in an evening recording.
+
+```{r,echo=FALSE}
+html_tag_audio('20220313_205000.WAV')
+```
+
+```{r}
+## Read in the sound data for the evening
+BFS_pm_1 <-tuneR::readWave('20220313_205000.WAV')
+```
+
+Here, we will use the function `ACI` to calculate the acoustic complexity of a morning versus evening recording from the BFS.
+
+```{r}
+ACI(BFS_am_1)
+ACI(BFS_pm_1)
+```
+
+ 

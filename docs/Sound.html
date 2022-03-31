@@ -11,7 +11,7 @@
 
 
 
-<title>Introduction to R</title>
+<title>Acoustic ecology - studying environments through sound</title>
 
 <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -225,6 +228,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -232,6 +298,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -329,96 +405,93 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introduction to <code>R</code></h1>
+<h1 class="title toc-ignore">Acoustic ecology - studying environments
+through sound</h1>
 <h4 class="author"></h4>
 
 </div>
 
 
-<p>We will use the package <code>swirl</code> to learn more about several fundamental concepts in <code>R</code>.</p>
-<div id="steps" class="section level2">
-<h2>Steps</h2>
-<ol style="list-style-type: decimal">
-<li>Log-in at <a href="https://rstudio.cloud/spaces/207567/">https://rstudio.cloud</a></li>
-<li>In the console, type in <code>library(swirl)</code>
+<div id="overview" class="section level1 tabset tabset-fade" number="1">
+<h1 class="tabset tabset-fade"><span
+class="header-section-number">1</span> Overview</h1>
+<p>In this tutorial, we’ll take a look at sound data collected at the
+Bernard Field Station over spring break.</p>
+<p>In this tutorial, you will learn:</p>
 <ul>
-<li>All subsequent steps should be run in the console.</li>
-</ul></li>
-<li>Type in <code>swirl()</code></li>
-<li>You will see a message in red text, reading <code>| Welcome to swirl!...call yourself something unique.</code>
-<ul>
-<li>In the line below, you will see a prompt in blue asking <code>What shall I call you?</code></li>
-<li>Please type in your first name or nickname.</li>
-<li>Note that if your name overlaps with commands in <code>R</code>, you may see functions popping up in auto-complete.</li>
-<li>The image below shows this exact problem for my nickname, <code>Char</code>.</li>
-<li>Type out your name and use the back-arrow to avoid auto-selecting a function or some other command if it does pop up as an auto-complete field. (This is–hopefully–very unlikely to happen!)</li>
-</ul></li>
-</ol>
-<p><img src="figures/nameAutocompleteIssue.png" /></p>
-<ol start="5" style="list-style-type: decimal">
-<li>After you type in your name, you will see this message in red text. Basically, the gist of the message is that <code>swirl</code> will interact with you in the console, and any time you see three blue dots (an ellipsis), you should hit enter.</li>
-</ol>
-<pre><code>| Thanks, &lt;FIRST NAME&gt;. Let&#39;s cover a couple of quick housekeeping items...</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>Continue through the next two <code>swirl</code> steps, which lead to this query in red text: <code>| Please choose a course, or type 0 to exit swirl</code>
-<ul>
-<li>NB (Nota bene): By this point, <code>swirl</code> has mentioned the <code>R prompt (&gt;)</code> several times.</li>
-<li>The character <code>&gt;</code> is an example of a <strong>command prompt</strong> where you tell a computer (in this case, the server hosting RStudio Server which is running <code>R</code> code) to execute your command.</li>
-<li><em>Examples from other languages</em>: In Python, the command prompt is denoted by <code>&gt;&gt;&gt;</code> (if you are interacting with Python on the command line in a terminal). In Unix operating systems (e.g. Linux distributions or Mac OS), the command prompt for the terminal is often denoted by <code>$</code>.</li>
-<li>TL;DR: The carat symbol <code>&gt;</code> in the <code>R</code> console within RStudio Server is where <code>R</code> awaits your instructions (commands).</li>
-</ul></li>
-<li>In response to the query (<code>| Please choose a course...</code>), type <code>1</code> after the blue text reading <code>Selection:</code></li>
-<li>In response to the next query, <code>| Please choose a lesson...</code>, please type <code>1</code> after the blue text reading <code>Selection:</code>.
-<ul>
-<li>We will be taking on the <code>1: Basic Building Blocks</code> lesson!</li>
-</ul></li>
-<li>You are ready to go and learn about fundamental programming concepts in <code>R</code> using this first class in <code>swirl</code>.</li>
-<li>If you encounter errors, don’t worry! Just try something different and think a bit more carefully about the <code>swirl</code> instructions at that step. You can always use the vertical navigation bar on the right-hand side of the console to roll back up and see what the last instruction was. For example, in response to this instruction:</li>
-</ol>
-<pre><code>| To see another example of how this vector &#39;recycling&#39; works, try
-| adding c(1, 2, 3, 4) and c(0, 10). Don&#39;t worry about saving the
-| result in a new variable.</code></pre>
-<p>my command here was incorrectly specified (typed in at the <code>R</code> command prompt <code>&gt;</code>):</p>
-<pre><code>c(1, 2, 3, 4) _ c(0, 10)</code></pre>
-<p>and threw an error:</p>
-<pre><code>Error: unexpected input in &quot;c(1, 2, 3, 4) _&quot;</code></pre>
-<p>In this case, I ended up fixing it by typing:</p>
-<pre><code>c(1, 2, 3, 4) + c(0, 10)</code></pre>
-<p>Unfortunately, with these types of <em>syntax</em> errors (akin to a grammatical error in a human language, like kluging your verb conjugation and forgetting the term for a conjunction to join two clauses together), <code>swirl</code> won’t jump in and “automagically” help you.</p>
-<p>If you get really stuck, first try entering something that is syntatically correct in the console at the command prompt. For instance, you could try <code>myName &lt;- "Char"</code>. While this isn’t the correct answer to this <code>swirl</code> instruction, because this command can be interpreted by <code>R</code>, you’ll get kicked back into <code>swirl</code> instructions that may offer you something that you could directly copy and paste into the console, e.g.:</p>
-<pre><code>| That&#39;s not exactly what I&#39;m looking for. Try again. Or, type info()
-| for more options.
-
-| Type c(1, 2, 3, 4) + c(0, 10, 100) to see how R handles adding two
-| vectors, when the shorter vector&#39;s length does not divide evenly
-| into the longer vector&#39;s length. Don&#39;t worry about assigning the
-| result to a variable.</code></pre>
-<p>(Note that here you would type or copy and paste <code>c(1, 2, 3, 4) + c(0, 10, 100)</code> into the console at the command prompt <code>&gt;</code>.)</p>
-<ol start="11" style="list-style-type: decimal">
-<li>If you are in the middle of interacting with the command prompt (<code>&gt;</code>), you can exit the course and <code>swirl</code> at any time by typing <code>bye()</code> into the console.
-<ul>
-<li>Don’t worry: <code>swirl</code> will save where you are in the course so you won’t lose your progress!</li>
-</ul></li>
-<li>The course tracks your progress: when you see the black text displaying <code>|=========</code>, the number at the right hand side, after another <code>|</code> represents the percentage of this course that you have completed.</li>
-<li>At the end of the course, you will see a question from <code>swirl</code> asking:</li>
-</ol>
-<pre><code>| Would you like to receive credit for completing this course on
-| Coursera.org?</code></pre>
-<p>I recommend typing in <code>2</code> (representing “No”) at the <code>Selection:</code> field.</p>
-<ol start="14" style="list-style-type: decimal">
-<li>Afterwards, <code>swirl</code> will tell you that you’ve completed the course, you will see the following in red text:</li>
-</ol>
-<pre><code>| Excellent work!
-| You&#39;ve reached the end of this lesson...
-| Please choose a course, or type 0 to exit swirl.</code></pre>
-<p>In response to the blue <code>Selection:</code> query, please type 0.</p>
-<ol start="15" style="list-style-type: decimal">
-<li>When you have completed the first <code>swirl</code> course, please navigate to the <a href="https://sakai.claremont.edu/portal/directtool/bed484e9-cce5-4661-9413-5cd48ecea551/">Gradescope POM</a> subpage in our Sakai site and select the correct option for the <code>Completion of swirl class (Basic Building Blocks)</code> assignment.</li>
-</ol>
+<li>what are different ways to interact with sound data in
+<code>R</code>?</li>
+<li>how can we visualize sound data using spectrograms?</li>
+<li>how can we calculate indices of acoustic diversity?</li>
+</ul>
+</div>
+<div id="a-brief-description-of-sound" class="section level1"
+number="2">
+<h1><span class="header-section-number">2</span> A brief description of
+sound</h1>
+<p>When we vocalize, we are making vibrations that move through the air
+like a wave. Microphones detect these vibrations. These vibrations are
+then recorded into numbers which can be processed by computers. It turns
+out that we can get quite a bit of information from these numbers.</p>
+<p>Let’s start by loading the packages that we will need.</p>
+<pre class="r"><code>### Loading packages
+library(seewave)
+library(tuneR)</code></pre>
+<div id="waveforms" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Waveforms</h2>
+<p>Let’s pull in one of the recorded files from the BFS. You can play
+the recording below.</p>
+<audio controls="">
+<source src="20220313_063000.WAV" type="audio/wav"/>
+</audio>
+<p>Now, let’s visualize this recording using an oscillogram. The output
+from the function <code>oscillo</code> shows how how the amplitude (or
+loudness) changes over the whole recording. We’re going to focus on
+visualizing the recording from 1:01 to 1:05</p>
+<p><img src="Sound_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>One thing to note is that these data were recorded at a frequency of
+48,000 records per second. So even though each sound file is only 5
+minutes long, it has a total of 14,400,000 data points! (This is equal
+to 5 minutes * 60 seconds / minute * 48000 records/second.)</p>
+</div>
+<div id="spectrogram" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Spectrogram</h2>
+<p>Another way that we can visualize sound is to use the fact that sound
+has the property of frequency (pitch) at particular times. We can also
+include amplitude (loudness) as a color. A spectrogram let’s us display
+all three elements of an acoustic signal: its time/duration, the
+frequency (pitch) of the sound, and the loudness of the sound at each
+frequency (pitch).</p>
+<p>We see that the frequencies in this sound recording are mostly
+located from 0 to 5000 Hz (or 5 kHz).</p>
+<p><img src="Sound_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+</div>
+<div id="soundscape-indices" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Soundscape indices</h1>
+<p>From observational data of species, we can calculate metrics such as
+species richness, Shannon’s index, etc. Similarly, from sound data, we
+can calculate metrics of acoustic complexity, which theoretically should
+be related to the overall biodiversity of vocalizing animals.</p>
+<p>First, let’s now also read in an evening recording.</p>
+<audio controls="">
+<source src="20220313_205000.WAV" type="audio/wav"/>
+</audio>
+<pre class="r"><code>## Read in the sound data for the evening
+BFS_pm_1 &lt;-tuneR::readWave(&#39;20220313_205000.WAV&#39;)</code></pre>
+<p>Here, we will use the function <code>ACI</code> to calculate the
+acoustic complexity of a morning versus evening recording from the
+BFS.</p>
+<pre class="r"><code>ACI(BFS_am_1)</code></pre>
+<pre><code>## [1] 155.0816</code></pre>
+<pre class="r"><code>ACI(BFS_pm_1)</code></pre>
+<pre><code>## [1] 150.623</code></pre>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -451,6 +524,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
