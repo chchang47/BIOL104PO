@@ -448,6 +448,12 @@ the recording below.</p>
 from the function <code>oscillo</code> shows how how the amplitude (or
 loudness) changes over the whole recording. We’re going to focus on
 visualizing the recording from 1:01 to 1:05</p>
+<pre class="r"><code>## Read in the sound data
+BFS_am_1 &lt;-tuneR::readWave(&#39;20220313_063000.WAV&#39;)
+## Show the oscillogram
+## which is a plot of amplitude over time
+## We&#39;ll focus on the first minute of the recording
+oscillo(BFS_am_1, from = 0, to = 60, fastdisp=TRUE)</code></pre>
 <p><img src="Sound_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>One thing to note is that these data were recorded at a frequency of
 48,000 records per second. So even though each sound file is only 5
@@ -464,6 +470,8 @@ frequency (pitch) of the sound, and the loudness of the sound at each
 frequency (pitch).</p>
 <p>We see that the frequencies in this sound recording are mostly
 located from 0 to 5000 Hz (or 5 kHz).</p>
+<pre class="r"><code>## Use spectro to display the spectogram of this data
+spectro(BFS_am_1, fastdisp=TRUE)</code></pre>
 <p><img src="Sound_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 </div>

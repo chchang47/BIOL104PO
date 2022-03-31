@@ -56,7 +56,7 @@ html_tag_audio('20220313_063000.WAV')
 
 Now, let's visualize this recording using an oscillogram. The output from the function `oscillo` shows how how the amplitude (or loudness) changes over the whole recording. We're going to focus on visualizing the recording from 1:01 to 1:05
 
-```{r,echo=FALSE}
+```{r,echo=TRUE}
 ## Read in the sound data
 BFS_am_1 <-tuneR::readWave('20220313_063000.WAV')
 ## Show the oscillogram
@@ -73,7 +73,7 @@ Another way that we can visualize sound is to use the fact that sound has the pr
 
 We see that the frequencies in this sound recording are mostly located from 0 to 5000 Hz (or 5 kHz).
 
-```{r,echo=FALSE,warning=FALSE,message=FALSE}
+```{r,echo=TRUE,warning=FALSE,message=FALSE}
 ## Use spectro to display the spectogram of this data
 spectro(BFS_am_1, fastdisp=TRUE)
 ```
