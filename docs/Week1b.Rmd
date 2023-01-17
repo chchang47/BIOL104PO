@@ -13,11 +13,14 @@ We will use the package `swirl` to learn more about several fundamental concepts
  
 ## Steps
 
-1. Log-in at [https://rstudio.cloud](https://rstudio.cloud/spaces/207567/)
-2. In the console, type in `library(swirl)`
+1. Log-in to our class workspace, [`Conservation Biology Spring 2023`](https://posit.cloud/spaces/323650/)
+    + If the above link isn't working, please try [the `Conservation Biology Spring 2023` workspace at this link](https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ)
+    + Alternatively, please try the SSO log-in page only: [sso.rstudio.cloud/pomona](https://sso.rstudio.cloud/pomona)
+2. Please click on the `Week 1` assignment ([direct link to the `Week 1` project](https://posit.cloud/spaces/323650/content/5199737))
+3. In the console, type in `library(swirl)`
     + All subsequent steps should be run in the console.
-3. Type in `swirl()`
-4. You will see a message in red text, reading `| Welcome to swirl!...call yourself something unique.`
+4. Type in `swirl()`
+5. You will see a message in red text, reading `| Welcome to swirl!...call yourself something unique.`
     + In the line below, you will see a prompt in blue asking `What shall I call you?`
     + Please type in your first name or nickname.
     + Note that if your name overlaps with commands in `R`, you may see functions popping up in auto-complete.
@@ -26,21 +29,21 @@ We will use the package `swirl` to learn more about several fundamental concepts
 
 ![](figures/nameAutocompleteIssue.png)
 
-5. After you type in your name, you will see this message in red text. Basically, the gist of the message is that `swirl` will interact with you in the console, and any time you see three blue dots (an ellipsis), you should hit enter.
+6. After you type in your name, you will see this message in red text. Basically, the gist of the message is that `swirl` will interact with you in the console, and any time you see three blue dots (an ellipsis), you should hit enter.
 ```
 | Thanks, <FIRST NAME>. Let's cover a couple of quick housekeeping items...
 ```
 
-6. Continue through the next two `swirl` steps, which lead to this query in red text: `| Please choose a course, or type 0 to exit swirl`
+7. Continue through the next two `swirl` steps, which lead to this query in red text: `| Please choose a course, or type 0 to exit swirl`
     + NB (Nota bene): By this point, `swirl` has mentioned the `R prompt (>)` several times.
     + The character `>` is an example of a **command prompt** where you tell a computer (in this case, the server hosting RStudio Server which is running `R` code) to execute your command.
     + *Examples from other languages*: In Python, the command prompt is denoted by `>>>` (if you are interacting with Python on the command line in a terminal). In Unix operating systems (e.g. Linux distributions or Mac OS), the command prompt for the terminal is often denoted by `$`.
     + TL;DR: The carat symbol `>` in the `R` console within RStudio Server is where `R` awaits your instructions (commands).
-7. In response to the query (`| Please choose a course...`), type `1` after the blue text reading `Selection:`
-8. In response to the next query, `| Please choose a lesson...`, please type `1` after the blue text reading `Selection:`.
+8. In response to the query (`| Please choose a course...`), type `1` after the blue text reading `Selection:`
+9. In response to the next query, `| Please choose a lesson...`, please type `1` after the blue text reading `Selection:`.
     + We will be taking on the `1: Basic Building Blocks` lesson!
-9. You are ready to go and learn about fundamental programming concepts in `R` using this first class in `swirl`.
-10. If you encounter errors, don't worry! Just try something different and think a bit more carefully about the `swirl` instructions at that step. You can always use the vertical navigation bar on the right-hand side of the console to roll back up and see what the last instruction was. 
+10. You are ready to go and learn about fundamental programming concepts in `R` using this first class in `swirl`.
+11. If you encounter errors, don't worry! Just try something different and think a bit more carefully about the `swirl` instructions at that step. You can always use the vertical navigation bar on the right-hand side of the console to roll back up and see what the last instruction was. 
 For example, in response to this instruction:
 ```
 | To see another example of how this vector 'recycling' works, try
@@ -74,17 +77,17 @@ If you get really stuck, first try entering something that is syntatically corre
 ```
 (Note that here you would type or copy and paste `c(1, 2, 3, 4) + c(0, 10, 100)` into the console at the command prompt `>`.)
 
-11. If you are in the middle of interacting with the command prompt (`>`), you can exit the course and `swirl` at any time by typing `bye()` into the console.
+12. If you are in the middle of interacting with the command prompt (`>`), you can exit the course and `swirl` at any time by typing `bye()` into the console.
     + Don't worry: `swirl` will save where you are in the course so you won't lose your progress!
-12. The course tracks your progress: when you see the black text displaying `|=========`, the number at the right hand side, after another `|` represents the percentage of this course that you have completed.
-13. At the end of the course, you will see a question from `swirl` asking:
+13. The course tracks your progress: when you see the black text displaying `|=========`, the number at the right hand side, after another `|` represents the percentage of this course that you have completed.
+14. At the end of the course, you will see a question from `swirl` asking:
 ```
 | Would you like to receive credit for completing this course on
 | Coursera.org?
 ```
 I recommend typing in `2` (representing "No") at the `Selection:` field.
 
-14. Afterwards, `swirl` will tell you that you've completed the course, you will see the following in red text:
+15. Afterwards, `swirl` will tell you that you've completed the course, you will see the following in red text:
 ```
 | Excellent work!
 | You've reached the end of this lesson...
@@ -92,4 +95,4 @@ I recommend typing in `2` (representing "No") at the `Selection:` field.
 ```
 In response to the blue `Selection:` query, please type 0.
 
-15. When you have completed the first `swirl` course, please navigate to the [Gradescope POM](https://sakai.claremont.edu/portal/directtool/bed484e9-cce5-4661-9413-5cd48ecea551/) subpage in our Sakai site and select the correct option for the `Completion of swirl class (Basic Building Blocks)` assignment.
+15. When you have completed the first `swirl` course, please navigate to the [Gradescope POM](https://www.gradescope.com/courses/489552) subpage in our Sakai site and select the correct option for the `Completion of swirl class (Basic Building Blocks)` assignment. Please also nominate a guest speaker for our class.

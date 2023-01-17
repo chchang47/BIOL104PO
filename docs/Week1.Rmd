@@ -25,7 +25,9 @@ We will write code in `R`, a statistical programming language, using RStudio. RS
 
 ## How do I access RStudio?
 
-You will navigate to [https://rstudio.cloud/](https://rstudio.cloud/spaces/207567/) and use your Claremont College credentials to log in. Pomona students: please use your existing user ID and navigate through the SSO window. Non-Pomona students: please use your campus email (e.g. `athenas47@scrippscollege.edu`) and set-up a memorable but distinct password. You can also use password generators like [LastPass](https://www.lastpass.com/) or your browser's password manager (e.g. [Firefox](https://support.mozilla.org/en-US/kb/password-manager-remember-delete-edit-logins?redirectslug=password-manager-remember-delete-change-and-import&redirectlocale=en-US)) to generate a secure password and store it for you. It is important to have good [digital hygiene](https://www.wired.com/2016/05/password-tips-experts/)--which includes strong, random passwords.
+Please start by logging into [sso.posit.cloud/pomona](https://sso.posit.cloud/pomona). Once you've logged in, you should see the option to open the `Conservation Biology Spring 2023` workspace. You can also access [the `Conservation Biology Spring 2023` workspace at this link](https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ). 
+
+At the workspace, you should then see the "Assignment" `Week 1`. Please click on that Assignment. Here is a [direct link to the `Week 1` project](https://posit.cloud/spaces/323650/content/5199737), but it may not work if this is the first time ever or in a while that you're logging into posit.cloud. If it doesn't work, no worries - just log in through the [sso.posit.cloud/pomona](https://sso.posit.cloud/pomona) link.
 
 ## What does RStudio have anyway?
 

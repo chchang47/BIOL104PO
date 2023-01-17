@@ -335,57 +335,112 @@ $(document).ready(function () {
 </div>
 
 
-<p>We will use the package <code>swirl</code> to learn more about several fundamental concepts in <code>R</code>.</p>
+<p>We will use the package <code>swirl</code> to learn more about
+several fundamental concepts in <code>R</code>.</p>
 <div id="steps" class="section level2">
 <h2>Steps</h2>
 <ol style="list-style-type: decimal">
-<li>Log-in at <a href="https://rstudio.cloud/spaces/207567/">https://rstudio.cloud</a></li>
+<li>Log-in to our class workspace, <a
+href="https://posit.cloud/spaces/323650/"><code>Conservation Biology Spring 2023</code></a>
+<ul>
+<li>If the above link isn’t working, please try <a
+href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">the
+<code>Conservation Biology Spring 2023</code> workspace at this
+link</a></li>
+<li>Alternatively, please try the SSO log-in page only: <a
+href="https://sso.rstudio.cloud/pomona">sso.rstudio.cloud/pomona</a></li>
+</ul></li>
+<li>Please click on the <code>Week 1</code> assignment (<a
+href="https://posit.cloud/spaces/323650/content/5199737">direct link to
+the <code>Week 1</code> project</a>)</li>
 <li>In the console, type in <code>library(swirl)</code>
 <ul>
 <li>All subsequent steps should be run in the console.</li>
 </ul></li>
 <li>Type in <code>swirl()</code></li>
-<li>You will see a message in red text, reading <code>| Welcome to swirl!...call yourself something unique.</code>
+<li>You will see a message in red text, reading
+<code>| Welcome to swirl!...call yourself something unique.</code>
 <ul>
-<li>In the line below, you will see a prompt in blue asking <code>What shall I call you?</code></li>
+<li>In the line below, you will see a prompt in blue asking
+<code>What shall I call you?</code></li>
 <li>Please type in your first name or nickname.</li>
-<li>Note that if your name overlaps with commands in <code>R</code>, you may see functions popping up in auto-complete.</li>
-<li>The image below shows this exact problem for my nickname, <code>Char</code>.</li>
-<li>Type out your name and use the back-arrow to avoid auto-selecting a function or some other command if it does pop up as an auto-complete field. (This is–hopefully–very unlikely to happen!)</li>
+<li>Note that if your name overlaps with commands in <code>R</code>, you
+may see functions popping up in auto-complete.</li>
+<li>The image below shows this exact problem for my nickname,
+<code>Char</code>.</li>
+<li>Type out your name and use the back-arrow to avoid auto-selecting a
+function or some other command if it does pop up as an auto-complete
+field. (This is–hopefully–very unlikely to happen!)</li>
 </ul></li>
 </ol>
 <p><img src="figures/nameAutocompleteIssue.png" /></p>
-<ol start="5" style="list-style-type: decimal">
-<li>After you type in your name, you will see this message in red text. Basically, the gist of the message is that <code>swirl</code> will interact with you in the console, and any time you see three blue dots (an ellipsis), you should hit enter.</li>
+<ol start="6" style="list-style-type: decimal">
+<li>After you type in your name, you will see this message in red text.
+Basically, the gist of the message is that <code>swirl</code> will
+interact with you in the console, and any time you see three blue dots
+(an ellipsis), you should hit enter.</li>
 </ol>
 <pre><code>| Thanks, &lt;FIRST NAME&gt;. Let&#39;s cover a couple of quick housekeeping items...</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>Continue through the next two <code>swirl</code> steps, which lead to this query in red text: <code>| Please choose a course, or type 0 to exit swirl</code>
+<ol start="7" style="list-style-type: decimal">
+<li>Continue through the next two <code>swirl</code> steps, which lead
+to this query in red text:
+<code>| Please choose a course, or type 0 to exit swirl</code>
 <ul>
-<li>NB (Nota bene): By this point, <code>swirl</code> has mentioned the <code>R prompt (&gt;)</code> several times.</li>
-<li>The character <code>&gt;</code> is an example of a <strong>command prompt</strong> where you tell a computer (in this case, the server hosting RStudio Server which is running <code>R</code> code) to execute your command.</li>
-<li><em>Examples from other languages</em>: In Python, the command prompt is denoted by <code>&gt;&gt;&gt;</code> (if you are interacting with Python on the command line in a terminal). In Unix operating systems (e.g. Linux distributions or Mac OS), the command prompt for the terminal is often denoted by <code>$</code>.</li>
-<li>TL;DR: The carat symbol <code>&gt;</code> in the <code>R</code> console within RStudio Server is where <code>R</code> awaits your instructions (commands).</li>
+<li>NB (Nota bene): By this point, <code>swirl</code> has mentioned the
+<code>R prompt (&gt;)</code> several times.</li>
+<li>The character <code>&gt;</code> is an example of a <strong>command
+prompt</strong> where you tell a computer (in this case, the server
+hosting RStudio Server which is running <code>R</code> code) to execute
+your command.</li>
+<li><em>Examples from other languages</em>: In Python, the command
+prompt is denoted by <code>&gt;&gt;&gt;</code> (if you are interacting
+with Python on the command line in a terminal). In Unix operating
+systems (e.g. Linux distributions or Mac OS), the command prompt for the
+terminal is often denoted by <code>$</code>.</li>
+<li>TL;DR: The carat symbol <code>&gt;</code> in the <code>R</code>
+console within RStudio Server is where <code>R</code> awaits your
+instructions (commands).</li>
 </ul></li>
-<li>In response to the query (<code>| Please choose a course...</code>), type <code>1</code> after the blue text reading <code>Selection:</code></li>
-<li>In response to the next query, <code>| Please choose a lesson...</code>, please type <code>1</code> after the blue text reading <code>Selection:</code>.
+<li>In response to the query (<code>| Please choose a course...</code>),
+type <code>1</code> after the blue text reading
+<code>Selection:</code></li>
+<li>In response to the next query,
+<code>| Please choose a lesson...</code>, please type <code>1</code>
+after the blue text reading <code>Selection:</code>.
 <ul>
-<li>We will be taking on the <code>1: Basic Building Blocks</code> lesson!</li>
+<li>We will be taking on the <code>1: Basic Building Blocks</code>
+lesson!</li>
 </ul></li>
-<li>You are ready to go and learn about fundamental programming concepts in <code>R</code> using this first class in <code>swirl</code>.</li>
-<li>If you encounter errors, don’t worry! Just try something different and think a bit more carefully about the <code>swirl</code> instructions at that step. You can always use the vertical navigation bar on the right-hand side of the console to roll back up and see what the last instruction was. For example, in response to this instruction:</li>
+<li>You are ready to go and learn about fundamental programming concepts
+in <code>R</code> using this first class in <code>swirl</code>.</li>
+<li>If you encounter errors, don’t worry! Just try something different
+and think a bit more carefully about the <code>swirl</code> instructions
+at that step. You can always use the vertical navigation bar on the
+right-hand side of the console to roll back up and see what the last
+instruction was. For example, in response to this instruction:</li>
 </ol>
 <pre><code>| To see another example of how this vector &#39;recycling&#39; works, try
 | adding c(1, 2, 3, 4) and c(0, 10). Don&#39;t worry about saving the
 | result in a new variable.</code></pre>
-<p>my command here was incorrectly specified (typed in at the <code>R</code> command prompt <code>&gt;</code>):</p>
+<p>my command here was incorrectly specified (typed in at the
+<code>R</code> command prompt <code>&gt;</code>):</p>
 <pre><code>c(1, 2, 3, 4) _ c(0, 10)</code></pre>
 <p>and threw an error:</p>
 <pre><code>Error: unexpected input in &quot;c(1, 2, 3, 4) _&quot;</code></pre>
 <p>In this case, I ended up fixing it by typing:</p>
 <pre><code>c(1, 2, 3, 4) + c(0, 10)</code></pre>
-<p>Unfortunately, with these types of <em>syntax</em> errors (akin to a grammatical error in a human language, like kluging your verb conjugation and forgetting the term for a conjunction to join two clauses together), <code>swirl</code> won’t jump in and “automagically” help you.</p>
-<p>If you get really stuck, first try entering something that is syntatically correct in the console at the command prompt. For instance, you could try <code>myName &lt;- "Char"</code>. While this isn’t the correct answer to this <code>swirl</code> instruction, because this command can be interpreted by <code>R</code>, you’ll get kicked back into <code>swirl</code> instructions that may offer you something that you could directly copy and paste into the console, e.g.:</p>
+<p>Unfortunately, with these types of <em>syntax</em> errors (akin to a
+grammatical error in a human language, like kluging your verb
+conjugation and forgetting the term for a conjunction to join two
+clauses together), <code>swirl</code> won’t jump in and “automagically”
+help you.</p>
+<p>If you get really stuck, first try entering something that is
+syntatically correct in the console at the command prompt. For instance,
+you could try <code>myName &lt;- "Char"</code>. While this isn’t the
+correct answer to this <code>swirl</code> instruction, because this
+command can be interpreted by <code>R</code>, you’ll get kicked back
+into <code>swirl</code> instructions that may offer you something that
+you could directly copy and paste into the console, e.g.:</p>
 <pre><code>| That&#39;s not exactly what I&#39;m looking for. Try again. Or, type info()
 | for more options.
 
@@ -393,27 +448,44 @@ $(document).ready(function () {
 | vectors, when the shorter vector&#39;s length does not divide evenly
 | into the longer vector&#39;s length. Don&#39;t worry about assigning the
 | result to a variable.</code></pre>
-<p>(Note that here you would type or copy and paste <code>c(1, 2, 3, 4) + c(0, 10, 100)</code> into the console at the command prompt <code>&gt;</code>.)</p>
-<ol start="11" style="list-style-type: decimal">
-<li>If you are in the middle of interacting with the command prompt (<code>&gt;</code>), you can exit the course and <code>swirl</code> at any time by typing <code>bye()</code> into the console.
+<p>(Note that here you would type or copy and paste
+<code>c(1, 2, 3, 4) + c(0, 10, 100)</code> into the console at the
+command prompt <code>&gt;</code>.)</p>
+<ol start="12" style="list-style-type: decimal">
+<li>If you are in the middle of interacting with the command prompt
+(<code>&gt;</code>), you can exit the course and <code>swirl</code> at
+any time by typing <code>bye()</code> into the console.
 <ul>
-<li>Don’t worry: <code>swirl</code> will save where you are in the course so you won’t lose your progress!</li>
+<li>Don’t worry: <code>swirl</code> will save where you are in the
+course so you won’t lose your progress!</li>
 </ul></li>
-<li>The course tracks your progress: when you see the black text displaying <code>|=========</code>, the number at the right hand side, after another <code>|</code> represents the percentage of this course that you have completed.</li>
-<li>At the end of the course, you will see a question from <code>swirl</code> asking:</li>
+<li>The course tracks your progress: when you see the black text
+displaying <code>|=========</code>, the number at the right hand side,
+after another <code>|</code> represents the percentage of this course
+that you have completed.</li>
+<li>At the end of the course, you will see a question from
+<code>swirl</code> asking:</li>
 </ol>
 <pre><code>| Would you like to receive credit for completing this course on
 | Coursera.org?</code></pre>
-<p>I recommend typing in <code>2</code> (representing “No”) at the <code>Selection:</code> field.</p>
-<ol start="14" style="list-style-type: decimal">
-<li>Afterwards, <code>swirl</code> will tell you that you’ve completed the course, you will see the following in red text:</li>
+<p>I recommend typing in <code>2</code> (representing “No”) at the
+<code>Selection:</code> field.</p>
+<ol start="15" style="list-style-type: decimal">
+<li>Afterwards, <code>swirl</code> will tell you that you’ve completed
+the course, you will see the following in red text:</li>
 </ol>
 <pre><code>| Excellent work!
 | You&#39;ve reached the end of this lesson...
 | Please choose a course, or type 0 to exit swirl.</code></pre>
-<p>In response to the blue <code>Selection:</code> query, please type 0.</p>
+<p>In response to the blue <code>Selection:</code> query, please type
+0.</p>
 <ol start="15" style="list-style-type: decimal">
-<li>When you have completed the first <code>swirl</code> course, please navigate to the <a href="https://sakai.claremont.edu/portal/directtool/bed484e9-cce5-4661-9413-5cd48ecea551/">Gradescope POM</a> subpage in our Sakai site and select the correct option for the <code>Completion of swirl class (Basic Building Blocks)</code> assignment.</li>
+<li>When you have completed the first <code>swirl</code> course, please
+navigate to the <a
+href="https://www.gradescope.com/courses/489552">Gradescope POM</a>
+subpage in our Sakai site and select the correct option for the
+<code>Completion of swirl class (Basic Building Blocks)</code>
+assignment. Please also nominate a guest speaker for our class.</li>
 </ol>
 </div>
 
