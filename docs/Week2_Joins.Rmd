@@ -120,28 +120,28 @@ Given `dt1`, `dt2`, and `dt2new` that have just been defined above, run and cont
 
 # Adding socioeconomic data to the Provided Datasheet
 
-As an additional illustration of data merging, I will illustrate below how one can add on socio-economic data from the USDA and the US Census to the [Provided Datasheet](https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv). In the code chunk below, I pull in data from the GitHub repository that stores the class `R` tutorials.
+As an additional illustration of data merging, I will illustrate below how one can add on socio-economic data from the USDA and the US Census to the [Provided Datasheet](https://github.com/chchang47/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv). In the code chunk below, I pull in data from the GitHub repository that stores the class `R` tutorials.
 
 ```{r reading_in_data}
 ### Read in data
-CA_county_data <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_protectedareas_datasheet.tsv") # this is a link to the Provided Datasheet for the class project
+CA_county_data <- readr::read_tsv("https://raw.githubusercontent.com/chchang47/BIOL104PO/master/data/CA_protectedareas_datasheet.tsv") # this is a link to the Provided Datasheet for the class project
   ### Take a look at the first few rows of the data table
 CA_county_data
 ### Data on socio-economic statuses in California
-CA_county_SES <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_ses.tsv") # URL for spreadsheet storing socioeconomic data by county in California
+CA_county_SES <- readr::read_tsv("https://raw.githubusercontent.com/chchang47/BIOL104PO/master/data/CA_ses.tsv") # URL for spreadsheet storing socioeconomic data by county in California
   ### Take a look at the first few rows of the data table
 CA_county_SES
 ### Data on racial composition in California
-CA_county_demog <- readr::read_tsv("https://raw.githubusercontent.com/charlottehchang/BIOL104PO/master/data/CA_census.tsv")
+CA_county_demog <- readr::read_tsv("https://raw.githubusercontent.com/chchang47/BIOL104PO/master/data/CA_census.tsv")
   ### Take a look at the first few rows of the data table
 CA_county_demog
 ```
 
 ## Data explanation
 
-Note that you can find a description of the [Provided Datasheet Data Explanation](https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit#bookmark=id.5xpubn6xluzn) here. 
+Note that you can find a description of the [Provided Datasheet Data Explanation](https://docs.google.com/document/d/1wzTXmZQpz8E1XG0qD2Y4IGJ9IYUWz_zJkpw8Vawt7u0/edit#bookmark=id.a1sce732k414) here. 
 
-On the other hand, the columns in [`CA_county_SES`](https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_ses.tsv) are as follows:
+On the other hand, the columns in [`CA_county_SES`](https://github.com/chchang47/BIOL104PO/blob/master/data/CA_ses.tsv) are as follows:
 
 * `State`: Abbreviated name for California (`CA`)
 * `County`: County name
@@ -152,7 +152,7 @@ On the other hand, the columns in [`CA_county_SES`](https://github.com/charlotte
 
 These data for California were modified from national [County-level Data setsat the USDA Economic Research Service](https://www.ers.usda.gov/data-products/county-level-data-sets/download-data/). The [county-level data sets website](https://www.ers.usda.gov/data-products/county-level-data-sets) opens up a data viewer; [here is the data viewer for California](https://data.ers.usda.gov/reports.aspx?ID=17826).
 
-The columns in [`CA_county_demog`](https://github.com/charlottehchang/BIOL104PO/blob/master/data/CA_census.tsv) are as follows:
+The columns in [`CA_county_demog`](https://github.com/chchang47/BIOL104PO/blob/master/data/CA_census.tsv) are as follows:
 
 * `STNAME`: The name of the state
 * `CTYNAME`: The name of the county

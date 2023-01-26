@@ -14,7 +14,7 @@ library(fontawesome)
 library(dplyr)
 ```
 
-For the California biodiversity & protected areas project, I have created a [Provided Datasheet](https://github.com/chchang47/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv) that compiles data for the 58 counties in California. [The Provided Datasheet section of the class project description document](https://docs.google.com/document/d/1ZBF5h3-3-PNHv-7V2qfrdP2PIUKSbOL9BQov-hJH0e8/edit#bookmark=id.5xpubn6xluzn) describes the columns of the datasheet. 
+For the California biodiversity & protected areas project, I have created a [Provided Datasheet](https://github.com/chchang47/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv) that compiles data for the 58 counties in California. [The Provided Datasheet section of the class project description document](https://docs.google.com/document/d/1wzTXmZQpz8E1XG0qD2Y4IGJ9IYUWz_zJkpw8Vawt7u0/edit#bookmark=id.5xpubn6xluzn) describes the columns of the datasheet. 
 
 # Interacting with datasets using the `dplyr` package
 
@@ -41,23 +41,20 @@ NB: If you have used `.Rmd` (R Markdown) files before, you are more than welcome
 # Steps
 
 1. Please navigate to either:
-    a. [The class Conservation Biology Spring 2022 workspace Week 2 assignment](https://rstudio.cloud/spaces/207567/project/3495829) - this assumes that you have a Pomona account and the SSO is working. If you have a Pomona account, please try and send us screenshots of any errors that you see.
-    b. [My private ConBioChangSpace Week 2 assignment](https://rstudio.cloud/spaces/209043/project/3495822) - this is reserved only for students who cannot log into option `a` above.
+    a. The class workspace, [`Conservation Biology Spring 2023`](https://posit.cloud/spaces/323650/).
+    b. Alternatively, please try the SSO log-in page only: [sso.rstudio.cloud/pomona](https://sso.rstudio.cloud/pomona)
+    c. You will click on the `Week2` assignment there.
     
-2. Opening up a new `.R` script
-    + I am not sure this will work but I have created a placeholder `Week2.R` script that may be visible for you in the `Files` pane. If not then ...
+2. Opening up an `.R` script
+    + I have created a placeholder `Week2.R` script that will be visible for you in the `Files` pane.
+    + Please **click on this `Week2.R` file**. You can then skip step 3 below and proceed directly to step 4.
     + Note that you can navigate to the bars in between each pane until you see a `r fa("arrows-alt", fill="black")` icon, which you can use to drag the panes to be larger or smaller 
 
 ![3a) Opening up the script pane](figures/openingRscript.png)
 
 ![3b) R script editor pane](figures/Rscript.png)
 
-4. I also recommend creating a folder to store your work:
-    + In the bottom right-hand corner (Viewer/Plots/Files pane), click on `Files`
-    + Click on `New Folder`
-    + Give your folder a name. I recommend `BIOL104`
-5. Click in the text editor pane in the top left-hand side, which will currently either be named `Week2.R` (if the assignments work how I think they do) or `Untitled1` (if they don't copy over files for you all) at the top.
-6. Subsequently, copy the code below into the `R` script:
+4. Subsequently, as you read through this tutorial, please copy the code into the `R` script and use the file as a way to track your commands:
     + Note that below, any line starting with the pound sign `#` is a *comment*.
     + Comments are text that are not executed by `R`.
     + In general, it is good practice to "comment your code" -- that is, use comments to annotate your code for future reference.
@@ -65,16 +62,13 @@ When you've copied in the code into the `R` script, it will look something like 
 
 ![R script with initial commands](figures/InitialRScript.png)
 
-7. Next, save the `Untitled1` file using the `r fa("save")` icon and give it an informative name.
-    + I recommend selecting the `BIOL104` folder (or whatever you previously named the folder) as the location to save this file.
-    + I went ahead and gave this file the name `Week2.R`
-8. Now you can run the code **from the script editor directly**! 
-9. The easiest way to run the code is to highlight each line of code and either type `⌘ + Enter` (people who have Mac OS) or `CTRL + Enter` (Windows and Linux).
+5. Next, save the file when you make changes using the `r fa("save")` icon and give it an informative name.
+6. Now you can run the code **from the script editor directly**! 
+7. The easiest way to run the code is to highlight each line of code and either type `⌘ + Enter` (people who have Mac OS) or `CTRL + Enter` (Windows and Linux).
 You can also highlight each line of code with your mouse and use the "run code" button at the top right-hand side of the text editor pane:
 ![run code](figures/runCode.png)
-10. Note that running each line of code from the text editor (from the `R` script in this case) is the same as typing the commands into the console. You typed commands directly into the console last week in your initial interactions with `R`.
-11. Writing scripts is advantageous because you can store your commands somewhere convenient and revisit or edit the file anytime.
-
+8. Note that running each line of code from the text editor (from the `R` script in this case) is the same as typing the commands into the console. You typed commands directly into the console last week in your initial interactions with `R`.
+9. Writing scripts is advantageous because you can store your commands somewhere convenient and revisit or edit the file anytime.
 
 # Interacting with the class dataset
 
