@@ -336,15 +336,40 @@ $(document).ready(function () {
 
 
 <div id="overview" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Overview</h1>
-<p>In this discussion activity, you will work with your small groups to query the IUCN Red List using its application programming interface, or <a href="https://en.wikipedia.org/wiki/API">API</a> for short.</p>
-<p>The objective of this activity is to better understand the criteria for Red-Listing species based on IUCN species narratives. Table 1 in the <a href="https://drive.google.com/file/d/1aRs5wXF2wS66sOH5ylV6U-VRB5Ou23Wk/view?usp=sharing">Collen paper</a> presents a great overview of the listing criteria.</p>
-<p>Note that an organism is listed based on the <strong>most severe category</strong> of threat. Thus, if any condition meets the criteria for Endangered, that is the status that would apply, even if under other conditions the species is Vulnerable or Near-Threatened (lower threat categories).</p>
+<h1><span class="header-section-number">1</span> Overview</h1>
+<p>In this discussion activity, you will work with your small groups to
+query the IUCN Red List using its application programming interface, or
+<a href="https://en.wikipedia.org/wiki/API">API</a> for short.</p>
+<p>The objective of this activity is to better understand the criteria
+for Red-Listing species based on IUCN species narratives. Table 1 in the
+<a
+href="https://drive.google.com/file/d/1aRs5wXF2wS66sOH5ylV6U-VRB5Ou23Wk/view?usp=sharing">Collen
+paper</a> presents a great overview of the listing criteria.</p>
+<p>Note that an organism is listed based on the <strong>most severe
+category</strong> of threat. Thus, if any condition meets the criteria
+for Endangered, that is the status that would apply, even if under other
+conditions the species is Vulnerable or Near-Threatened (lower threat
+categories).</p>
 </div>
 <div id="code" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Code</h1>
-<p>Please work in groups to execute the following code within the project <a href="https://rstudio.cloud/spaces/207567/project/3555746">Listing Species</a>. It should be visible in the <code>Files</code> pane (bottom right-hand side) as <code>IUCNactivity.R</code>.</p>
-<p>For convenience, I also include it here:</p>
+<h1><span class="header-section-number">2</span> Code</h1>
+<p>Please work in groups to execute the following code within the
+project <a
+href="https://posit.cloud/spaces/323650/content/5199739">Listing
+Species</a>. It should be visible in the <code>Files</code> pane (bottom
+right-hand side) as <code>IUCNactivity.R</code>.</p>
+<p>In case you are having access issues with the link above, here are
+some other options. Please navigate to either:</p>
+<ol style="list-style-type: lower-alpha">
+<li>The class workspace, <a
+href="https://posit.cloud/spaces/323650/"><code>Conservation Biology Spring 2023</code></a>.</li>
+<li>Alternatively, please try the SSO log-in page only: <a
+href="https://sso.rstudio.cloud/pomona">sso.rstudio.cloud/pomona</a></li>
+<li>You will click on the <code>ListingSpecies</code> assignment
+there.</li>
+</ol>
+<p>For convenience, I also include the <code>IUCNactivity.R</code>
+script contents here:</p>
 <pre><code>###==================================================
 ### Loading packages &amp; keys
 ###==================================================
@@ -401,12 +426,17 @@ IUCN_table %&gt;%
 IUCN_table %&gt;%
   dplyr::select(...) # what would you type here to select the column threats, or conservationmeasures, or usetrade?</code></pre>
 </div>
-<div id="accessing-the-class-workspace" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Accessing the class workspace</h1>
-<p>If you are still having issues accessing the <a href="https://sso.rstudio.cloud/pomona?redirect=https%3A%2F%2Frstudio.cloud%2Fspaces%2F207567%2Fjoin%3Faccess_code%3DUNcH0jSAmoMr_18KgJB1_0526sWkwlWQNBpwRfhb">Class workspace</a>, please:</p>
+<div id="accessing-the-class-workspace" class="section level1"
+number="3">
+<h1><span class="header-section-number">3</span> Accessing the class
+workspace</h1>
+<p>If you are still having issues accessing the <a
+href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">Class
+workspace</a>, please try the following:</p>
 <ol style="list-style-type: decimal">
 <li>Clear browser cache/cookies and open an incognito window</li>
-<li>Open this link in the private/incognito window <a href="https://sso.rstudio.cloud/pomona">https://sso.rstudio.cloud/pomona</a></li>
+<li>Open this link in the private/incognito window <a
+href="https://sso.rstudio.cloud/pomona">https://sso.rstudio.cloud/pomona</a></li>
 </ol>
 </div>
 

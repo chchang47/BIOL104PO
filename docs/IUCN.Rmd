@@ -21,9 +21,15 @@ Note that an organism is listed based on the **most severe category** of threat.
 
 # Code
 
-Please work in groups to execute the following code within the project [Listing Species](https://rstudio.cloud/spaces/207567/project/3555746). It should be visible in the `Files` pane (bottom right-hand side) as `IUCNactivity.R`.
+Please work in groups to execute the following code within the project [Listing Species](https://posit.cloud/spaces/323650/content/5199739). It should be visible in the `Files` pane (bottom right-hand side) as `IUCNactivity.R`.
 
-For convenience, I also include it here:
+In case you are having access issues with the link above, here are some other options. Please navigate to either:
+
+a. The class workspace, [`Conservation Biology Spring 2023`](https://posit.cloud/spaces/323650/).
+b. Alternatively, please try the SSO log-in page only: [sso.rstudio.cloud/pomona](https://sso.rstudio.cloud/pomona)
+c. You will click on the `ListingSpecies` assignment there.
+
+For convenience, I also include the `IUCNactivity.R` script contents here:
 
 ```
 ###==================================================
@@ -85,7 +91,7 @@ IUCN_table %>%
 
 # Accessing the class workspace
 
-If you are still having issues accessing the [Class workspace](https://sso.rstudio.cloud/pomona?redirect=https%3A%2F%2Frstudio.cloud%2Fspaces%2F207567%2Fjoin%3Faccess_code%3DUNcH0jSAmoMr_18KgJB1_0526sWkwlWQNBpwRfhb), please:
+If you are still having issues accessing the [Class workspace](https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ), please try the following:
 
 1. Clear browser cache/cookies and open an incognito window
 2. Open this link in the private/incognito window [https://sso.rstudio.cloud/pomona](https://sso.rstudio.cloud/pomona) 
