@@ -28,7 +28,7 @@ In the following exercises, please discuss as a group:
 * What processes do you think drive these differences?
     + What factors might be driven by the CBC itself?
 
-Note that in the assignment [ClaremontCBC](https://rstudio.cloud/spaces/207567/project/3569413), you'll see a `ClaremontCBC.R` script that you can use to follow along with this discussion activity.
+Note that in the assignment [ClaremontCBC](https://posit.cloud/spaces/323650/content/5199740), you'll see a `ClaremontCBC.R` script that you can use to follow along with this discussion activity.
 
 # Loading packages
 
