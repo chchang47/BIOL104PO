@@ -11,6 +11,16 @@ output:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message=FALSE, results = FALSE, fig.show = FALSE)
 ```
 
+# Accessing the assignment
+
+Please navigate to the assignment [SpeciesAreaRelationship](https://posit.cloud/spaces/323650/content/5199741) in the [ConBio SP2023 workspace](https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ). In the `Files` pane (typically, bottom right-hand corner), you will find an R script that you can use to follow along with this tutorial called `SAR.R`.
+
+Recall that:
+
+* You can use `Tools` --> `Global options` --> `Code` --> click `Soft-wrap R source files` to get word wrap enabled for `R` scripts.
+* You need to highlight (or place your cursor on a line) and run a line (or lines) of code to execute commands.
+* You can tell that the code has been executed when it is echoed (printed out) in the console.
+
 # Species-area relationship
 
 Observations of species richness (counts of species) across islands (or habitat fragments--sometimes called patches) showed a **consistent** relationship where **as islands became larger in area, they tended to support more species**: that is, *larger habitat areas have higher species richness*. This is a pattern that has been consistent across different taxonomic groups (e.g. vascular plants, birds, insects, fish) and regions (e.g. California, Southeast Asia, the Florida keys, etc.).
@@ -39,7 +49,7 @@ p <- p + theme_classic()
 p
 ```
 
-Oof! What we can see in the previous plot are the issues I raised in class on Tuesday (lecture 9). Issue 1): The x-axis values and y-axis values are quite wide-ranging (x-axis range: [`r paste(signif(range(seAsiaBirds$areaMi2),5),collapse=", ")`]; y-axis range: [`r paste(range(seAsiaBirds$birds),collapse=", ")`]). Issue 2): The relationship looks like a non-linear relationship, and a power law specifically. Is there some way that we can make this relationship of `species richness ~ habitat area` more linear?
+Oof! What we can see in the previous plot are the issues I raised in class on week 5. Issue 1): The x-axis values and y-axis values are quite wide-ranging (x-axis range: [`r paste(signif(range(seAsiaBirds$areaMi2),5),collapse=", ")`]; y-axis range: [`r paste(range(seAsiaBirds$birds),collapse=", ")`]). Issue 2): The relationship looks like a non-linear relationship, and a power law specifically. Is there some way that we can make this relationship of `species richness ~ habitat area` more linear?
 
 ## Calculating $d$ and $z$
 
