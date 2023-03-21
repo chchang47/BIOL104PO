@@ -13,6 +13,16 @@ output:
 knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ```
 
+# Accessing the assignment
+
+Please navigate to the assignment [PVA](https://posit.cloud/spaces/323650/content/5199742) in the [ConBio SP2023 workspace](https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ). In the `Files` pane (typically, bottom right-hand corner), you will find an R script that you can use to follow along with this tutorial called `PVA.R`.
+
+Recall that:
+
+* You can use `Tools` --> `Global options` --> `Code` --> click `Soft-wrap R source files` to get word wrap enabled for `R` scripts.
+* You need to highlight (or place your cursor on a line) and run a line (or lines) of code to execute commands.
+* You can tell that the code has been executed when it is echoed (printed out) in the console.
+
 # Modeling st/age structured populations with projection matrices
 
 Below, we will see how to model a population where individuals in different ages or stages make different contributions to population change over time.
