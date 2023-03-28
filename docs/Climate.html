@@ -335,8 +335,30 @@ $(document).ready(function () {
 </div>
 
 
-<div id="introduction-to-the-dataset" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Introduction to the
+<div id="accessing-the-assignment" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Accessing the
+assignment</h1>
+<p>Please navigate to the assignment <a
+href="https://posit.cloud/spaces/323650/content/5199743">Climate</a> in
+the <a
+href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">ConBio
+SP2023 workspace</a>. In the <code>Files</code> pane (typically, bottom
+right-hand corner), you will find an R script that you can use to follow
+along with this tutorial called <code>Climate.R</code>.</p>
+<p>Recall that:</p>
+<ul>
+<li>You can use <code>Tools</code> –&gt; <code>Global options</code>
+–&gt; <code>Code</code> –&gt; click
+<code>Soft-wrap R source files</code> to get word wrap enabled for
+<code>R</code> scripts.</li>
+<li>You need to highlight (or place your cursor on a line) and run a
+line (or lines) of code to execute commands.</li>
+<li>You can tell that the code has been executed when it is echoed
+(printed out) in the console.</li>
+</ul>
+</div>
+<div id="introduction-to-the-dataset" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Introduction to the
 dataset</h1>
 <p>To motivate learning about a way to explore associations between
 variables and to deepen engagement with the climate change materials, we
@@ -386,8 +408,8 @@ stage timing</a> responds strongly to temperature, among other
 environmental variables. As such, the short lifespan of butterflies and
 their responsiveness to temperature allows us to see how their phenology
 could be changing in response to regional or global change.</p>
-<div id="visualizing-the-dataset" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Visualizing the
+<div id="visualizing-the-dataset" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Visualizing the
 dataset</h2>
 <p>Below, we will look at one relationship of interest. What pattern do
 we see when we plot mean spring temperature against the time in which
@@ -408,8 +430,8 @@ temperature and butterfly phenology, represented by the timing of adult
 butterfly flight?</p>
 </div>
 </div>
-<div id="linear-regression-modeling" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Linear regression
+<div id="linear-regression-modeling" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Linear regression
 modeling</h1>
 <p>It turns out that we can look into possible associations between
 temperature and butterfly phenology using a linear regression. Linear
@@ -426,8 +448,8 @@ independent variable <span class="math inline">\(X\)</span> is
 <p>Note that you have already performed linear regressions using the
 species-area relationship data!</p>
 <div id="what-does-linear-regression-do" class="section level2"
-number="2.1">
-<h2><span class="header-section-number">2.1</span> What does linear
+number="3.1">
+<h2><span class="header-section-number">3.1</span> What does linear
 regression do?</h2>
 <p>Using a linear model, we are going to fit a line that describes the
 relationship between <span class="math inline">\(X\)</span> and <span
@@ -456,8 +478,8 @@ relationship between <span class="math inline">\(Y\)</span> and <span
 class="math inline">\(X_1\)</span>.</p>
 </div>
 <div id="estimating-the-linear-regression-model-for-the-butterfly-data"
-class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Estimating the linear
+class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Estimating the linear
 regression model for the butterfly data</h2>
 <p>Below, we will use the <code>lm</code> command (short for linear
 model) in <code>R</code> to estimate the coefficients, <span
@@ -484,8 +506,8 @@ class="math inline">\(\beta_0\)</span> (<code>(Intercept)</code>) and
 <span class="math inline">\(\beta_1\)</span>
 (<code>SpringTempC</code>).</p>
 </div>
-<div id="interpreting-these-values" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Interpreting these
+<div id="interpreting-these-values" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Interpreting these
 values</h2>
 <p>What do the values in the <code>summary</code> output reveal about
 the relationship between butterfly phenology and spring-time
@@ -564,8 +586,8 @@ p-value, the data indicate that there is a negative relationship (<span
 class="math inline">\(\beta_1 = -12.1 &lt; 0\)</span>) between spring
 temperature and butterfly flight time.</p>
 </div>
-<div id="plotting-the-linear-model" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Plotting the linear
+<div id="plotting-the-linear-model" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Plotting the linear
 model</h2>
 <p>We can add our linear model regression line to the plot we created
 above.</p>
@@ -577,8 +599,8 @@ p &lt;- p + labs(x=&quot;Mean spring temperature (°C)&quot;, y=&quot;Flight tim
 p &lt;- p + theme_bw() # modify the style of the plot
 p # display the plot, p</code></pre>
 </div>
-<div id="additional-resources" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Additional
+<div id="additional-resources" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Additional
 resources</h2>
 <p>In case you are curious about learning more about linear regression
 models:</p>
@@ -599,8 +621,8 @@ by Jim</a> provides a helpful answer to these questions.</li>
 </ul>
 </div>
 </div>
-<div id="homework-assignment" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Homework
+<div id="homework-assignment" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Homework
 assignment</h1>
 <p>It is your job to modify the code below to ensure that it works.
 Namely, you will need to replace any <code>...</code> in the code.</p>
@@ -626,8 +648,8 @@ p &lt;- p + geom_smooth(method=&quot;lm&quot;, fill=NA, color=&quot;purple&quot;
 p &lt;- p + labs(x=&quot;... (°C)&quot;, y=&quot;...&quot;) # changing the x and y-axis labels to be informative
 # p &lt;- p + theme_bw() # modify the style of the plot; uncomment by deleting leading # hashtag sign to run
 p # display the plot, p</code></pre>
-<div id="philosophical-sidebar" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Philosophical
+<div id="philosophical-sidebar" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Philosophical
 sidebar</h2>
 <p>Note that linear regressions and other types of statistical models
 are often <em>stochastic</em> models (looking at random variables with

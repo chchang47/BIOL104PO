@@ -11,6 +11,16 @@ output:
 knitr::opts_chunk$set(echo = TRUE, eval=F)
 ```
 
+# Accessing the assignment
+
+Please navigate to the assignment [Climate](https://posit.cloud/spaces/323650/content/5199743) in the [ConBio SP2023 workspace](https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ). In the `Files` pane (typically, bottom right-hand corner), you will find an R script that you can use to follow along with this tutorial called `Climate.R`.
+
+Recall that:
+
+* You can use `Tools` --> `Global options` --> `Code` --> click `Soft-wrap R source files` to get word wrap enabled for `R` scripts.
+* You need to highlight (or place your cursor on a line) and run a line (or lines) of code to execute commands.
+* You can tell that the code has been executed when it is echoed (printed out) in the console.
+
 # Introduction to the dataset
 
 To motivate learning about a way to explore associations between variables and to deepen engagement with the climate change materials, we will look at this dataset on butterfly phenology. The data for this tutorial are modified from [Kharouba and Vellend (2015)](https://drive.google.com/file/d/1SfqoazIo4N5Df_NdR6hYtqdGS6zmCswL/view?usp=sharing); the description of Tables 1 & 3 in the text may be helpful, but note that we are analyzing a modified dataset using a different procedure from the authors.
