@@ -1,0 +1,16 @@
+---
+title: "Bioacoustic analyses"
+author: ""
+date: '`r Sys.Date()`'
+output: 
+  html_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=F, message=F) # by default, print out all of the chunks with commands
+```
+
+# Overview 
+
+This page will provide a tutorial on analyzing the class dataset for variables such as `ACI` and species richness. The level of observation will be individual recordings, which you can aggregate up (remember `group_by`) to the level of the individual stations, or attributes of stations, or other features such as month/year/etc.

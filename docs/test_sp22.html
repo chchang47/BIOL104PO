@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Charlotte Chang" />
+
+
+<title>index.Rmd</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/tabwid-1.0.0/tabwid.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Conservation Biology</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Introduction
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 1</li>
+    <li>
+      <a href="Week1.html">The R and RStudio environments</a>
+    </li>
+    <li>
+      <a href="Week1b.html">Introduction to R</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Data manipulation
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Week 2</li>
+    <li>
+      <a href="Week2_CAcounty.html">Manipulating data.frames</a>
+    </li>
+    <li>
+      <a href="Week2b.html">Data visualization</a>
+    </li>
+    <li>
+      <a href="Week2_Joins.html">Joining data</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Conservation analyses
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="IUCN.html">IUCN Red List</a>
+    </li>
+    <li>
+      <a href="CBC.html">CBC</a>
+    </li>
+    <li>
+      <a href="SpeciesArea.html">Species-area</a>
+    </li>
+    <li>
+      <a href="PVA.html">PVA</a>
+    </li>
+    <li>
+      <a href="Climate.html">Climate</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bioacoustics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Sound.html">Acoustic data</a>
+    </li>
+    <li>
+      <a href="bioaco.html">Analyzing acoustic data</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">index.Rmd</h1>
+<h4 class="author">Charlotte Chang</h4>
+<h4 class="date">1/10/2022</h4>
+
+</div>
+
+
+<div id="r-markdown" class="section level2">
+<h2>R Markdown</h2>
+<pre class="r"><code>library(dplyr)
+library(googlesheets4)
+library(htmlTable)
+library(knitr)
+library(flextable)
+
+## Pull in Google sheet schedule
+schedDF &lt;- googlesheets4::read_sheet(&quot;
+https://docs.google.com/spreadsheets/d/1JIh8EzjAGdTWxuCF7ha7yI4RTIGbn0Smq4EpV5WTtWo/edit?usp=sharing&quot;,sheet = &quot;Schedule&quot;,col_types=&quot;ccccc&quot;)</code></pre>
+<pre><code>## Reading from &quot;Schedule&quot;</code></pre>
+<pre><code>## Range &quot;&#39;Schedule&#39;&quot;</code></pre>
+<pre class="r"><code>## Hack-y workaround to do zebra banding color automagically (based on NA values)
+zebra_cols &lt;- rep(&quot;none&quot;,dim(schedDF)[1])
+zebra_cols[which(is.na(schedDF$Topic))] &lt;- &quot;#adc2d8&quot;
+
+ft &lt;- flextable(schedDF) # Should try in the future! But it doesn&#39;t work with the bibtex citations
+ft &lt;- theme_vanilla(ft)
+knit_print(ft)</code></pre>
+<template id="b94bde9d-d701-4c9a-a5e4-444a5cc4009c"><style>
+.tabwid table{
+  border-spacing:0px !important;
+  border-collapse:collapse;
+  line-height:1;
+  margin-left:auto;
+  margin-right:auto;
+  border-width: 0;
+  display: table;
+  margin-top: 1.275em;
+  margin-bottom: 1.275em;
+  border-color: transparent;
+}
+.tabwid_left table{
+  margin-left:0;
+}
+.tabwid_right table{
+  margin-right:0;
+}
+.tabwid td {
+    padding: 0;
+}
+.tabwid a {
+  text-decoration: none;
+}
+.tabwid thead {
+    background-color: transparent;
+}
+.tabwid tfoot {
+    background-color: transparent;
+}
+.tabwid table tr {
+background-color: transparent;
+}
+</style><div class="tabwid"><style>.cl-c24a6f6a{}.cl-c235a008{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c235a030{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c235c4b6{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c2363798{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c23637c0{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c23637d4{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c23637de{width:54pt;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table class='cl-c24a6f6a'>
+<thead><tr style="overflow-wrap:break-word;"><td class="cl-c23637de"><p class="cl-c235c4b6"><span class="cl-c235a008">Week</span></p></td><td class="cl-c23637de"><p class="cl-c235c4b6"><span class="cl-c235a008">Date</span></p></td><td class="cl-c23637de"><p class="cl-c235c4b6"><span class="cl-c235a008">Topic</span></p></td><td class="cl-c23637de"><p class="cl-c235c4b6"><span class="cl-c235a008">Resources</span></p></td><td class="cl-c23637de"><p class="cl-c235c4b6"><span class="cl-c235a008">Lab</span></p></td></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-c2363798"><p class="cl-c235c4b6"><span class="cl-c235a030">1</span></p></td><td class="cl-c2363798"><p class="cl-c235c4b6"><span class="cl-c235a030">1/17</span></p></td><td class="cl-c2363798"><p class="cl-c235c4b6"><span class="cl-c235a030">Introduction to conservation biology &amp; biodiversity overview</span></p></td><td class="cl-c2363798"><p class="cl-c235c4b6"><span class="cl-c235a030">@mace2014whose; @sandbrook2019global; [Conservation Biology for All Chapter 2](https://conbio.org/images/content_publications/Chapter2.pdf)</span></p></td><td class="cl-c2363798"><p class="cl-c235c4b6"><span class="cl-c235a030">Getting set up with `RStudio.Cloud` and `R` introduction</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">2</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">1/24</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Measuring biodiversity &amp; the global extinction crisis</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">@myers2000biodiversity; @pimmExtinctionChapter; @ceballos2015accelerated</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Exploration of the class California county biodiversity dataset</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">3</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">1/31</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Why should society care? Defining ecosystem services.</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">[Conservation Biology for All, Chapter 3](https://conbio.org/images/content_publications/Chapter3.pdf); [Valuation of Ecosystem Services](https://www.youtube.com/watch?v=q8AZHtF2f50); @mccauley2006selling; @armsworth2007ecosystem; @tallis2011natural; @cardinale2012biodiversity</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Observing habitats through nature journaling with [Assistant Curator S. Moore of the Benton Museum](https://www.pomona.edu/museum/news/2020/10/13-press-release-benton-museum-art-pomona-college-announces-new-assistant-curator); practice using binoculars</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">4</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">2/7</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Describing extinction risk: the IUCN Red List and listing species for protection</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">@akccakaya2018quantifying; @collen2016clarifying; @lindenmayer2013counting; @scott2005recovery; @waples2013tale; [The IUCN Red List: A Barometer of Life](https://youtu.be/VukyqMajAOU); [ZSL video](https://youtu.be/LqRq-Gd63a0)</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Biodiversity surveys</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">5</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">2/14</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Consumer behaviors and habitat loss</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">@lenzen2012international; [Conservation Biology for All, Chapter 4 - subset](https://conbio.org/images/content_publications/Chapter4.pdf); [Conservation Biology for All, Chapter 5](https://conbio.org/images/content_publications/Chapter5.pdf); @mendenhall2014predicting</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Biodiversity surveys/work session for California biodiversity report</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">6</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">2/21</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Protected areas as a tool in conservation</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">@balmford2003should; @deangelis2019modelling; @geldmann2013effectiveness; @kareiva2010trade; @sarkar2011beyond; @rasolofoson2015effectiveness</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Common pool fishery game</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">7</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">2/28</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Over-exploitation as a threat to species</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">@peres2001synergistic; Pullin (2002), Chapter 6; @dirzo2014defaunation; Milner-Gulland et al., Chapter 5 in Conservation Research, Policy and Practice; [Will the oceans ever run out of fish?](https://youtu.be/WNdR808jMSA)</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">California biodiversity final peer review, biodiversity survey at BFS</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">8</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">3/7</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Environmental economics and conservation</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Guest lectures by Prof. Sahan Dissanayake. Readings will be posted at Sakai.</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">California biodiversity short presentations</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">3/14</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">California county conservation report due</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">9</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">3/14</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Week of spring break</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">10</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">3/21</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Population dynamics in conservation</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">[Morris, Doak, et al., Chapters 1, 2, and **4**](https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf); Simberloff chapter 6 in Conservation Science and Action</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Independent projects</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">11</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">3/28</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Climate change</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Guest lecture by Prof. Nina Karnovsky, [Conservation Biology for All, Chapter 8](https://conbio.org/images/content_publications/Chapter8.pdf); @walther2002ecological; [TedEd video on phenology](https://youtu.be/RNs3XpRmRfI); [Project BudBurst phenology video](https://youtu.be/Kpp9NE1i2zM) and an additional reading to be posted at Sakai.</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Independent projects</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">12</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">4/4</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Introduced and invasive species</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">MacDonald et al., Chapter 13 in Key Topics in Conservation Biology; @kimmerer2000native; @norton2009species; @seddon2014reversing; @larson2005war (optional)</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Independent projects (lab may be async this week)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">13</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">4/11</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Career paths in conservation</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">[Maya Higa](https://www.twitch.tv/maya/about) and [Michael Levin](http://www.ruthdefries.e3b.columbia.edu/lab-members/) (4/11), readings will be posted at Sakai</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Independent projects</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">14</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">4/18</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Pollution</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">@oneill2018conversation; @erisman2013consequences; [video on sampling stream macroinvertebrates](https://youtu.be/E5M3LvX6bO0); [video on nitrogen pollution](https://youtu.be/Gv5kfXRARN0)</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Independent projects</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">4/20</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Inter-group peer review of report and presentation</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">15</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">4/25</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Making conservation a success story</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">@reddy2017advancing; one of the following: @asensio2015nonprice; @blackman2017titling; @buechley2015importance; @clements2010payments; @poonswad2005comparison; @saypanya2013effectiveness</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Independent project presentations and end of semester celebration</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">16</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">5/2</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">Course retrospective and end of semester celebration</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">5/3</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030">End of semester</span></p></td><td class="cl-c23637c0"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c23637d4"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td><td class="cl-c23637d4"><p class="cl-c235c4b6"><span class="cl-c235a030">5/12</span></p></td><td class="cl-c23637d4"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td><td class="cl-c23637d4"><p class="cl-c235c4b6"><span class="cl-c235a030">Group project report due</span></p></td><td class="cl-c23637d4"><p class="cl-c235c4b6"><span class="cl-c235a030"></span></p></td></tr></tbody></table></div></template>
+<div class="flextable-shadow-host" id="30898347-0697-440d-a664-a671817f0142"></div>
+<script>
+var dest = document.getElementById("30898347-0697-440d-a664-a671817f0142");
+var template = document.getElementById("b94bde9d-d701-4c9a-a5e4-444a5cc4009c");
+var caption = template.content.querySelector("caption");
+if(caption) {
+  caption.style.cssText = "display:block;text-align:center;";
+  var newcapt = document.createElement("p");
+  newcapt.appendChild(caption)
+  dest.parentNode.insertBefore(newcapt, dest.previousSibling);
+}
+var fantome = dest.attachShadow({mode: 'open'});
+var templateContent = template.content;
+fantome.appendChild(templateContent);
+</script>
+
+<pre class="r"><code>#schedDF %&gt;% 
+#  addHtmlTableStyle(col.rgroup = zebra_cols,
+#                    align = &quot;llccc&quot;,
+#                    css.cell = &quot;border-bottom: solid 0.5px&quot;) %&gt;%
+#  htmlTable(rnames=FALSE) # can&#39;t figure out for now how to merge cells - whatever</code></pre>
+<div id="old-content" class="section level3">
+<h3>OLD CONTENT</h3>
+<!--Week 1; n=26 students?; 8 small groups Note that **L** denotes lecture and **B** lab.-->
+<!--Books: Magurran, Key-Topics-In-Conservation-Biology, Sutherland_ConservationScienceAction-->
+<table>
+<colgroup>
+<col width="10%" />
+<col width="62%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Week</th>
+<th>Topic</th>
+<th>Resources</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1/26</td>
+<td>Introduction: Personal motivations, Biodiversity overview, Getting set up with <code>RStudio Server</code></td>
+<td><span class="citation">Berkes (<a href="#ref-berkes2004rethinking" role="doc-biblioref">2004</a>)</span>; <span class="citation">Mace (<a href="#ref-mace2014whose" role="doc-biblioref">2014</a>)</span>; <span class="citation">Sandbrook et al. (<a href="#ref-sandbrook2019global" role="doc-biblioref">2019</a>)</span>; <a href="https://conbio.org/images/content_publications/Chapter2.pdf">Conservation Biology for All, Chapter 2</a></td>
+</tr>
+<tr class="even">
+<td>2/2</td>
+<td>Measuring biodiversity, the global extinction crisis, introduction to objects and data types in <code>R</code></td>
+<td><span class="citation">Myers et al. (<a href="#ref-myers2000biodiversity" role="doc-biblioref">2000</a>)</span>; <span class="citation">Pimm (<a href="#ref-pimmExtinctionChapter" role="doc-biblioref">2009</a>)</span>; <span class="citation">Ceballos et al. (<a href="#ref-ceballos2015accelerated" role="doc-biblioref">2015</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>2/9</td>
+<td>Why should society care? Ecosystem services, manipulating <code>data.frame</code>s in <code>R</code></td>
+<td><a href="https://conbio.org/images/content_publications/Chapter3.pdf">Conservation Biology for All, Chapter 3</a>; <a href="https://www.youtube.com/watch?v=q8AZHtF2f50">Valuation of Ecosystem Services</a>; <span class="citation">McCauley (<a href="#ref-mccauley2006selling" role="doc-biblioref">2006</a>)</span>; <span class="citation">Armsworth et al. (<a href="#ref-armsworth2007ecosystem" role="doc-biblioref">2007</a>)</span>; <span class="citation">Tallis et al. (<a href="#ref-tallis2011natural" role="doc-biblioref">2011</a>)</span>; <span class="citation">Cardinale et al. (<a href="#ref-cardinale2012biodiversity" role="doc-biblioref">2012</a>)</span></td>
+</tr>
+<tr class="even">
+<td>2/16</td>
+<td>Habitat loss, generating plots in <code>R</code></td>
+<td><a href="https://conbio.org/images/content_publications/Chapter4.pdf">Conservation Biology for All, Chapter 4 - subset</a>; <a href="https://conbio.org/images/content_publications/Chapter5.pdf">Conservation Biology for All, Chapter 5</a>; <span class="citation">Mueller et al. (<a href="#ref-mueller2012closing" role="doc-biblioref">2012</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>2/23</td>
+<td>How do we prioritize locating nature reserves given limited resources? When is PADDD strategic?</td>
+<td><span class="citation">Mace, Possingham, and Leader-Williams (<a href="#ref-mace2007prioritizing" role="doc-biblioref">2007</a>)</span>; <span class="citation">Balmford and Whitten (<a href="#ref-balmford2003should" role="doc-biblioref">2003</a>)</span>; <span class="citation">Kareiva (<a href="#ref-kareiva2010trade" role="doc-biblioref">2010</a>)</span>; <span class="citation">DeAngelis (<a href="#ref-deangelis2019modelling" role="doc-biblioref">2019</a>)</span></td>
+</tr>
+<tr class="even">
+<td>3/2</td>
+<td>Over-exploitation, joining data</td>
+<td><a href="https://conbio.org/images/content_publications/Chapter6.pdf">Conservation Biology for All, Chapter 6</a>; <span class="citation">Peres (<a href="#ref-peres2001synergistic" role="doc-biblioref">2001</a>)</span>; <span class="citation">Dirzo et al. (<a href="#ref-dirzo2014defaunation" role="doc-biblioref">2014</a>)</span>; <a href="https://youtu.be/WNdR808jMSA">Will the oceans ever run out of fish?</a></td>
+</tr>
+<tr class="odd">
+<td>3/9</td>
+<td>Spring recess</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>3/16</td>
+<td>Introduced species, Guest lecture by Prof. Marty Meyer</td>
+<td><a href="https://conbio.org/images/content_publications/Chapter7.pdf">Conservation Biology for All, Chapter 7</a>; <span class="citation">Cardoso et al. (<a href="#ref-cardoso2011seven" role="doc-biblioref">2011</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>3/23</td>
+<td>Climate change</td>
+<td><a href="https://conbio.org/images/content_publications/Chapter8.pdf">Conservation Biology for All, Chapter 8</a>; <span class="citation">Walther et al. (<a href="#ref-walther2002ecological" role="doc-biblioref">2002</a>)</span>; <a href="https://youtu.be/RNs3XpRmRfI">TedEd video on phenology</a>; <a href="https://youtu.be/Kpp9NE1i2zM">Project BudBurst phenology video</a> - note that the videos are optional</td>
+</tr>
+<tr class="even">
+<td>3/30</td>
+<td>Consumer behaviors &amp; pollution</td>
+<td><span class="citation">Lenzen et al. (<a href="#ref-lenzen2012international" role="doc-biblioref">2012</a>)</span>; <span class="citation">O’Neill (<a href="#ref-oneill2018conversation" role="doc-biblioref">2018</a>)</span>; <span class="citation">Erisman et al. (<a href="#ref-erisman2013consequences" role="doc-biblioref">2013</a>)</span>; <a href="https://youtu.be/E5M3LvX6bO0">video on sampling stream macroinvertebrates</a>; <a href="https://youtu.be/Gv5kfXRARN0">video on nitrogen pollution</a></td>
+</tr>
+<tr class="odd">
+<td>4/6</td>
+<td>Guest lectures by Drs. <a href="https://leventisfoundation.org.ng/the-management/">Hope Ovie Usieta</a> and <a href="https://www.ioes.ucla.edu/person/emma-fuller/">Emma Fuller</a></td>
+<td>Readings posted to Sakai</td>
+</tr>
+<tr class="even">
+<td>4/13</td>
+<td>Describing extinction risk: the IUCN Red List</td>
+<td><span class="citation">Collen et al. (<a href="#ref-collen2016clarifying" role="doc-biblioref">2016</a>)</span>; <span class="citation">Akçakaya et al. (<a href="#ref-akccakaya2018quantifying" role="doc-biblioref">2018</a>)</span>; <a href="https://youtu.be/VukyqMajAOU">The IUCN Red List: A Barometer of Life</a>; <a href="https://youtu.be/LqRq-Gd63a0">ZSL video</a></td>
+</tr>
+<tr class="odd">
+<td>4/20</td>
+<td>Population dynamics in conservation</td>
+<td><a href="https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf">Morris, Doak, et al., Chapters 1, 2, and <strong>4</strong></a>; additional videos TBD</td>
+</tr>
+<tr class="even">
+<td>4/27</td>
+<td>Conservation of common pool resources</td>
+<td><a href="https://sakai.claremont.edu/portal/directtool/03e44dc3-80e8-422c-bb24-52af386ba822/">Ostrom Nobel Prize speech</a>; <a href="https://www.youtube.com/watch?v=OINKJNWtSiE">Montreal Protocol</a>; <a href="https://youtu.be/B11kASPfYxY">Climate negotiations - a brief history</a>; <a href="https://sakai.claremont.edu/portal/directtool/03e44dc3-80e8-422c-bb24-52af386ba822/">select one of the 4 case studies at the Week 14 site</a></td>
+</tr>
+<tr class="odd">
+<td>5/4</td>
+<td>Making conservation a success story, Course retrospective, Final project 1B due</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div id="refs" class="references hanging-indent">
+<div id="ref-akccakaya2018quantifying">
+<p>Akçakaya, H Resit, Elizabeth L Bennett, Thomas M Brooks, Molly K Grace, Anna Heath, Simon Hedges, Craig Hilton-Taylor, et al. 2018. “Quantifying Species Recovery and Conservation Success to Develop an Iucn Green List of Species.” <em>Conservation Biology</em> 32 (5): 1128–38.</p>
+</div>
+<div id="ref-armsworth2007ecosystem">
+<p>Armsworth, PR, KM Chan, GC Daily, PR Ehrlich, C Kremen, TH Ricketts, and MA Sanjayan. 2007. “Ecosystem-Service Science and the Way Forward for Conservation.” <em>Conservation Biology</em> 21 (6): 1383–4.</p>
+</div>
+<div id="ref-balmford2003should">
+<p>Balmford, Andrew, and Tony Whitten. 2003. “Who Should Pay for Tropical Conservation, and How Could the Costs Be Met?” <em>Oryx</em> 37 (2): 238–50.</p>
+</div>
+<div id="ref-berkes2004rethinking">
+<p>Berkes, Fikret. 2004. “Rethinking Community-Based Conservation.” <em>Conservation Biology</em> 18 (3): 621–30.</p>
+</div>
+<div id="ref-cardinale2012biodiversity">
+<p>Cardinale, Bradley J, J Emmett Duffy, Andrew Gonzalez, David U Hooper, Charles Perrings, Patrick Venail, Anita Narwani, et al. 2012. “Biodiversity Loss and Its Impact on Humanity.” <em>Nature</em> 486 (7401): 59.</p>
+</div>
+<div id="ref-cardoso2011seven">
+<p>Cardoso, Pedro, Terry L Erwin, Paulo AV Borges, and Tim R New. 2011. “The Seven Impediments in Invertebrate Conservation and How to Overcome Them.” <em>Biological Conservation</em> 144 (11): 2647–55.</p>
+</div>
+<div id="ref-ceballos2015accelerated">
+<p>Ceballos, Gerardo, Paul R Ehrlich, Anthony D Barnosky, Andrés Garcı́a, Robert M Pringle, and Todd M Palmer. 2015. “Accelerated Modern Human–Induced Species Losses: Entering the Sixth Mass Extinction.” <em>Science Advances</em> 1 (5): e1400253.</p>
+</div>
+<div id="ref-collen2016clarifying">
+<p>Collen, Ben, Nicholas K Dulvy, Kevin J Gaston, Ulf Gärdenfors, David A Keith, André E Punt, Helen M Regan, et al. 2016. “Clarifying Misconceptions of Extinction Risk Assessment with the Iucn Red List.” <em>Biology Letters</em> 12 (4): 20150843.</p>
+</div>
+<div id="ref-deangelis2019modelling">
+<p>DeAngelis, Donald L. 2019. “Modelling Protected Area Trade-Offs.” <em>Nature Sustainability</em> 2 (5): 358–59.</p>
+</div>
+<div id="ref-dirzo2014defaunation">
+<p>Dirzo, Rodolfo, Hillary S Young, Mauro Galetti, Gerardo Ceballos, Nick JB Isaac, and Ben Collen. 2014. “Defaunation in the Anthropocene.” <em>Science</em> 345 (6195): 401–6.</p>
+</div>
+<div id="ref-erisman2013consequences">
+<p>Erisman, Jan Willem, James N Galloway, Sybil Seitzinger, Albert Bleeker, Nancy B Dise, AM Roxana Petrescu, Allison M Leach, and Wim de Vries. 2013. “Consequences of Human Modification of the Global Nitrogen Cycle.” <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> 368 (1621): 20130116.</p>
+</div>
+<div id="ref-kareiva2010trade">
+<p>Kareiva, Peter. 2010. “Trade-in to Trade-up.” <em>Nature</em> 466 (7304): 322–23.</p>
+</div>
+<div id="ref-lenzen2012international">
+<p>Lenzen, Manfred, Daniel Moran, Keiichiro Kanemoto, Barney Foran, Leonarda Lobefaro, and Arne Geschke. 2012. “International Trade Drives Biodiversity Threats in Developing Nations.” <em>Nature</em> 486 (7401): 109–12.</p>
+</div>
+<div id="ref-mace2014whose">
+<p>Mace, Georgina M. 2014. “Whose Conservation?” <em>Science</em> 345 (6204): 1558–60.</p>
+</div>
+<div id="ref-mace2007prioritizing">
+<p>Mace, Georgina M, Hugh P Possingham, and Nigel Leader-Williams. 2007. “Prioritizing Choices in Conservation.” In <em>Key Topics in Conservation Biology</em>, edited by David Macdonald and Katrina Service, 17–34. Blackwell Publishing, Malden, MA.</p>
+</div>
+<div id="ref-mccauley2006selling">
+<p>McCauley, Douglas J. 2006. “Selling Out on Nature.” <em>Nature</em> 443 (7107): 27–28.</p>
+</div>
+<div id="ref-mueller2012closing">
+<p>Mueller, Nathaniel D, James S Gerber, Matt Johnston, Deepak K Ray, Navin Ramankutty, and Jonathan A Foley. 2012. “Closing Yield Gaps Through Nutrient and Water Management.” <em>Nature</em> 490 (7419): 254.</p>
+</div>
+<div id="ref-myers2000biodiversity">
+<p>Myers, Norman, Russell A Mittermeier, Cristina G Mittermeier, Gustavo AB Da Fonseca, and Jennifer Kent. 2000. “Biodiversity Hotspots for Conservation Priorities.” <em>Nature</em> 403 (6772): 853–58.</p>
+</div>
+<div id="ref-oneill2018conversation">
+<p>O’Neill, Daniel. 2018. “Is It Possible for Everyone to Live a Good Life Within Our Planet’s Limits.” Vol. 8. The Conversation.</p>
+</div>
+<div id="ref-peres2001synergistic">
+<p>Peres, Carlos A. 2001. “Synergistic Effects of Subsistence Hunting and Habitat Fragmentation on Amazonian Forest Vertebrates.” <em>Conservation Biology</em> 15 (6): 1490–1505.</p>
+</div>
+<div id="ref-pimmExtinctionChapter">
+<p>Pimm, Stuart L. 2009. “Extinction.” In <em>Conservation Science and Action</em>, edited by William J Sutherland, 20–39. John Wiley &amp; Sons.</p>
+</div>
+<div id="ref-sandbrook2019global">
+<p>Sandbrook, Chris, Janet A Fisher, George Holmes, Rogelio Luque-Lora, and Aidan Keane. 2019. “The Global Conservation Movement Is Diverse but Not Divided.” <em>Nature Sustainability</em> 2 (4): 316–23.</p>
+</div>
+<div id="ref-tallis2011natural">
+<p>Tallis, Heather, Taylor H Ricketts, Gretchen C Daily, and Stephen Polasky. 2011. <em>Natural Capital: Theory and Practice of Mapping Ecosystem Services</em>. Oxford University Press.</p>
+</div>
+<div id="ref-walther2002ecological">
+<p>Walther, Gian-Reto, Eric Post, Peter Convey, Annette Menzel, Camille Parmesan, Trevor JC Beebee, Jean-Marc Fromentin, Ove Hoegh-Guldberg, and Franz Bairlein. 2002. “Ecological Responses to Recent Climate Change.” <em>Nature</em> 416 (6879): 389–95.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

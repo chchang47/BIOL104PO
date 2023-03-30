@@ -1,6 +1,6 @@
 name: "BIOL104"
 output_dir: "."
-include: [index.Rmd, PVA.Rmd, CBC.Rmd, IUCN.Rmd, Week2*.Rmd, Week1*.Rmd, Week5.Rmd, SpeciesArea.Rmd, Sound.Rmd]
+include: [index.Rmd, PVA.Rmd, CBC.Rmd, IUCN.Rmd, Week2*.Rmd, Week1*.Rmd, Week5.Rmd, SpeciesArea.Rmd, Sound.Rmd, bioaco.Rmd]
 exclude: [old/*.Rmd]
 navbar:
   title: "Conservation Biology"
@@ -36,8 +36,12 @@ navbar:
           href: PVA.html
         - text: "Climate"
           href: Climate.html
-        - text: "Acoustic"
+    - text: "Bioacoustics"
+      menu:
+        - text: "Acoustic data"
           href: Sound.html
+        - text: "Analyzing acoustic data"
+          href: bioaco.html
 output:
   html_document:
     theme: flatly

@@ -312,8 +312,20 @@ $(document).ready(function () {
     <li>
       <a href="Climate.html">Climate</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bioacoustics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="Sound.html">Acoustic</a>
+      <a href="Sound.html">Acoustic data</a>
+    </li>
+    <li>
+      <a href="bioaco.html">Analyzing acoustic data</a>
     </li>
   </ul>
 </li>
@@ -329,100 +341,54 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Interacting with the class CA county
-dataset in <code>R</code></h1>
+<h1 class="title toc-ignore">Interacting with the class CA county dataset in <code>R</code></h1>
 <h4 class="author"></h4>
 
 </div>
 
 
-<p>For the California biodiversity &amp; protected areas project, I have
-created a <a
-href="https://github.com/chchang47/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv">Provided
-Datasheet</a> that compiles data for the 58 counties in California. <a
-href="https://docs.google.com/document/d/1wzTXmZQpz8E1XG0qD2Y4IGJ9IYUWz_zJkpw8Vawt7u0/edit#bookmark=id.5xpubn6xluzn">The
-Provided Datasheet section of the class project description document</a>
-describes the columns of the datasheet.</p>
-<div id="interacting-with-datasets-using-the-dplyr-package"
-class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Interacting with
-datasets using the <code>dplyr</code> package</h1>
-<p>In this class, we will use the <a
-href="https://r4ds.had.co.nz/">Tidyverse</a> developed by RStudio
-statisticians and <code>R</code> aficianados. Relative to other ways of
-interacting with data in (“base”) <code>R</code>, the Tidyverse has the
-advantage of featuring syntax that more directly translates to other
-data science tool kits and languages, such as Python or SQL. <a
-href="https://github.com/tidyverse/dplyr/"><code>dplyr</code></a> is one
-of the Tidyverse packages that extends core <code>R</code> functions to
-make <code>R</code> more modern and elegant in interacting with
-real-world data.</p>
+<p>For the California biodiversity &amp; protected areas project, I have created a <a href="https://github.com/chchang47/BIOL104PO/blob/master/data/CA_protectedareas_datasheet.tsv">Provided Datasheet</a> that compiles data for the 58 counties in California. <a href="https://docs.google.com/document/d/1wzTXmZQpz8E1XG0qD2Y4IGJ9IYUWz_zJkpw8Vawt7u0/edit#bookmark=id.5xpubn6xluzn">The Provided Datasheet section of the class project description document</a> describes the columns of the datasheet.</p>
+<div id="interacting-with-datasets-using-the-dplyr-package" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Interacting with datasets using the <code>dplyr</code> package</h1>
+<p>In this class, we will use the <a href="https://r4ds.had.co.nz/">Tidyverse</a> developed by RStudio statisticians and <code>R</code> aficianados. Relative to other ways of interacting with data in (“base”) <code>R</code>, the Tidyverse has the advantage of featuring syntax that more directly translates to other data science tool kits and languages, such as Python or SQL. <a href="https://github.com/tidyverse/dplyr/"><code>dplyr</code></a> is one of the Tidyverse packages that extends core <code>R</code> functions to make <code>R</code> more modern and elegant in interacting with real-world data.</p>
 </div>
 <div id="data-operations" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Data operations</h1>
-<p>One of the core data types that is integral to the modern world is
-spreadsheet-like data organized into a matrix format. In <code>R</code>
-parlance, such data are typically represented by a type of object called
-a <code>data.frame</code>. In many contexts, these types of data are
-also called data tables.</p>
-<p>In this module, we will focus on the following types of queries for
-data tables:</p>
+<h1 number="2"><span class="header-section-number">2</span> Data operations</h1>
+<p>One of the core data types that is integral to the modern world is spreadsheet-like data organized into a matrix format. In <code>R</code> parlance, such data are typically represented by a type of object called a <code>data.frame</code>. In many contexts, these types of data are also called data tables.</p>
+<p>In this module, we will focus on the following types of queries for data tables:</p>
 <ul>
-<li><code>filter()</code>: subsetting a data table based on values in
-<strong>rows</strong></li>
-<li><code>select()</code>: subset a data table based on specific
-<strong>columns</strong> given by their names</li>
+<li><code>filter()</code>: subsetting a data table based on values in <strong>rows</strong></li>
+<li><code>select()</code>: subset a data table based on specific <strong>columns</strong> given by their names</li>
 <li><code>arrange()</code>: sort rows based on values in columns</li>
-<li><code>mutate()</code>: create new columns for a data table based on
-some operation applied to existing columns</li>
-<li><code>summarize()</code>: summarize data table, usually yielding a
-data table with fewer rows</li>
+<li><code>mutate()</code>: create new columns for a data table based on some operation applied to existing columns</li>
+<li><code>summarize()</code>: summarize data table, usually yielding a data table with fewer rows</li>
 </ul>
 </div>
 <div id="scripting" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Scripting</h1>
-<p>Today, we will also embark on writing <code>R</code> scripts to store
-our commands. We will even be able to execute the code interactively
-from the script editor (much like a text editor or some other type of
-notepad).</p>
-<p>NB: If you have used <code>.Rmd</code> (R Markdown) files before, you
-are more than welcome to use an R Markdown file. But for purposes of the
-general teaching in this class, I will introduce <code>R</code>
-scripts.</p>
+<h1 number="3"><span class="header-section-number">3</span> Scripting</h1>
+<p>Today, we will also embark on writing <code>R</code> scripts to store our commands. We will even be able to execute the code interactively from the script editor (much like a text editor or some other type of notepad).</p>
+<p>NB: If you have used <code>.Rmd</code> (R Markdown) files before, you are more than welcome to use an R Markdown file. But for purposes of the general teaching in this class, I will introduce <code>R</code> scripts.</p>
 </div>
 <div id="steps" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Steps</h1>
+<h1 number="4"><span class="header-section-number">4</span> Steps</h1>
 <ol style="list-style-type: decimal">
 <li>Please navigate to either:
 <ol style="list-style-type: lower-alpha">
-<li>The class workspace, <a
-href="https://posit.cloud/spaces/323650/"><code>Conservation Biology Spring 2023</code></a>.</li>
-<li>Alternatively, please try the SSO log-in page only: <a
-href="https://sso.rstudio.cloud/pomona">sso.rstudio.cloud/pomona</a></li>
+<li>The class workspace, <a href="https://posit.cloud/spaces/323650/"><code>Conservation Biology Spring 2023</code></a>.</li>
+<li>Alternatively, please try the SSO log-in page only: <a href="https://sso.rstudio.cloud/pomona">sso.rstudio.cloud/pomona</a></li>
 <li>You will click on the <code>Week2</code> assignment there.</li>
 </ol></li>
 <li>Opening up an <code>.R</code> script
 <ul>
-<li>I have created a placeholder <code>Week2.R</code> script that will
-be visible for you in the <code>Files</code> pane.</li>
-<li>Please <strong>click on this <code>Week2.R</code>
-file</strong>.</li>
-<li>Note that you can navigate to the bars in between each pane until
-you see a
-<svg style="height:0.8em;top:.04em;position:relative;fill:black;" viewBox="0 0 512 512"><path d="M352.201 425.775l-79.196 79.196c-9.373 9.373-24.568 9.373-33.941 0l-79.196-79.196c-15.119-15.119-4.411-40.971 16.971-40.97h51.162L228 284H127.196v51.162c0 21.382-25.851 32.09-40.971 16.971L7.029 272.937c-9.373-9.373-9.373-24.569 0-33.941L86.225 159.8c15.119-15.119 40.971-4.411 40.971 16.971V228H228V127.196h-51.23c-21.382 0-32.09-25.851-16.971-40.971l79.196-79.196c9.373-9.373 24.568-9.373 33.941 0l79.196 79.196c15.119 15.119 4.411 40.971-16.971 40.971h-51.162V228h100.804v-51.162c0-21.382 25.851-32.09 40.97-16.971l79.196 79.196c9.373 9.373 9.373 24.569 0 33.941L425.773 352.2c-15.119 15.119-40.971 4.411-40.97-16.971V284H284v100.804h51.23c21.382 0 32.09 25.851 16.971 40.971z"/></svg>
-icon, which you can use to drag the panes to be larger or smaller</li>
+<li>I have created a placeholder <code>Week2.R</code> script that will be visible for you in the <code>Files</code> pane.</li>
+<li>Please <strong>click on this <code>Week2.R</code> file</strong>.</li>
+<li>Note that you can navigate to the bars in between each pane until you see a <svg style="height:0.8em;top:.04em;position:relative;fill:black;" viewBox="0 0 512 512"><path d="M352.201 425.775l-79.196 79.196c-9.373 9.373-24.568 9.373-33.941 0l-79.196-79.196c-15.119-15.119-4.411-40.971 16.971-40.97h51.162L228 284H127.196v51.162c0 21.382-25.851 32.09-40.971 16.971L7.029 272.937c-9.373-9.373-9.373-24.569 0-33.941L86.225 159.8c15.119-15.119 40.971-4.411 40.971 16.971V228H228V127.196h-51.23c-21.382 0-32.09-25.851-16.971-40.971l79.196-79.196c9.373-9.373 24.568-9.373 33.941 0l79.196 79.196c15.119 15.119 4.411 40.971-16.971 40.971h-51.162V228h100.804v-51.162c0-21.382 25.851-32.09 40.97-16.971l79.196 79.196c9.373 9.373 9.373 24.569 0 33.941L425.773 352.2c-15.119 15.119-40.971 4.411-40.97-16.971V284H284v100.804h51.23c21.382 0 32.09 25.851 16.971 40.971z"/></svg> icon, which you can use to drag the panes to be larger or smaller</li>
 </ul></li>
-<li>Subsequently, as you read through this tutorial, please copy the
-code into the <code>R</code> script and use the file as a way to track
-your commands:
+<li>Subsequently, as you read through this tutorial, please copy the code into the <code>R</code> script and use the file as a way to track your commands:
 <ul>
-<li>Note that below, any line starting with the pound sign
-<code>#</code> is a <em>comment</em>.</li>
+<li>Note that below, any line starting with the pound sign <code>#</code> is a <em>comment</em>.</li>
 <li>Comments are text that are not executed by <code>R</code>.</li>
-<li>In general, it is good practice to “comment your code” – that is,
-use comments to annotate your code for future reference. When you’ve
-copied in the code into the <code>R</code> script, it will look
-something like this:</li>
+<li>In general, it is good practice to “comment your code” – that is, use comments to annotate your code for future reference. When you’ve copied in the code into the <code>R</code> script, it will look something like this:</li>
 </ul></li>
 </ol>
 <div class="figure">
@@ -430,32 +396,17 @@ something like this:</li>
 <p class="caption">R script with initial commands</p>
 </div>
 <ol start="4" style="list-style-type: decimal">
-<li>Next, save the file when you make changes using the
-<svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"><path d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"/></svg>
-icon and give it an informative name.</li>
-<li>Now you can run the code <strong>from the script editor
-directly</strong>!</li>
-<li>The easiest way to run the code is to highlight each line of code
-and either type <code>⌘ + Enter</code> (people who have Mac OS) or
-<code>CTRL + Enter</code> (Windows and Linux). You can also highlight
-each line of code with your mouse and use the “run code” button at the
-top right-hand side of the text editor pane: <img
-src="figures/runCode.png" alt="run code" /></li>
-<li>Note that running each line of code from the text editor (from the
-<code>R</code> script in this case) is the same as typing the commands
-into the console. You typed commands directly into the console last week
-in your initial interactions with <code>R</code>.</li>
-<li>Writing scripts is advantageous because you can store your commands
-somewhere convenient and revisit or edit the file anytime.</li>
+<li>Next, save the file when you make changes using the <svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 448 512"><path d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"/></svg> icon and give it an informative name.</li>
+<li>Now you can run the code <strong>from the script editor directly</strong>!</li>
+<li>The easiest way to run the code is to highlight each line of code and either type <code>⌘ + Enter</code> (people who have Mac OS) or <code>CTRL + Enter</code> (Windows and Linux). You can also highlight each line of code with your mouse and use the “run code” button at the top right-hand side of the text editor pane: <img src="figures/runCode.png" alt="run code" /></li>
+<li>Note that running each line of code from the text editor (from the <code>R</code> script in this case) is the same as typing the commands into the console. You typed commands directly into the console last week in your initial interactions with <code>R</code>.</li>
+<li>Writing scripts is advantageous because you can store your commands somewhere convenient and revisit or edit the file anytime.</li>
 </ol>
 </div>
-<div id="interacting-with-the-class-dataset" class="section level1"
-number="5">
-<h1><span class="header-section-number">5</span> Interacting with the
-class dataset</h1>
+<div id="interacting-with-the-class-dataset" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Interacting with the class dataset</h1>
 <div id="reading-in-the-data" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Reading in the
-data</h2>
+<h2 number="5.1"><span class="header-section-number">5.1</span> Reading in the data</h2>
 <pre class="r"><code>### Loading packages with helpful functions
 library(dplyr) 
   # R will let you know if loading in this package over-rides any existing function names; don&#39;t worry about this message for now.
@@ -465,77 +416,32 @@ CA_county_data &lt;- readr::read_tsv(&quot;https://raw.githubusercontent.com/cha
 
 ### Take a look at the first few rows of the data table
 CA_county_data</code></pre>
-<p>Awesome! You have 1) loaded the package <code>dplyr</code>, which is
-our toolkit for more elegant data manipulation in <code>R</code>, 2)
-read in the Provided Datasheet using the function <code>read_tsv</code>
-(read in tab-separated value files, sometimes also called
-<code>.txt</code> files, though <code>.tsv</code> is the format used
-here) from the package <code>readr</code>, 3) printed out the first 10
-rows of the data table.</p>
-<p>One thing to note is that the packages we are using in <code>R</code>
-make “opinionated” decisions about how many columns to display. Because
-the provided datasheet has 26 columns, <code>R</code> only displays 6 or
-so of the columns and just lists the names of the remaining columns.</p>
+<p>Awesome! You have 1) loaded the package <code>dplyr</code>, which is our toolkit for more elegant data manipulation in <code>R</code>, 2) read in the Provided Datasheet using the function <code>read_tsv</code> (read in tab-separated value files, sometimes also called <code>.txt</code> files, though <code>.tsv</code> is the format used here) from the package <code>readr</code>, 3) printed out the first 10 rows of the data table.</p>
+<p>One thing to note is that the packages we are using in <code>R</code> make “opinionated” decisions about how many columns to display. Because the provided datasheet has 26 columns, <code>R</code> only displays 6 or so of the columns and just lists the names of the remaining columns.</p>
 </div>
 <div id="using-the-view-command" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Using the
-<code>View</code> command</h2>
-<p>Oftentimes, we may want a more intuitive way to see our data tables.
-It can be really annoying when <code>R</code> is too clever and only
-displays a subset of the columns of your spreadsheet. The
-<code>View()</code> function pulls up an Excel-style data viewer. Let’s
-try it below:</p>
+<h2 number="5.2"><span class="header-section-number">5.2</span> Using the <code>View</code> command</h2>
+<p>Oftentimes, we may want a more intuitive way to see our data tables. It can be really annoying when <code>R</code> is too clever and only displays a subset of the columns of your spreadsheet. The <code>View()</code> function pulls up an Excel-style data viewer. Let’s try it below:</p>
 <pre><code>View(CA_county_data)</code></pre>
-<p>What just happened? <code>R</code> pulled up a spreadsheet data
-viewer in a new tab next to your <code>R</code> script. You can always
-press the <code>x</code> button on the upper right-hand side of the tab
-to close the viewer. And if you ever want to view your spreadsheet
-again, you can just re-run the command above! Another cool thing is that
-the spreadsheet viewer gives you options to sort
-(<code>dplyr::arrange</code>).</p>
-<p>The other thing to note is that the <code>View()</code> output (as
-well as just typing <code>CA_county_data</code> in the console) tells
-you the <em>dimensions</em> of your data - how many <em>rows</em> and
-<em>columns</em> are in your data. This is a handy way of confirming if
-the output of your functions are working correctly.</p>
-<p>If you ever don’t know what a function does, note that you can use
-the <code>?</code> command before a function’s name to pull up a help
-page for that function. For example, you could run <code>?View</code> in
-the console (remember, where you see the <code>&gt;</code> carat symbol
-awaiting your command – or you can copy <code>?View</code> to the text
-editor pane then run that line). Calling <code>?View</code> will pull up
-the <code>Help</code> pane in the lower right-hand corner of RStudio
-Server, which will display a help document with the title <strong>Invoke
-a Data Viewer</strong>. You can do this <code>?</code> help command with
-<code>?mean</code> (pull up the help display for the arithmetic mean
-function), <code>?mutate</code> (pulls up a help display for
-<code>mutate</code>).</p>
+<p>What just happened? <code>R</code> pulled up a spreadsheet data viewer in a new tab next to your <code>R</code> script. You can always press the <code>x</code> button on the upper right-hand side of the tab to close the viewer. And if you ever want to view your spreadsheet again, you can just re-run the command above! Another cool thing is that the spreadsheet viewer gives you options to sort (<code>dplyr::arrange</code>).</p>
+<p>The other thing to note is that the <code>View()</code> output (as well as just typing <code>CA_county_data</code> in the console) tells you the <em>dimensions</em> of your data - how many <em>rows</em> and <em>columns</em> are in your data. This is a handy way of confirming if the output of your functions are working correctly.</p>
+<p>If you ever don’t know what a function does, note that you can use the <code>?</code> command before a function’s name to pull up a help page for that function. For example, you could run <code>?View</code> in the console (remember, where you see the <code>&gt;</code> carat symbol awaiting your command – or you can copy <code>?View</code> to the text editor pane then run that line). Calling <code>?View</code> will pull up the <code>Help</code> pane in the lower right-hand corner of RStudio Server, which will display a help document with the title <strong>Invoke a Data Viewer</strong>. You can do this <code>?</code> help command with <code>?mean</code> (pull up the help display for the arithmetic mean function), <code>?mutate</code> (pulls up a help display for <code>mutate</code>).</p>
 <div class="figure">
 <img src="figures/Viewer.png" alt="" />
-<p class="caption">Sorting the <code>CA_county_data</code> spreadsheet
-in the Viewer pane by the number of birds (highest to lowest)</p>
+<p class="caption">Sorting the <code>CA_county_data</code> spreadsheet in the Viewer pane by the number of birds (highest to lowest)</p>
 </div>
 </div>
-<div id="performing-operations-on-the-data" class="section level2"
-number="5.3">
-<h2><span class="header-section-number">5.3</span> Performing operations
-on the data</h2>
+<div id="performing-operations-on-the-data" class="section level2" number="5.3">
+<h2 number="5.3"><span class="header-section-number">5.3</span> Performing operations on the data</h2>
 <div id="filtering-rows" class="section level3" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Filtering rows</h3>
-<p>Let’s say we want to only focus on the counties that have 50 or more
-tree species. How do we do that?</p>
+<h3 number="5.3.1"><span class="header-section-number">5.3.1</span> Filtering rows</h3>
+<p>Let’s say we want to only focus on the counties that have 50 or more tree species. How do we do that?</p>
 <pre><code>### Subsetting our data by rows
 filter(CA_county_data, Trees &gt;= 50) # select all rows (each row is a county) where there are 50 or more tree species</code></pre>
-<p>Note that we can also always open up a convenient spreadsheet viewer
-for our data. I’m going to use the pipe operator <code>%&gt;%</code> to
-daisy chain commands together into a sequence. It is a handy way to make
-a complex operation with intermediate steps more transparent. The
-visualization below describes what pipes do in <code>R</code> in linking
-up functions:</p>
+<p>Note that we can also always open up a convenient spreadsheet viewer for our data. I’m going to use the pipe operator <code>%&gt;%</code> to daisy chain commands together into a sequence. It is a handy way to make a complex operation with intermediate steps more transparent. The visualization below describes what pipes do in <code>R</code> in linking up functions:</p>
 <div class="figure">
 <img src="figures/Rpipeoperator.png" alt="" />
-<p class="caption">Schematic of the pipe <code>%&gt;%</code> operator in
-<code>R</code> (Altaf Ali)</p>
+<p class="caption">Schematic of the pipe <code>%&gt;%</code> operator in <code>R</code> (Altaf Ali)</p>
 </div>
 <pre><code>filter(CA_county_data, Trees &gt;= 50) %&gt;% View() # filter to counties with 50 or more tree species then open up a spreadsheet viewer</code></pre>
 <p>Here are examples of additional filtering operations:</p>
@@ -543,12 +449,8 @@ up functions:</p>
 filter(CA_county_data, Mammals &gt; 60 &amp; Birds &gt; 200) # select all rows with more than 70 mammal and more than 150 bird species</code></pre>
 </div>
 <div id="selecting-columns" class="section level3" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> Selecting
-columns</h3>
-<p>Now let’s say that we want to focus on particular variables, or
-columns, in our data. For instance, how would we just pull out the
-column that tells us the number of threatened species
-(<code>iucn_threat_count_species</code>) in the dataset?</p>
+<h3 number="5.3.2"><span class="header-section-number">5.3.2</span> Selecting columns</h3>
+<p>Now let’s say that we want to focus on particular variables, or columns, in our data. For instance, how would we just pull out the column that tells us the number of threatened species (<code>iucn_threat_count_species</code>) in the dataset?</p>
 <pre><code>### Selecting columns from the data table
 select(CA_county_data, iucn_threat_count_species) # Here, we are selecting the column of threatened species richness</code></pre>
 <p>As before, we can open up a viewer for our output:</p>
@@ -558,10 +460,8 @@ select(CA_county_data, iucn_threat_count_species) # Here, we are selecting the c
 select(CA_county_data, Reptiles, Trees) # Here, we are selecting two columns: reptile species richness and tree species richness</code></pre>
 </div>
 <div id="data-sorting" class="section level3" number="5.3.3">
-<h3><span class="header-section-number">5.3.3</span> Data sorting</h3>
-<p>How do I sort the data based on increasing or decreasing values?
-Let’s say we want to see which counties in California have the most
-protected area under GAP Status 1.</p>
+<h3 number="5.3.3"><span class="header-section-number">5.3.3</span> Data sorting</h3>
+<p>How do I sort the data based on increasing or decreasing values? Let’s say we want to see which counties in California have the most protected area under GAP Status 1.</p>
 <pre><code>### Sorting the data table based on the level of threatened bird richness
 dplyr::arrange(CA_county_data, PAs_gapstatus1_HAs) %&gt;% # the :: is R syntax to refer to a function from a package; I wanted to show this explicitly here.
   select(County, PAs_gapstatus1_HAs) # not included in the question but I add it here for clarity
@@ -569,39 +469,24 @@ dplyr::arrange(CA_county_data, PAs_gapstatus1_HAs) %&gt;% # the :: is R syntax t
   # Sometimes the :: is necessary when multiple packages have functions of the same name. Then if you load a second package after dplyr that also has an &quot;arrange&quot; function, that package&#39;s arrange function would be the default one that you call on.</code></pre>
 </div>
 <div id="creating-new-variables" class="section level3" number="5.3.4">
-<h3><span class="header-section-number">5.3.4</span> Creating new
-variables</h3>
-<p>Often, we are pulling data into <code>R</code> in order to perform
-additional analyses. For instance, we may seek to transform our
-variables.</p>
-<p>Here is how you would calculate the proportion of land in each county
-that is covered by farmland. <code>mutate</code> is the command to
-either alter an existing column or create a new column in the data.</p>
+<h3 number="5.3.4"><span class="header-section-number">5.3.4</span> Creating new variables</h3>
+<p>Often, we are pulling data into <code>R</code> in order to perform additional analyses. For instance, we may seek to transform our variables.</p>
+<p>Here is how you would calculate the proportion of land in each county that is covered by farmland. <code>mutate</code> is the command to either alter an existing column or create a new column in the data.</p>
 <pre><code>CA_county_data %&gt;%
       mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha) # create a new column called farmland_proportion to calculate the proportion farmland in each county</code></pre>
 </div>
-<div id="creating-summaries-of-the-data" class="section level3"
-number="5.3.5">
-<h3><span class="header-section-number">5.3.5</span> Creating summaries
-of the data</h3>
-<p>How can we calculate summary statistics across all 58 counties for
-the number of bird species?</p>
+<div id="creating-summaries-of-the-data" class="section level3" number="5.3.5">
+<h3 number="5.3.5"><span class="header-section-number">5.3.5</span> Creating summaries of the data</h3>
+<p>How can we calculate summary statistics across all 58 counties for the number of bird species?</p>
 <pre><code>summarize(CA_county_data, min_birds = min(Birds), 
 mean_birds = mean(Birds),
 max_birds = max(Birds)) # Creating a small table that summarizes the minimum, mean, and maximum species richness of birds across all 58 counties</code></pre>
-<p>Let’s say that we want to do a more elaborate summary: we want to
-know the mean proportion of land that is farmland across all the
-counties in each of the 5 regions in California. We realize that we
-don’t have the right data. We need to perform a calculation using
-variables in the dataset. We will:</p>
+<p>Let’s say that we want to do a more elaborate summary: we want to know the mean proportion of land that is farmland across all the counties in each of the 5 regions in California. We realize that we don’t have the right data. We need to perform a calculation using variables in the dataset. We will:</p>
 <ul>
-<li>Calculate the proportion of land in each county that is farmland (we
-just did this above!);</li>
-<li>Generate a summary across the 5 regions in California for the mean
-proportion of each county’s area that is farmland.</li>
+<li>Calculate the proportion of land in each county that is farmland (we just did this above!);</li>
+<li>Generate a summary across the 5 regions in California for the mean proportion of each county’s area that is farmland.</li>
 </ul>
-<p>We will do that below using the <code>%&gt;%</code> pipe operator to
-link up commands:</p>
+<p>We will do that below using the <code>%&gt;%</code> pipe operator to link up commands:</p>
 <pre><code>### Using pipes to 1) calculate proportion farmland in each county
 ### and 2) summarize proportion farmland across the 5 regions in CA.
 ### We will store the output in a new object called CA_farm_summary
@@ -613,60 +498,30 @@ CA_farm_summary &lt;- CA_county_data %&gt;%
 ### Uncomment the line below (delete the leading # pound sign)
 ### to print the CA_farm_summary at the console
 # CA_farm_summary</code></pre>
-<p>Nice! By running the code above (including uncommenting the
-<code>CA_farm_summary</code> line by deleting the leading <code>#</code>
-from <code># CA_farm_summary</code>) we will generate this:</p>
+<p>Nice! By running the code above (including uncommenting the <code>CA_farm_summary</code> line by deleting the leading <code>#</code> from <code># CA_farm_summary</code>) we will generate this:</p>
 <div class="figure">
 <img src="figures/Week3_mutate_groupby.png" alt="" />
-<p class="caption">Summary of average amount of land that is farmland
-across all counties in each of the 5 regions in California</p>
+<p class="caption">Summary of average amount of land that is farmland across all counties in each of the 5 regions in California</p>
 </div>
 <p>What we have done above is:</p>
 <ul>
-<li>Used the <code>%&gt;%</code> pipe operator to pass
-<code>CA_county_data</code>, our data table object into the
-<code>mutate</code> command;</li>
-<li>The
-<code>mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha)</code>
-line creates a new column called <code>farmland_proportion</code> that
-divides <code>farmland_area_HAs</code> over
-<code>area_of_county_ha</code>;
+<li>Used the <code>%&gt;%</code> pipe operator to pass <code>CA_county_data</code>, our data table object into the <code>mutate</code> command;</li>
+<li>The <code>mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha)</code> line creates a new column called <code>farmland_proportion</code> that divides <code>farmland_area_HAs</code> over <code>area_of_county_ha</code>;
 <ul>
-<li>Note though that we are not storing this column long-term in
-<code>CA_county_data</code> (We would need to modify the specification
-of this code chunk to store that <code>mutate</code> output into an
-object.)</li>
+<li>Note though that we are not storing this column long-term in <code>CA_county_data</code> (We would need to modify the specification of this code chunk to store that <code>mutate</code> output into an object.)</li>
 </ul></li>
-<li>We pass the output of the <code>mutate</code> command into a
-<code>group_by</code> function call.</li>
-<li><code>group_by</code> splits a data table into groups based on
-distinct values a variable that has <strong>categories</strong>. In this
-case, we tell <code>group_by</code> to divide up the
-<code>CA_county_data</code> data table into groups based on the values
-of <code>Region</code>;</li>
-<li>Subsequently, we take the output of the <code>group_by</code>
-function forward into a <code>summarize</code> function, which tells
-<code>R</code> to calculate the <code>mean</code> value of the new
-<code>farmland_proportion</code> column (created by the
-<code>mutate</code> operation above) across the groups given by
-<code>Region</code>;</li>
-<li>Ultimately, what we store in the new object
-<code>CA_farm_summary</code> (defined at the top of this code chunk) is
-the output of all of these commands, linked together, which is the
-little summary data table you see at the end.</li>
+<li>We pass the output of the <code>mutate</code> command into a <code>group_by</code> function call.</li>
+<li><code>group_by</code> splits a data table into groups based on distinct values a variable that has <strong>categories</strong>. In this case, we tell <code>group_by</code> to divide up the <code>CA_county_data</code> data table into groups based on the values of <code>Region</code>;</li>
+<li>Subsequently, we take the output of the <code>group_by</code> function forward into a <code>summarize</code> function, which tells <code>R</code> to calculate the <code>mean</code> value of the new <code>farmland_proportion</code> column (created by the <code>mutate</code> operation above) across the groups given by <code>Region</code>;</li>
+<li>Ultimately, what we store in the new object <code>CA_farm_summary</code> (defined at the top of this code chunk) is the output of all of these commands, linked together, which is the little summary data table you see at the end.</li>
 </ul>
-<p><em>Food for thought</em>: In this example, I am creating new object
-(<code>CA_farm_summary</code>) to store the outputs of the commands (via
-the <code>&lt;--</code> command). Why is that useful here?</p>
+<p><em>Food for thought</em>: In this example, I am creating new object (<code>CA_farm_summary</code>) to store the outputs of the commands (via the <code>&lt;--</code> command). Why is that useful here?</p>
 <p>What happens when we just run this code below:</p>
 <pre><code>CA_county_data %&gt;%
       mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha)
       
 select(CA_county_data, farmland_proportion) # this will throw an error! Why? How can we deal with that?</code></pre>
-<p>If we want out outputs to be something we can continue using, then we
-need to make sure that we are storing them as needed. Here is one way to
-ensure that we create a column, <code>farmland_proportion</code>
-<strong>and</strong> store it in <code>CA_county_data</code>.</p>
+<p>If we want out outputs to be something we can continue using, then we need to make sure that we are storing them as needed. Here is one way to ensure that we create a column, <code>farmland_proportion</code> <strong>and</strong> store it in <code>CA_county_data</code>.</p>
 <pre><code>CA_county_data &lt;- CA_county_data %&gt;%
       mutate(farmland_proportion = farmland_area_HAs/area_of_county_ha)
       
@@ -675,40 +530,22 @@ select(CA_county_data, farmland_proportion) # this now works. Why?</code></pre>
 </div>
 </div>
 <div id="exercises" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Exercises</h1>
-<p>Congratulations on several exciting achievements! You have 1) read in
-data from an online source into <code>R</code>, 2) learned how to
-perform different operations to select rows or columns from the data,
-and 3) started to see how to summarize your data.</p>
-<p>To help you make forward progress, here are several exercises. Please
-work through them with your groups in lab.</p>
+<h1 number="6"><span class="header-section-number">6</span> Exercises</h1>
+<p>Congratulations on several exciting achievements! You have 1) read in data from an online source into <code>R</code>, 2) learned how to perform different operations to select rows or columns from the data, and 3) started to see how to summarize your data.</p>
+<p>To help you make forward progress, here are several exercises. Please work through them with your groups in lab.</p>
 <ol style="list-style-type: decimal">
-<li>How would you subset (filter) rows from <code>CA_county_data</code>
-where <code>Reptiles</code> is greater than or equal to 25?
+<li>How would you subset (filter) rows from <code>CA_county_data</code> where <code>Reptiles</code> is greater than or equal to 25?
 <ul>
-<li>Note that you can use the command <code>names(CA_county_data)</code>
-(you can add this to your script or run it any time in the console) to
-see the names of all of the columns in your data table</li>
+<li>Note that you can use the command <code>names(CA_county_data)</code> (you can add this to your script or run it any time in the console) to see the names of all of the columns in your data table</li>
 </ul></li>
 <li>How would you select the column <code>area_of_county_ha</code>?</li>
-<li>How would you filter to rows where
-<code>iucn_threat_count_species</code> is <span
-class="math inline">\(\geq 30\)</span> <strong>and</strong> subset your
-data to the columns <code>iucn_threat_count_species</code> and
-<code>Birds</code>?</li>
-<li>How would you calculate a new column in <code>CA_county_data</code>
-that stores the ratio of threatened species to all vertebrate (bird,
-mammal, and reptile) species?</li>
-<li>How would you create a column that stores the proportion of land
-protected in each county?
+<li>How would you filter to rows where <code>iucn_threat_count_species</code> is <span class="math inline">\(\geq 30\)</span> <strong>and</strong> subset your data to the columns <code>iucn_threat_count_species</code> and <code>Birds</code>?</li>
+<li>How would you calculate a new column in <code>CA_county_data</code> that stores the ratio of threatened species to all vertebrate (bird, mammal, and reptile) species?</li>
+<li>How would you create a column that stores the proportion of land protected in each county?
 <ul>
-<li>NB: In each county, the protected lands are designed as GAP statuses
-1-4 - you may want to use the column
-<code>PAs_gapstatus1thru4_HAs</code>)</li>
+<li>NB: In each county, the protected lands are designed as GAP statuses 1-4 - you may want to use the column <code>PAs_gapstatus1thru4_HAs</code>)</li>
 </ul></li>
-<li>How would you summarize the minimum (<code>min()</code>), mean
-(<code>mean()</code>), and maximum (<code>max()</code>) values for the
-proportion of land that is protected in each county?</li>
+<li>How would you summarize the minimum (<code>min()</code>), mean (<code>mean()</code>), and maximum (<code>max()</code>) values for the proportion of land that is protected in each county?</li>
 </ol>
 <p><strong>Hint</strong>:</p>
 <pre><code>CA_protected_summary &lt;- CA_county_data %&gt;%
@@ -718,10 +555,7 @@ proportion of land that is protected in each county?</li>
     
 CA_protected_summary # print out the object CA_protected_summary in the console</code></pre>
 <ol start="7" style="list-style-type: decimal">
-<li>How would you calculate the mean number of IUCN threatened species
-across the counties in each of the 5 regions in California? How would
-you store the output of these commands in a new object called
-<code>regionIUCNrichnessMean</code>?</li>
+<li>How would you calculate the mean number of IUCN threatened species across the counties in each of the 5 regions in California? How would you store the output of these commands in a new object called <code>regionIUCNrichnessMean</code>?</li>
 </ol>
 <p><strong>Hint for question 7</strong>:</p>
 <pre><code>    &lt;- CA_county_data %&gt;%
@@ -730,11 +564,7 @@ you store the output of these commands in a new object called
 
 # regionIUCNrichnessMean # how would you print this object in the console?</code></pre>
 <ol start="8" style="list-style-type: decimal">
-<li>How would you take a subset of <code>CA_county_data</code> where the
-counties have more than 40 tree species and select the columns
-<code>County</code>, <code>Trees</code>, <code>Mammals</code>, and
-<code>PAs_gapstatus1thru4_Cts</code>? How would you store that in a new
-object called <code>treeSubset</code>?</li>
+<li>How would you take a subset of <code>CA_county_data</code> where the counties have more than 40 tree species and select the columns <code>County</code>, <code>Trees</code>, <code>Mammals</code>, and <code>PAs_gapstatus1thru4_Cts</code>? How would you store that in a new object called <code>treeSubset</code>?</li>
 </ol>
 <p><strong>Hint</strong>:</p>
 <pre><code>treeSubset &lt;- CA_county_data %&gt;%
@@ -745,16 +575,11 @@ treeSubset # print out treeSubset object
 
 # note that you could also run:
 # View(treeSubset) # uncomment by deleting the leading hashtag to run this command</code></pre>
-<p>Please attempt to work through these exercises. I provide answers
-below but you will learn the most by thinking through and doing these
-questions.</p>
-<div id="answers-to-the-exercises-above" class="section level2"
-number="6.1">
-<h2><span class="header-section-number">6.1</span> Answers to the
-exercises above</h2>
+<p>Please attempt to work through these exercises. I provide answers below but you will learn the most by thinking through and doing these questions.</p>
+<div id="answers-to-the-exercises-above" class="section level2" number="6.1">
+<h2 number="6.1"><span class="header-section-number">6.1</span> Answers to the exercises above</h2>
 <ol style="list-style-type: decimal">
-<li>How would you subset (filter) rows from <code>CA_county_data</code>
-where <code>Reptiles</code> is greater than or equal to 25?</li>
+<li>How would you subset (filter) rows from <code>CA_county_data</code> where <code>Reptiles</code> is greater than or equal to 25?</li>
 </ol>
 <pre><code>### Let&#39;s run names(CA_county_data) for fun to see what happens!
 names(CA_county_data)
@@ -776,11 +601,7 @@ CA_county_data %&gt;%
 ### The above syntax is equivalent to:
 select(CA_county_data, area_of_county_ha)</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>How would you filter to rows where
-<code>iucn_threat_count_species</code> is <span
-class="math inline">\(\geq 30\)</span> <strong>and</strong> subset your
-data to the columns <code>iucn_threat_count_species</code> and
-<code>Birds</code>?</li>
+<li>How would you filter to rows where <code>iucn_threat_count_species</code> is <span class="math inline">\(\geq 30\)</span> <strong>and</strong> subset your data to the columns <code>iucn_threat_count_species</code> and <code>Birds</code>?</li>
 </ol>
 <pre><code>### Performing a row and column subsetting operation
 CA_county_data %&gt;%
@@ -788,9 +609,7 @@ CA_county_data %&gt;%
     select(iucn_threat_count_species, Birds) %&gt;% # subset to the columns threatened species and bird richness
       View() # added on for ease of viewing final output</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>How would you calculate a new column in <code>CA_county_data</code>
-that stores the ratio of threatened species to all vertebrate (bird,
-mammal, and reptile) species?</li>
+<li>How would you calculate a new column in <code>CA_county_data</code> that stores the ratio of threatened species to all vertebrate (bird, mammal, and reptile) species?</li>
 </ol>
 <pre><code>CA_county_data %&gt;%
   mutate(threatenedRatio = iucn_threat_count_species/(Mammals+Birds+Reptiles)) %&gt;%
@@ -799,8 +618,7 @@ mammal, and reptile) species?</li>
 ### Again however, note that if you just run:
 select(CA_county_data, threatenedRatio) # this will throw an error!</code></pre>
 <ol start="5" style="list-style-type: decimal">
-<li>How would you create a column that stores the proportion of land
-protected in each county?</li>
+<li>How would you create a column that stores the proportion of land protected in each county?</li>
 </ol>
 <pre><code>CA_county_data %&gt;%
   mutate(propLandProtected = PAs_gapstatus1thru4_HAs / area_of_county_ha) # create a new column that divides protected area extent in HAs by county land area in HAs
@@ -811,13 +629,9 @@ View(CA_county_data)
 ### the code below will not work:
 select(CA_county_data, propLandProtected)</code></pre>
 <ol start="6" style="list-style-type: decimal">
-<li>How would you summarize the minimum (<code>min()</code>), mean
-(<code>mean()</code>), and maximum (<code>max()</code>) values for the
-proportion of land that is protected in each county?</li>
+<li>How would you summarize the minimum (<code>min()</code>), mean (<code>mean()</code>), and maximum (<code>max()</code>) values for the proportion of land that is protected in each county?</li>
 </ol>
-<p>Note that because we didn’t save the output of the two different
-versions of the answer to exercise 5 above, we will have to re-run those
-commands!</p>
+<p>Note that because we didn’t save the output of the two different versions of the answer to exercise 5 above, we will have to re-run those commands!</p>
 <pre><code>### Generating a summary across all of the states
 CA_county_data %&gt;%
   mutate(propLandProtected = PAs_gapstatus1thru4_HAs / area_of_county_ha) %&gt;%
@@ -835,8 +649,7 @@ prop_land_summary &lt;- CA_county_data %&gt;%
 
   # Print out prop_land_summary
 prop_land_summary</code></pre>
-<p>Let’s assume that we did store our outputs in problem 5 as I specify
-below (<code>CA_county_data &lt;- CA_county_data %&gt;% ...</code>).</p>
+<p>Let’s assume that we did store our outputs in problem 5 as I specify below (<code>CA_county_data &lt;- CA_county_data %&gt;% ...</code>).</p>
 <pre><code>CA_county_data &lt;- CA_county_data %&gt;%
   mutate(propLandProtected = PAs_gapstatus1thru4_HAs / area_of_county_ha)
   
@@ -849,10 +662,7 @@ CA_county_data %&gt;%
 ### the code below will now work:
 select(CA_county_data, propLandProtected)</code></pre>
 <ol start="7" style="list-style-type: decimal">
-<li>How would you calculate the mean number of IUCN threatened species
-across the counties in each of the 5 regions in California? How would
-you store the output of these commands in a new object called
-<code>regionIUCNrichnessMean</code>?</li>
+<li>How would you calculate the mean number of IUCN threatened species across the counties in each of the 5 regions in California? How would you store the output of these commands in a new object called <code>regionIUCNrichnessMean</code>?</li>
 </ol>
 <pre><code>regionIUCNrichnessMean &lt;- CA_county_data %&gt;%
     group_by(Region) %&gt;% # which column would you use to divide the data into groups?
@@ -860,11 +670,7 @@ you store the output of these commands in a new object called
 
 regionIUCNrichnessMean # how would you print this object in the console?</code></pre>
 <ol start="8" style="list-style-type: decimal">
-<li>How would you take a subset of <code>CA_county_data</code> where the
-counties have more than 40 tree species and select the columns
-<code>County</code>, <code>Trees</code>, <code>Mammals</code>, and
-<code>PAs_gapstatus1thru4_Cts</code>? How would you store that in a new
-object called <code>treeSubset</code>?</li>
+<li>How would you take a subset of <code>CA_county_data</code> where the counties have more than 40 tree species and select the columns <code>County</code>, <code>Trees</code>, <code>Mammals</code>, and <code>PAs_gapstatus1thru4_Cts</code>? How would you store that in a new object called <code>treeSubset</code>?</li>
 </ol>
 <pre><code>treeSubset &lt;- CA_county_data %&gt;% # take CA_county_data and pipe it into the next function
     filter(Trees &gt; 40) %&gt;% # subset to the counties (rows) with &gt; 40 tree species, pipe into the next function

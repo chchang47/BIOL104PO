@@ -312,8 +312,20 @@ $(document).ready(function () {
     <li>
       <a href="Climate.html">Climate</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bioacoustics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="Sound.html">Acoustic</a>
+      <a href="Sound.html">Acoustic data</a>
+    </li>
+    <li>
+      <a href="bioaco.html">Analyzing acoustic data</a>
     </li>
   </ul>
 </li>
@@ -345,7 +357,7 @@ seAsiaBirds &lt;- tibble::tibble(areaMi2=c(312000,290000,144000,70000,48000,2500
 
 ### Display first few rows of the Southeast Asia bird dataset
 seAsiaBirds</code></pre>
-<pre><code>## # A tibble: 10 x 2
+<pre><code>## # A tibble: 10 × 2
 ##    areaMi2 birds
 ##      &lt;dbl&gt; &lt;dbl&gt;
 ##  1  312000   540
@@ -383,7 +395,7 @@ seAsiaBirds &lt;- seAsiaBirds %&gt;%
 
   # Display seAsiaBirds in the console
 seAsiaBirds</code></pre>
-<pre><code>## # A tibble: 10 x 4
+<pre><code>## # A tibble: 10 × 4
 ##    areaMi2 birds log10Area log10Birds
 ##      &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
 ##  1  312000   540      5.49       2.73
@@ -504,7 +516,7 @@ conservationDF &lt;- tibble::tibble(
 )
 
 conservationDF # display the conservation dataset</code></pre>
-<pre><code>## # A tibble: 20 x 3
+<pre><code>## # A tibble: 20 × 3
 ##    site_id costs value
 ##      &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
 ##  1       1  982.  341.
@@ -537,7 +549,7 @@ p</code></pre>
 <p><img src="Week5_files/figure-html/plot_csdata-1.png" width="672" /></p>
 <p>We might look at the preceding graph and think that we should select all of the sites with the largest ecosystem service values (large conservation benefit) without exceeding our maximum budget of $1500. In that case, we’d select sites 8 and 6, totaling 1598.899 ecosystem service benefits at a cost of $1328.29. Below, I display the first four rows of this conservation decision making dataset</p>
 <pre class="r"><code>dplyr::arrange(conservationDF, desc(value))[1:4,]</code></pre>
-<pre><code>## # A tibble: 4 x 3
+<pre><code>## # A tibble: 4 × 3
 ##   site_id costs value
 ##     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1       8  575.  893.
@@ -556,7 +568,7 @@ p</code></pre>
 <p><img src="Week5_files/figure-html/modifyConsDF-1.png" width="672" /></p>
 <p>As we can see from this plot and the subset of the table below, when we include benefit per unit cost across the 20 sites, we may come to a different conclusion about which sites to prioritize. Namely, we may focus on sites 8 and 13, yielding a total level of 1256 ecosystem service benefit units at a cost of $905. However, how should we pick among the remaining sites that don’t break our budget?</p>
 <pre class="r"><code>dplyr::arrange(conservationDF, desc(vpw))[1:6,]</code></pre>
-<pre><code>## # A tibble: 6 x 4
+<pre><code>## # A tibble: 6 × 4
 ##   site_id costs value   vpw
 ##     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1       8  575.  893. 1.55 
@@ -630,7 +642,7 @@ conservation_site_selection &lt;- function(conservationDF, maxcost) {
 result &lt;- conservation_site_selection(conservationDF = conservationDF, maxcost=1500)</code></pre>
 <p>In this model, we have selected the following sites:</p>
 <pre class="r"><code>result</code></pre>
-<pre><code>## # A tibble: 1 x 3
+<pre><code>## # A tibble: 1 × 3
 ##   Sites    TotalBiodiv TotalCost
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 8, 13, 2       1727.     1404.</code></pre>
@@ -675,7 +687,7 @@ expectedBirdsDF &lt;- tibble::tibble(area = habitat_area,
 
 ### Display expectedBirdsDF
 expectedBirdsDF</code></pre>
-<pre><code>## # A tibble: 6 x 2
+<pre><code>## # A tibble: 6 × 2
 ##     area expBirds
 ##    &lt;dbl&gt;    &lt;dbl&gt;
 ## 1   5000     113.
@@ -715,7 +727,7 @@ expectedBirdsLost &lt;- tibble::tibble(remaining=remaining_extent,
 
 ### Display expectedBirdsDF
 expectedBirdsLost</code></pre>
-<pre><code>## # A tibble: 6 x 2
+<pre><code>## # A tibble: 6 × 2
 ##   remaining expLoss
 ##       &lt;dbl&gt;   &lt;dbl&gt;
 ## 1      0.99   0.390
@@ -743,7 +755,7 @@ result &lt;- conservation_site_selection(conservationDF=conservationDF,maxcost=2
 
 ### Display result
 result</code></pre>
-<pre><code>## # A tibble: 1 x 3
+<pre><code>## # A tibble: 1 × 3
 ##   Sites       TotalBiodiv TotalCost
 ##   &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 8, 13, 2, 7       2172.     1915.</code></pre>
@@ -757,7 +769,7 @@ result &lt;- conservation_site_selection(conservationDF=conservationDF,maxcost=1
 
 ### Display result
 result</code></pre>
-<pre><code>## # A tibble: 1 x 3
+<pre><code>## # A tibble: 1 × 3
 ##   Sites     TotalBiodiv TotalCost
 ##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 8, 13, 19       1413.     1162.</code></pre>

@@ -312,8 +312,20 @@ $(document).ready(function () {
     <li>
       <a href="Climate.html">Climate</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bioacoustics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="Sound.html">Acoustic</a>
+      <a href="Sound.html">Acoustic data</a>
+    </li>
+    <li>
+      <a href="bioaco.html">Analyzing acoustic data</a>
     </li>
   </ul>
 </li>
@@ -336,13 +348,8 @@ $(document).ready(function () {
 
 
 <div id="overview" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Overview</h1>
-<p><a
-href="http://www.pomonavalleyaudubon.org/uploads/3/4/9/5/34958940/2018_2019_winter.pdf">Claremont,
-CA</a> has had a local winter <a
-href="https://www.audubon.org/conservation/history-christmas-bird-count">Christmas
-Bird Count (CBC for short)</a> station since 1972. We are going to
-interact with the CBC data for four focal species:</p>
+<h1 number="1"><span class="header-section-number">1</span> Overview</h1>
+<p><a href="http://www.pomonavalleyaudubon.org/uploads/3/4/9/5/34958940/2018_2019_winter.pdf">Claremont, CA</a> has had a local winter <a href="https://www.audubon.org/conservation/history-christmas-bird-count">Christmas Bird Count (CBC for short)</a> station since 1972. We are going to interact with the CBC data for four focal species:</p>
 <ul>
 <li><code>COHA</code> - Cooper’s Hawk</li>
 <li><code>ACWO</code> - Acorn woodpecker</li>
@@ -351,26 +358,20 @@ interact with the CBC data for four focal species:</p>
 </ul>
 <p>In the following exercises, please discuss as a group:</p>
 <ul>
-<li>What pattern, if any, do you observe for your species (or pair of
-species)?
+<li>What pattern, if any, do you observe for your species (or pair of species)?
 <ul>
-<li>How is their population abundance, proxied by CBC data, changing
-through time?</li>
+<li>How is their population abundance, proxied by CBC data, changing through time?</li>
 </ul></li>
-<li>What differences do you see between the plots for
-<code>Number</code> and <code>NumNormal</code>?</li>
+<li>What differences do you see between the plots for <code>Number</code> and <code>NumNormal</code>?</li>
 <li>What processes do you think drive these differences?
 <ul>
 <li>What factors might be driven by the CBC itself?</li>
 </ul></li>
 </ul>
-<p>Note that in the assignment <a
-href="https://posit.cloud/spaces/323650/content/5199740">ClaremontCBC</a>,
-you’ll see a <code>ClaremontCBC.R</code> script that you can use to
-follow along with this discussion activity.</p>
+<p>Note that in the assignment <a href="https://posit.cloud/spaces/323650/content/5199740">ClaremontCBC</a>, you’ll see a <code>ClaremontCBC.R</code> script that you can use to follow along with this discussion activity.</p>
 </div>
 <div id="loading-packages" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Loading packages</h1>
+<h1 number="2"><span class="header-section-number">2</span> Loading packages</h1>
 <p>First, let’s load the packages that we’ll need.</p>
 <pre class="r"><code>###==================================================
 ### Loading packages &amp; keys
@@ -379,8 +380,7 @@ library(&quot;dplyr&quot;)    # load package for wrangling data
 library(&quot;readr&quot;)    # package for reading tabular data
 library(&quot;ggplot2&quot;)  # package for plotting</code></pre>
 <div id="importing-the-data" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Importing the
-data</h2>
+<h2 number="2.1"><span class="header-section-number">2.1</span> Importing the data</h2>
 <pre class="r"><code>###==================================================
 ### Importing the data
 ###==================================================
@@ -397,23 +397,19 @@ claremontCBC %&gt;%
 <ul>
 <li><code>Species</code>: the shortened code for each species</li>
 <li><code>Year</code>: the year of the CBC observation</li>
-<li><code>Number</code>: the number of each species observed in that
-year</li>
-<li><code>NumNormal</code>: <code>Number</code>/effort, where effort is
-the number of people participating that year</li>
+<li><code>Number</code>: the number of each species observed in that year</li>
+<li><code>NumNormal</code>: <code>Number</code>/effort, where effort is the number of people participating that year</li>
 </ul>
 </div>
 </div>
 <div id="filtering-the-data" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Filtering the data</h1>
+<h1 number="3"><span class="header-section-number">3</span> Filtering the data</h1>
 <p>Your task is to:</p>
 <ul>
 <li>Generate a plot for one (or more) species</li>
-<li>Contrast the <code>Number</code> and <code>NumNormal</code>
-columns</li>
+<li>Contrast the <code>Number</code> and <code>NumNormal</code> columns</li>
 </ul>
-<p>First, let’s consider how to filter the data to just one of the
-species.</p>
+<p>First, let’s consider how to filter the data to just one of the species.</p>
 <pre class="r"><code>### Create your subset data
 clareSub &lt;- claremontCBC %&gt;%
   filter(Species==&quot;...&quot;) # select one of the 4 species and replace the ... with its short code name
@@ -421,13 +417,8 @@ clareSub &lt;- claremontCBC %&gt;%
 ### View your subset data
 clareSub</code></pre>
 <div id="generating-a-plot" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Generating a
-plot</h2>
-<p>Of the different plots (see <a
-href="https://chchang47.github.io/BIOL104PO/Week2b.html">Week2b</a>
-FMI), because we have observations of distinct numeric x- and
-y-variables (x = time and y = species counts), a scatterplot would be
-appropriate.</p>
+<h2 number="3.1"><span class="header-section-number">3.1</span> Generating a plot</h2>
+<p>Of the different plots (see <a href="https://chchang47.github.io/BIOL104PO/Week2b.html">Week2b</a> FMI), because we have observations of distinct numeric x- and y-variables (x = time and y = species counts), a scatterplot would be appropriate.</p>
 <pre class="r"><code>### Creating a scatterplot
   # Note that we will store the scatterplot in an object named &quot;p&quot; for plot
 p &lt;- ggplot(clareSub, aes(x=Year, y=Number)) # specifying an aesthetic where x is Year and y is the count of that species
@@ -439,18 +430,14 @@ p # calling p which will be displayed in the plot viewer
   # ?ggsave # uncomment and run to load the help page
 #ggsave(plot= p, filename=&quot;BirdPlot.jpeg&quot;) # replace filename with something more informative; remove leading # to run</code></pre>
 <div id="exercise" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Exercise</h3>
-<p>How would you repeat the plot above but have <code>NumNormal</code>
-on the y-axis? Why might this be more appropriate in some cases?</p>
+<h3 number="3.1.1"><span class="header-section-number">3.1.1</span> Exercise</h3>
+<p>How would you repeat the plot above but have <code>NumNormal</code> on the y-axis? Why might this be more appropriate in some cases?</p>
 </div>
 </div>
-<div id="plotting-two-or-more-species" class="section level2"
-number="3.2">
-<h2><span class="header-section-number">3.2</span> Plotting two or more
-species</h2>
+<div id="plotting-two-or-more-species" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Plotting two or more species</h2>
 <p>We’ll start by modifying the data filter to include two species.</p>
-<p>First, let’s consider how to filter the data to just one of the
-species.</p>
+<p>First, let’s consider how to filter the data to just one of the species.</p>
 <pre class="r"><code>### Create your subset data
 clareSub &lt;- claremontCBC %&gt;%
   filter(Species==&quot;...&quot; | Species==&quot;...&quot;) # select two of the 4 species and replace the ... with their short code name
@@ -460,13 +447,8 @@ clareSub &lt;- claremontCBC %&gt;%
 clareSub</code></pre>
 </div>
 <div id="generating-a-plot-1" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Generating a
-plot</h2>
-<p>Of the different plots (see <a
-href="https://chchang47.github.io/BIOL104PO/Week2b.html">Week2b</a>
-FMI), because we have observations of distinct numeric x- and
-y-variables (x = time and y = species counts), a scatterplot would be
-appropriate.</p>
+<h2 number="3.3"><span class="header-section-number">3.3</span> Generating a plot</h2>
+<p>Of the different plots (see <a href="https://chchang47.github.io/BIOL104PO/Week2b.html">Week2b</a> FMI), because we have observations of distinct numeric x- and y-variables (x = time and y = species counts), a scatterplot would be appropriate.</p>
 <pre class="r"><code>### Creating a scatterplot
   # Note that we will store the scatterplot in an object named &quot;p&quot; for plot
 p &lt;- ggplot(clareSub, aes(x=Year, y=Number, color=Species)) # specifying an aesthetic where x is Year and y is the count of that species
@@ -480,18 +462,15 @@ p # calling p which will be displayed in the plot viewer
   # ?ggsave # uncomment and run to load the help page
 #ggsave(plot= p, filename=&quot;BirdPlot2.jpeg&quot;) # replace filename with something more informative; remove leading # to run</code></pre>
 <div id="exercise-1" class="section level3" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Exercise</h3>
-<p>How would you repeat the plot above but have <code>NumNormal</code>
-on the y-axis? Why might this be more appropriate in some cases?</p>
+<h3 number="3.3.1"><span class="header-section-number">3.3.1</span> Exercise</h3>
+<p>How would you repeat the plot above but have <code>NumNormal</code> on the y-axis? Why might this be more appropriate in some cases?</p>
 </div>
 </div>
 </div>
 <div id="answers-to-exercises" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Answers to
-exercises</h1>
+<h1 number="4"><span class="header-section-number">4</span> Answers to exercises</h1>
 <div id="single-species-version" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> Single-species
-version</h2>
+<h2 number="4.1"><span class="header-section-number">4.1</span> Single-species version</h2>
 <pre class="r"><code>### Creating a scatterplot
   # Note that we will store the scatterplot in an object named &quot;p&quot; for plot
 p &lt;- ggplot(clareSub, aes(x=Year, y=NumNormal)) # specifying an aesthetic where x is Year and y is the count of that species
@@ -504,8 +483,7 @@ p # calling p which will be displayed in the plot viewer
 #ggsave(plot= p, filename=&quot;BirdPlot.jpeg&quot;) # replace filename with something more informative; remove leading # to run</code></pre>
 </div>
 <div id="multi-species-version" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Multi-species
-version</h2>
+<h2 number="4.2"><span class="header-section-number">4.2</span> Multi-species version</h2>
 <pre class="r"><code>### Creating a scatterplot
   # Note that we will store the scatterplot in an object named &quot;p&quot; for plot
 p &lt;- ggplot(clareSub, aes(x=Year, y=NumNormal, color=Species)) # specifying an aesthetic where x is Year and y is the count of that species

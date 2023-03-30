@@ -312,8 +312,20 @@ $(document).ready(function () {
     <li>
       <a href="Climate.html">Climate</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bioacoustics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="Sound.html">Acoustic</a>
+      <a href="Sound.html">Acoustic data</a>
+    </li>
+    <li>
+      <a href="bioaco.html">Analyzing acoustic data</a>
     </li>
   </ul>
 </li>
@@ -337,45 +349,20 @@ $(document).ready(function () {
 
 <!--Popbio version 2.7 in 2022 RStudioCloud-->
 <div id="accessing-the-assignment" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Accessing the
-assignment</h1>
-<p>Please navigate to the assignment <a
-href="https://posit.cloud/spaces/323650/content/5199742">PVA</a> in the
-<a
-href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">ConBio
-SP2023 workspace</a>. In the <code>Files</code> pane (typically, bottom
-right-hand corner), you will find an R script that you can use to follow
-along with this tutorial called <code>PVA.R</code>.</p>
+<h1 number="1"><span class="header-section-number">1</span> Accessing the assignment</h1>
+<p>Please navigate to the assignment <a href="https://posit.cloud/spaces/323650/content/5199742">PVA</a> in the <a href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">ConBio SP2023 workspace</a>. In the <code>Files</code> pane (typically, bottom right-hand corner), you will find an R script that you can use to follow along with this tutorial called <code>PVA.R</code>.</p>
 <p>Recall that:</p>
 <ul>
-<li>You can use <code>Tools</code> –&gt; <code>Global options</code>
-–&gt; <code>Code</code> –&gt; click
-<code>Soft-wrap R source files</code> to get word wrap enabled for
-<code>R</code> scripts.</li>
-<li>You need to highlight (or place your cursor on a line) and run a
-line (or lines) of code to execute commands.</li>
-<li>You can tell that the code has been executed when it is echoed
-(printed out) in the console.</li>
+<li>You can use <code>Tools</code> –&gt; <code>Global options</code> –&gt; <code>Code</code> –&gt; click <code>Soft-wrap R source files</code> to get word wrap enabled for <code>R</code> scripts.</li>
+<li>You need to highlight (or place your cursor on a line) and run a line (or lines) of code to execute commands.</li>
+<li>You can tell that the code has been executed when it is echoed (printed out) in the console.</li>
 </ul>
 </div>
-<div id="modeling-stage-structured-populations-with-projection-matrices"
-class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Modeling st/age
-structured populations with projection matrices</h1>
-<p>Below, we will see how to model a population where individuals in
-different ages or stages make different contributions to population
-change over time.</p>
-<p>First, we will build up intuition about <span
-class="math inline">\(\lambda\)</span> in the context of projection
-matrices. How is it possible that we can extract a number that presents
-the average per-individual growth rate when there is age, stage, or size
-structure?</p>
-<p>We’ll begin by defining a projection matrix <span
-class="math inline">\(A\)</span> for a species (say an annual plant)
-which has seedlings and adults that die at the end of the year. Both
-classes contribute in creating new offspring within the year though. We
-will also start with an initial population vector, <span
-class="math inline">\(n_0\)</span>.</p>
+<div id="modeling-stage-structured-populations-with-projection-matrices" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Modeling st/age structured populations with projection matrices</h1>
+<p>Below, we will see how to model a population where individuals in different ages or stages make different contributions to population change over time.</p>
+<p>First, we will build up intuition about <span class="math inline">\(\lambda\)</span> in the context of projection matrices. How is it possible that we can extract a number that presents the average per-individual growth rate when there is age, stage, or size structure?</p>
+<p>We’ll begin by defining a projection matrix <span class="math inline">\(A\)</span> for a species (say an annual plant) which has seedlings and adults that die at the end of the year. Both classes contribute in creating new offspring within the year though. We will also start with an initial population vector, <span class="math inline">\(n_0\)</span>.</p>
 <pre class="r"><code>### Defining the projection matrix and initial population vector
 A &lt;- matrix(c(1,4,0.5,0),byrow=TRUE,nrow=2) # projection matrix
 A # display the projection matrix
@@ -393,17 +380,9 @@ for (i in 1:9) {
   print(paste(&quot;Growth rate:&quot;,signif(sum(nt)/sum(n0), 3), collapse=&quot;&quot;))
   n0 &lt;- nt # update n0 to take on the previous step&#39;s nt value
 }</code></pre>
-<div id="khaya-senegalensis-example" class="section level2"
-number="2.1">
-<h2><span class="header-section-number">2.1</span> <em>Khaya
-senegalensis</em> example</h2>
-<p>Below, we’ll start by importing data on the projection matrices of
-<em>Khaya senegalensis</em>. There are four matrices. Two correspond to
-low levels of harvest and two correspond to high levels of harvest for
-<em>K. senegalensis</em> trees; all of the matrices come from the
-Sudano-Guinean region in central Benin, which is a transition zone
-between the more arid north and the humid savannah central/south region
-of the country.</p>
+<div id="khaya-senegalensis-example" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> <em>Khaya senegalensis</em> example</h2>
+<p>Below, we’ll start by importing data on the projection matrices of <em>Khaya senegalensis</em>. There are four matrices. Two correspond to low levels of harvest and two correspond to high levels of harvest for <em>K. senegalensis</em> trees; all of the matrices come from the Sudano-Guinean region in central Benin, which is a transition zone between the more arid north and the humid savannah central/south region of the country.</p>
 <pre class="r"><code>### Loading packages
 library(dplyr)    # data wrangling package
 library(magrittr) # pipe %&gt;% function
@@ -449,14 +428,9 @@ image2(khaya_matrices$HighB) # equivalently, image2(khaya_matrices[[2]])
 ### How many offspring do large adult trees produce?</code></pre>
 </div>
 </div>
-<div id="showing-trajectories-for-k.-senegalensis-populations"
-class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Showing trajectories
-for <em>K. senegalensis</em> populations</h1>
-<p>In the code below, we will plot the population trajectories for the
-two Boukoussera populations. One is experiencing high levels of harvest
-(<code>HighB</code>) and the other low levels of harvest
-(<code>LowB</code>).</p>
+<div id="showing-trajectories-for-k.-senegalensis-populations" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Showing trajectories for <em>K. senegalensis</em> populations</h1>
+<p>In the code below, we will plot the population trajectories for the two Boukoussera populations. One is experiencing high levels of harvest (<code>HighB</code>) and the other low levels of harvest (<code>LowB</code>).</p>
 <pre class="r"><code>### First, we will specify a starting population vector
 n0 &lt;- c(500, 200, 100, 80, 50) # 500 seedlings, 200 saplings, 100 juveniles, 80 small adult, and 50 large adult trees
 # You can arbitrarily change these 5 values to any (&gt;= 0) number you like
@@ -486,21 +460,10 @@ stage.vector.plot(lowB_Nt$stage.vectors, col=stage_colors, main=&quot;Low harves
 ### for the High harvest population?
 stage.vector.plot(highB_Nt$stage.vectors, col=stage_colors, main=&quot;High harvest population stage plot&quot;,ylim=c(0,0.6)) </code></pre>
 </div>
-<div id="population-viability-analysis" class="section level1"
-number="4">
-<h1><span class="header-section-number">4</span> Population viability
-analysis</h1>
-<p>Now, let’s take a look at all four of the <em>K. senegalensis</em>
-matrices and use those to examine how the relative frequency of the
-different projection matrices influence extinction probability.</p>
-<p>In situations where we don’t model stochasticity, looking at the
-<span class="math inline">\(\lambda\)</span> for the projection matrix
-would be enough to tell us if the population was going to be in trouble
-or not (<span class="math inline">\(\lambda &lt; 1\)</span>). However,
-when there is variation, which leads to different possible demographic
-rates for populations, we need to account for that somehow. Simulation
-models using these projection matrices let us do that type of
-analysis.</p>
+<div id="population-viability-analysis" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Population viability analysis</h1>
+<p>Now, let’s take a look at all four of the <em>K. senegalensis</em> matrices and use those to examine how the relative frequency of the different projection matrices influence extinction probability.</p>
+<p>In situations where we don’t model stochasticity, looking at the <span class="math inline">\(\lambda\)</span> for the projection matrix would be enough to tell us if the population was going to be in trouble or not (<span class="math inline">\(\lambda &lt; 1\)</span>). However, when there is variation, which leads to different possible demographic rates for populations, we need to account for that somehow. Simulation models using these projection matrices let us do that type of analysis.</p>
 <pre class="r"><code>### Let&#39;s take a look again at those values 
 ### of lambda associated with each population&#39;s
 ### projection matrix
@@ -555,19 +518,10 @@ matplot(khaya_stoch_ext, xlab=&quot;Years&quot;, ylab=&quot;Quasi-extinction pro
  type=&#39;l&#39;, lty=1, col=rainbow(10), las=1,
  main=ext_title)</code></pre>
 </div>
-<div id="performing-thought-experiments-in-conservation"
-class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Performing thought
-experiments in conservation</h1>
-<p>One advantage of these matrix models is that we can examine which
-parameters are most important in changing the overall trajectory of a
-population. We saw above that <span
-class="math inline">\(\lambda\)</span> for the high harvest population
-in Boukoussera is around 0.98.</p>
-<p>As conservation biologists, how would we need to manage the
-population to ensure that it is viable? That is, what parameters would
-need to change so that <span class="math inline">\(\lambda \geq
-1\)</span>?</p>
+<div id="performing-thought-experiments-in-conservation" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Performing thought experiments in conservation</h1>
+<p>One advantage of these matrix models is that we can examine which parameters are most important in changing the overall trajectory of a population. We saw above that <span class="math inline">\(\lambda\)</span> for the high harvest population in Boukoussera is around 0.98.</p>
+<p>As conservation biologists, how would we need to manage the population to ensure that it is viable? That is, what parameters would need to change so that <span class="math inline">\(\lambda \geq 1\)</span>?</p>
 <pre class="r"><code>expMat &lt;- khaya_matrices$HighB # experimental matrix storing the high harvest Boukoussera matrix
 image2(khaya_matrices$HighB)
 ## Here we will re-assign the value for juvenile survivorship
@@ -594,13 +548,9 @@ elasticity(khaya_matrices$HighB) %&gt;%
 
 # What does this show?</code></pre>
 </div>
-<div id="exploring-these-concepts-further" class="section level1"
-number="6">
-<h1><span class="header-section-number">6</span> Exploring these
-concepts further</h1>
-<p>Manipulate the values in the exercises we did above. I’ve copied the
-code here and indicated which ones you could change. How does that
-affect what you observe?</p>
+<div id="exploring-these-concepts-further" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Exploring these concepts further</h1>
+<p>Manipulate the values in the exercises we did above. I’ve copied the code here and indicated which ones you could change. How does that affect what you observe?</p>
 <pre class="r"><code>### Setting up our parameters for our stochastic projection
 popn_probabilities &lt;- c(P1, P2, P3, P4) # this is the most critical parameter.
   # Change these values yourself to probabilities that sum to 1.

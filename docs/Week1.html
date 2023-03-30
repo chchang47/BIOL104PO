@@ -312,8 +312,20 @@ $(document).ready(function () {
     <li>
       <a href="Climate.html">Climate</a>
     </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Bioacoustics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="Sound.html">Acoustic</a>
+      <a href="Sound.html">Acoustic data</a>
+    </li>
+    <li>
+      <a href="bioaco.html">Analyzing acoustic data</a>
     </li>
   </ul>
 </li>
@@ -346,12 +358,7 @@ $(document).ready(function () {
 </div>
 <div id="what-are-r-and-rstudio" class="section level2">
 <h2>What are <code>R</code> and RStudio?</h2>
-<p>We will write code in <code>R</code>, a statistical programming
-language, using RStudio. RStudio is an “IDE” or an integrated
-development environment. Basically, if <code>R</code> is the engine of
-our (statistical programming) car, then RStudio is our dashboard, with
-all of the controls that we’d be more familiar with (plotting window,
-file visualization pane, help pane, etc.).</p>
+<p>We will write code in <code>R</code>, a statistical programming language, using RStudio. RStudio is an “IDE” or an integrated development environment. Basically, if <code>R</code> is the engine of our (statistical programming) car, then RStudio is our dashboard, with all of the controls that we’d be more familiar with (plotting window, file visualization pane, help pane, etc.).</p>
 <div class="figure">
 <img src="figures/R_vs_RStudio_1.png" alt="" />
 <p class="caption">Image from Ismay <em>et al.</em> (2020)</p>
@@ -359,22 +366,8 @@ file visualization pane, help pane, etc.).</p>
 </div>
 <div id="how-do-i-access-rstudio" class="section level2">
 <h2>How do I access RStudio?</h2>
-<p>Please start by logging into <a
-href="https://sso.posit.cloud/pomona">sso.posit.cloud/pomona</a>. Once
-you’ve logged in, you should see the option to open the
-<code>Conservation Biology Spring 2023</code> workspace. You can also
-access <a
-href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">the
-<code>Conservation Biology Spring 2023</code> workspace at this
-link</a>.</p>
-<p>At the workspace, you should then see the “Assignment”
-<code>Week 1</code>. Please click on that Assignment. Here is a <a
-href="https://posit.cloud/spaces/323650/content/5199737">direct link to
-the <code>Week 1</code> project</a>, but it may not work if this is the
-first time ever or in a while that you’re logging into posit.cloud. If
-it doesn’t work, no worries - just log in through the <a
-href="https://sso.posit.cloud/pomona">sso.posit.cloud/pomona</a>
-link.</p>
+<p>Please start by logging into <a href="https://sso.posit.cloud/pomona">sso.posit.cloud/pomona</a>. Once you’ve logged in, you should see the option to open the <code>Conservation Biology Spring 2023</code> workspace. You can also access <a href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">the <code>Conservation Biology Spring 2023</code> workspace at this link</a>.</p>
+<p>At the workspace, you should then see the “Assignment” <code>Week 1</code>. Please click on that Assignment. Here is a <a href="https://posit.cloud/spaces/323650/content/5199737">direct link to the <code>Week 1</code> project</a>, but it may not work if this is the first time ever or in a while that you’re logging into posit.cloud. If it doesn’t work, no worries - just log in through the <a href="https://sso.posit.cloud/pomona">sso.posit.cloud/pomona</a> link.</p>
 </div>
 <div id="what-does-rstudio-have-anyway" class="section level2">
 <h2>What does RStudio have anyway?</h2>
@@ -389,57 +382,37 @@ link.</p>
 <ul>
 <li>Console: where you enter commands that <code>R</code> interprets
 <ul>
-<li>Running code: the act of telling <code>R</code> to perform an act by
-giving it commands in the console.</li>
+<li>Running code: the act of telling <code>R</code> to perform an act by giving it commands in the console.</li>
 </ul></li>
-<li>Environment: lists all objects/data/functions available to you in
-the current session
+<li>Environment: lists all objects/data/functions available to you in the current session
 <ul>
-<li>Session: the current instance that you have logged into RStudio (NB:
-unlike other software, the session doesn’t necessarily end when you
-close the browser window! Instead, it can preserve its state over
-time).</li>
+<li>Session: the current instance that you have logged into RStudio (NB: unlike other software, the session doesn’t necessarily end when you close the browser window! Instead, it can preserve its state over time).</li>
 </ul></li>
-<li>Output: later on, we will interact with this pane most often to
-display plots that you generate!
+<li>Output: later on, we will interact with this pane most often to display plots that you generate!
 <ul>
-<li>The other tabs in this pane can be used to navigate through files,
-see available packages that extend the functionality of <code>R</code>,
-view help, and view spreadsheets (<code>Viewer</code>).</li>
+<li>The other tabs in this pane can be used to navigate through files, see available packages that extend the functionality of <code>R</code>, view help, and view spreadsheets (<code>Viewer</code>).</li>
 </ul></li>
 </ul>
 </div>
 <div id="running-your-first-r-code" class="section level2">
 <h2>Running your first <code>R</code> code!</h2>
-<p>Copy the code below into the console and hit enter. What do you
-see?</p>
+<p>Copy the code below into the console and hit enter. What do you see?</p>
 <pre class="r"><code>x &lt;- c(1,2,3)
 x</code></pre>
 <p>You should see the following:</p>
 <pre><code>## [1] 1 2 3</code></pre>
-<p>Congratulations! You have created your first object in
-<code>R</code>: a vector storing the numbers 1, 2, and 3.</p>
-<p>You achieved that by using the assignment operator <code>&lt;-</code>
-to tell <code>R</code> to create a new object, <code>x</code>, that
-stores the values 1, 2, and 3 in a vector, denoted by
-<code>c(...)</code> where the <code>...</code> is just a placeholder for
-whatever you’d like to enter (where each element is separated by
-commas).</p>
+<p>Congratulations! You have created your first object in <code>R</code>: a vector storing the numbers 1, 2, and 3.</p>
+<p>You achieved that by using the assignment operator <code>&lt;-</code> to tell <code>R</code> to create a new object, <code>x</code>, that stores the values 1, 2, and 3 in a vector, denoted by <code>c(...)</code> where the <code>...</code> is just a placeholder for whatever you’d like to enter (where each element is separated by commas).</p>
 <p>I encourage you to try the following:</p>
 <ul>
 <li>How would you create an object to store your first name?
 <ul>
 <li>Hint: what about <code>myName &lt;- "..."</code></li>
-<li>How would you see what <code>myName</code> contains? (Hint: think
-about what happened when we entered <code>x</code> in the console
-earlier.)</li>
+<li>How would you see what <code>myName</code> contains? (Hint: think about what happened when we entered <code>x</code> in the console earlier.)</li>
 </ul></li>
-<li>How would you modify the command above to have <code>x</code> store
-the values 1, 47, 4747, and 474747?
+<li>How would you modify the command above to have <code>x</code> store the values 1, 47, 4747, and 474747?
 <ul>
-<li>Hint: what is wrong with this command?
-<code>x &lt;- 1,47,4747,474747</code>? What does that pesky error
-message say?</li>
+<li>Hint: what is wrong with this command? <code>x &lt;- 1,47,4747,474747</code>? What does that pesky error message say?</li>
 </ul></li>
 </ul>
 </div>
