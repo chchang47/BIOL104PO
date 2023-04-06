@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, warning=F, message=F) # by default, print out
 
 # Accessing the assignment
 
-Please navigate to the assignment [Acoustic](https://posit.cloud/spaces/323650/content/5199743) in the [ConBio SP2023 workspace](https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ). In the `Files` pane (typically, bottom right-hand corner), you will find an R script that you can use to follow along with this tutorial called `bioacoustic.R`.
+Please navigate to the assignment [Acoustic](https://posit.cloud/spaces/323650/content/5199744) in the [ConBio SP2023 workspace](https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ). In the `Files` pane (typically, bottom right-hand corner), you will find an R script that you can use to follow along with this tutorial called `bioacoustic.R`.
 
 Recall that:
 

@@ -60,7 +60,7 @@ library(readr)
 
 ## Waveforms
 
-Let's pull in one of the recorded files from the BFS. You can play the recording below.
+Let's pull in one of the recorded files from the BFS. You can play the recording below. **NOTE**: Make sure that you use the code in the `Acoustic.R` file (or the code in its entirety at the bottom of this tutorial page) because the sound recording is in a different location on `posit.cloud` than what is shown here!
 
 ```{r,echo=FALSE}
 html_tag_audio('20220313_063000.WAV')
