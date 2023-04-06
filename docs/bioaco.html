@@ -353,7 +353,7 @@ $(document).ready(function () {
 <h1><span class="header-section-number">1</span> Accessing the
 assignment</h1>
 <p>Please navigate to the assignment <a
-href="https://posit.cloud/spaces/323650/content/5199743">Acoustic</a> in
+href="https://posit.cloud/spaces/323650/content/5199744">Acoustic</a> in
 the <a
 href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">ConBio
 SP2023 workspace</a>. In the <code>Files</code> pane (typically, bottom
@@ -598,13 +598,13 @@ names(randomizing_diffs)[1] &lt;- &quot;DiffMeans&quot; # change the name of the
 
 # View first few rows of data
 head(randomizing_diffs)</code></pre>
-<pre><code>##    DiffMeans
-## 1  40.763169
-## 2 146.610098
-## 3 182.855740
-## 4  -7.360132
-## 5 -36.689101
-## 6  87.663997</code></pre>
+<pre><code>##     DiffMeans
+## 1  -68.529942
+## 2 -209.458568
+## 3   76.695019
+## 4   -2.194099
+## 5   18.071384
+## 6  115.530969</code></pre>
 <p>Now we can visualize the distribution of simulated differences in the
 mean values of <code>ChangVar</code> at the Big and Open sites versus
 our observed difference in means. Note that the observed difference was
@@ -687,7 +687,7 @@ when we shuffle our data?</p>
 <pre class="r"><code>quantiles_cor &lt;- qdata( ~ cor, p = c(0.025, 0.975), data=randomizing_cor) # calculate the 2.5% and 97.5% quantiles in our simulated correlation coefficient data (note that 97.5-2.5 = 95!)
 quantiles_cor # display the quantiles</code></pre>
 <pre><code>##         2.5%        97.5% 
-## -0.004898955  0.007722658</code></pre>
+## -0.005747058  0.007560330</code></pre>
 <p>The values above give us a 95% confidence interval estimate for our
 correlation coefficient!</p>
 <p>Do we clearly see that our correlation coefficient distribution does
