@@ -9,11 +9,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="" />
 
 
 <title>Acoustic ecology - studying environments through sound</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -428,7 +429,7 @@ through sound</h1>
 <h1><span class="header-section-number">1</span> Accessing the
 assignment</h1>
 <p>Please navigate to the assignment <a
-href="https://posit.cloud/spaces/323650/content/5199743">Acoustic</a> in
+href="https://posit.cloud/spaces/323650/content/5199744">Acoustic</a> in
 the <a
 href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">ConBio
 SP2023 workspace</a>. In the <code>Files</code> pane (typically, bottom
@@ -457,7 +458,6 @@ Bernard Field Station.</p>
 <code>R</code>?</li>
 <li>how can we visualize sound data using spectrograms?</li>
 <li>how can we calculate indices of acoustic diversity?</li>
-<li>what can we do with processed sound data?</li>
 </ul>
 </div>
 <div id="a-brief-description-of-sound" class="section level1"
@@ -595,6 +595,34 @@ Earth map of sampling stations</a></li>
 <li>… other variables that you may think of and are feasible for us to
 collect!</li>
 </ul>
+<pre><code>###===============================================================
+### Section 3
+###===============================================================
+### Loading packages
+library(seewave)
+library(tuneR)
+library(dplyr)
+library(readr)
+###===============================================================
+### Section 3.1 - 3.2
+###===============================================================
+## Read in the sound data
+BFS_am_1 &lt;-tuneR::readWave(&#39;BFS_sound_2022/20220313_063000.WAV&#39;)
+## Show the oscillogram
+## which is a plot of amplitude over time
+## We&#39;ll focus on the first minute of the recording
+oscillo(BFS_am_1, from = 0, to = 60, fastdisp=TRUE)
+## Use spectro to display the spectogram of this data
+spectro(BFS_am_1, fastdisp=TRUE)
+###===============================================================
+### Section 4
+###===============================================================
+## Read in the sound data for the evening
+BFS_pm_1 &lt;-tuneR::readWave(&#39;BFS_sound_2022/20220313_205000.WAV&#39;)
+### Morning sound recording acoustic complexity index
+ACI(BFS_am_1)
+### Evening sound recording acoustic complexity index
+ACI(BFS_pm_1)</code></pre>
 </div>
 
 
