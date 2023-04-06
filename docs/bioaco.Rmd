@@ -457,7 +457,7 @@ gf_histogram(~ cor,
              ylab="Count")
 
 # Statistical test
-cor.test(ChangVar~sitenum, method="spearman")
+cor.test(ChangVar~sitenum, data=soundDF, method="spearman")
 
 ### Regression models
 
