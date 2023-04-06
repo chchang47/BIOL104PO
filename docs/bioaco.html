@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2023-03-29" />
+<meta name="date" content="2023-04-05" />
 
 <title>Bioacoustic analyses</title>
 
@@ -344,19 +344,619 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Bioacoustic analyses</h1>
 <h4 class="author"></h4>
-<h4 class="date">2023-03-29</h4>
+<h4 class="date">2023-04-05</h4>
 
 </div>
 
 
-<div id="overview" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Overview</h1>
-<p>This page will provide a tutorial on analyzing the class dataset for
-variables such as <code>ACI</code> and species richness. The level of
-observation will be individual recordings, which you can aggregate up
-(remember <code>group_by</code>) to the level of the individual
-stations, or attributes of stations, or other features such as
-month/year/etc.</p>
+<div id="accessing-the-assignment" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Accessing the
+assignment</h1>
+<p>Please navigate to the assignment <a
+href="https://posit.cloud/spaces/323650/content/5199743">Acoustic</a> in
+the <a
+href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">ConBio
+SP2023 workspace</a>. In the <code>Files</code> pane (typically, bottom
+right-hand corner), you will find an R script that you can use to follow
+along with this tutorial called <code>bioacoustic.R</code>.</p>
+<p>Recall that:</p>
+<ul>
+<li>You can use <code>Tools</code> –&gt; <code>Global options</code>
+–&gt; <code>Code</code> –&gt; click
+<code>Soft-wrap R source files</code> to get word wrap enabled for
+<code>R</code> scripts.</li>
+<li>You need to highlight (or place your cursor on a line) and run a
+line (or lines) of code to execute commands.</li>
+<li>You can tell that the code has been executed when it is echoed
+(printed out) in the console.</li>
+</ul>
+</div>
+<div id="preparing-data" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Preparing data</h1>
+<div id="load-packages" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> 1: Load packages</h2>
+<p>Below, we will start by loading packages that we’ll need.</p>
+<pre class="r"><code>### Load packages
+library(&quot;ggplot2&quot;) # plotting functions
+library(&quot;dplyr&quot;) # data wrangling functions
+library(&quot;readr&quot;) # reading in tables, including ones online
+library(&quot;mosaic&quot;) # shuffle (permute) our data</code></pre>
+</div>
+<div id="read-data" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> 2: Read data</h2>
+<p>Next, we will pull in our data and inspect it.</p>
+<pre class="r"><code>### Load in dataset
+soundDF &lt;- readr::read_tsv(&quot;https://github.com/EA30POM/site/blob/main/data/bioacousticF22.tsv?raw=true&quot;) # read in spreadsheet from its URL and store in soundDF
+
+### Look at the first few rows
+soundDF</code></pre>
+<pre><code>## # A tibble: 85,654 × 7
+##    unit  date       time        ACI    SR DayNight Month  
+##    &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  
+##  1 CBio3 2022-10-12 18H 0M 0S  152.     1 Night    October
+##  2 CBio3 2022-10-12 18H 1M 0S  153.     1 Night    October
+##  3 CBio3 2022-10-12 18H 2M 0S  152.     1 Night    October
+##  4 CBio3 2022-10-12 18H 3M 0S  151.     1 Night    October
+##  5 CBio3 2022-10-12 18H 4M 0S  152.     1 Night    October
+##  6 CBio3 2022-10-12 18H 5M 0S  151.     1 Night    October
+##  7 CBio3 2022-10-12 18H 6M 0S  154.     2 Night    October
+##  8 CBio3 2022-10-12 18H 7M 0S  152.     2 Night    October
+##  9 CBio3 2022-10-12 18H 8M 0S  153.     0 Night    October
+## 10 CBio3 2022-10-12 18H 9M 0S  152.     2 Night    October
+## # ℹ 85,644 more rows</code></pre>
+<pre class="r"><code>### Look at the first few rows in a spreadsheet viewer
+soundDF %&gt;% head() %&gt;% View()</code></pre>
+<p>We see that there are the following columns:</p>
+<ul>
+<li><code>unit</code>: Which AudioMoth collected the recordings
+<ul>
+<li>Note that each AudioMoth had a particular location, so your group
+may use that attribute in your analyses. I’ll show you how to do that
+below.</li>
+</ul></li>
+<li><code>date</code>: The date of the recording</li>
+<li><code>time</code>: The time of the recording</li>
+<li><code>ACI</code>: The Acoustic Complexity Index of the recording
+<ul>
+<li>In a nutshell, ACI values typically increase with more diversity of
+sounds.</li>
+<li>The calculation for ACI introduced by Pieretti <em>et al.</em>
+(2011) is based on the following observations: 1) biological sounds
+(like bird song) tend to show fluctuations of intensities while 2)
+anthropogenic sounds (like cars passing or planes flying) tend to
+present a very constant droning sound at a less varying intensity.</li>
+<li>One potential confounding factor is the role of geophony, or
+environmental sounds like rainfall. Sometimes geophony like a low,
+constant wind can present at a very constant intensity, and therefore
+would not influence ACI. However, patterns that have high variation
+could influence ACI because they may have varying intensities.
+<!-- See table 1 here https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13254--></li>
+</ul></li>
+<li><code>SR</code>: The species richness in every 30 second
+recording</li>
+<li><code>DayNight</code>: Whether the recording occurred in the day or
+at night</li>
+<li><code>Month</code>: A variable that notes if the recording was taken
+in October or November.</li>
+</ul>
+<p>Here, I am going to do two tasks. I am going to create a dummy column
+of data that takes the average of the ranks of <code>SR</code> and
+<code>ACI</code> to illustrate different analyses. I am also going to
+create a data table that tells us different characteristics of each
+AudioMoth <code>unit</code> to illustrate how hypotheses that have some
+relationship with distance or tree cover (which would be informed by the
+location of the unit) could proceed.</p>
+<pre class="r"><code>### Creating a data table for the 14 units
+  # Each row is a unit and columns 2 and 3 store 
+  # values for different attributes about these units
+unit_table &lt;- tibble::tibble(
+  unit = paste(&quot;CBio&quot;,c(1:14),sep=&quot;&quot;), # create CBio1 to CBio14 in ascending order
+  sitecat = c(&quot;Tree&quot;,&quot;Tree&quot;,&quot;Tree&quot;,&quot;Tree&quot;,&quot;Tree&quot;,
+              &quot;Tree&quot;,&quot;Tree&quot;,&quot;Open&quot;,&quot;Open&quot;,&quot;Open&quot;,
+              &quot;Open&quot;,&quot;Open&quot;,&quot;Open&quot;,&quot;Open&quot;), # categorical site variable, like degree of tree cover
+  sitenum = c(1,5,8,9,4,
+              3,-2,-5,-1,-6,
+              2.5,-3.4,6.5,4.7) # numeric site variable, like distance
+)</code></pre>
+<pre class="r"><code>View(unit_table) # take a look at this table to see if it lines up with what you expect</code></pre>
+<pre class="r"><code>### Creating a dummy variable for example analyses below
+soundDF &lt;- soundDF %&gt;%
+  mutate(ChangVar =(rank(ACI)+ rank(SR))/2)</code></pre>
+<p>Sometimes, data that we want to combine for analyses are separated
+across different spreadsheets or data tables. How can we combine these
+different data tables? <code>Join</code> operations (<a
+href="https://statisticsglobe.com/r-dplyr-join-inner-left-right-full-semi-anti">FMI
+on <code>join</code>ing two data tables</a>) offer a way to merge data
+across multiple data tables (also called data frames in <code>R</code>
+parlance).</p>
+<p>In this case, we want to add on the site features of the 14 AudioMoth
+units to the bioacoustic data. I am going to use the
+<code>left_join</code> operation to add on the unit characteristics
+defined in <code>unit_table</code> above.</p>
+<pre class="r"><code>### Adding on the site features of the 14 AudioMoth units
+soundDF &lt;- soundDF %&gt;%
+  left_join(unit_table, by=c(&quot;unit&quot;=&quot;unit&quot;)) # Join on the data based on the value of the column unit in both data tables</code></pre>
+</div>
+</div>
+<div id="data-exploration" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Data exploration</h1>
+<p>Below, I provide fully-worked examples of different ways of
+inspecting your data and performing analyses <strong>assuming that
+<code>ChangVar</code> is the variable of interest</strong>. In applying
+this code to your own data, you will want to think about what variable
+name should <em>replace</em> <code>ChangVar</code> in the commands
+below. For example, you would change
+<code>tapply(soundDF$ChangVar, soundDF$sitecat, summary)</code> to
+<code>tapply(soundDF$ResponseVariable, soundDF$sitecat, summary)</code>
+where <code>ResponseVariable</code> is the variable you’re
+analyzing.</p>
+<p>Let’s start with exploratory data analysis where you calculate
+summary statistics and visualize your variable.</p>
+<pre class="r"><code>### Calculate summary statistics for ChangVar
+### for each sitecat
+tapply(soundDF$ChangVar, soundDF$sitecat, summary) </code></pre>
+<pre><code>## $Open
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    5801   27717   44828   42338   56858   85048 
+## 
+## $Tree
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    5802   30426   44778   43324   56500   85070</code></pre>
+<pre class="r"><code>  # use sitecat as the grouping variable
+  # for ChangVar and then summarize ChangVar
+  # for each sitecat (site characteristics)</code></pre>
+<div id="visualization" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Visualization</h2>
+<p>How would I visualize the values of <code>ChangVar</code>? I could
+use something like a histogram and color the values differently for the
+categories in <code>sitecat</code>.</p>
+<pre class="r"><code>### Creating a histogram
+  # Instantiate a plot
+p &lt;- ggplot(soundDF, aes(x=ChangVar,fill=sitecat))
+  # Add on a histogram
+p &lt;- p + geom_histogram()
+  # Change the axis labels
+p &lt;- p + labs(x=&quot;Mean of ranks&quot;,y=&quot;Frequency&quot;)
+  # Change the plot appearance
+p &lt;- p + theme_minimal()
+  # Display the final plot
+p</code></pre>
+<p><img src="bioaco_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Alternatively, I could create a boxplot to visualize the distribution
+of values in <code>ChangVar</code> with two boxplots for each value of
+<code>sitecat</code>. Note that <code>notch=TRUE</code> means that there
+will be a 95% confidence interval added to the median of the
+boxplot.</p>
+<pre class="r"><code>### Creating a boxplot
+  # Instantiate a plot
+p &lt;- ggplot(soundDF, aes(x=sitecat, y=ChangVar, fill=sitecat))
+  # Add on a boxplot
+p &lt;- p + geom_boxplot(notch=TRUE)
+  # Change the axis labels
+p &lt;- p + labs(x=&quot;Site cat&quot;,y=&quot;Ranks&quot;)
+  # Change the plot appearance
+p &lt;- p + theme_classic()
+  # Display the final plot
+p</code></pre>
+<p><img src="bioaco_files/figure-html/EDAbox-1.png" width="672" /></p>
+<p>Finally, if I am interested in the relationship between two or more
+<strong>numeric</strong> variables, I can use a scatterplot to visualize
+each pair of data.</p>
+<pre class="r"><code>### Creating a scatterplot
+  # Instantiate a plot
+p &lt;- ggplot(soundDF, aes(x=sitenum, y=ChangVar, color=sitecat))
+  # Add on a scatterplot
+p &lt;- p + geom_point()
+  # Change the axis labels
+p &lt;- p + labs(x=&quot;Site num&quot;,y=&quot;Ranks&quot;)
+  # Change the plot appearance
+p &lt;- p + theme_bw()
+  # Display the final plot
+p</code></pre>
+<p><img src="bioaco_files/figure-html/scatter-1.png" width="672" /></p>
+</div>
+</div>
+<div id="statistical-analysis" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Statistical
+analysis</h1>
+<p>The code below shows you how to do different types of analyses.</p>
+<div id="calculating-differences-in-means" class="section level2"
+number="4.1">
+<h2><span class="header-section-number">4.1</span> 1: Calculating
+differences in means</h2>
+<p>Let’s say I am interested in determining
+<code>if Tree sites tend to have higher ChangVar ranks</code>. This
+sounds like I want to see if there is a clear difference in the mean
+values of <code>ChangVar</code> for the Tree vs. Open sites. We can
+start by calculating the mean difference we observe.</p>
+<pre class="r"><code>mean( ChangVar ~ sitecat, data = soundDF , na.rm=T) # show mean ChangVar values for the Big and Open sites, removing missing data</code></pre>
+<pre><code>##     Open     Tree 
+## 42338.25 43324.07</code></pre>
+<pre class="r"><code>obs_diff &lt;- diff( mean( ChangVar ~ sitecat, data = soundDF , na.rm=T)) # calculate the difference between the means and store in a variable called &quot;obs_diff&quot;
+obs_diff # display the value of obs_diff</code></pre>
+<pre><code>##     Tree 
+## 985.8256</code></pre>
+<p>OK, so the mean difference in mean values between Big and Open sites
+is 985.83. Is this difference meaningful though? We can test that by
+specifying an opposing <strong>null hypothesis</strong>.</p>
+<p>In this case, our null hypothesis would be that there is no
+difference in <code>ChangVar</code> across <code>sitecat</code>.</p>
+<p>Logically, if there is a meaningful difference, then if we shuffle
+our data around, that should lead to different results than what we see.
+That is one way to <em>simulate</em> statistics to test the null
+hypothesis. And specifically, in this case, we would expect to see our
+observed difference is much larger (or much smaller) than most of the
+simulated values.</p>
+<p>Let’s shuffle the data 1000 times according to the null hypothesis
+(where <code>sitecat</code> doesn’t matter for influencing
+<code>ChangVar</code>) and see what that means for the distribution of
+mean <code>ChangVar</code> differences between Tree and Open sites.</p>
+<pre class="r"><code>### Create random differences by shuffling the data
+randomizing_diffs &lt;- do(1000) * diff( mean( ChangVar ~ shuffle(sitecat),na.rm=T, data = soundDF) ) # calculate the mean in ChangVar when we&#39;re shuffling the site characteristics around 1000 times
+  # Clean up our shuffled data
+names(randomizing_diffs)[1] &lt;- &quot;DiffMeans&quot; # change the name of the variable
+
+# View first few rows of data
+head(randomizing_diffs)</code></pre>
+<pre><code>##    DiffMeans
+## 1 -105.73063
+## 2 -221.52699
+## 3   38.34887
+## 4  -90.91298
+## 5  -21.48533
+## 6   33.76630</code></pre>
+<p>Now we can visualize the distribution of simulated differences in the
+mean values of <code>ChangVar</code> at the Big and Open sites versus
+our observed difference in means. Note that the observed difference was
+less than 0. So in this case, more extreme data would be more extremely
+small. Thus, we need to use <code>&lt;=</code> below in the
+<code>fill = ~</code> part of the command.</p>
+<pre class="r"><code>gf_histogram(~ DiffMeans, fill = ~ (DiffMeans &lt;= obs_diff),
+             data = randomizing_diffs,
+             xlab=&quot;Difference in mean ChangVar under null&quot;,
+             ylab=&quot;Count&quot;)</code></pre>
+<p><img src="bioaco_files/figure-html/diffHist-1.png" width="672" /></p>
+<p>In the end, how many of the simulated mean differences were more
+extreme than the value we observed? This is a probability value or a
+p-value for short.</p>
+<pre class="r"><code># What proportion of simulated values were larger than our observed difference
+prop( ~ DiffMeans &lt;= obs_diff, data = randomizing_diffs) # ~0.0 was the observed difference value - see obs_diff</code></pre>
+<pre><code>## prop_TRUE 
+##         1</code></pre>
+<p>Wow! Our observation was really extreme. The p-value we’ve calculated
+is 0. The simulated mean differences were never more extreme(ly small)
+than our observed difference in means. Based on this value, if we were
+using the conventional <span class="math inline">\(p\)</span>-value
+(probability value) of 0.05, we would conclude that because this
+simulated <span class="math inline">\(p\)</span>-value &lt;&lt;&lt;
+0.05, that we can reject the null hypothesis.</p>
+<div id="statistical-test" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Statistical
+test</h3>
+<p>Alternatively, we can run a test. If we are concerned about potential
+violations to normality, we can use a non-parametric test to compare
+means.</p>
+<pre class="r"><code>wilcox.test(ChangVar ~ sitecat, data=soundDF)</code></pre>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  ChangVar by sitecat
+## W = 898593646, p-value = 3.502e-07
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+<div id="calculating-correlation-coefficients" class="section level2"
+number="4.2">
+<h2><span class="header-section-number">4.2</span> Calculating
+correlation coefficients</h2>
+<p>Now let’s say that you’re interested in comparing
+<code>ChangVar</code>, a numeric variable, against another numeric
+variable like <code>sitenum</code>. One way to do that is to calculate a
+confidence interval for their correlation coefficient.</p>
+<p>How would I determine if there is a non-zero correlation between two
+variables or that two variables are positively correlated? I can again
+start by calculating the observed correlation coefficient for the
+data.</p>
+<pre class="r"><code>### Calculate observed correlation
+obs_cor &lt;- cor(ChangVar ~ sitenum, data=soundDF, use=&quot;complete.obs&quot;) # store observed correlation in obs_cor of ChangVar vs sitenum
+obs_cor # print out value</code></pre>
+<pre><code>## [1] 0.001082036</code></pre>
+<p>Let’s say that I’m interested in determining if <code>ChangVar</code>
+is actually positively correlated with <code>sitenum</code>. We can test
+this against the opposing null hypothesis. Our null hypothesis could be
+that the correlation coefficient is actually 0.</p>
+<p>As before though, how do I know that my correlation coefficient of 0
+is significantly different from 0? We can tackle this question by
+simulating a ton of correlation coefficient values from our data by
+shuffling it!</p>
+<p>In this case, the shuffling here lets us estimate the variation in
+the correlation coefficient given our data. So we are curious now if the
+distribution of simulated values does or does not include 0 (that is, is
+it clearly <span class="math inline">\(&lt; 0\)</span> or <span
+class="math inline">\(&gt; 0\)</span>?).</p>
+<pre class="r"><code>### Calculate correlation coefs for shuffled data
+randomizing_cor &lt;- do(1000) * cor(ChangVar ~ sitenum, 
+                                 data = resample(soundDF), 
+                                 use=&quot;complete.obs&quot;) 
+# Shuffle the data 1000 times
+# Calculate the correlation coefficient each time
+# By correlating ChangVar to sitenum from the
+# data table soundDF</code></pre>
+<p>What are the distribution of correlation coefficients that we see
+when we shuffle our data?</p>
+<pre class="r"><code>quantiles_cor &lt;- qdata( ~ cor, p = c(0.025, 0.975), data=randomizing_cor) # calculate the 2.5% and 97.5% quantiles in our simulated correlation coefficient data (note that 97.5-2.5 = 95!)
+quantiles_cor # display the quantiles</code></pre>
+<pre><code>##         2.5%        97.5% 
+## -0.005685185  0.007677471</code></pre>
+<p>The values above give us a 95% confidence interval estimate for our
+correlation coefficient!</p>
+<p>Do we clearly see that our correlation coefficient distribution does
+or doesn’t include 0?</p>
+<pre class="r"><code>gf_histogram(~ cor,
+             data = randomizing_cor,
+             xlab=&quot;Simulated correlation coefficients&quot;,
+             ylab=&quot;Count&quot;)</code></pre>
+<p><img src="bioaco_files/figure-html/simCorHist-1.png" width="672" /></p>
+<p>In this case, our simulated correlation coefficient includes 0 in its
+95% simulated confidence interval. We can also see this in the plot. So
+given these data, we cannot reject the null hypothesis. There is not
+sufficiently strong data that the mean ranks in <code>ChangVar</code>
+associate with site characteristics in <code>sitenum</code> in any clear
+way.</p>
+<div id="statistical-test-1" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Statistical
+test</h3>
+<p>We can also use a statistical test here rather than a
+permutation-based analysis. If we wanted to run a test of the
+correlation coefficient, we could use the <code>cor.test</code> function
+in <code>R</code>. If we are concerned about violations of normality, we
+can also used non-parametric, rank-based tests.</p>
+<pre class="r"><code>cor.test(ChangVar~sitenum, data=soundDF, method=&quot;spearman&quot;)</code></pre>
+<pre><code>## 
+##  Spearman&#39;s rank correlation rho
+## 
+## data:  ChangVar and sitenum
+## S = 1.0493e+14, p-value = 0.5855
+## alternative hypothesis: true rho is not equal to 0
+## sample estimates:
+##         rho 
+## -0.00186358</code></pre>
+</div>
+</div>
+<div id="linear-regression" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Linear
+regression</h2>
+<p>In the context of these data, it is not as obvious how a linear
+regression would be 1) appropriate (e.g. comparing across categories is
+arguably better done with a comparison of means) or 2) more insightful
+than the correlation analysis above.</p>
+<p>However, for completeness I show how we could fit a regression
+model.</p>
+<pre class="r"><code>aci_mod &lt;- lm(ACI ~ sitenum, data=soundDF)
+summary(aci_mod)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = ACI ~ sitenum, data = soundDF)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -10.242  -2.842  -1.757   0.407 180.299 
+## 
+## Coefficients:
+##              Estimate Std. Error  t value Pr(&gt;|t|)    
+## (Intercept) 1.535e+02  2.338e-02 6564.915   &lt;2e-16 ***
+## sitenum     9.873e-03  4.716e-03    2.093   0.0363 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.362 on 85652 degrees of freedom
+## Multiple R-squared:  5.116e-05,  Adjusted R-squared:  3.948e-05 
+## F-statistic: 4.382 on 1 and 85652 DF,  p-value: 0.03632</code></pre>
+<p>If one wanted to analyze species richness as a response variable, we
+would need to use an alternative to <code>lm</code> (ordinary least
+squares regression) and use a <code>glm</code> (generalized linear
+model). Species richness values are <strong>integers</strong> (whole
+numbers). That means that they are better modeled using a Poisson
+process, which lets us think about the rates of seeing integer numbers
+(e.g. number of days before another big rain event, number of fish
+swimming down a stretch of river).</p>
+<pre class="r"><code>sr_mod &lt;- glm(SR~sitenum, data=soundDF,family=poisson)
+summary(sr_mod)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = SR ~ sitenum, family = poisson, data = soundDF)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.1099  -2.0460  -0.8363   0.5882   6.7666  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  0.7737699  0.0024888 310.903   &lt;2e-16 ***
+## sitenum     -0.0043872  0.0005045  -8.697   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 196073  on 85653  degrees of freedom
+## Residual deviance: 195997  on 85652  degrees of freedom
+## AIC: 369364
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+<div id="your-task" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Your task</h1>
+<p>Each of your groups is required to submit 3 hypotheses by the end of
+this lab. Please confer with your groups on possible hypotheses that you
+can explore with these data. Note that a hypothesis is a falsifiable
+statement–e.g., “Bird richness is higher near candy shops than cat
+shelters,” rather than “Where are birds located? Are they near candy
+shops or cat shelters or somewhere else?”</p>
+</div>
+<div id="code-in-entirety" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Code in entirety</h1>
+<p>The segment below can be directly copied and pasted into the code
+editor in RStudio Cloud.</p>
+<pre class="r"><code>###=========================================
+### 2: Load packages
+###=========================================
+
+library(&quot;ggplot2&quot;) # plotting functions
+library(&quot;dplyr&quot;) # data wrangling functions
+library(&quot;readr&quot;) # reading in tables, including ones online
+library(&quot;mosaic&quot;) # shuffle (permute) our data
+
+###=========================================
+### 2: Preparing data
+###=========================================
+
+### Load in dataset
+soundDF &lt;- readr::read_tsv(&quot;https://github.com/EA30POM/site/blob/main/data/bioacousticF22.tsv?raw=true&quot;) # read in spreadsheet from its URL and store in soundDF
+
+### Look at the first few rows
+soundDF
+
+### Look at the first few rows in a spreadsheet viewer
+soundDF %&gt;% head() %&gt;% View()
+
+### Creating a data table for the 14 units
+  # Each row is a unit and columns 2 and 3 store 
+  # values for different attributes about these units
+unit_table &lt;- tibble::tibble(
+  unit = paste(&quot;CBio&quot;,c(1:14),sep=&quot;&quot;), # create CBio1 to CBio14 in ascending order
+  sitecat = c(&quot;Tree&quot;,&quot;Tree&quot;,&quot;Tree&quot;,&quot;Tree&quot;,&quot;Tree&quot;,
+              &quot;Tree&quot;,&quot;Tree&quot;,&quot;Open&quot;,&quot;Open&quot;,&quot;Open&quot;,
+              &quot;Open&quot;,&quot;Open&quot;,&quot;Open&quot;,&quot;Open&quot;), # categorical site variable, like degree of tree cover
+  sitenum = c(1,5,8,9,4,
+              3,-2,-5,-1,-6,
+              2.5,-3.4,6.5,4.7) # numeric site variable, like distance
+)
+
+View(unit_table) # take a look at this table to see if it lines up with what you expect
+
+### Creating a dummy variable for example analyses below
+soundDF &lt;- soundDF %&gt;%
+  mutate(ChangVar =(rank(ACI)+ rank(SR))/2)
+
+### Adding on the site features of the 14 AudioMoth units
+soundDF &lt;- soundDF %&gt;%
+  left_join(unit_table, by=c(&quot;unit&quot;=&quot;unit&quot;)) # Join on the data based on the value of the column unit in both data tables
+
+###=========================================
+### 3: Data exploration
+###=========================================
+
+### Calculate summary statistics for ChangVar
+### for each sitecat
+tapply(soundDF$ChangVar, soundDF$sitecat, summary) 
+
+### Creating a histogram
+  # Instantiate a plot
+p &lt;- ggplot(soundDF, aes(x=ChangVar,fill=sitecat))
+  # Add on a histogram
+p &lt;- p + geom_histogram()
+  # Change the axis labels
+p &lt;- p + labs(x=&quot;Mean of ranks&quot;,y=&quot;Frequency&quot;)
+  # Change the plot appearance
+p &lt;- p + theme_minimal()
+  # Display the final plot
+p
+
+### Creating a boxplot
+  # Instantiate a plot
+p &lt;- ggplot(soundDF, aes(x=sitecat, y=ChangVar, fill=sitecat))
+  # Add on a boxplot
+p &lt;- p + geom_boxplot()
+  # Change the axis labels
+p &lt;- p + labs(x=&quot;Site cat&quot;,y=&quot;Ranks&quot;)
+  # Change the plot appearance
+p &lt;- p + theme_classic()
+  # Display the final plot
+p
+
+### Creating a scatterplot
+  # Instantiate a plot
+p &lt;- ggplot(soundDF, aes(x=sitenum, y=ChangVar, color=sitecat))
+  # Add on a scatterplot
+p &lt;- p + geom_point()
+  # Change the axis labels
+p &lt;- p + labs(x=&quot;Site num&quot;,y=&quot;Ranks&quot;)
+  # Change the plot appearance
+p &lt;- p + theme_bw()
+  # Display the final plot
+p
+
+###=========================================
+### 4: Statistical analysis
+###=========================================
+
+###*************
+###* 4.1: Difference in means
+###*************
+
+mean( ChangVar ~ sitecat, data = soundDF , na.rm=T) # show mean ChangVar values for the Big and Open sites, removing missing data
+
+obs_diff &lt;- diff( mean( ChangVar ~ sitecat, data = soundDF , na.rm=T)) # calculate the difference between the means and store in a variable called &quot;obs_diff&quot;
+obs_diff # display the value of obs_diff
+
+### Create random differences by shuffling the data
+randomizing_diffs &lt;- do(1000) * diff( mean( ChangVar ~ shuffle(sitecat),na.rm=T, data = soundDF) ) # calculate the mean in ChangVar when we&#39;re shuffling the site characteristics around 1000 times
+  # Clean up our shuffled data
+names(randomizing_diffs)[1] &lt;- &quot;DiffMeans&quot; # change the name of the variable
+
+# View first few rows of data
+head(randomizing_diffs)
+
+# Plot the simulated vs. observed value
+  # Think about the direction in fill! &lt;= or =&gt;
+gf_histogram(~ DiffMeans, fill = ~ (DiffMeans &lt;= obs_diff),
+             data = randomizing_diffs,
+             xlab=&quot;Difference in mean ChangVar under null&quot;,
+             ylab=&quot;Count&quot;)
+
+# What proportion of simulated values were larger than our observed difference
+prop( ~ DiffMeans &lt;= obs_diff, data = randomizing_diffs) # ~0.0 was the observed difference value - see obs_diff
+
+# Statistical test
+wilcox.test(ChangVar ~ sitecat, data=soundDF)
+
+###*************
+###* 4.2: Correlation coefficients
+###*************
+
+### Calculate observed correlation
+obs_cor &lt;- cor(ChangVar ~ sitenum, data=soundDF, use=&quot;complete.obs&quot;) # store observed correlation in obs_cor of ChangVar vs sitenum
+obs_cor # print out value
+
+### Calculate correlation coefs for shuffled data
+randomizing_cor &lt;- do(1000) * cor(ChangVar ~ sitenum, 
+                                 data = resample(soundDF), 
+                                 use=&quot;complete.obs&quot;) 
+# Shuffle the data 1000 times
+# Calculate the correlation coefficient each time
+# By correlating ChangVar to sitenum from the
+# data table soundDF
+
+quantiles_cor &lt;- qdata( ~ cor, p = c(0.025, 0.975), data=randomizing_cor) # calculate the 2.5% and 97.5% quantiles in our simulated correlation coefficient data (note that 97.5-2.5 = 95!)
+quantiles_cor # display the quantiles
+
+gf_histogram(~ cor,
+             data = randomizing_cor,
+             xlab=&quot;Simulated correlation coefficients&quot;,
+             ylab=&quot;Count&quot;)
+
+# Statistical test
+cor.test(ChangVar~sitenum, method=&quot;spearman&quot;)
+
+### Regression models
+
+aci_mod &lt;- lm(ACI ~ sitenum, data=soundDF)
+summary(aci_mod)
+
+sr_mod &lt;- glm(SR~sitenum, data=soundDF,family=poisson)
+summary(sr_mod)</code></pre>
 </div>
 
 

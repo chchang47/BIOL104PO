@@ -388,20 +388,8 @@ div.tocify {
     <li>
       <a href="Climate.html">Climate</a>
     </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bioacoustics
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="Sound.html">Acoustic data</a>
-    </li>
-    <li>
-      <a href="bioaco.html">Analyzing acoustic data</a>
+      <a href="Sound.html">Acoustic</a>
     </li>
   </ul>
 </li>
@@ -424,45 +412,22 @@ through sound</h1>
 </div>
 
 
-<div id="accessing-the-assignment" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Accessing the
-assignment</h1>
-<p>Please navigate to the assignment <a
-href="https://posit.cloud/spaces/323650/content/5199743">Acoustic</a> in
-the <a
-href="https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ">ConBio
-SP2023 workspace</a>. In the <code>Files</code> pane (typically, bottom
-right-hand corner), you will find an R script that you can use to follow
-along with this tutorial called <code>Acoustic.R</code>.</p>
-<p>Recall that:</p>
-<ul>
-<li>You can use <code>Tools</code> –&gt; <code>Global options</code>
-–&gt; <code>Code</code> –&gt; click
-<code>Soft-wrap R source files</code> to get word wrap enabled for
-<code>R</code> scripts.</li>
-<li>You need to highlight (or place your cursor on a line) and run a
-line (or lines) of code to execute commands.</li>
-<li>You can tell that the code has been executed when it is echoed
-(printed out) in the console.</li>
-</ul>
-</div>
-<div id="overview" class="section level1 tabset tabset-fade" number="2">
+<div id="overview" class="section level1 tabset tabset-fade" number="1">
 <h1 class="tabset tabset-fade"><span
-class="header-section-number">2</span> Overview</h1>
+class="header-section-number">1</span> Overview</h1>
 <p>In this tutorial, we’ll take a look at sound data collected at the
-Bernard Field Station.</p>
+Bernard Field Station over spring break.</p>
 <p>In this tutorial, you will learn:</p>
 <ul>
 <li>what are different ways to interact with sound data in
 <code>R</code>?</li>
 <li>how can we visualize sound data using spectrograms?</li>
 <li>how can we calculate indices of acoustic diversity?</li>
-<li>what can we do with processed sound data?</li>
 </ul>
 </div>
 <div id="a-brief-description-of-sound" class="section level1"
-number="3">
-<h1><span class="header-section-number">3</span> A brief description of
+number="2">
+<h1><span class="header-section-number">2</span> A brief description of
 sound</h1>
 <p>When we vocalize, we are making vibrations that move through the air
 like a wave. Microphones detect these vibrations. These vibrations are
@@ -471,11 +436,9 @@ out that we can get quite a bit of information from these numbers.</p>
 <p>Let’s start by loading the packages that we will need.</p>
 <pre class="r"><code>### Loading packages
 library(seewave)
-library(tuneR)
-library(dplyr)
-library(readr)</code></pre>
-<div id="waveforms" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Waveforms</h2>
+library(tuneR)</code></pre>
+<div id="waveforms" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Waveforms</h2>
 <p>Let’s pull in one of the recorded files from the BFS. You can play
 the recording below.</p>
 <audio controls="">
@@ -497,8 +460,8 @@ oscillo(BFS_am_1, from = 0, to = 60, fastdisp=TRUE)</code></pre>
 minutes long, it has a total of 14,400,000 data points! (This is equal
 to 5 minutes * 60 seconds / minute * 48000 records/second.)</p>
 </div>
-<div id="spectrogram" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Spectrogram</h2>
+<div id="spectrogram" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Spectrogram</h2>
 <p>Another way that we can visualize sound is to use the fact that sound
 has the property of frequency (pitch) at particular times. We can also
 include amplitude (loudness) as a color. A spectrogram let’s us display
@@ -512,8 +475,8 @@ spectro(BFS_am_1, fastdisp=TRUE)</code></pre>
 <p><img src="Sound_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 </div>
-<div id="soundscape-indices" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Soundscape indices</h1>
+<div id="soundscape-indices" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Soundscape indices</h1>
 <p>From observational data of species, we can calculate metrics such as
 species richness, Shannon’s index, etc. Similarly, from sound data, we
 can calculate metrics of acoustic complexity, which theoretically should
@@ -531,70 +494,6 @@ BFS.</p>
 <pre><code>## [1] 155.0816</code></pre>
 <pre class="r"><code>ACI(BFS_pm_1)</code></pre>
 <pre><code>## [1] 150.623</code></pre>
-</div>
-<div id="processed-data-species-richness" class="section level1"
-number="5">
-<h1><span class="header-section-number">5</span> Processed data: Species
-richness</h1>
-<p>In addition to using numeric metrics such as <code>ACI</code> to
-calculate the acoustic diversity of audio recordings, we can use new
-computer vision models to identify (bird) species in the recordings.
-This therefore gives us data that we tend to see in conservation
-biology: <strong>species richness</strong>. We have and will process/ed
-the raw recording data to:</p>
-<ul>
-<li>Calculate ACI for each recording;</li>
-<li>Identify bird vocalizations in each recording;</li>
-</ul>
-<p>We have used Cornell Lab of Ornithology’s <a
-href="https://birdnet.cornell.edu/">BirdNET</a> neural network model,
-which is trained on data such as identified acoustic recordings from <a
-href="https://xeno-canto.org/">xeno-canto</a>. This model extracts
-distinct bird vocalizations from the spectrographic representation of
-each sound file. Those bird vocalizations are then pattern matched
-against known bird vocalizations to generate the most likely species (of
-the 3000 species supported by the model) with some probability (a.k.a.
-<code>confidence</code>).</p>
-</div>
-<div id="your-task" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Your task</h1>
-<p>Your job is to now go forward and perform the bioacoustic analysis
-tutorial (next drop-down menu item.) Then, think through as groups about
-3 questions that you would be interested in answering using processed
-acoustic data from the BFS that will span from October-November 2022 and
-our current data in March-April 2023. Here are some suggestions about
-external datasets that you can look at:</p>
-<ul>
-<li>Precipitation</li>
-<li>Temperature
-<ul>
-<li><a
-href="https://www.ncei.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USR0000CCLA/detail">NOAA
-NCDC Claremont Station</a></li>
-<li><a
-href="https://cdec.water.ca.gov/dynamicapp/QueryDaily?s=CMO&amp;end=2022-07-06">CA
-Dept Water Resources, historic temperature data</a></li>
-<li><a href="https://cdec.water.ca.gov/cgi-progs/plotReal?staid=CMO">CA
-Data Exchange-CMO station</a></li>
-<li><a href="https://cimis.water.ca.gov/">CIMIS data</a></li>
-</ul></li>
-<li>Time of year (<code>date</code>)</li>
-<li><a
-href="https://dashboard.birdcast.info/region/US-CA-037">BirdCast</a>
-migration estimates for Los Angeles County (see the <em>Birds in flight
-(nightly avg.)</em> plot FMI)</li>
-<li>Habitat type in the BFS (determined by the <code>unit</code>’s
-location)
-<ul>
-<li><a
-href="https://earth.google.com/earth/d/1-8gneVsVX1zM89AHJQhloNBqVLUZUYnH?usp=share_link">Google
-Earth map of sampling stations</a></li>
-</ul></li>
-<li>Distance to road or edge of the BFS (determined by the
-<code>unit</code>’s location)</li>
-<li>… other variables that you may think of and are feasible for us to
-collect!</li>
-</ul>
 </div>
 
 

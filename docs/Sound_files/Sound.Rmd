@@ -24,26 +24,15 @@ html_tag_audio <- function(file, type = c("wav")) {
 }
 ```
 
-# Accessing the assignment
-
-Please navigate to the assignment [Acoustic](https://posit.cloud/spaces/323650/content/5199743) in the [ConBio SP2023 workspace](https://sso.posit.cloud/pomona?redirect=https%3A%2F%2Fposit.cloud%2Fspaces%2F323650%2Fjoin%3Faccess_code%3D_klYqlJJLC2qolGKC7GmdPDI6m-xGiZnJ7wesTsQ). In the `Files` pane (typically, bottom right-hand corner), you will find an R script that you can use to follow along with this tutorial called `Acoustic.R`.
-
-Recall that:
-
-* You can use `Tools` --> `Global options` --> `Code` --> click `Soft-wrap R source files` to get word wrap enabled for `R` scripts.
-* You need to highlight (or place your cursor on a line) and run a line (or lines) of code to execute commands.
-* You can tell that the code has been executed when it is echoed (printed out) in the console.
-
 # Overview {.tabset .tabset-fade}
 
-In this tutorial, we'll take a look at sound data collected at the Bernard Field Station.
+In this tutorial, we'll take a look at sound data collected at the Bernard Field Station over spring break.
 
 In this tutorial, you will learn:
 
 * what are different ways to interact with sound data in `R`?
 * how can we visualize sound data using spectrograms?
 * how can we calculate indices of acoustic diversity?
-* what can we do with processed sound data?
 
 #  A brief description of sound
 
@@ -55,8 +44,6 @@ Let's start by loading the packages that we will need.
 ### Loading packages
 library(seewave)
 library(tuneR)
-library(dplyr)
-library(readr)
 ```
 
 ## Waveforms
@@ -113,28 +100,4 @@ ACI(BFS_am_1)
 ACI(BFS_pm_1)
 ```
 
-# Processed data: Species richness
-
-In addition to using numeric metrics such as `ACI` to calculate the acoustic diversity of audio recordings, we can use new computer vision models to identify (bird) species in the recordings. This therefore gives us data that we tend to see in conservation biology: **species richness**. We have and will process/ed the raw recording data to:
-
-* Calculate ACI for each recording;
-* Identify bird vocalizations in each recording;
-
-We have used Cornell Lab of Ornithology's [BirdNET](https://birdnet.cornell.edu/) neural network model, which is trained on data such as identified acoustic recordings from [xeno-canto](https://xeno-canto.org/). This model extracts distinct bird vocalizations from the spectrographic representation of each sound file. Those bird vocalizations are then pattern matched against known bird vocalizations to generate the most likely species (of the 3000 species supported by the model) with some probability (a.k.a. `confidence`).
-
-# Your task
-
-Your job is to now go forward and perform the bioacoustic analysis tutorial (next drop-down menu item.) Then, think through as groups about 3 questions that you would be interested in answering using processed acoustic data from the BFS that will span from October-November 2022 and our current data in March-April 2023. Here are some suggestions about external datasets that you can look at:
-
-* Precipitation
-* Temperature
-    + [NOAA NCDC Claremont Station](https://www.ncei.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USR0000CCLA/detail)
-    + [CA Dept Water Resources, historic temperature data](https://cdec.water.ca.gov/dynamicapp/QueryDaily?s=CMO&end=2022-07-06)
-    + [CA Data Exchange-CMO station](https://cdec.water.ca.gov/cgi-progs/plotReal?staid=CMO)
-    + [CIMIS data](https://cimis.water.ca.gov/)
-* Time of year (`date`)
-* [BirdCast](https://dashboard.birdcast.info/region/US-CA-037) migration estimates for Los Angeles County (see the *Birds in flight (nightly avg.)* plot FMI)
-* Habitat type in the BFS (determined by the `unit`'s location)
-    + [Google Earth map of sampling stations](https://earth.google.com/earth/d/1-8gneVsVX1zM89AHJQhloNBqVLUZUYnH?usp=share_link)
-* Distance to road or edge of the BFS (determined by the `unit`'s location)
-* ... other variables that you may think of and are feasible for us to collect!
+ 
