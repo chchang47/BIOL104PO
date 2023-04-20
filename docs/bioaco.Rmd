@@ -21,6 +21,23 @@ Recall that:
 * You need to highlight (or place your cursor on a line) and run a line (or lines) of code to execute commands.
 * You can tell that the code has been executed when it is echoed (printed out) in the console.
 
+## Hypotheses
+
+This table below shows the hypotheses for each group:
+
+```{r, echo=F}
+library(magrittr)
+## Pull in Google sheet schedule
+schedDF <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1J_RpbtCo-9KZ9FxQ6fJsenTflXCHfilwhejDOqCeVHs/edit?usp=sharing",sheet = "FinalVersions",col_types="cccc")
+schedDF %<>% dplyr::select(`Group Number`,'Hypothesis','Approach')
+
+schedDF %>% 
+  htmlTable::addHtmlTableStyle(col.rgroup = c("#fb9a99","#fdc086","#ffff99","#ccebc5","#b3cde3","#decbe4","#bc98b5"
+  )) %>%
+  htmlTable::htmlTable(rnames=FALSE) # can't figure out for now how to merge cells - whatever
+```
+**Note**: The suggested analyses are **not prescriptive**. If you feel that a different type of analysis is better (e.g. correlation coefficient rather than comparison of means, or correlation coefficient rather than regression, or regression rather than comparison of means), then please proceed! The table above is simply intended to help speed along the analysis.
+
 # Preparing data
 
 ## 1: Load packages
@@ -41,7 +58,7 @@ Next, we will pull in our data and inspect it.
 
 ```{r data}
 ### Load in dataset
-soundDF <- readr::read_tsv("https://github.com/EA30POM/site/blob/main/data/bioacousticF22.tsv?raw=true") # read in spreadsheet from its URL and store in soundDF
+soundDF <- readr::read_tsv("https://github.com/chchang47/BIOL104PO/raw/master/data/bioacousticAY22-23.tsv") # read in spreadsheet from its URL and store in soundDF
 
 ### Look at the first few rows
 soundDF
@@ -63,7 +80,8 @@ We see that there are the following columns:
   + One potential confounding factor is the role of geophony, or environmental sounds like rainfall. Sometimes geophony like a low, constant wind can present at a very constant intensity, and therefore would not influence ACI. However, patterns that have high variation could influence ACI because they may have varying intensities. <!-- See table 1 here https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13254-->
 * `SR`: The species richness in every 30 second recording
 * `DayNight`: Whether the recording occurred in the day or at night
-* `Month`: A variable that notes if the recording was taken in October or November.
+* `Month`: A variable that notes if the recording was taken in October, November, March, or April
+* `season`: The season of the recording (fall or spring)
 
 Here, I am going to do two tasks. I am going to create a dummy column of data that takes the average of the ranks of `SR` and `ACI` to illustrate different analyses. I am also going to create a data table that tells us different characteristics of each AudioMoth `unit` to illustrate how hypotheses that have some relationship with distance or tree cover (which would be informed by the location of the unit) could proceed.
 
@@ -221,8 +239,27 @@ Wow! Our observation was really extreme. The p-value we've calculated is 0. The 
 Alternatively, we can run a test. If we are concerned about potential violations to normality, we can use a non-parametric test to compare means.
 
 ```{r}
+# Statistical test - comparing means between two categories
+t.test(ChangVar ~ sitecat, data=soundDF)
+
+# Statistical test - non-parametric - comparing means between two categories
 wilcox.test(ChangVar ~ sitecat, data=soundDF)
 ```
+
+If we are comparing a numeric value across more than three categories in the data, we can either use an ANOVA or a non-parametric test (robust to violating assumptions about the distribution of your data and the errors of your model) such as a Kruskal-Wallis test.
+
+```{r, eval=F}
+# Run the ANOVA test
+anova_test <- aov(ChangVar ~ Month, data=soundDF)
+# See the outputs
+summary(anova_test)
+
+# Run the non-parametric Kruskal-Wallis test
+kw_test <- kruskal.test(ChangVar ~ Month, data=soundDF)
+# See the outputs
+kw_test
+```
+
 
 ## Calculating correlation coefficients
 
@@ -288,6 +325,7 @@ In the context of these data, it is not as obvious how a linear regression would
 However, for completeness I show how we could fit a regression model.
 
 ```{r}
+### Regression model for ACI
 aci_mod <- lm(ACI ~ sitenum, data=soundDF)
 summary(aci_mod)
 ```
@@ -295,9 +333,30 @@ summary(aci_mod)
 If one wanted to analyze species richness as a response variable, we would need to use an alternative to `lm` (ordinary least squares regression) and use a `glm` (generalized linear model). Species richness values are **integers** (whole numbers). That means that they are better modeled using a Poisson process, which lets us think about the rates of seeing integer numbers (e.g. number of days before another big rain event, number of fish swimming down a stretch of river).
 
 ```{r}
+### Regression model for species richness
+  # Need to use a generalized linear model
+  # Because species richness is an integer value
+  # So we have to use poisson-distributed errors
 sr_mod <- glm(SR~sitenum, data=soundDF,family=poisson)
 summary(sr_mod)
 ```
+
+### Multiple linear regression with an interaction effect
+
+Below, I will show you how you can specify an [interaction effect](https://www.theanalysisfactor.com/interpreting-interactions-in-regression/) ([more involved explainer here with an `R` example](https://education.arcus.chop.edu/understanding-interactions/)) in a multiple linear regression, or a regression model which has more than one predictor variable.
+
+```{r}
+### Specify a generalized linear regression model for species richness with an interaction term
+sr_int_mod <- glm(SR~sitenum + sitecat + sitenum*sitecat, data=soundDF, family=poisson)
+### See the outputs
+summary(sr_int_mod)
+
+### Specify a linear regression model for ACI with an interaction term
+ACI_int_mod <- lm(ACI~sitenum + sitecat + sitenum*sitecat, data=soundDF)
+### See the outputs
+summary(ACI_int_mod)
+```
+
 
 # Your task
 
@@ -322,7 +381,7 @@ library("mosaic") # shuffle (permute) our data
 ###=========================================
 
 ### Load in dataset
-soundDF <- readr::read_tsv("https://github.com/EA30POM/site/blob/main/data/bioacousticF22.tsv?raw=true") # read in spreadsheet from its URL and store in soundDF
+soundDF <- readr::read_tsv("https://github.com/chchang47/BIOL104PO/raw/master/data/bioacousticAY22-23.tsv") # read in spreadsheet from its URL and store in soundDF
 
 ### Look at the first few rows
 soundDF
@@ -428,8 +487,21 @@ gf_histogram(~ DiffMeans, fill = ~ (DiffMeans <= obs_diff),
 # What proportion of simulated values were larger than our observed difference
 prop( ~ DiffMeans <= obs_diff, data = randomizing_diffs) # ~0.0 was the observed difference value - see obs_diff
 
-# Statistical test
+# Statistical test - comparing means between two categories
+t.test(ChangVar ~ sitecat, data=soundDF)
+
+# Statistical test - non-parametric - comparing means between two categories
 wilcox.test(ChangVar ~ sitecat, data=soundDF)
+
+# Run the ANOVA test
+anova_test <- aov(ChangVar ~ Month, data=soundDF)
+# See the outputs
+summary(anova_test)
+
+# Run the non-parametric Kruskal-Wallis test
+kw_test <- kruskal.test(ChangVar ~ Month, data=soundDF)
+# See the outputs
+kw_test
 
 ###*************
 ###* 4.2: Correlation coefficients
@@ -460,10 +532,19 @@ gf_histogram(~ cor,
 cor.test(ChangVar~sitenum, data=soundDF, method="spearman")
 
 ### Regression models
-
 aci_mod <- lm(ACI ~ sitenum, data=soundDF)
 summary(aci_mod)
 
 sr_mod <- glm(SR~sitenum, data=soundDF,family=poisson)
 summary(sr_mod)
+
+### Specify a generalized linear regression model for species richness with an interaction term
+sr_int_mod <- glm(SR~sitenum + sitecat + sitenum*sitecat, data=soundDF, family=poisson)
+### See the outputs
+summary(sr_int_mod)
+
+### Specify a linear regression model for ACI with an interaction term
+ACI_int_mod <- lm(ACI~sitenum + sitecat + sitenum*sitecat, data=soundDF)
+### See the outputs
+summary(ACI_int_mod)
 ```

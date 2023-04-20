@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2023-04-06" />
+<meta name="date" content="2023-04-19" />
 
 <title>Bioacoustic analyses</title>
 
@@ -344,7 +344,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Bioacoustic analyses</h1>
 <h4 class="author"></h4>
-<h4 class="date">2023-04-06</h4>
+<h4 class="date">2023-04-19</h4>
 
 </div>
 
@@ -370,6 +370,112 @@ line (or lines) of code to execute commands.</li>
 <li>You can tell that the code has been executed when it is echoed
 (printed out) in the console.</li>
 </ul>
+<div id="hypotheses" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Hypotheses</h2>
+<p>This table below shows the hypotheses for each group:</p>
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Group Number
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Hypothesis
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Approach
+</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color: #fb9a99;">
+<td style="background-color: #fb9a99; text-align: center;">
+1
+</td>
+<td style="background-color: #fb9a99; text-align: center;">
+There will be greater edge effects (lower species richness near edges)
+in the morning compared to the evening.
+</td>
+<td style="background-color: #fb9a99; text-align: center;">
+Multiple linear regression with interaction
+</td>
+</tr>
+<tr style="background-color: #fdc086;">
+<td style="background-color: #fdc086; text-align: center;">
+2
+</td>
+<td style="background-color: #fdc086; text-align: center;">
+Species richness is higher at dawn
+</td>
+<td style="background-color: #fdc086; text-align: center;">
+Comparison of means
+</td>
+</tr>
+<tr style="background-color: #ffff99;">
+<td style="background-color: #ffff99; text-align: center;">
+3
+</td>
+<td style="background-color: #ffff99; text-align: center;">
+There will be more species richness in sites with higher tree cover.
+</td>
+<td style="background-color: #ffff99; text-align: center;">
+Comparison of means
+</td>
+</tr>
+<tr style="background-color: #ccebc5;">
+<td style="background-color: #ccebc5; text-align: center;">
+4
+</td>
+<td style="background-color: #ccebc5; text-align: center;">
+There will be higher ACI in the northern part of BFS (the neck), than in
+the more southern portion.
+</td>
+<td style="background-color: #ccebc5; text-align: center;">
+Comparison of means
+</td>
+</tr>
+<tr style="background-color: #b3cde3;">
+<td style="background-color: #b3cde3; text-align: center;">
+5
+</td>
+<td style="background-color: #b3cde3; text-align: center;">
+ACI values vary throughout the different habitats across the BFS.
+</td>
+<td style="background-color: #b3cde3; text-align: center;">
+Comparison of means
+</td>
+</tr>
+<tr style="background-color: #decbe4;">
+<td style="background-color: #decbe4; text-align: center;">
+6
+</td>
+<td style="background-color: #decbe4; text-align: center;">
+There is higher ACI or species richness in the spring than the fall.
+</td>
+<td style="background-color: #decbe4; text-align: center;">
+Comparison of means
+</td>
+</tr>
+<tr style="background-color: #bc98b5;">
+<td style="background-color: #bc98b5; border-bottom: 2px solid grey; text-align: center;">
+7
+</td>
+<td style="background-color: #bc98b5; border-bottom: 2px solid grey; text-align: center;">
+There will be more species recorded closer to the pond
+</td>
+<td style="background-color: #bc98b5; border-bottom: 2px solid grey; text-align: center;">
+Linear regression
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong>: The suggested analyses are <strong>not
+prescriptive</strong>. If you feel that a different type of analysis is
+better (e.g. correlation coefficient rather than comparison of means, or
+correlation coefficient rather than regression, or regression rather
+than comparison of means), then please proceed! The table above is
+simply intended to help speed along the analysis.</p>
+</div>
 </div>
 <div id="preparing-data" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Preparing data</h1>
@@ -386,24 +492,24 @@ library(&quot;mosaic&quot;) # shuffle (permute) our data</code></pre>
 <h2><span class="header-section-number">2.2</span> 2: Read data</h2>
 <p>Next, we will pull in our data and inspect it.</p>
 <pre class="r"><code>### Load in dataset
-soundDF &lt;- readr::read_tsv(&quot;https://github.com/EA30POM/site/blob/main/data/bioacousticF22.tsv?raw=true&quot;) # read in spreadsheet from its URL and store in soundDF
+soundDF &lt;- readr::read_tsv(&quot;https://github.com/chchang47/BIOL104PO/raw/master/data/bioacousticAY22-23.tsv&quot;) # read in spreadsheet from its URL and store in soundDF
 
 ### Look at the first few rows
 soundDF</code></pre>
-<pre><code>## # A tibble: 85,654 × 7
-##    unit  date       time        ACI    SR DayNight Month  
-##    &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  
-##  1 CBio3 2022-10-12 18H 0M 0S  152.     1 Night    October
-##  2 CBio3 2022-10-12 18H 1M 0S  153.     1 Night    October
-##  3 CBio3 2022-10-12 18H 2M 0S  152.     1 Night    October
-##  4 CBio3 2022-10-12 18H 3M 0S  151.     1 Night    October
-##  5 CBio3 2022-10-12 18H 4M 0S  152.     1 Night    October
-##  6 CBio3 2022-10-12 18H 5M 0S  151.     1 Night    October
-##  7 CBio3 2022-10-12 18H 6M 0S  154.     2 Night    October
-##  8 CBio3 2022-10-12 18H 7M 0S  152.     2 Night    October
-##  9 CBio3 2022-10-12 18H 8M 0S  153.     0 Night    October
-## 10 CBio3 2022-10-12 18H 9M 0S  152.     2 Night    October
-## # ℹ 85,644 more rows</code></pre>
+<pre><code>## # A tibble: 151,468 × 8
+##    unit  date       time        ACI    SR DayNight Month season
+##    &lt;chr&gt; &lt;date&gt;     &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; 
+##  1 CBio4 2023-03-23 18H 0M 0S  155.     3 Night    March Spring
+##  2 CBio4 2023-03-23 18H 1M 0S  154.     3 Night    March Spring
+##  3 CBio4 2023-03-23 18H 2M 0S  151.     7 Night    March Spring
+##  4 CBio4 2023-03-23 18H 3M 0S  155.     3 Night    March Spring
+##  5 CBio4 2023-03-23 18H 4M 0S  152.     2 Night    March Spring
+##  6 CBio4 2023-03-23 18H 5M 0S  152.     4 Night    March Spring
+##  7 CBio4 2023-03-23 18H 6M 0S  159.     3 Night    March Spring
+##  8 CBio4 2023-03-23 18H 7M 0S  152.     2 Night    March Spring
+##  9 CBio4 2023-03-23 18H 8M 0S  152.     3 Night    March Spring
+## 10 CBio4 2023-03-23 18H 9M 0S  153.     7 Night    March Spring
+## # ℹ 151,458 more rows</code></pre>
 <pre class="r"><code>### Look at the first few rows in a spreadsheet viewer
 soundDF %&gt;% head() %&gt;% View()</code></pre>
 <p>We see that there are the following columns:</p>
@@ -437,7 +543,9 @@ recording</li>
 <li><code>DayNight</code>: Whether the recording occurred in the day or
 at night</li>
 <li><code>Month</code>: A variable that notes if the recording was taken
-in October or November.</li>
+in October, November, March, or April</li>
+<li><code>season</code>: The season of the recording (fall or
+spring)</li>
 </ul>
 <p>Here, I am going to do two tasks. I am going to create a dummy column
 of data that takes the average of the ranks of <code>SR</code> and
@@ -497,11 +605,11 @@ summary statistics and visualize your variable.</p>
 tapply(soundDF$ChangVar, soundDF$sitecat, summary) </code></pre>
 <pre><code>## $Open
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    5801   27717   44828   42338   56858   85048 
+##    8095   47172   77256   73805  100275  149904 
 ## 
 ## $Tree
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    5802   30426   44778   43324   56500   85070</code></pre>
+##    8046   52731   80302   77683  103211  151085</code></pre>
 <pre class="r"><code>  # use sitecat as the grouping variable
   # for ChangVar and then summarize ChangVar
   # for each sitecat (site characteristics)</code></pre>
@@ -521,7 +629,7 @@ p &lt;- p + labs(x=&quot;Mean of ranks&quot;,y=&quot;Frequency&quot;)
 p &lt;- p + theme_minimal()
   # Display the final plot
 p</code></pre>
-<p><img src="bioaco_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="bioaco_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Alternatively, I could create a boxplot to visualize the distribution
 of values in <code>ChangVar</code> with two boxplots for each value of
 <code>sitecat</code>. Note that <code>notch=TRUE</code> means that there
@@ -571,13 +679,13 @@ values of <code>ChangVar</code> for the Tree vs. Open sites. We can
 start by calculating the mean difference we observe.</p>
 <pre class="r"><code>mean( ChangVar ~ sitecat, data = soundDF , na.rm=T) # show mean ChangVar values for the Big and Open sites, removing missing data</code></pre>
 <pre><code>##     Open     Tree 
-## 42338.25 43324.07</code></pre>
+## 73805.17 77682.87</code></pre>
 <pre class="r"><code>obs_diff &lt;- diff( mean( ChangVar ~ sitecat, data = soundDF , na.rm=T)) # calculate the difference between the means and store in a variable called &quot;obs_diff&quot;
 obs_diff # display the value of obs_diff</code></pre>
 <pre><code>##     Tree 
-## 985.8256</code></pre>
+## 3877.701</code></pre>
 <p>OK, so the mean difference in mean values between Big and Open sites
-is 985.83. Is this difference meaningful though? We can test that by
+is 3877.7. Is this difference meaningful though? We can test that by
 specifying an opposing <strong>null hypothesis</strong>.</p>
 <p>In this case, our null hypothesis would be that there is no
 difference in <code>ChangVar</code> across <code>sitecat</code>.</p>
@@ -598,13 +706,13 @@ names(randomizing_diffs)[1] &lt;- &quot;DiffMeans&quot; # change the name of the
 
 # View first few rows of data
 head(randomizing_diffs)</code></pre>
-<pre><code>##     DiffMeans
-## 1  -68.529942
-## 2 -209.458568
-## 3   76.695019
-## 4   -2.194099
-## 5   18.071384
-## 6  115.530969</code></pre>
+<pre><code>##   DiffMeans
+## 1 111.65401
+## 2  45.55392
+## 3 104.20120
+## 4 172.06861
+## 5 -85.71986
+## 6 -72.35591</code></pre>
 <p>Now we can visualize the distribution of simulated differences in the
 mean values of <code>ChangVar</code> at the Big and Open sites versus
 our observed difference in means. Note that the observed difference was
@@ -636,13 +744,40 @@ test</h3>
 <p>Alternatively, we can run a test. If we are concerned about potential
 violations to normality, we can use a non-parametric test to compare
 means.</p>
-<pre class="r"><code>wilcox.test(ChangVar ~ sitecat, data=soundDF)</code></pre>
+<pre class="r"><code># Statistical test - comparing means between two categories
+t.test(ChangVar ~ sitecat, data=soundDF)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  ChangVar by sitecat
+## t = -22.053, df = 151380, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -4222.333 -3533.069
+## sample estimates:
+## mean in group Open mean in group Tree 
+##           73805.17           77682.87</code></pre>
+<pre class="r"><code># Statistical test - non-parametric - comparing means between two categories
+wilcox.test(ChangVar ~ sitecat, data=soundDF)</code></pre>
 <pre><code>## 
 ##  Wilcoxon rank sum test with continuity correction
 ## 
 ## data:  ChangVar by sitecat
-## W = 898593646, p-value = 3.502e-07
+## W = 2.698e+09, p-value &lt; 2.2e-16
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>If we are comparing a numeric value across more than three categories
+in the data, we can either use an ANOVA or a non-parametric test (robust
+to violating assumptions about the distribution of your data and the
+errors of your model) such as a Kruskal-Wallis test.</p>
+<pre class="r"><code># Run the ANOVA test
+anova_test &lt;- aov(ChangVar ~ Month, data=soundDF)
+# See the outputs
+summary(anova_test)
+
+# Run the non-parametric Kruskal-Wallis test
+kw_test &lt;- kruskal.test(ChangVar ~ Month, data=soundDF)
+# See the outputs
+kw_test</code></pre>
 </div>
 </div>
 <div id="calculating-correlation-coefficients" class="section level2"
@@ -660,7 +795,7 @@ data.</p>
 <pre class="r"><code>### Calculate observed correlation
 obs_cor &lt;- cor(ChangVar ~ sitenum, data=soundDF, use=&quot;complete.obs&quot;) # store observed correlation in obs_cor of ChangVar vs sitenum
 obs_cor # print out value</code></pre>
-<pre><code>## [1] 0.001082036</code></pre>
+<pre><code>## [1] 0.05162087</code></pre>
 <p>Let’s say that I’m interested in determining if <code>ChangVar</code>
 is actually positively correlated with <code>sitenum</code>. We can test
 this against the opposing null hypothesis. Our null hypothesis could be
@@ -686,8 +821,8 @@ randomizing_cor &lt;- do(1000) * cor(ChangVar ~ sitenum,
 when we shuffle our data?</p>
 <pre class="r"><code>quantiles_cor &lt;- qdata( ~ cor, p = c(0.025, 0.975), data=randomizing_cor) # calculate the 2.5% and 97.5% quantiles in our simulated correlation coefficient data (note that 97.5-2.5 = 95!)
 quantiles_cor # display the quantiles</code></pre>
-<pre><code>##         2.5%        97.5% 
-## -0.005747058  0.007560330</code></pre>
+<pre><code>##       2.5%      97.5% 
+## 0.04678683 0.05627252</code></pre>
 <p>The values above give us a 95% confidence interval estimate for our
 correlation coefficient!</p>
 <p>Do we clearly see that our correlation coefficient distribution does
@@ -716,11 +851,11 @@ can also used non-parametric, rank-based tests.</p>
 ##  Spearman&#39;s rank correlation rho
 ## 
 ## data:  ChangVar and sitenum
-## S = 1.0493e+14, p-value = 0.5855
+## S = 5.5471e+14, p-value &lt; 2.2e-16
 ## alternative hypothesis: true rho is not equal to 0
 ## sample estimates:
-##         rho 
-## -0.00186358</code></pre>
+##        rho 
+## 0.04224551</code></pre>
 </div>
 </div>
 <div id="linear-regression" class="section level2" number="4.3">
@@ -732,7 +867,8 @@ arguably better done with a comparison of means) or 2) more insightful
 than the correlation analysis above.</p>
 <p>However, for completeness I show how we could fit a regression
 model.</p>
-<pre class="r"><code>aci_mod &lt;- lm(ACI ~ sitenum, data=soundDF)
+<pre class="r"><code>### Regression model for ACI
+aci_mod &lt;- lm(ACI ~ sitenum, data=soundDF)
 summary(aci_mod)</code></pre>
 <pre><code>## 
 ## Call:
@@ -740,18 +876,18 @@ summary(aci_mod)</code></pre>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -10.242  -2.842  -1.757   0.407 180.299 
+## -12.054  -3.452  -2.082   0.690 179.123 
 ## 
 ## Coefficients:
-##              Estimate Std. Error  t value Pr(&gt;|t|)    
-## (Intercept) 1.535e+02  2.338e-02 6564.915   &lt;2e-16 ***
-## sitenum     9.873e-03  4.716e-03    2.093   0.0363 *  
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 1.543e+02  2.002e-02 7704.40   &lt;2e-16 ***
+## sitenum     9.650e-02  4.041e-03   23.88   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 6.362 on 85652 degrees of freedom
-## Multiple R-squared:  5.116e-05,  Adjusted R-squared:  3.948e-05 
-## F-statistic: 4.382 on 1 and 85652 DF,  p-value: 0.03632</code></pre>
+## Residual standard error: 7.237 on 151466 degrees of freedom
+## Multiple R-squared:  0.003751,   Adjusted R-squared:  0.003744 
+## F-statistic: 570.2 on 1 and 151466 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>If one wanted to analyze species richness as a response variable, we
 would need to use an alternative to <code>lm</code> (ordinary least
 squares regression) and use a <code>glm</code> (generalized linear
@@ -760,7 +896,11 @@ numbers). That means that they are better modeled using a Poisson
 process, which lets us think about the rates of seeing integer numbers
 (e.g. number of days before another big rain event, number of fish
 swimming down a stretch of river).</p>
-<pre class="r"><code>sr_mod &lt;- glm(SR~sitenum, data=soundDF,family=poisson)
+<pre class="r"><code>### Regression model for species richness
+  # Need to use a generalized linear model
+  # Because species richness is an integer value
+  # So we have to use poisson-distributed errors
+sr_mod &lt;- glm(SR~sitenum, data=soundDF,family=poisson)
 summary(sr_mod)</code></pre>
 <pre><code>## 
 ## Call:
@@ -768,22 +908,87 @@ summary(sr_mod)</code></pre>
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.1099  -2.0460  -0.8363   0.5882   6.7666  
+## -2.2689  -1.1181  -0.3616   0.8314   6.2756  
 ## 
 ## Coefficients:
-##               Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)  0.7737699  0.0024888 310.903   &lt;2e-16 ***
-## sitenum     -0.0043872  0.0005045  -8.697   &lt;2e-16 ***
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) 0.9375071  0.0017326 541.093   &lt;2e-16 ***
+## sitenum     0.0008825  0.0003493   2.526   0.0115 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for poisson family taken to be 1)
 ## 
-##     Null deviance: 196073  on 85653  degrees of freedom
-## Residual deviance: 195997  on 85652  degrees of freedom
-## AIC: 369364
+##     Null deviance: 339016  on 151467  degrees of freedom
+## Residual deviance: 339010  on 151466  degrees of freedom
+## AIC: 682210
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
+<div id="multiple-linear-regression-with-an-interaction-effect"
+class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Multiple linear
+regression with an interaction effect</h3>
+<p>Below, I will show you how you can specify an <a
+href="https://www.theanalysisfactor.com/interpreting-interactions-in-regression/">interaction
+effect</a> (<a
+href="https://education.arcus.chop.edu/understanding-interactions/">more
+involved explainer here with an <code>R</code> example</a>) in a
+multiple linear regression, or a regression model which has more than
+one predictor variable.</p>
+<pre class="r"><code>### Specify a generalized linear regression model for species richness with an interaction term
+sr_int_mod &lt;- glm(SR~sitenum + sitecat + sitenum*sitecat, data=soundDF, family=poisson)
+### See the outputs
+summary(sr_int_mod)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = SR ~ sitenum + sitecat + sitenum * sitecat, family = poisson, 
+##     data = soundDF)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.2850  -1.1259  -0.3598   0.8356   6.2945  
+## 
+## Coefficients:
+##                       Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)          0.9402080  0.0022701 414.173  &lt; 2e-16 ***
+## sitenum              0.0029793  0.0005076   5.869 4.38e-09 ***
+## sitecatTree          0.0053173  0.0040857   1.301    0.193    
+## sitenum:sitecatTree -0.0046273  0.0008098  -5.714 1.10e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 339016  on 151467  degrees of freedom
+## Residual deviance: 338975  on 151464  degrees of freedom
+## AIC: 682179
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<pre class="r"><code>### Specify a linear regression model for ACI with an interaction term
+ACI_int_mod &lt;- lm(ACI~sitenum + sitecat + sitenum*sitecat, data=soundDF)
+### See the outputs
+summary(ACI_int_mod)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = ACI ~ sitenum + sitecat + sitenum * sitecat, data = soundDF)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -12.396  -3.449  -2.079   0.691 178.851 
+## 
+## Coefficients:
+##                      Estimate Std. Error  t value Pr(&gt;|t|)    
+## (Intercept)         1.540e+02  2.627e-02 5862.075  &lt; 2e-16 ***
+## sitenum             2.750e-02  5.875e-03    4.680 2.87e-06 ***
+## sitecatTree         4.256e-01  4.735e-02    8.988  &lt; 2e-16 ***
+## sitenum:sitecatTree 9.231e-02  9.369e-03    9.853  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.229 on 151464 degrees of freedom
+## Multiple R-squared:  0.005899,   Adjusted R-squared:  0.005879 
+## F-statistic: 299.6 on 3 and 151464 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
 </div>
 </div>
 <div id="your-task" class="section level1" number="5">
@@ -813,7 +1018,7 @@ library(&quot;mosaic&quot;) # shuffle (permute) our data
 ###=========================================
 
 ### Load in dataset
-soundDF &lt;- readr::read_tsv(&quot;https://github.com/EA30POM/site/blob/main/data/bioacousticF22.tsv?raw=true&quot;) # read in spreadsheet from its URL and store in soundDF
+soundDF &lt;- readr::read_tsv(&quot;https://github.com/chchang47/BIOL104PO/raw/master/data/bioacousticAY22-23.tsv&quot;) # read in spreadsheet from its URL and store in soundDF
 
 ### Look at the first few rows
 soundDF
@@ -919,8 +1124,21 @@ gf_histogram(~ DiffMeans, fill = ~ (DiffMeans &lt;= obs_diff),
 # What proportion of simulated values were larger than our observed difference
 prop( ~ DiffMeans &lt;= obs_diff, data = randomizing_diffs) # ~0.0 was the observed difference value - see obs_diff
 
-# Statistical test
+# Statistical test - comparing means between two categories
+t.test(ChangVar ~ sitecat, data=soundDF)
+
+# Statistical test - non-parametric - comparing means between two categories
 wilcox.test(ChangVar ~ sitecat, data=soundDF)
+
+# Run the ANOVA test
+anova_test &lt;- aov(ChangVar ~ Month, data=soundDF)
+# See the outputs
+summary(anova_test)
+
+# Run the non-parametric Kruskal-Wallis test
+kw_test &lt;- kruskal.test(ChangVar ~ Month, data=soundDF)
+# See the outputs
+kw_test
 
 ###*************
 ###* 4.2: Correlation coefficients
@@ -951,12 +1169,21 @@ gf_histogram(~ cor,
 cor.test(ChangVar~sitenum, data=soundDF, method=&quot;spearman&quot;)
 
 ### Regression models
-
 aci_mod &lt;- lm(ACI ~ sitenum, data=soundDF)
 summary(aci_mod)
 
 sr_mod &lt;- glm(SR~sitenum, data=soundDF,family=poisson)
-summary(sr_mod)</code></pre>
+summary(sr_mod)
+
+### Specify a generalized linear regression model for species richness with an interaction term
+sr_int_mod &lt;- glm(SR~sitenum + sitecat + sitenum*sitecat, data=soundDF, family=poisson)
+### See the outputs
+summary(sr_int_mod)
+
+### Specify a linear regression model for ACI with an interaction term
+ACI_int_mod &lt;- lm(ACI~sitenum + sitecat + sitenum*sitecat, data=soundDF)
+### See the outputs
+summary(ACI_int_mod)</code></pre>
 </div>
 
 
