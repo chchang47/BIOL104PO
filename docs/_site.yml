@@ -1,4 +1,4 @@
-name: "BIOL104"
+name: "BIOL104A"
 output_dir: "."
 include: [index.Rmd, PVA.Rmd, CBC.Rmd, IUCN.Rmd, Week2*.Rmd, Week1*.Rmd, Week5.Rmd, SpeciesArea.Rmd, Sound.Rmd, bioaco.Rmd]
 exclude: [old/*.Rmd]
@@ -8,40 +8,40 @@ navbar:
     - text: "Syllabus"
       icon: fa-home
       href: index.html
-    - text: "Introduction"
-      menu:
-        - text: "Week 1"
-        - text: "The R and RStudio environments"
-          href: Week1.html
-        - text: "Introduction to R"
-          href: Week1b.html
-    - text: "Data manipulation"
-      menu:
-        - text: "Week 2"
-        - text: "Manipulating data.frames"
-          href:  Week2_CAcounty.html
-        - text: "Data visualization"
-          href:  Week2b.html
-        - text: "Joining data"
-          href: Week2_Joins.html
-    - text: "Conservation analyses"
-      menu:
-        - text: "IUCN Red List"
-          href: IUCN.html
-        - text: "CBC"
-          href: CBC.html
-        - text: "Species-area"
-          href: SpeciesArea.html
-        - text: "PVA"
-          href: PVA.html
-        - text: "Climate"
-          href: Climate.html
-    - text: "Bioacoustics"
-      menu:
-        - text: "Acoustic data"
-          href: Sound.html
-        - text: "Analyzing acoustic data"
-          href: bioaco.html
+   # - text: "Introduction"
+   #    menu:
+   #      - text: "Week 1"
+   #      - text: "The R and RStudio environments"
+   #        href: Week1.html
+   #      - text: "Introduction to R"
+   #        href: Week1b.html
+   #  - text: "Data manipulation"
+   #    menu:
+   #      - text: "Week 2"
+   #      - text: "Manipulating data.frames"
+   #        href:  Week2_CAcounty.html
+   #      - text: "Data visualization"
+   #        href:  Week2b.html
+   #      - text: "Joining data"
+   #        href: Week2_Joins.html
+   #  - text: "Conservation analyses"
+   #    menu:
+   #      - text: "IUCN Red List"
+   #        href: IUCN.html
+   #      - text: "CBC"
+   #        href: CBC.html
+   #      - text: "Species-area"
+   #        href: SpeciesArea.html
+   #      - text: "PVA"
+   #        href: PVA.html
+   #      - text: "Climate"
+   #        href: Climate.html
+   # #- text: "Bioacoustics"
+   #    menu:
+   #      - text: "Acoustic data"
+   #        href: Sound.html
+   #      - text: "Analyzing acoustic data"
+   #        href: bioaco.html
 output:
   html_document:
     theme: flatly

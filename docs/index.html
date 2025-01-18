@@ -9,12 +9,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="" />
 
-<meta name="date" content="2023-03-29" />
+<meta name="date" content="2025-01-18" />
 
 <title>Conservation Biology Syllabus</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -33,8 +34,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -60,6 +61,29 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -145,11 +169,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -178,8 +206,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -187,16 +215,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -256,80 +277,6 @@ $(document).ready(function () {
     Syllabus
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Introduction
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Week 1</li>
-    <li>
-      <a href="Week1.html">The R and RStudio environments</a>
-    </li>
-    <li>
-      <a href="Week1b.html">Introduction to R</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Data manipulation
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Week 2</li>
-    <li>
-      <a href="Week2_CAcounty.html">Manipulating data.frames</a>
-    </li>
-    <li>
-      <a href="Week2b.html">Data visualization</a>
-    </li>
-    <li>
-      <a href="Week2_Joins.html">Joining data</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Conservation analyses
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="IUCN.html">IUCN Red List</a>
-    </li>
-    <li>
-      <a href="CBC.html">CBC</a>
-    </li>
-    <li>
-      <a href="SpeciesArea.html">Species-area</a>
-    </li>
-    <li>
-      <a href="PVA.html">PVA</a>
-    </li>
-    <li>
-      <a href="Climate.html">Climate</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Bioacoustics
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="Sound.html">Acoustic data</a>
-    </li>
-    <li>
-      <a href="bioaco.html">Analyzing acoustic data</a>
-    </li>
-  </ul>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -344,48 +291,83 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Conservation Biology Syllabus</h1>
 <h4 class="author"></h4>
-<h4 class="date">2023-03-29</h4>
+<h4 class="date">2025-01-18</h4>
 
 </div>
 
 
 <div id="overview" class="section level1">
 <h1>Overview</h1>
-<p><img src="figures/OverviewDiagram.jpeg" /> If these are questions that you find urgent, exciting, or otherwise fascinating, then you have come to the right class to explore these topics further. Recent studies estimate that as many as 10-50% of all species on Earth are at risk of extinction. Different anthropogenic activities such as land conversion for agriculture or the exploitation of natural resources such as fisheries and bushmeat pose major threats to biodiversity.</p>
-<p>Ultimately, the threats facing species and ecosystems are driven by human behaviors and societal decisions. Finding solutions therefore requires the combination of the social sciences alongside ecology. Most of the material that we will cover in class will take the form of conceptual models linked to “lessons learned” from conservation successes or failures. The course will be centered on discussions and collaborative group work. In this course, you will also be introduced to key computational tools used by conservation scientists and you will apply these skills in your own projects.</p>
+<p><img src="figures/OverviewDiagram.jpeg" /> If these are questions
+that you find urgent, exciting, or otherwise fascinating, then you have
+come to the right class to explore these topics further. Recent studies
+estimate that as many as 10-50% of all species on Earth are at risk of
+extinction. Different anthropogenic activities such as land conversion
+for agriculture or the exploitation of natural resources such as
+fisheries and bushmeat pose major threats to biodiversity.</p>
+<p>Ultimately, the threats facing species and ecosystems are driven by
+human behaviors and societal decisions. Finding solutions therefore
+requires the combination of the social sciences alongside ecology. Most
+of the material that we will cover in class will take the form of
+conceptual models linked to “lessons learned” from conservation
+successes or failures. The course will be centered on discussions and
+collaborative group work. In this course, you will also be introduced to
+key computational tools used by conservation scientists and you will
+apply these skills in your own projects.</p>
 <ul>
-<li><em>Reading</em>: You will interpret, synthesize, extend, and question core principles in conservation biology and science.</li>
-<li><em>Communication and Presentation</em>: Describing complex issues with clarity and persuasion is a highly translatable skill. This course will offer many opportunities to further develop your presentation skills, including speed presentations on readings and group presentations.</li>
-<li><em>Synthesis</em>: Creating socio-ecological conceptual models is a critical skill for conservation science. This course will allow you to build your skills in concept-mapping and interpreting claims in the literature.</li>
-<li><em>Data management, analysis, and visualization</em>: This course has a computational component where you will be able to develop skills in statistical programming using the <code>R</code> programming language. I do not assume any prior experience with programming.</li>
+<li><em>Reading</em>: You will interpret, synthesize, extend, and
+question core principles in conservation biology and science.</li>
+<li><em>Communication and Presentation</em>: Describing complex issues
+with clarity and persuasion is a highly translatable skill. This course
+will offer many opportunities to further develop your presentation
+skills, including speed presentations on readings and group
+presentations.</li>
+<li><em>Synthesis</em>: Creating socio-ecological conceptual models is a
+critical skill for conservation science. This course will allow you to
+build your skills in concept-mapping and interpreting claims in the
+literature.</li>
+<li><em>Grant writing</em>: Developing compelling hypotheses, situating
+your claims in the literature, and requesting financial support for your
+science is an important and highly transferable skill.</li>
 </ul>
 <div id="learning-outcomes" class="section level2">
 <h2>Learning outcomes</h2>
 <p>By the end of the course, a successful learner will be able to:</p>
 <ol style="list-style-type: decimal">
-<li>define biodiversity, describe trends pertinent to global biodiversity, and arguments to conserve biodiversity;</li>
+<li>define biodiversity, describe trends pertinent to global
+biodiversity, and arguments to conserve biodiversity;</li>
 <li>critically review evidence for causes of biodiversity declines;</li>
-<li>evaluate different strategies to effectively mitigate biodiversity decline;</li>
-<li>discuss the use of science in conservation practice and consider the role of personal and social norms and values in conservation.</li>
+<li>evaluate different strategies to effectively mitigate biodiversity
+decline;</li>
+<li>discuss the use of science in conservation practice and consider the
+role of personal and social norms and values in conservation.</li>
 </ol>
 </div>
 <div id="general-information" class="section level2">
 <h2>General information</h2>
 <p><strong>Location</strong>:</p>
-<ul>
-<li>Lecture: Seaver South Room 52</li>
-<li>Lab: Seaver South Room 48
-<ul>
-<li>NB: If you ever need to join by Zoom, you can find the lecture or lab Zoom call information at the <a href="https://sakai.claremont.edu/portal/directtool/87d58019-011c-493a-a8da-94adf24b4e84/">Sakai Zoom Pomona tab</a>.</li>
-</ul></li>
-</ul>
-<p><strong>Schedule</strong>: Tuesdays &amp; Thursdays, 9:35-10:50am PT, Labs Thursdays 1:15-5pm PT</p>
-<p><strong>Office Hours</strong>: My regularly scheduled office hours will be Tuesdays from 1:00-3:00pm. I am always happy to talk to you. You can find me at my office or lab. In case you’d like to use Zoom, I recommend giving me a heads up at my <a href="https://calendly.com/chchang47/small-group-meetings">Calendly</a>.</p>
-<p><strong>Prerequisites</strong>: Bio 41E (Intro Ecol &amp; Evolutionary Bio w/Lab) or instructor permission</p>
-<p><strong>Readings</strong>: This course will use a combination of the primary literature, popular science books, and the free, online textbook <a href="https://conbio.org/publications/free-textbook"><em>Conservation Biology for All</em></a>.</p>
-<p><strong>Student Well-Being</strong>: Our health, both mental and physical, is paramount. In an era where we are still impacted by COVID19, we must consider the health of others inside and outside the classroom. Class attendance is important, but if you need to miss class for health reasons, concerning symptoms, suspected COVID exposure, unexpected dependent care, technology issues, or other emergency reasons I will work with you. Let me underscore this: <strong>please make your decisions always based on health, safety, and wellness—yours and others</strong>—and I will work with you at the other end. <em>Take any potential symptoms seriously; we’re counting on each other.</em></p>
-<p>In addition to the course policies below, I prioritize your health and well-being. Physical or mental illness, personal crises, family care, and other responsibilities can strongly impact your ability to participate in this course. Please let me and/or staff in the Student Affairs or related offices know if any of these issues pose severe obstacles to you and we will work together to come up with solutions. I am also more than happy to work with you and a representative from Student Affairs in situations where sensitive information is involved.</p>
-<p><strong>Digital ethics</strong>: One of the tools we will use from time to time in this course is Zoom. To facilitate access, I will typically record Zoom meetings. I will inform students when recordings are in progress. I expect that students in my class will respect one another and my privacy. To that end, students will not record any other member of the class–including the instructor–without obtaining their consent in advance. Students will also not share information about other members of this course in any type of public fora, such as social media. As the instructor, I own the copyright to my instructional materials. These materials cannot be distributed in whole or in part to any person or entity other than other members of the current class without my prior written consent.</p>
+<p>Seaver Biology Room 111</p>
+<p><strong>Schedule</strong>: Mondays and Wednesdays 11am-12:15pm</p>
+<p><strong>Office Hours</strong>: My regularly scheduled office hours
+will be <em>TBD</em> in my office (Seaver South 108).</p>
+<p><strong>Prerequisites</strong>: Bio 41E (Intro Ecol &amp;
+Evolutionary Bio w/Lab) or instructor permission</p>
+<p><strong>Readings</strong>: This course will use a combination of the
+primary literature, popular science books, and the free, online textbook
+<a href="https://conbio.org/publications/free-textbook"><em>Conservation
+Biology for All</em></a>.</p>
+<p><strong>Digital ethics</strong>: One of the tools we will use from
+time to time in this course is Zoom. To facilitate access, I will
+typically record Zoom meetings. I will inform students when recordings
+are in progress. I expect that students in my class will respect one
+another and my privacy. To that end, students will not record any other
+member of the class–including the instructor–without obtaining their
+consent in advance. Students will also not share information about other
+members of this course in any type of public fora, such as social media.
+As the instructor, I own the copyright to my instructional materials.
+These materials cannot be distributed in whole or in part to any person
+or entity other than other members of the current class without my prior
+written consent.</p>
 </div>
 <div id="course-assessment" class="section level2">
 <h2>Course assessment</h2>
@@ -395,73 +377,152 @@ $(document).ready(function () {
 <li>Weekly self-assessments: 5%</li>
 <li>Article reflection questions: 5%</li>
 </ul></li>
-<li>Lab and lecture assignments: 20%</li>
-<li>Case study presentation and discussion facilitation: 20%
+<li>Lecture presentation (featuring a case study) and discussion
+facilitation: 25%
 <ul>
-<li>Case study presentation: 15%</li>
+<li>Lecture and case study presentation: 20%</li>
 <li>Discussion facilitation: 5%</li>
 </ul></li>
-<li>California county conservation analysis: 30%
+<li>Grant proposal: 40%
 <ul>
-<li>Presentation: 10%</li>
-<li>Report: 20%</li>
+<li>Oral presentation: 10%</li>
+<li>Proposal draft and peer review: 10%</li>
+<li>Proposal: 20%</li>
 </ul></li>
-<li>Independent project: 20%
+<li>Conservation technology/data science interview: 25%
 <ul>
-<li>Presentation: 10%</li>
-<li>Group report: 10%</li>
+<li>Interview justification: 10%</li>
+<li>Interview product: 15%</li>
 </ul></li>
 </ul>
-<p>As this course is a <em>Speaking Intensive</em> course and involves extensive student discussion in lecture and laboratory, I reserve the option to assign a failing grade if students have six or more unexcused absences.</p>
+<p>As this course is a <em>Speaking Intensive</em> course and involves
+extensive student discussion, I reserve the option to assign a failing
+grade if students have <strong>three</strong> or more unexcused
+absences.</p>
 </div>
 <div id="mutual-expectations" class="section level2">
 <h2>Mutual expectations</h2>
 <div id="what-i-expect-from-you" class="section level3">
 <h3>What I expect from you</h3>
-<p>I welcome individuals of all ages, backgrounds, beliefs, ethnicities, genders, gender identities, gender expressions, national origins, religious affiliations, sexual orientations, ability - and other visible and non-visible differences. As an instructor, I strongly emphasize student agency; this class is <strong>your</strong> learning journey, and as such, I expect students to take leadership in their own learning and to keep track of assignments and examination dates. I expect we will respectfully consider differing opinions and engage in constructive discourse. As such, I expect that everyone will help create a collegial environment where all students feel welcome and their rights to learn are respected. Please refer to the <a href="http://catalog.pomona.edu/content.php?catoid=38&amp;navoid=7668">Pomona College Student Code</a> for official policy.</p>
+<p>I welcome individuals of all ages, backgrounds, beliefs, ethnicities,
+genders, gender identities, gender expressions, national origins,
+religious affiliations, sexual orientations, ability - and other visible
+and non-visible differences. As an instructor, I strongly emphasize
+student agency; this class is <strong>your</strong> learning journey,
+and as such, I expect students to take leadership in their own learning
+and to keep track of assignments and examination dates. I expect we will
+respectfully consider differing opinions and engage in constructive
+discourse. As such, I expect that everyone will help create a collegial
+environment where all students feel welcome and their rights to learn
+are respected. Please refer to the <a
+href="http://catalog.pomona.edu/content.php?catoid=38&amp;navoid=7668">Pomona
+College Student Code</a> for official policy.</p>
 </div>
 <div id="what-you-can-expect-from-me" class="section level3">
 <h3>What you can expect from me</h3>
-<p>I will strive to provide an equitable and inclusive learning environment. My overarching goal is to help you succeed in your exploration of conservation. To that end, you can expect me to be responsive to your concerns about course content, delivery style, and suggestions on how I can improve this course.</p>
-<p>A key component of my role as an instructor is office hours. During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course. I am also more than happy to chat about broader questions such as career paths in conservation, next steps after Pomona College/the Claremont Colleges, or other topics of interest to you.</p>
+<p>I will strive to provide an equitable and inclusive learning
+environment. My overarching goal is to help you succeed in your
+exploration of conservation. To that end, you can expect me to be
+responsive to your concerns about course content, delivery style, and
+suggestions on how I can improve this course.</p>
+<p>A key component of my role as an instructor is office hours. During
+office hours, I am available to help you work through any problems,
+questions, or thoughts you have about the course. I am also more than
+happy to chat about broader questions such as career paths in
+conservation, next steps after Pomona College/the Claremont Colleges, or
+other topics of interest to you.</p>
 </div>
 </div>
 <div id="general-course-policies" class="section level2">
 <h2>General course policies</h2>
-<p><em>Office hours, email, and class Slack channel</em>: During office hours, I am available to help you work through any problems, questions, or thoughts you have about the course. If you would like to discuss a particular problem or topic that would benefit from preparation on my part, please give me advance notice via <a href="https://calendly.com/chchang47/small-group-meetings">Calendly</a>.</p>
-<p>I have email boundaries and I encourage you to find your own. Mine include not answering emails after 6pm, or on weekends or holidays. Finally, I request that emails only be used for interactions that are truly one-on-one (e.g. requesting extensions to assignments or accommodations); in general, to help create an atmosphere of transparency and group learning, I request that <strong>questions about content and assignments be directed to the #bio104sp23 Slack channel</strong> in the Pomona College Division-II workspace.</p>
-<p><em>Learning diversity &amp; accommodations</em>: Pomona College welcomes and accommodates students with disabilities. As your instructor, I care about you and your growth as an environmental scholar. If you encounter obstacles to your success, please let me know immediately so that we can work together to identify ways to overcome any limitations of current course design. If you feel you need a reasonable accommodation to participate in this class, complete course requirements, or benefit from the College’s programs or services, you are also welcome to contact the student accessibility resource office at your College to begin this conversation or to establish accommodations for this or other courses.</p>
-<p>Below is a list of the relevant accessibility resource offices at each of the Colleges:</p>
+<p><em>Office hours, email, and class Slack channel</em>: During office
+hours, I am available to help you work through any problems, questions,
+or thoughts you have about the course.</p>
+<p>I have email boundaries and I encourage you to find your own. Mine
+include not answering emails after 6pm, or on weekends or holidays.
+Finally, I request that emails only be used for interactions that are
+truly one-on-one (e.g. requesting extensions to assignments or
+accommodations); in general, to help create an atmosphere of
+transparency and group learning, I request that <strong>questions about
+content and assignments be directed to the #bio104a Slack
+channel</strong> in the Pomona College Division-II workspace.</p>
+<p><em>Learning diversity &amp; accommodations</em>: Pomona College
+welcomes and accommodates students with disabilities. As your
+instructor, I care about you and your growth as an environmental
+scholar. If you encounter obstacles to your success, please let me know
+immediately so that we can work together to identify ways to overcome
+any limitations of current course design. If you feel you need a
+reasonable accommodation to participate in this class, complete course
+requirements, or benefit from the College’s programs or services, you
+are also welcome to contact the student accessibility resource office at
+your College to begin this conversation or to establish accommodations
+for this or other courses.</p>
+<p>Below is a list of the relevant accessibility resource offices at
+each of the Colleges:</p>
 <ol style="list-style-type: decimal">
-<li><a href="https://www.cmc.edu/dean-of-students/accessibility-services">Claremont McKenna College (CMC) Accessibility Services</a></li>
-<li><a href="https://www.hmc.edu/student-life/disability-resources/">Harvey Mudd College (HMC) Disability Resources Office</a></li>
-<li><a href="https://www.pitzer.edu/student-life/academic-support-services/">Pitzer College (PZ) Academic Support Services</a></li>
-<li><a href="https://www.pomona.edu/accessibility/student-accessibility">Pomona College (POM) Student Accessibility Resources and Services Office</a></li>
-<li><a href="https://www.scrippscollege.edu/academics/students-with-disabilities">Scripps College (SC) Accommodations for Students with Disabilities</a></li>
-<li><a href="https://services.claremont.edu/sdrc/">The 7 College (7C) Student Disability Resource Center</a> and <a href="mailto:SDRC@claremont.edu">7C Student Disability Resource Center email</a></li>
+<li><a
+href="https://www.cmc.edu/dean-of-students/accessibility-services">Claremont
+McKenna College (CMC) Accessibility Services</a></li>
+<li><a
+href="https://www.hmc.edu/student-life/disability-resources/">Harvey
+Mudd College (HMC) Disability Resources Office</a></li>
+<li><a
+href="https://www.pitzer.edu/student-life/academic-support-services/">Pitzer
+College (PZ) Academic Support Services</a></li>
+<li><a
+href="https://www.pomona.edu/accessibility/student-accessibility">Pomona
+College (POM) Student Accessibility Resources and Services
+Office</a></li>
+<li><a
+href="https://www.scrippscollege.edu/academics/students-with-disabilities">Scripps
+College (SC) Accommodations for Students with Disabilities</a></li>
+<li><a href="https://services.claremont.edu/sdrc/">The 7 College (7C)
+Student Disability Resource Center</a> and <a
+href="mailto:SDRC@claremont.edu">7C Student Disability Resource Center
+email</a></li>
 </ol>
-<p><em>Writing center and student support services</em>: I urge all students to make use of your home campus’ Writing Center and other student support services. A list of relevant resources in included below. For example, the Writing Center is a great resource to workshop and improve your writing whether that is for classwork, for public consumption (e.g. op-eds), graduate school or funding applications, or any other domain.</p>
+<p><em>Writing center and student support services</em>: I urge all
+students to make use of your home campus’ Writing Center and other
+student support services. A list of relevant resources in included
+below. For example, the Writing Center is a great resource to workshop
+and improve your writing whether that is for classwork, for public
+consumption (e.g. op-eds), graduate school or funding applications, or
+any other domain.</p>
 <ol style="list-style-type: decimal">
-<li><a href="https://www.cmc.edu/writing">CMC Center for Writing and Public Discourse</a></li>
-<li><a href="https://www.hmc.edu/learning-programs/writing-center/">HMC Writing Center</a></li>
-<li><a href="https://www.pomona.edu/administration/writing-center">POM Writing Center</a></li>
-<li><a href="https://www.pitzer.edu/writing-center/">PZ Writing Center</a></li>
-<li><a href="https://www.scrippscollege.edu/departments/writing-program/writing-center">SC Writing Center</a></li>
+<li><a href="https://www.cmc.edu/writing">CMC Center for Writing and
+Public Discourse</a></li>
+<li><a href="https://www.hmc.edu/learning-programs/writing-center/">HMC
+Writing Center</a></li>
+<li><a href="https://www.pomona.edu/administration/writing-center">POM
+Writing Center</a></li>
+<li><a href="https://www.pitzer.edu/writing-center/">PZ Writing
+Center</a></li>
+<li><a
+href="https://www.scrippscollege.edu/departments/writing-program/writing-center">SC
+Writing Center</a></li>
 </ol>
-<p><em>Late assignments</em>: When assignments are handed in late without prior notice, I reserve the right to apply a grade deduction penalty (up to 1 grade reduction for each day late).</p>
-<p><em>Academic integrity</em>: Academic honesty is a core value of Pomona College and the Claremont Colleges. Plagiarism undermines academic integrity and is a threat to communal ethics. I will assign plagiarized assignments a failing grade and will report any instance of plagiarism to the College.</p>
+<p><em>Late assignments</em>: When assignments are handed in late
+without prior notice, I reserve the right to apply a grade deduction
+penalty (~1 grade reduction for each day late; 4 or more days late
+translates to a failing grade).</p>
+<p><em>Academic integrity</em>: Academic honesty is a core value of
+Pomona College and the Claremont Colleges. Plagiarism undermines
+academic integrity and is a threat to communal ethics. I will assign
+plagiarized assignments a failing grade and will report any instance of
+plagiarism to the College.</p>
 </div>
 <div id="course-schedule" class="section level2">
 <h2>Course Schedule</h2>
-<p>Please note that this schedule is subject to change; this syllabus is very much a <em>living document</em> that will change to reflect the unique conditions of this semester. I reserve the right to exercise some flexibility in scheduling, usually in favor of giving more time to students.</p>
+<p>Please note that this schedule is subject to change; this syllabus is
+very much a <em>living document</em> that will change to reflect the
+unique conditions of this semester. I reserve the right to exercise some
+flexibility in scheduling, usually in favor of giving more time to
+students.</p>
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 <thead>
 <tr>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
 Week
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Date
 </th>
 <th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
 Topic
@@ -470,7 +531,7 @@ Topic
 Resources
 </th>
 <th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
-Lab
+Assignments
 </th>
 </tr>
 </thead>
@@ -480,16 +541,17 @@ Lab
 1
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-1/17
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
 Introduction to conservation biology &amp; biodiversity overview
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-<span class="citation">Mace (<a href="#ref-mace2014whose" role="doc-biblioref">2014</a>)</span>; <span class="citation">Sandbrook et al. (<a href="#ref-sandbrook2019global" role="doc-biblioref">2019</a>)</span>; <a href="https://conbio.org/images/content_publications/Chapter2.pdf">Conservation Biology for All Chapter 2</a>
+<span class="citation">Mace (<a
+href="#ref-mace2014whose">2014</a>)</span>; <span
+class="citation">Sandbrook et al. (<a
+href="#ref-sandbrook2019global">2019</a>)</span>; <a
+href="https://conbio.org/images/content_publications/Chapter2.pdf">Conservation
+Biology for All Chapter 2</a>
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Getting set up with <code>RStudio.Cloud</code> and <code>R</code> introduction
 </td>
 </tr>
 <tr>
@@ -497,16 +559,17 @@ Getting set up with <code>RStudio.Cloud</code> and <code>R</code> introduction
 2
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-1/24
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
 Measuring biodiversity &amp; the global extinction crisis
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-<span class="citation">Myers et al. (<a href="#ref-myers2000biodiversity" role="doc-biblioref">2000</a>)</span>; <span class="citation">Pimm (<a href="#ref-pimmExtinctionChapter" role="doc-biblioref">2009</a>)</span>; <span class="citation">Ceballos et al. (<a href="#ref-ceballos2015accelerated" role="doc-biblioref">2015</a>)</span>
+<span class="citation">Myers et al. (<a
+href="#ref-myers2000biodiversity">2000</a>)</span>; <span
+class="citation">Pimm (<a
+href="#ref-pimmExtinctionChapter">2009</a>)</span>; <span
+class="citation">Ceballos et al. (<a
+href="#ref-ceballos2015accelerated">2015</a>)</span>
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Exploration of the class California county biodiversity dataset
 </td>
 </tr>
 <tr>
@@ -514,16 +577,24 @@ Exploration of the class California county biodiversity dataset
 3
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-1/31
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
 Why should society care? Defining ecosystem services.
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-<a href="https://conbio.org/images/content_publications/Chapter3.pdf">Conservation Biology for All, Chapter 3</a>; <a href="https://www.youtube.com/watch?v=q8AZHtF2f50">Valuation of Ecosystem Services</a>; <span class="citation">McCauley (<a href="#ref-mccauley2006selling" role="doc-biblioref">2006</a>)</span>; <span class="citation">Armsworth et al. (<a href="#ref-armsworth2007ecosystem" role="doc-biblioref">2007</a>)</span>; <span class="citation">Tallis et al. (<a href="#ref-tallis2011natural" role="doc-biblioref">2011</a>)</span>; <span class="citation">Cardinale et al. (<a href="#ref-cardinale2012biodiversity" role="doc-biblioref">2012</a>)</span>
+<a
+href="https://conbio.org/images/content_publications/Chapter3.pdf">Conservation
+Biology for All, Chapter 3</a>; <a
+href="https://www.youtube.com/watch?v=q8AZHtF2f50">Valuation of
+Ecosystem Services</a>; <span class="citation">McCauley (<a
+href="#ref-mccauley2006selling">2006</a>)</span>; <span
+class="citation">Armsworth et al. (<a
+href="#ref-armsworth2007ecosystem">2007</a>)</span>; <span
+class="citation">Tallis et al. (<a
+href="#ref-tallis2011natural">2011</a>)</span>; <span
+class="citation">Cardinale et al. (<a
+href="#ref-cardinale2012biodiversity">2012</a>)</span>
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Observing habitats through nature journaling with <a href="https://www.pomona.edu/museum/news/2020/10/13-press-release-benton-museum-art-pomona-college-announces-new-assistant-curator">Assistant Curator S. Moore of the Benton Museum</a>; practice using binoculars
+Begin student lecture &amp; case study presentations
 </td>
 </tr>
 <tr>
@@ -531,16 +602,26 @@ Observing habitats through nature journaling with <a href="https://www.pomona.ed
 4
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-2/7
+Describing extinction risk: the IUCN Red List and listing species for
+protection
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Describing extinction risk: the IUCN Red List and listing species for protection
+<span class="citation">Akçakaya et al. (<a
+href="#ref-akccakaya2018quantifying">2018</a>)</span>; <span
+class="citation">Collen et al. (<a
+href="#ref-collen2016clarifying">2016</a>)</span>; <span
+class="citation">Lindenmayer, Piggott, and Wintle (<a
+href="#ref-lindenmayer2013counting">2013</a>)</span>; <span
+class="citation">Scott et al. (<a
+href="#ref-scott2005recovery">2005</a>)</span>; <span
+class="citation">Waples et al. (<a
+href="#ref-waples2013tale">2013</a>)</span>; <a
+href="https://youtu.be/VukyqMajAOU">The IUCN Red List: A Barometer of
+Life</a>; <a href="https://youtu.be/LqRq-Gd63a0">ZSL video</a>
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-<span class="citation">Akçakaya et al. (<a href="#ref-akccakaya2018quantifying" role="doc-biblioref">2018</a>)</span>; <span class="citation">Collen et al. (<a href="#ref-collen2016clarifying" role="doc-biblioref">2016</a>)</span>; <span class="citation">Lindenmayer, Piggott, and Wintle (<a href="#ref-lindenmayer2013counting" role="doc-biblioref">2013</a>)</span>; <span class="citation">Scott et al. (<a href="#ref-scott2005recovery" role="doc-biblioref">2005</a>)</span>; <span class="citation">Waples et al. (<a href="#ref-waples2013tale" role="doc-biblioref">2013</a>)</span>; <a href="https://youtu.be/VukyqMajAOU">The IUCN Red List: A Barometer of Life</a>; <a href="https://youtu.be/LqRq-Gd63a0">ZSL video</a>
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-Biodiversity surveys
+Conservation technology/data science interview roadmap (respondent,
+justification bullet points)
 </td>
 </tr>
 <tr>
@@ -548,16 +629,18 @@ Biodiversity surveys
 5
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-2/14
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
 Consumer behaviors and habitat loss
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-<span class="citation">Lenzen et al. (<a href="#ref-lenzen2012international" role="doc-biblioref">2012</a>)</span>; <a href="https://conbio.org/images/content_publications/Chapter4.pdf">Conservation Biology for All, Chapter 4 - subset</a>; <a href="https://conbio.org/images/content_publications/Chapter5.pdf">Conservation Biology for All, Chapter 5</a>; <span class="citation">Mendenhall et al. (<a href="#ref-mendenhall2014predicting" role="doc-biblioref">2014</a>)</span>
+<span class="citation">Lenzen et al. (<a
+href="#ref-lenzen2012international">2012</a>)</span>; <a
+href="https://conbio.org/images/content_publications/Chapter4.pdf">Conservation
+Biology for All, Chapter 4 - subset</a>; <a
+href="https://conbio.org/images/content_publications/Chapter5.pdf">Conservation
+Biology for All, Chapter 5</a>; <span class="citation">Mendenhall et al.
+(<a href="#ref-mendenhall2014predicting">2014</a>)</span>
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Biodiversity surveys/work session for California biodiversity report
 </td>
 </tr>
 <tr>
@@ -565,16 +648,24 @@ Biodiversity surveys/work session for California biodiversity report
 6
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-2/21
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
 Protected areas as a tool in conservation
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-<span class="citation">Balmford and Whitten (<a href="#ref-balmford2003should" role="doc-biblioref">2003</a>)</span>; <span class="citation">DeAngelis (<a href="#ref-deangelis2019modelling" role="doc-biblioref">2019</a>)</span>; <span class="citation">Geldmann et al. (<a href="#ref-geldmann2013effectiveness" role="doc-biblioref">2013</a>)</span>; <span class="citation">Kareiva (<a href="#ref-kareiva2010trade" role="doc-biblioref">2010</a>)</span>; <span class="citation">Sarkar and Montoya (<a href="#ref-sarkar2011beyond" role="doc-biblioref">2011</a>)</span>; <span class="citation">Rasolofoson et al. (<a href="#ref-rasolofoson2015effectiveness" role="doc-biblioref">2015</a>)</span>
+<span class="citation">Balmford and Whitten (<a
+href="#ref-balmford2003should">2003</a>)</span>; <span
+class="citation">DeAngelis (<a
+href="#ref-deangelis2019modelling">2019</a>)</span>; <span
+class="citation">Geldmann et al. (<a
+href="#ref-geldmann2013effectiveness">2013</a>)</span>; <span
+class="citation">Kareiva (<a
+href="#ref-kareiva2010trade">2010</a>)</span>; <span
+class="citation">Sarkar and Montoya (<a
+href="#ref-sarkar2011beyond">2011</a>)</span>; <span
+class="citation">Rasolofoson et al. (<a
+href="#ref-rasolofoson2015effectiveness">2015</a>)</span>
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Common pool fishery game
+Grant proposal: initial ideation
 </td>
 </tr>
 <tr>
@@ -582,62 +673,58 @@ Common pool fishery game
 7
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-2/28
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
 Over-exploitation as a threat to species
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-<span class="citation">Peres (<a href="#ref-peres2001synergistic" role="doc-biblioref">2001</a>)</span>; Pullin (2002), Chapter 6; <span class="citation">Dirzo et al. (<a href="#ref-dirzo2014defaunation" role="doc-biblioref">2014</a>)</span>; Milner-Gulland et al., Chapter 5 in Conservation Research, Policy and Practice; <a href="https://youtu.be/WNdR808jMSA">Will the oceans ever run out of fish?</a>
+<span class="citation">Peres (<a
+href="#ref-peres2001synergistic">2001</a>)</span>; Pullin (2002),
+Chapter 6; <span class="citation">Dirzo et al. (<a
+href="#ref-dirzo2014defaunation">2014</a>)</span>; Milner-Gulland et
+al., Chapter 5 in Conservation Research, Policy and Practice; <a
+href="https://youtu.be/WNdR808jMSA">Will the oceans ever run out of
+fish?</a>
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-California biodiversity final peer review, biodiversity survey at BFS
 </td>
 </tr>
-<tr>
-<td style="border-bottom: solid 0.5px; text-align: left;">
+<tr style="background-color: #adc2d8;">
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
 8
 </td>
-<td style="border-bottom: solid 0.5px; text-align: left;">
-3/7
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-Environmental economics and conservation
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-Guest lectures by Prof. Sahan Dissanayake. Readings will be posted at Sakai.
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-California biodiversity short presentations
-</td>
-</tr>
-<tr style="background-color: #adc2d8;">
 <td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
-3/14
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
-California county conservation report due
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
-</td>
-</tr>
-<tr style="background-color: #adc2d8;">
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
-9
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
-3/14
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
 </td>
 <td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
 Week of spring break
 </td>
 <td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+Conservation technology interviews due
+</td>
+</tr>
+<tr style="background-color: #adc2d8;">
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+</td>
+<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+Grant proposal: Bullet point outline
+</td>
+</tr>
+<tr>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+9
+</td>
+<td style="border-bottom: solid 0.5px; text-align: left;">
+Population dynamics in conservation
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
+<a
+href="https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf">Morris,
+Doak, et al., Chapters 1, 2, and <strong>4</strong></a>; Simberloff
+chapter 6 in Conservation Science and Action
+</td>
+<td style="border-bottom: solid 0.5px; text-align: center;">
 </td>
 </tr>
 <tr>
@@ -645,16 +732,17 @@ Week of spring break
 10
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-3/21
+Climate change
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Population dynamics in conservation
+<a
+href="https://conbio.org/images/content_publications/Chapter8.pdf">Conservation
+Biology for All, Chapter 8</a>; <span class="citation">Walther et al.
+(<a href="#ref-walther2002ecological">2002</a>)</span>; <a
+href="https://youtu.be/RNs3XpRmRfI">TedEd video on phenology</a>; <a
+href="https://youtu.be/Kpp9NE1i2zM">Project BudBurst phenology video</a>
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-<a href="https://www.cbd.int/doc/pa/tools/A%20Practical%20Handbook%20for%20Population%20Viability%20Analysis.pdf">Morris, Doak, et al., Chapters 1, 2, and <strong>4</strong></a>; Simberloff chapter 6 in Conservation Science and Action
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-Independent projects
 </td>
 </tr>
 <tr>
@@ -662,16 +750,21 @@ Independent projects
 11
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-3/28
+Introduced and invasive species
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Climate change
+MacDonald et al., Chapter 13 in Key Topics in Conservation Biology;
+<span class="citation">Kimmerer (<a
+href="#ref-kimmerer2000native">2000</a>)</span>; <span
+class="citation">Norton (<a
+href="#ref-norton2009species">2009</a>)</span>; <span
+class="citation">Seddon et al. (<a
+href="#ref-seddon2014reversing">2014</a>)</span>; <span
+class="citation">Larson (<a href="#ref-larson2005war">2005</a>)</span>
+(optional)
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Guest lecture by Prof. Nina Karnovsky, <a href="https://conbio.org/images/content_publications/Chapter8.pdf">Conservation Biology for All, Chapter 8</a>; <span class="citation">Walther et al. (<a href="#ref-walther2002ecological" role="doc-biblioref">2002</a>)</span>; <a href="https://youtu.be/RNs3XpRmRfI">TedEd video on phenology</a>; <a href="https://youtu.be/Kpp9NE1i2zM">Project BudBurst phenology video</a> and an additional reading to be posted at Sakai.
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-Independent projects
+Grant proposal draft for peer review
 </td>
 </tr>
 <tr>
@@ -679,16 +772,12 @@ Independent projects
 12
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-4/4
+Peer review of grant proposals
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Introduced and invasive species
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-MacDonald et al., Chapter 13 in Key Topics in Conservation Biology; <span class="citation">Kimmerer (<a href="#ref-kimmerer2000native" role="doc-biblioref">2000</a>)</span>; <span class="citation">Norton (<a href="#ref-norton2009species" role="doc-biblioref">2009</a>)</span>; <span class="citation">Seddon et al. (<a href="#ref-seddon2014reversing" role="doc-biblioref">2014</a>)</span>; <span class="citation">Larson (<a href="#ref-larson2005war" role="doc-biblioref">2005</a>)</span> (optional)
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-Independent projects (lab may be async this week)
+Submit written peer review following NSF format
 </td>
 </tr>
 <tr>
@@ -696,16 +785,18 @@ Independent projects (lab may be async this week)
 13
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-4/11
+Pollution
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Career paths in conservation
+<span class="citation">O’Neill (<a
+href="#ref-oneill2018conversation">2018</a>)</span>; <span
+class="citation">Erisman et al. (<a
+href="#ref-erisman2013consequences">2013</a>)</span>; <a
+href="https://youtu.be/E5M3LvX6bO0">video on sampling stream
+macroinvertebrates</a>; <a href="https://youtu.be/Gv5kfXRARN0">video on
+nitrogen pollution</a>
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-<a href="https://www.twitch.tv/maya/about">Maya Higa</a> and <a href="http://www.ruthdefries.e3b.columbia.edu/lab-members/">Michael Levin</a> (4/11), readings will be posted at Sakai
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-Independent projects
 </td>
 </tr>
 <tr>
@@ -713,90 +804,40 @@ Independent projects
 14
 </td>
 <td style="border-bottom: solid 0.5px; text-align: left;">
-4/18
+Grant proposal presentations
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-Pollution
 </td>
 <td style="border-bottom: solid 0.5px; text-align: center;">
-<span class="citation">O’Neill (<a href="#ref-oneill2018conversation" role="doc-biblioref">2018</a>)</span>; <span class="citation">Erisman et al. (<a href="#ref-erisman2013consequences" role="doc-biblioref">2013</a>)</span>; <a href="https://youtu.be/E5M3LvX6bO0">video on sampling stream macroinvertebrates</a>; <a href="https://youtu.be/Gv5kfXRARN0">video on nitrogen pollution</a>
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-Independent projects
-</td>
-</tr>
-<tr style="background-color: #adc2d8;">
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
-4/20
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
-Inter-group peer review of report and presentation
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
+Presentation for grant proposal
 </td>
 </tr>
 <tr>
-<td style="border-bottom: solid 0.5px; text-align: left;">
+<td style="border-bottom: 2px solid grey; text-align: left;">
 15
 </td>
-<td style="border-bottom: solid 0.5px; text-align: left;">
-4/25
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
+<td style="border-bottom: 2px solid grey; text-align: left;">
 Making conservation a success story
 </td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-<span class="citation">Reddy et al. (<a href="#ref-reddy2017advancing" role="doc-biblioref">2017</a>)</span>; one of the following: <span class="citation">Asensio and Delmas (<a href="#ref-asensio2015nonprice" role="doc-biblioref">2015</a>)</span>; <span class="citation">Blackman et al. (<a href="#ref-blackman2017titling" role="doc-biblioref">2017</a>)</span>; <span class="citation">Buechley et al. (<a href="#ref-buechley2015importance" role="doc-biblioref">2015</a>)</span>; <span class="citation">Clements et al. (<a href="#ref-clements2010payments" role="doc-biblioref">2010</a>)</span>; <span class="citation">Poonswad et al. (<a href="#ref-poonswad2005comparison" role="doc-biblioref">2005</a>)</span>; <span class="citation">Saypanya et al. (<a href="#ref-saypanya2013effectiveness" role="doc-biblioref">2013</a>)</span>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+<span class="citation">Reddy et al. (<a
+href="#ref-reddy2017advancing">2017</a>)</span>; one of the following:
+<span class="citation">Asensio and Delmas (<a
+href="#ref-asensio2015nonprice">2015</a>)</span>; <span
+class="citation">Blackman et al. (<a
+href="#ref-blackman2017titling">2017</a>)</span>; <span
+class="citation">Buechley et al. (<a
+href="#ref-buechley2015importance">2015</a>)</span>; <span
+class="citation">Clements et al. (<a
+href="#ref-clements2010payments">2010</a>)</span>; <span
+class="citation">Poonswad et al. (<a
+href="#ref-poonswad2005comparison">2005</a>)</span>; <span
+class="citation">Saypanya et al. (<a
+href="#ref-saypanya2013effectiveness">2013</a>)</span>
 </td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-Independent project presentations and end of semester celebration
-</td>
-</tr>
-<tr>
-<td style="border-bottom: solid 0.5px; text-align: left;">
-16
-</td>
-<td style="border-bottom: solid 0.5px; text-align: left;">
-5/2
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-Course retrospective and end of semester celebration
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-</td>
-<td style="border-bottom: solid 0.5px; text-align: center;">
-</td>
-</tr>
-<tr style="background-color: #adc2d8;">
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: left;">
-5/3
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
-End of semester
-</td>
-<td style="border-bottom: solid 0.5px; background-color: #adc2d8; text-align: center;">
-</td>
-</tr>
-<tr style="background-color: #adc2d8;">
-<td style="border-bottom: 2px solid grey; background-color: #adc2d8; text-align: left;">
-</td>
-<td style="border-bottom: 2px solid grey; background-color: #adc2d8; text-align: left;">
-5/12
-</td>
-<td style="border-bottom: 2px solid grey; background-color: #adc2d8; text-align: center;">
-</td>
-<td style="border-bottom: 2px solid grey; background-color: #adc2d8; text-align: center;">
-Group project report due
-</td>
-<td style="border-bottom: 2px solid grey; background-color: #adc2d8; text-align: center;">
+<td style="border-bottom: 2px solid grey; text-align: center;">
+Final grant proposal due Friday May 2 for seniors; Friday May 9 for all
+other students.
 </td>
 </tr>
 </tbody>
@@ -804,120 +845,217 @@ Group project report due
 </div>
 <div id="reading-list" class="section level2">
 <h2>Reading list</h2>
-<div id="refs" class="references hanging-indent">
-<div id="ref-akccakaya2018quantifying">
-<p>Akçakaya, H Resit, Elizabeth L Bennett, Thomas M Brooks, Molly K Grace, Anna Heath, Simon Hedges, Craig Hilton-Taylor, et al. 2018. “Quantifying Species Recovery and Conservation Success to Develop an Iucn Green List of Species.” <em>Conservation Biology</em> 32 (5): 1128–38.</p>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-akccakaya2018quantifying" class="csl-entry">
+Akçakaya, H Resit, Elizabeth L Bennett, Thomas M Brooks, Molly K Grace,
+Anna Heath, Simon Hedges, Craig Hilton-Taylor, et al. 2018.
+<span>“Quantifying Species Recovery and Conservation Success to Develop
+an IUCN Green List of Species.”</span> <em>Conservation Biology</em> 32
+(5): 1128–38.
 </div>
-<div id="ref-armsworth2007ecosystem">
-<p>Armsworth, PR, KM Chan, GC Daily, PR Ehrlich, C Kremen, TH Ricketts, and MA Sanjayan. 2007. “Ecosystem-Service Science and the Way Forward for Conservation.” <em>Conservation Biology</em> 21 (6): 1383–4.</p>
+<div id="ref-armsworth2007ecosystem" class="csl-entry">
+Armsworth, PR, KM Chan, GC Daily, PR Ehrlich, C Kremen, TH Ricketts, and
+MA Sanjayan. 2007. <span>“Ecosystem-Service Science and the Way Forward
+for Conservation.”</span> <em>Conservation Biology</em> 21 (6): 1383–84.
 </div>
-<div id="ref-asensio2015nonprice">
-<p>Asensio, Omar I, and Magali A Delmas. 2015. “Nonprice Incentives and Energy Conservation.” <em>Proceedings of the National Academy of Sciences</em> 112 (6): E510–E515.</p>
+<div id="ref-asensio2015nonprice" class="csl-entry">
+Asensio, Omar I, and Magali A Delmas. 2015. <span>“Nonprice Incentives
+and Energy Conservation.”</span> <em>Proceedings of the National Academy
+of Sciences</em> 112 (6): E510–15.
 </div>
-<div id="ref-balmford2003should">
-<p>Balmford, Andrew, and Tony Whitten. 2003. “Who Should Pay for Tropical Conservation, and How Could the Costs Be Met?” <em>Oryx</em> 37 (2): 238–50.</p>
+<div id="ref-balmford2003should" class="csl-entry">
+Balmford, Andrew, and Tony Whitten. 2003. <span>“Who Should Pay for
+Tropical Conservation, and How Could the Costs Be Met?”</span>
+<em>Oryx</em> 37 (2): 238–50.
 </div>
-<div id="ref-blackman2017titling">
-<p>Blackman, Allen, Leonardo Corral, Eirivelthon Santos Lima, and Gregory P Asner. 2017. “Titling Indigenous Communities Protects Forests in the Peruvian Amazon.” <em>Proceedings of the National Academy of Sciences</em> 114 (16): 4123–8.</p>
+<div id="ref-blackman2017titling" class="csl-entry">
+Blackman, Allen, Leonardo Corral, Eirivelthon Santos Lima, and Gregory P
+Asner. 2017. <span>“Titling Indigenous Communities Protects Forests in
+the Peruvian Amazon.”</span> <em>Proceedings of the National Academy of
+Sciences</em> 114 (16): 4123–28.
 </div>
-<div id="ref-buechley2015importance">
-<p>Buechley, Evan R, Çağan H Şekercioğlu, Anagaw Atickem, Gelaye Gebremichael, James Kuria Ndungu, Bruktawit Abdu Mahamued, Tifases Beyene, Tariku Mekonnen, and Luc Lens. 2015. “Importance of Ethiopian Shade Coffee Farms for Forest Bird Conservation.” <em>Biological Conservation</em> 188: 50–60.</p>
+<div id="ref-buechley2015importance" class="csl-entry">
+Buechley, Evan R, Çağan H Şekercioğlu, Anagaw Atickem, Gelaye
+Gebremichael, James Kuria Ndungu, Bruktawit Abdu Mahamued, Tifases
+Beyene, Tariku Mekonnen, and Luc Lens. 2015. <span>“Importance of
+Ethiopian Shade Coffee Farms for Forest Bird Conservation.”</span>
+<em>Biological Conservation</em> 188: 50–60.
 </div>
-<div id="ref-cardinale2012biodiversity">
-<p>Cardinale, Bradley J, J Emmett Duffy, Andrew Gonzalez, David U Hooper, Charles Perrings, Patrick Venail, Anita Narwani, et al. 2012. “Biodiversity Loss and Its Impact on Humanity.” <em>Nature</em> 486 (7401): 59.</p>
+<div id="ref-cardinale2012biodiversity" class="csl-entry">
+Cardinale, Bradley J, J Emmett Duffy, Andrew Gonzalez, David U Hooper,
+Charles Perrings, Patrick Venail, Anita Narwani, et al. 2012.
+<span>“Biodiversity Loss and Its Impact on Humanity.”</span>
+<em>Nature</em> 486 (7401): 59.
 </div>
-<div id="ref-ceballos2015accelerated">
-<p>Ceballos, Gerardo, Paul R Ehrlich, Anthony D Barnosky, Andrés Garcı́a, Robert M Pringle, and Todd M Palmer. 2015. “Accelerated Modern Human–Induced Species Losses: Entering the Sixth Mass Extinction.” <em>Science Advances</em> 1 (5): e1400253.</p>
+<div id="ref-ceballos2015accelerated" class="csl-entry">
+Ceballos, Gerardo, Paul R Ehrlich, Anthony D Barnosky, Andrés Garcı́a,
+Robert M Pringle, and Todd M Palmer. 2015. <span>“Accelerated Modern
+Human–Induced Species Losses: Entering the Sixth Mass
+Extinction.”</span> <em>Science Advances</em> 1 (5): e1400253.
 </div>
-<div id="ref-clements2010payments">
-<p>Clements, Tom, Ashish John, Karen Nielsen, Dara An, Setha Tan, and EJ Milner-Gulland. 2010. “Payments for Biodiversity Conservation in the Context of Weak Institutions: Comparison of Three Programs from Cambodia.” <em>Ecological Economics</em> 69 (6): 1283–91.</p>
+<div id="ref-clements2010payments" class="csl-entry">
+Clements, Tom, Ashish John, Karen Nielsen, Dara An, Setha Tan, and EJ
+Milner-Gulland. 2010. <span>“Payments for Biodiversity Conservation in
+the Context of Weak Institutions: Comparison of Three Programs from
+Cambodia.”</span> <em>Ecological Economics</em> 69 (6): 1283–91.
 </div>
-<div id="ref-collen2016clarifying">
-<p>Collen, Ben, Nicholas K Dulvy, Kevin J Gaston, Ulf Gärdenfors, David A Keith, André E Punt, Helen M Regan, et al. 2016. “Clarifying Misconceptions of Extinction Risk Assessment with the Iucn Red List.” <em>Biology Letters</em> 12 (4): 20150843.</p>
+<div id="ref-collen2016clarifying" class="csl-entry">
+Collen, Ben, Nicholas K Dulvy, Kevin J Gaston, Ulf Gärdenfors, David A
+Keith, André E Punt, Helen M Regan, et al. 2016. <span>“Clarifying
+Misconceptions of Extinction Risk Assessment with the IUCN Red
+List.”</span> <em>Biology Letters</em> 12 (4): 20150843.
 </div>
-<div id="ref-deangelis2019modelling">
-<p>DeAngelis, Donald L. 2019. “Modelling Protected Area Trade-Offs.” <em>Nature Sustainability</em> 2 (5): 358–59.</p>
+<div id="ref-deangelis2019modelling" class="csl-entry">
+DeAngelis, Donald L. 2019. <span>“Modelling Protected Area
+Trade-Offs.”</span> <em>Nature Sustainability</em> 2 (5): 358–59.
 </div>
-<div id="ref-dirzo2014defaunation">
-<p>Dirzo, Rodolfo, Hillary S Young, Mauro Galetti, Gerardo Ceballos, Nick JB Isaac, and Ben Collen. 2014. “Defaunation in the Anthropocene.” <em>Science</em> 345 (6195): 401–6.</p>
+<div id="ref-dirzo2014defaunation" class="csl-entry">
+Dirzo, Rodolfo, Hillary S Young, Mauro Galetti, Gerardo Ceballos, Nick
+JB Isaac, and Ben Collen. 2014. <span>“Defaunation in the
+Anthropocene.”</span> <em>Science</em> 345 (6195): 401–6.
 </div>
-<div id="ref-erisman2013consequences">
-<p>Erisman, Jan Willem, James N Galloway, Sybil Seitzinger, Albert Bleeker, Nancy B Dise, AM Roxana Petrescu, Allison M Leach, and Wim de Vries. 2013. “Consequences of Human Modification of the Global Nitrogen Cycle.” <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> 368 (1621): 20130116.</p>
+<div id="ref-erisman2013consequences" class="csl-entry">
+Erisman, Jan Willem, James N Galloway, Sybil Seitzinger, Albert Bleeker,
+Nancy B Dise, AM Roxana Petrescu, Allison M Leach, and Wim de Vries.
+2013. <span>“Consequences of Human Modification of the Global Nitrogen
+Cycle.”</span> <em>Philosophical Transactions of the Royal Society B:
+Biological Sciences</em> 368 (1621): 20130116.
 </div>
-<div id="ref-geldmann2013effectiveness">
-<p>Geldmann, Jonas, Megan Barnes, Lauren Coad, Ian D Craigie, Marc Hockings, and Neil D Burgess. 2013. “Effectiveness of Terrestrial Protected Areas in Reducing Habitat Loss and Population Declines.” <em>Biological Conservation</em> 161: 230–38.</p>
+<div id="ref-geldmann2013effectiveness" class="csl-entry">
+Geldmann, Jonas, Megan Barnes, Lauren Coad, Ian D Craigie, Marc
+Hockings, and Neil D Burgess. 2013. <span>“Effectiveness of Terrestrial
+Protected Areas in Reducing Habitat Loss and Population
+Declines.”</span> <em>Biological Conservation</em> 161: 230–38.
 </div>
-<div id="ref-kareiva2010trade">
-<p>Kareiva, Peter. 2010. “Trade-in to Trade-up.” <em>Nature</em> 466 (7304): 322–23.</p>
+<div id="ref-kareiva2010trade" class="csl-entry">
+Kareiva, Peter. 2010. <span>“Trade-in to Trade-up.”</span>
+<em>Nature</em> 466 (7304): 322–23.
 </div>
-<div id="ref-kimmerer2000native">
-<p>Kimmerer, Robin Wall. 2000. “Native Knowledge for Native Ecosystems.” <em>Journal of Forestry</em> 98 (8): 4.</p>
+<div id="ref-kimmerer2000native" class="csl-entry">
+Kimmerer, Robin Wall. 2000. <span>“Native Knowledge for Native
+Ecosystems.”</span> <em>Journal of Forestry</em> 98 (8): 4.
 </div>
-<div id="ref-larson2005war">
-<p>Larson, Brendon MH. 2005. “The War of the Roses: Demilitarizing Invasion Biology.” <em>Frontiers in Ecology and the Environment</em> 3 (9): 495–500.</p>
+<div id="ref-larson2005war" class="csl-entry">
+Larson, Brendon MH. 2005. <span>“The War of the Roses: Demilitarizing
+Invasion Biology.”</span> <em>Frontiers in Ecology and the
+Environment</em> 3 (9): 495–500.
 </div>
-<div id="ref-lenzen2012international">
-<p>Lenzen, Manfred, Daniel Moran, Keiichiro Kanemoto, Barney Foran, Leonarda Lobefaro, and Arne Geschke. 2012. “International Trade Drives Biodiversity Threats in Developing Nations.” <em>Nature</em> 486 (7401): 109–12.</p>
+<div id="ref-lenzen2012international" class="csl-entry">
+Lenzen, Manfred, Daniel Moran, Keiichiro Kanemoto, Barney Foran,
+Leonarda Lobefaro, and Arne Geschke. 2012. <span>“International Trade
+Drives Biodiversity Threats in Developing Nations.”</span>
+<em>Nature</em> 486 (7401): 109–12.
 </div>
-<div id="ref-lindenmayer2013counting">
-<p>Lindenmayer, David B, Maxine P Piggott, and Brendan A Wintle. 2013. “Counting the Books While the Library Burns: Why Conservation Monitoring Programs Need a Plan for Action.” <em>Frontiers in Ecology and the Environment</em> 11 (10): 549–55.</p>
+<div id="ref-lindenmayer2013counting" class="csl-entry">
+Lindenmayer, David B, Maxine P Piggott, and Brendan A Wintle. 2013.
+<span>“Counting the Books While the Library Burns: Why Conservation
+Monitoring Programs Need a Plan for Action.”</span> <em>Frontiers in
+Ecology and the Environment</em> 11 (10): 549–55.
 </div>
-<div id="ref-mace2014whose">
-<p>Mace, Georgina M. 2014. “Whose Conservation?” <em>Science</em> 345 (6204): 1558–60.</p>
+<div id="ref-mace2014whose" class="csl-entry">
+Mace, Georgina M. 2014. <span>“Whose Conservation?”</span>
+<em>Science</em> 345 (6204): 1558–60.
 </div>
-<div id="ref-mccauley2006selling">
-<p>McCauley, Douglas J. 2006. “Selling Out on Nature.” <em>Nature</em> 443 (7107): 27–28.</p>
+<div id="ref-mccauley2006selling" class="csl-entry">
+McCauley, Douglas J. 2006. <span>“Selling Out on Nature.”</span>
+<em>Nature</em> 443 (7107): 27–28.
 </div>
-<div id="ref-mendenhall2014predicting">
-<p>Mendenhall, Chase D, Daniel S Karp, Christoph FJ Meyer, Elizabeth A Hadly, and Gretchen C Daily. 2014. “Predicting Biodiversity Change and Averting Collapse in Agricultural Landscapes.” <em>Nature</em> 509 (7499): 213–17.</p>
+<div id="ref-mendenhall2014predicting" class="csl-entry">
+Mendenhall, Chase D, Daniel S Karp, Christoph FJ Meyer, Elizabeth A
+Hadly, and Gretchen C Daily. 2014. <span>“Predicting Biodiversity Change
+and Averting Collapse in Agricultural Landscapes.”</span>
+<em>Nature</em> 509 (7499): 213–17.
 </div>
-<div id="ref-myers2000biodiversity">
-<p>Myers, Norman, Russell A Mittermeier, Cristina G Mittermeier, Gustavo AB Da Fonseca, and Jennifer Kent. 2000. “Biodiversity Hotspots for Conservation Priorities.” <em>Nature</em> 403 (6772): 853–58.</p>
+<div id="ref-myers2000biodiversity" class="csl-entry">
+Myers, Norman, Russell A Mittermeier, Cristina G Mittermeier, Gustavo AB
+Da Fonseca, and Jennifer Kent. 2000. <span>“Biodiversity Hotspots for
+Conservation Priorities.”</span> <em>Nature</em> 403 (6772): 853–58.
 </div>
-<div id="ref-norton2009species">
-<p>Norton, David A. 2009. “Species Invasions and the Limits to Restoration: Learning from the New Zealand Experience.” <em>Science</em> 325 (5940): 569–71.</p>
+<div id="ref-norton2009species" class="csl-entry">
+Norton, David A. 2009. <span>“Species Invasions and the Limits to
+Restoration: Learning from the New Zealand Experience.”</span>
+<em>Science</em> 325 (5940): 569–71.
 </div>
-<div id="ref-oneill2018conversation">
-<p>O’Neill, Daniel. 2018. “Is It Possible for Everyone to Live a Good Life Within Our Planet’s Limits.” Vol. 8. The Conversation.</p>
+<div id="ref-oneill2018conversation" class="csl-entry">
+O’Neill, Daniel. 2018. <span>“Is It Possible for Everyone to Live a Good
+Life Within Our Planet’s Limits.”</span> Vol. 8. The Conversation.
 </div>
-<div id="ref-peres2001synergistic">
-<p>Peres, Carlos A. 2001. “Synergistic Effects of Subsistence Hunting and Habitat Fragmentation on Amazonian Forest Vertebrates.” <em>Conservation Biology</em> 15 (6): 1490–1505.</p>
+<div id="ref-peres2001synergistic" class="csl-entry">
+Peres, Carlos A. 2001. <span>“Synergistic Effects of Subsistence Hunting
+and Habitat Fragmentation on Amazonian Forest Vertebrates.”</span>
+<em>Conservation Biology</em> 15 (6): 1490–1505.
 </div>
-<div id="ref-pimmExtinctionChapter">
-<p>Pimm, Stuart L. 2009. “Extinction.” In <em>Conservation Science and Action</em>, edited by William J Sutherland, 20–39. John Wiley &amp; Sons.</p>
+<div id="ref-pimmExtinctionChapter" class="csl-entry">
+Pimm, Stuart L. 2009. <span>“Extinction.”</span> In <em>Conservation
+Science and Action</em>, edited by William J Sutherland, 20–39. John
+Wiley &amp; Sons.
 </div>
-<div id="ref-poonswad2005comparison">
-<p>Poonswad, Pilai, Chumpol Sukkasem, Somnoi Phataramata, Sumsuding Hayeemuida, Kamol Plongmai, Phitaya Chuailua, Preeda Thiensongrusame, and Narong Jirawatkavi. 2005. “Comparison of Cavity Modification and Community Involvement as Strategies for Hornbill Conservation in Thailand.” <em>Biological Conservation</em> 122 (3): 385–93.</p>
+<div id="ref-poonswad2005comparison" class="csl-entry">
+Poonswad, Pilai, Chumpol Sukkasem, Somnoi Phataramata, Sumsuding
+Hayeemuida, Kamol Plongmai, Phitaya Chuailua, Preeda Thiensongrusame,
+and Narong Jirawatkavi. 2005. <span>“Comparison of Cavity Modification
+and Community Involvement as Strategies for Hornbill Conservation in
+Thailand.”</span> <em>Biological Conservation</em> 122 (3): 385–93.
 </div>
-<div id="ref-rasolofoson2015effectiveness">
-<p>Rasolofoson, Ranaivo A, Paul J Ferraro, Clinton N Jenkins, and Julia PG Jones. 2015. “Effectiveness of Community Forest Management at Reducing Deforestation in Madagascar.” <em>Biological Conservation</em> 184: 271–77.</p>
+<div id="ref-rasolofoson2015effectiveness" class="csl-entry">
+Rasolofoson, Ranaivo A, Paul J Ferraro, Clinton N Jenkins, and Julia PG
+Jones. 2015. <span>“Effectiveness of Community Forest Management at
+Reducing Deforestation in Madagascar.”</span> <em>Biological
+Conservation</em> 184: 271–77.
 </div>
-<div id="ref-reddy2017advancing">
-<p>Reddy, Sheila MW, Jensen Montambault, Yuta J Masuda, Elizabeth Keenan, William Butler, Jonathan RB Fisher, Stanley T Asah, and Ayelet Gneezy. 2017. “Advancing Conservation by Understanding and Influencing Human Behavior.” <em>Conservation Letters</em> 10 (2): 248–56.</p>
+<div id="ref-reddy2017advancing" class="csl-entry">
+Reddy, Sheila MW, Jensen Montambault, Yuta J Masuda, Elizabeth Keenan,
+William Butler, Jonathan RB Fisher, Stanley T Asah, and Ayelet Gneezy.
+2017. <span>“Advancing Conservation by Understanding and Influencing
+Human Behavior.”</span> <em>Conservation Letters</em> 10 (2): 248–56.
 </div>
-<div id="ref-sandbrook2019global">
-<p>Sandbrook, Chris, Janet A Fisher, George Holmes, Rogelio Luque-Lora, and Aidan Keane. 2019. “The Global Conservation Movement Is Diverse but Not Divided.” <em>Nature Sustainability</em> 2 (4): 316–23.</p>
+<div id="ref-sandbrook2019global" class="csl-entry">
+Sandbrook, Chris, Janet A Fisher, George Holmes, Rogelio Luque-Lora, and
+Aidan Keane. 2019. <span>“The Global Conservation Movement Is Diverse
+but Not Divided.”</span> <em>Nature Sustainability</em> 2 (4): 316–23.
 </div>
-<div id="ref-sarkar2011beyond">
-<p>Sarkar, Sahotra, and Mariana Montoya. 2011. “Beyond Parks and Reserves: The Ethics and Politics of Conservation with a Case Study from Perú.” <em>Biological Conservation</em> 144 (3): 979–88.</p>
+<div id="ref-sarkar2011beyond" class="csl-entry">
+Sarkar, Sahotra, and Mariana Montoya. 2011. <span>“Beyond Parks and
+Reserves: The Ethics and Politics of Conservation with a Case Study from
+Per<span>ú</span>.”</span> <em>Biological Conservation</em> 144 (3):
+979–88.
 </div>
-<div id="ref-saypanya2013effectiveness">
-<p>Saypanya, Santi, Troy Hansel, Arlyne Johnson, Annalisa Bianchessi, and Brooke Sadowsky. 2013. “Effectiveness of a Social Marketing Strategy, Coupled with Law Enforcement, to Conserve Tigers and Their Prey in Nam et Phou Louey National Protected Area, Lao People’s Democratic Republic.” <em>Conservation Evidence</em> 10 (2013): 57–66.</p>
+<div id="ref-saypanya2013effectiveness" class="csl-entry">
+Saypanya, Santi, Troy Hansel, Arlyne Johnson, Annalisa Bianchessi, and
+Brooke Sadowsky. 2013. <span>“Effectiveness of a Social Marketing
+Strategy, Coupled with Law Enforcement, to Conserve Tigers and Their
+Prey in Nam Et Phou Louey National Protected Area, Lao People’s
+Democratic Republic.”</span> <em>Conservation Evidence</em> 10 (2013):
+57–66.
 </div>
-<div id="ref-scott2005recovery">
-<p>Scott, J Michael, Dale D Goble, John A Wiens, David S Wilcove, Michael Bean, and Timothy Male. 2005. “Recovery of Imperiled Species Under the Endangered Species Act: The Need for a New Approach.” <em>Frontiers in Ecology and the Environment</em> 3 (7): 383–89.</p>
+<div id="ref-scott2005recovery" class="csl-entry">
+Scott, J Michael, Dale D Goble, John A Wiens, David S Wilcove, Michael
+Bean, and Timothy Male. 2005. <span>“Recovery of Imperiled Species Under
+the Endangered Species Act: The Need for a New Approach.”</span>
+<em>Frontiers in Ecology and the Environment</em> 3 (7): 383–89.
 </div>
-<div id="ref-seddon2014reversing">
-<p>Seddon, Philip J, Christine J Griffiths, Pritpal S Soorae, and Doug P Armstrong. 2014. “Reversing Defaunation: Restoring Species in a Changing World.” <em>Science</em> 345 (6195): 406–12.</p>
+<div id="ref-seddon2014reversing" class="csl-entry">
+Seddon, Philip J, Christine J Griffiths, Pritpal S Soorae, and Doug P
+Armstrong. 2014. <span>“Reversing Defaunation: Restoring Species in a
+Changing World.”</span> <em>Science</em> 345 (6195): 406–12.
 </div>
-<div id="ref-tallis2011natural">
-<p>Tallis, Heather, Taylor H Ricketts, Gretchen C Daily, and Stephen Polasky. 2011. <em>Natural Capital: Theory and Practice of Mapping Ecosystem Services</em>. Oxford University Press.</p>
+<div id="ref-tallis2011natural" class="csl-entry">
+Tallis, Heather, Taylor H Ricketts, Gretchen C Daily, and Stephen
+Polasky. 2011. <em>Natural Capital: Theory and Practice of Mapping
+Ecosystem Services</em>. Oxford University Press.
 </div>
-<div id="ref-walther2002ecological">
-<p>Walther, Gian-Reto, Eric Post, Peter Convey, Annette Menzel, Camille Parmesan, Trevor JC Beebee, Jean-Marc Fromentin, Ove Hoegh-Guldberg, and Franz Bairlein. 2002. “Ecological Responses to Recent Climate Change.” <em>Nature</em> 416 (6879): 389–95.</p>
+<div id="ref-walther2002ecological" class="csl-entry">
+Walther, Gian-Reto, Eric Post, Peter Convey, Annette Menzel, Camille
+Parmesan, Trevor JC Beebee, Jean-Marc Fromentin, Ove Hoegh-Guldberg, and
+Franz Bairlein. 2002. <span>“Ecological Responses to Recent Climate
+Change.”</span> <em>Nature</em> 416 (6879): 389–95.
 </div>
-<div id="ref-waples2013tale">
-<p>Waples, Robin S, Marta Nammack, Jean Fitts Cochrane, and Jeffrey A Hutchings. 2013. “A Tale of Two Acts: Endangered Species Listing Practices in Canada and the United States.” <em>BioScience</em> 63 (9): 723–34.</p>
+<div id="ref-waples2013tale" class="csl-entry">
+Waples, Robin S, Marta Nammack, Jean Fitts Cochrane, and Jeffrey A
+Hutchings. 2013. <span>“A Tale of Two Acts: Endangered Species Listing
+Practices in Canada and the United States.”</span> <em>BioScience</em>
+63 (9): 723–34.
 </div>
 </div>
 </div>
