@@ -125,7 +125,7 @@ library(flextable)
 
 ## Pull in Google sheet schedule
 schedDF <- googlesheets4::read_sheet("
-https://docs.google.com/spreadsheets/d/1JIh8EzjAGdTWxuCF7ha7yI4RTIGbn0Smq4EpV5WTtWo/edit?usp=sharing",sheet = "Schedule",col_types="cccc")
+https://docs.google.com/spreadsheets/d/1JIh8EzjAGdTWxuCF7ha7yI4RTIGbn0Smq4EpV5WTtWo/edit?usp=sharing",sheet = "Schedule",col_types="ccccc")
 
 ## Hack-y workaround to do zebra banding color automagically (based on NA values)
 zebra_cols <- rep("none",dim(schedDF)[1])
@@ -141,7 +141,7 @@ schedDF %>%
   addHtmlTableStyle(col.rgroup = zebra_cols,
                     align = "llccc",
                     css.cell = "border-bottom: solid 0.5px",
-                    css.cgroup=c("width: 1000px;","width: 300px;","width: 300px;","width: 300px;")) %>% # doesn't make a difference! must be getting overridden by knitr.
+                    css.cgroup=c("width: 1000px;","width: 300px;","width: 300px;","width: 300px;","width: 300px;")) %>% # doesn't make a difference! must be getting overridden by knitr.
   htmlTable(rnames=FALSE) # can't figure out for now how to merge cells - whatever
 ```
 
